@@ -31,6 +31,7 @@ import PlayerRelationsPage from './features/players/PlayerRelationsPage'
 import StaffMemberPage from './features/staff/StaffPage'
 import StaffPersonalPage from './features/staff/StaffPersonalPage'
 import LeagueSchedulePage from './features/leagues/LeagueSchedulePage'
+import AboutPage from './features/misc/AboutPage'
 
 function App() {
   return (
@@ -68,6 +69,7 @@ function App() {
         <Route path="/players/:playerId/relations" element={<PlayerRelationsPage />} />
         <Route path="/staff/:staffId" element={<StaffMemberPage />} />
         <Route path="/staff/:staffId/personal" element={<StaffPersonalPage />} />
+        <Route path="/about" element={<AboutPage />} />
         {/* Not part of the original app's UI — internal tool for verifying
             the React -> .NET -> engine-ffi pipe, reachable by URL only. */}
         <Route path="/debug" element={<PipeCheckPage />} />
