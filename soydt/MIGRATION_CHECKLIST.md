@@ -24,8 +24,8 @@ Ver plan completo en la conversación (Fase 0-4). Este archivo se actualiza a me
 
 ### Countries
 - [x] `countries/get/index.html` → índice continentes/países (`/countries`) — verificado end-to-end
-- [~] `countries/get.html` → squad nacional (`/countries/{id}`, +u21) — pipe completo responde 200, pero squad viene vacío (`[]`) incluso tras procesar 10 días; causa no confirmada (¿call-ups requieren ventana FIFA específica, o bug de filtrado en `engine_get_national_squad`?). Un agente dedicado a investigar esto se quedó sin sesión antes de encontrar la causa raíz — sigue pendiente. No tachar como verificado hasta confirmar.
-- [~] `countries/schedule.html` — pipe responde 200 pero vacío `[]`, mismo patrón que squad nacional (probable causa raíz común: fixtures/call-ups no poblados sin trigger específico) — mismo bug pendiente que arriba
+- [x] `countries/get.html` → squad nacional (`/countries/{id}`, +u21) — **no era bug**: `SimulatorData::process_world_national_team_callups` (open-football `src/core/src/simulator/data.rs`) solo llama a `call_up_squad` en fechas específicas de ventana FIFA (`BREAK_WINDOWS` en `country/national/types.rs`: sep 4-12, oct 9-17, nov 13-21, mar 20-28, más ventana de torneo en junio). Con pocos días procesados nunca se cruza una ventana → squad/schedule quedan vacíos legítimamente. Verificado con datos reales procesando hasta 2026-09-20 (cruza la ventana de septiembre): squad de Argentina con Ezequiel Centurión (River Plate) etc.
+- [x] `countries/schedule.html` — mismo hallazgo que arriba; verificado con datos reales (Argentina 2-1 Uruguay, Copa América, 06.09.2026) tras procesar hasta la ventana FIFA de septiembre
 - [x] `countries/staff.html` — verificado con datos reales (Valentín Ojeda DT, etc.)
 - [x] `countries/list/index.html` → lista de ligas del país (`/countries/{id}/leagues`) — verificado end-to-end
 - [x] `countries/free_agents.html` — verificado con datos reales (Santiago Cáseres, etc.)
