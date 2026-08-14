@@ -1,0 +1,35 @@
+{
+  "id": 2000497899,
+  "first_name": "Elías",
+  "last_name": "Alderete",
+  "birth_date": "2008-07-16",
+  "country_id": 1649,
+  "club_id": 94,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 55,
+    "right": 100
+  },
+  "current_ability": 70,
+  "potential_ability": -55,
+  "value": 231000,
+  "contract": {    "expiration": "2029-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2022, "c": 94, "p": 0 },
+    { "s": 2023, "c": 94, "p": 0 },
+    { "s": 2024, "c": 94, "p": 0 },
+    { "s": 2025, "c": 94, "p": 0 }
+  ]
+}

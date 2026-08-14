@@ -1,0 +1,29 @@
+{
+  "id": 19224726,
+  "first_name": "Juliano",
+  "last_name": "Chade",
+  "birth_date": "1998-03-14",
+  "country_id": 1651,
+  "club_id": 330,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 25,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 122,
+  "value": 2000,
+  "contract": {    "expiration": "2025-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2019, "c": 107206, "p": 0 },
+    { "s": 2019, "c": 20041349, "p": 17 }
+  ]
+}

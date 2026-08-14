@@ -1,0 +1,35 @@
+{
+  "id": 19364091,
+  "first_name": "Heitor",
+  "last_name": "Roca",
+  "birth_date": "1998-02-19",
+  "country_id": 1651,
+  "club_id": 320,
+  "positions": [
+    {
+      "code": "DL",
+      "level": 20
+    },
+    {
+      "code": "WBL",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 25
+  },
+  "current_ability": 92,
+  "potential_ability": 106,
+  "value": 3000,
+  "contract": {    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2018, "c": 332, "p": 0 },
+    { "s": 2024, "c": 332, "p": 6 },
+    { "s": 2024, "c": 301356, "p": 13 },
+    { "s": 2025, "c": 320, "p": 1 }
+  ]
+}

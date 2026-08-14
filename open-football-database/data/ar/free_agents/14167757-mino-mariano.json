@@ -1,0 +1,35 @@
+{
+  "id": 14167757,
+  "first_name": "Mariano",
+  "last_name": "Miño",
+  "birth_date": "1994-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 55,
+    "right": 100
+  },
+  "current_ability": 108,
+  "potential_ability": 116
+}

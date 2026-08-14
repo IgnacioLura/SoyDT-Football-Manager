@@ -1,0 +1,32 @@
+{
+  "id": 2000503847,
+  "first_name": "Tiziano",
+  "last_name": "Martinez",
+  "birth_date": "2009-03-08",
+  "country_id": 1649,
+  "club_id": 90,
+  "positions": [
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 74,
+  "potential_ability": -7,
+  "value": 368000,
+  "contract": {    "expiration": "2030-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2018, "c": 8877836, "p": 0 },
+    { "s": 2019, "c": 8877836, "p": 0 },
+    { "s": 2020, "c": 8877836, "p": 0 },
+    { "s": 2021, "c": 8877836, "p": 22 },
+    { "s": 2022, "c": 84107139, "p": 2 }
+  ]
+}

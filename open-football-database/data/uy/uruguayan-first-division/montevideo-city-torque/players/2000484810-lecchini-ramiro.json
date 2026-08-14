@@ -1,0 +1,34 @@
+{
+  "id": 2000484810,
+  "first_name": "Ramiro",
+  "last_name": "Lecchini",
+  "birth_date": "2007-07-24",
+  "country_id": 1657,
+  "club_id": 78027478,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 60,
+    "right": 100
+  },
+  "current_ability": 80,
+  "potential_ability": -65,
+  "value": 71000,
+  "contract": {    "expiration": "2027-06-30",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2023, "c": 78027478, "p": 0 },
+    { "s": 2024, "c": 78027478, "p": 0 },
+    { "s": 2025, "c": 78027478, "p": 0 }
+  ]
+}

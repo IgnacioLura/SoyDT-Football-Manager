@@ -1,0 +1,23 @@
+{
+  "id": 14160024,
+  "first_name": "Marcelo",
+  "last_name": "Vaca",
+  "birth_date": "1997-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "DL",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 50
+  },
+  "current_ability": 96,
+  "potential_ability": 110
+}

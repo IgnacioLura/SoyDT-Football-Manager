@@ -1,0 +1,19 @@
+{
+  "id": 86052801,
+  "first_name": "Enzo",
+  "last_name": "Pelosi",
+  "birth_date": "1987-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 110
+}

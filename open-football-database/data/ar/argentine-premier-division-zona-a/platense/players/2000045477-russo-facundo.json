@@ -1,0 +1,46 @@
+{
+  "id": 2000045477,
+  "first_name": "Facundo",
+  "last_name": "Russo",
+  "birth_date": "2000-07-20",
+  "country_id": 1649,
+  "club_id": 92,
+  "positions": [
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 108,
+  "potential_ability": 112,
+  "value": 176000,
+  "contract": {
+    "salary": 42172,
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 14037344,
+    "expiration": "2027-12-31",
+    "salary": 42172,
+    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2021, "c": 92, "p": 12 },
+    { "s": 2022, "c": 92, "p": 6 },
+    { "s": 2022, "c": 102490, "p": 11 },
+    { "s": 2023, "c": 92, "p": 5 },
+    { "s": 2023, "c": 102490, "p": 3 },
+    { "s": 2024, "c": 92, "p": 8 },
+    { "s": 2025, "c": 14004603, "p": 11 }
+  ]
+}

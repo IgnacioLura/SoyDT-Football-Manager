@@ -1,0 +1,27 @@
+{
+  "id": 47068052,
+  "first_name": "Lucas",
+  "last_name": "",
+  "birth_date": "1994-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 25,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 106
+}

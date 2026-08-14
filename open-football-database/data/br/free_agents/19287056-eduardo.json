@@ -1,0 +1,27 @@
+{
+  "id": 19287056,
+  "first_name": "Eduardo",
+  "last_name": "",
+  "birth_date": "1995-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 25,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 102
+}

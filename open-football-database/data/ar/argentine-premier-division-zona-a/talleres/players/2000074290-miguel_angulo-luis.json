@@ -1,0 +1,52 @@
+{
+  "id": 2000074290,
+  "first_name": "Luis",
+  "last_name": "Miguel Ángulo",
+  "birth_date": "2004-03-23",
+  "country_id": 1653,
+  "club_id": 102489,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 122,
+  "potential_ability": 138,
+  "value": 7000000,
+  "contract": {
+    "salary": 104000,
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 1922,
+    "expiration": "2027-12-31",
+    "salary": 104000,
+    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2020, "c": 2000255200, "p": 0 },
+    { "s": 2021, "c": 309345, "p": 8, "g": 1 },
+    { "s": 2022, "c": 309345, "p": 27, "g": 1 },
+    { "s": 2023, "c": 102489, "p": 3 },
+    { "s": 2023, "c": 309345, "p": 21, "g": 3 },
+    { "s": 2024, "c": 92, "p": 5 },
+    { "s": 2024, "c": 14018428, "p": 17, "g": 3 },
+    { "s": 2025, "c": 102489, "p": 11 },
+    { "s": 2025, "c": 14018428, "p": 16, "g": 1 },
+    { "s": 2026, "c": 102489, "p": 1 }
+  ],
+  "ids": {
+    "transfermarkt.com": "885301"
+  }
+}

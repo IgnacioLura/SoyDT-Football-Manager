@@ -1,0 +1,27 @@
+{
+  "id": 2000026048,
+  "first_name": "Enzo",
+  "last_name": "Ribeiro",
+  "birth_date": "2000-01-01",
+  "country_id": 1657,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "DL",
+      "level": 20
+    },
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 100
+}

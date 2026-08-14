@@ -1,0 +1,23 @@
+{
+  "id": 14059330,
+  "first_name": "Juan",
+  "last_name": "Carlos Lescano",
+  "birth_date": "1991-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 100,
+  "potential_ability": 102
+}

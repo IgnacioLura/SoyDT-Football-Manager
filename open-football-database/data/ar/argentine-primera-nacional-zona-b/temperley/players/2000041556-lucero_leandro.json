@@ -1,0 +1,42 @@
+{
+  "id": 2000041556,
+  "first_name": "Leandro",
+  "last_name": "Lucero",
+  "birth_date": "2003-01-25",
+  "country_id": 1649,
+  "club_id": 3100019,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    },
+    {
+      "code": "DM",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 112,
+  "potential_ability": 126,
+  "value": 1000000,
+  "contract": {
+    "salary": 71,
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2018, "c": 90, "p": 0 },
+    { "s": 2019, "c": 90, "p": 0 },
+    { "s": 2020, "c": 90, "p": 0 },
+    { "s": 2021, "c": 90, "p": 0 },
+    { "s": 2022, "c": 90, "p": 0 },
+    { "s": 2023, "c": 90, "p": 0 },
+    { "s": 2023, "c": 2000225903, "p": 6, "g": 1 },
+    { "s": 2024, "c": 3100019, "p": 11 },
+    { "s": 2025, "c": 3100019, "p": 15 }
+  ]
+}

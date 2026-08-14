@@ -1,0 +1,23 @@
+{
+  "id": 19371668,
+  "first_name": "Júlio",
+  "last_name": "Amorim",
+  "birth_date": "1999-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 94,
+  "potential_ability": 112
+}

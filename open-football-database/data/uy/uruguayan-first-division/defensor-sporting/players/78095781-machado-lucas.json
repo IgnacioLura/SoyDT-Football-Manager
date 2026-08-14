@@ -1,0 +1,37 @@
+{
+  "id": 78095781,
+  "first_name": "Lucas",
+  "last_name": "Machado",
+  "birth_date": "1998-04-10",
+  "country_id": 1657,
+  "club_id": 1919,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 55,
+    "right": 100
+  },
+  "current_ability": 100,
+  "potential_ability": 108,
+  "value": 13000,
+  "contract": {    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2016, "c": 1925, "p": 0 },
+    { "s": 2017, "c": 1925, "p": 0 },
+    { "s": 2018, "c": 1925, "p": 0 },
+    { "s": 2019, "c": 1925, "p": 0 },
+    { "s": 2020, "c": 1925, "p": 14 },
+    { "s": 2021, "c": 1925, "p": 0 },
+    { "s": 2022, "c": 115039, "p": 12 },
+    { "s": 2023, "c": 115039, "p": 5 },
+    { "s": 2024, "c": 115039, "p": 23 },
+    { "s": 2025, "c": 1919, "p": 0 }
+  ]
+}

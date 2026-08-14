@@ -1,0 +1,29 @@
+{
+  "id": 2000281105,
+  "first_name": "Luka",
+  "last_name": "Gutiérrez",
+  "birth_date": "2006-08-27",
+  "country_id": 1649,
+  "club_id": 81,
+  "positions": [
+    {
+      "code": "DL",
+      "level": 20
+    },
+    {
+      "code": "WBL",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 25
+  },
+  "current_ability": 80,
+  "potential_ability": -55,
+  "value": 125000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

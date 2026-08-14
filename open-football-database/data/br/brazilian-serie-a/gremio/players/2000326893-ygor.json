@@ -1,0 +1,29 @@
+{
+  "id": 2000326893,
+  "first_name": "Ygor",
+  "last_name": "",
+  "birth_date": "2005-03-04",
+  "country_id": 1651,
+  "club_id": 324,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 86,
+  "potential_ability": -65,
+  "value": 607000,
+  "contract": {    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 301148,
+    "expiration": "2027-10-30",    "wage_contribution_pct": 100
+  }
+}

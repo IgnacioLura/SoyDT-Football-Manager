@@ -1,0 +1,23 @@
+{
+  "id": 14023760,
+  "first_name": "Facundo",
+  "last_name": "Melivilo",
+  "birth_date": "1992-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 50
+  },
+  "current_ability": 108,
+  "potential_ability": 116
+}

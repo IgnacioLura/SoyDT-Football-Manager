@@ -1,0 +1,23 @@
+{
+  "id": 14245217,
+  "first_name": "Alex",
+  "last_name": "Guaricuyu",
+  "birth_date": "1998-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DL",
+      "level": 20
+    },
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 94,
+  "potential_ability": 104
+}

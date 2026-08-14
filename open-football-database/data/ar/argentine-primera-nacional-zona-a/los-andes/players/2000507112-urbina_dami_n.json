@@ -1,0 +1,26 @@
+{
+  "id": 2000507112,
+  "first_name": "Damián",
+  "last_name": "Urbina",
+  "birth_date": "2008-05-27",
+  "country_id": 1649,
+  "club_id": 102495,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 30,
+    "right": 100
+  },
+  "current_ability": 70,
+  "potential_ability": -5,
+  "value": 125000,
+  "contract": {
+    "expiration": "2029-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

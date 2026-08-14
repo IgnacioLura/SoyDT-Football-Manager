@@ -1,0 +1,42 @@
+{
+  "id": 2000308483,
+  "first_name": "Luis",
+  "last_name": "Miguel",
+  "birth_date": "2005-02-04",
+  "country_id": 1651,
+  "club_id": 340,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 60,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": -65,
+  "value": 76000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 301266,
+    "expiration": "2027-11-30",    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2024, "c": 340, "p": 1 },
+    { "s": 2024, "c": 312324, "p": 10, "g": 1 },
+    { "s": 2025, "c": 340, "p": 0 },
+    { "s": 2025, "c": 301208, "p": 9, "g": 2 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1223828"
+  }
+}

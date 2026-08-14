@@ -1,0 +1,41 @@
+{
+  "id": 78102761,
+  "first_name": "Logan",
+  "last_name": "Ponce",
+  "birth_date": "2002-01-25",
+  "country_id": 1657,
+  "club_id": 1916,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    },
+    {
+      "code": "DM",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 96,
+  "potential_ability": 98,
+  "value": 22000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2018, "c": 1925, "p": 0 },
+    { "s": 2019, "c": 1925, "p": 0 },
+    { "s": 2020, "c": 1925, "p": 0 },
+    { "s": 2021, "c": 1916, "p": 1 },
+    { "s": 2022, "c": 1916, "p": 7 },
+    { "s": 2022, "c": 5512782, "p": 0 },
+    { "s": 2023, "c": 2000262519, "p": 14, "g": 2 },
+    { "s": 2024, "c": 1916, "p": 15 },
+    { "s": 2025, "c": 1916, "p": 12, "g": 1 },
+    { "s": 2025, "c": 130848, "p": 0 }
+  ]
+}

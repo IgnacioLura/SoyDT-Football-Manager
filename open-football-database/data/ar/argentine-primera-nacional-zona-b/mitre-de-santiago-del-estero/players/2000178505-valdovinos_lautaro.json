@@ -1,0 +1,29 @@
+{
+  "id": 2000178505,
+  "first_name": "Lautaro",
+  "last_name": "Valdovinos",
+  "birth_date": "2005-09-13",
+  "country_id": 1649,
+  "club_id": 14037231,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 65,
+    "right": 100
+  },
+  "current_ability": 82,
+  "potential_ability": -6,
+  "value": 177000,
+  "contract": {
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 14037231, "p": 0 }
+  ]
+}

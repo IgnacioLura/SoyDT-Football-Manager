@@ -1,0 +1,29 @@
+{
+  "id": 2000509422,
+  "first_name": "Benjamín",
+  "last_name": "Rosales",
+  "birth_date": "2006-08-17",
+  "country_id": 1649,
+  "club_id": 3102137,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 78,
+  "potential_ability": -55,
+  "value": 76000,
+  "contract": {
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 3102137, "p": 0 }
+  ]
+}

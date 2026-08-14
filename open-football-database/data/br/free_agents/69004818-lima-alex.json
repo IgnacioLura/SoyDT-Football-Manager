@@ -1,0 +1,39 @@
+{
+  "id": 69004818,
+  "first_name": "Alex",
+  "last_name": "Lima",
+  "birth_date": "1989-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "ML",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 45
+  },
+  "current_ability": 100,
+  "potential_ability": 108
+}

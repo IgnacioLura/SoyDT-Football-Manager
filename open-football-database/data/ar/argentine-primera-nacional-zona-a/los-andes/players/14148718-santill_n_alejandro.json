@@ -1,0 +1,26 @@
+{
+  "id": 14148718,
+  "first_name": "Alejandro",
+  "last_name": "Santillán",
+  "birth_date": "1986-03-10",
+  "country_id": 1649,
+  "club_id": 102495,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "current_ability": 30,
+  "potential_ability": 30,
+  "value": 31,
+  "contract": {
+    "expiration": "2027-06-30",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2008, "c": 955208, "p": 14 },
+    { "s": 2009, "c": 952758, "p": 31 }
+  ]
+}

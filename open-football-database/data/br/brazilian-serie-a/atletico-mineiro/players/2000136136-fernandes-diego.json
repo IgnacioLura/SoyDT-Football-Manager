@@ -1,0 +1,32 @@
+{
+  "id": 2000136136,
+  "first_name": "Diego",
+  "last_name": "Fernandes",
+  "birth_date": "2004-08-31",
+  "country_id": 1651,
+  "club_id": 314,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 60,
+    "right": 100
+  },
+  "current_ability": 80,
+  "potential_ability": 106,
+  "value": 22000,
+  "contract": {    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 104775,
+    "expiration": "2027-03-15",    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2021, "c": 952758, "p": 3 }
+  ]
+}

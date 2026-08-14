@@ -1,0 +1,28 @@
+{
+  "id": 2000464963,
+  "first_name": "Máximo",
+  "last_name": "Soto",
+  "birth_date": "2005-03-12",
+  "country_id": 1649,
+  "club_id": 3100018,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 50
+  },
+  "current_ability": 80,
+  "potential_ability": -55,
+  "value": 17000,
+  "contract": {    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 15044852, "p": 2 }
+  ]
+}

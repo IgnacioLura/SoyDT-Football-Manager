@@ -1,0 +1,19 @@
+{
+  "id": 2000092655,
+  "first_name": "Francisco",
+  "last_name": "Sagardia",
+  "birth_date": "2002-01-01",
+  "country_id": 1657,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 100
+}

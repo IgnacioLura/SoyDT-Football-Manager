@@ -1,0 +1,30 @@
+{
+  "id": 2000244469,
+  "first_name": "Benjamín",
+  "last_name": "Borruel",
+  "birth_date": "2003-09-30",
+  "country_id": 1649,
+  "club_id": 956891,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 50
+  },
+  "current_ability": 96,
+  "potential_ability": 118,
+  "value": 241000,
+  "contract": {
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2023, "c": 956891, "p": 0 },
+    { "s": 2024, "c": 956891, "p": 0 }
+  ]
+}

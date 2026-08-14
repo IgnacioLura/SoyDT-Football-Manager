@@ -1,0 +1,31 @@
+{
+  "id": 2000381024,
+  "first_name": "Matheusinho",
+  "last_name": "",
+  "birth_date": "2007-03-30",
+  "country_id": 1651,
+  "club_id": 316,
+  "positions": [
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 78,
+  "potential_ability": -7,
+  "value": 316000,
+  "contract": {    "expiration": "2028-04-30",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2022, "c": 5744631, "p": 0 },
+    { "s": 2023, "c": 5744631, "p": 0 },
+    { "s": 2024, "c": 135448, "p": 0 },
+    { "s": 2025, "c": 135448, "p": 0 }
+  ]
+}

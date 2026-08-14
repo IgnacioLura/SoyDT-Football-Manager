@@ -1,0 +1,23 @@
+{
+  "id": 19388975,
+  "first_name": "Ramires",
+  "last_name": "",
+  "birth_date": "1999-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 100
+}

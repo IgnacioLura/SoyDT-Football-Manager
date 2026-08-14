@@ -1,0 +1,23 @@
+{
+  "id": 19235798,
+  "first_name": "Leandro",
+  "last_name": "Carvalho",
+  "birth_date": "1995-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 55,
+    "right": 100
+  },
+  "current_ability": 104,
+  "potential_ability": 124
+}

@@ -1,0 +1,40 @@
+{
+  "id": 2000187731,
+  "first_name": "Franco",
+  "last_name": "Ratotti",
+  "birth_date": "2005-07-13",
+  "country_id": 1649,
+  "club_id": 102467,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 102,
+  "potential_ability": -7,
+  "value": 156000,
+  "contract": {    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 5270169,
+    "expiration": "2027-12-31",    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2020, "c": 102467, "p": 0 },
+    { "s": 2021, "c": 102467, "p": 0 },
+    { "s": 2022, "c": 102467, "p": 0 },
+    { "s": 2023, "c": 102467, "p": 0 },
+    { "s": 2024, "c": 102467, "p": 0 },
+    { "s": 2025, "c": 120064, "p": 10, "g": 1 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1305782"
+  }
+}

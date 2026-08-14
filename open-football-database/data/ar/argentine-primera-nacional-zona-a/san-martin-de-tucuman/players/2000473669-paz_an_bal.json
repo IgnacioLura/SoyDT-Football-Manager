@@ -1,0 +1,36 @@
+{
+  "id": 2000473669,
+  "first_name": "Aníbal",
+  "last_name": "Paz",
+  "birth_date": "2002-10-08",
+  "country_id": 1649,
+  "club_id": 102466,
+  "positions": [
+    {
+      "code": "WBL",
+      "level": 20
+    },
+    {
+      "code": "ML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 35
+  },
+  "current_ability": 104,
+  "potential_ability": 120,
+  "value": 286000,
+  "contract": {
+    "salary": 111,
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2023, "c": 2000275110, "p": 12, "g": 1 },
+    { "s": 2024, "c": 14057746, "p": 2 },
+    { "s": 2025, "c": 102466, "p": 9 }
+  ]
+}

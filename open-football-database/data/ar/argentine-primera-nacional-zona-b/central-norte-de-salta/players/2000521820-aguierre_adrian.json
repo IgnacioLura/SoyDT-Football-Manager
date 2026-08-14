@@ -1,0 +1,26 @@
+{
+  "id": 2000521820,
+  "first_name": "Adrian",
+  "last_name": "Aguierre",
+  "birth_date": "2007-04-21",
+  "country_id": 1649,
+  "club_id": 14002958,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 70,
+  "potential_ability": -5,
+  "value": 105000,
+  "contract": {
+    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

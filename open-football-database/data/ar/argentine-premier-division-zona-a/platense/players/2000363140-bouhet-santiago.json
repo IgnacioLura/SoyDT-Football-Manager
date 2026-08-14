@@ -1,0 +1,32 @@
+{
+  "id": 2000363140,
+  "first_name": "Santiago",
+  "last_name": "Bouhet",
+  "birth_date": "2006-01-10",
+  "country_id": 1649,
+  "club_id": 92,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 76,
+  "potential_ability": -7,
+  "value": 247000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 92, "p": 0 }
+  ]
+}

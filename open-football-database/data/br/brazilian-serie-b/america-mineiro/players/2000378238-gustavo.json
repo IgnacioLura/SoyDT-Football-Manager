@@ -1,0 +1,25 @@
+{
+  "id": 2000378238,
+  "first_name": "Gustavo",
+  "last_name": "",
+  "birth_date": "2007-01-16",
+  "country_id": 1651,
+  "club_id": 107201,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 70,
+  "potential_ability": -6,
+  "value": 0,
+  "contract": {    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

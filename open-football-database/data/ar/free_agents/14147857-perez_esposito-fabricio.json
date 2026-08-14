@@ -1,0 +1,19 @@
+{
+  "id": 14147857,
+  "first_name": "Fabricio",
+  "last_name": "Pérez Espósito",
+  "birth_date": "1993-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 100,
+  "potential_ability": 106
+}

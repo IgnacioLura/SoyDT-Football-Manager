@@ -1,0 +1,23 @@
+{
+  "id": 78023178,
+  "first_name": "Rodrigo",
+  "last_name": "Cabrera",
+  "birth_date": "1989-01-01",
+  "country_id": 1657,
+  "positions": [
+    {
+      "code": "DL",
+      "level": 20
+    },
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 94,
+  "potential_ability": 118
+}

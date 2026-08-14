@@ -1,0 +1,19 @@
+{
+  "id": 14212350,
+  "first_name": "Aarón",
+  "last_name": "Martínez",
+  "birth_date": "2001-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 90,
+  "potential_ability": 118
+}

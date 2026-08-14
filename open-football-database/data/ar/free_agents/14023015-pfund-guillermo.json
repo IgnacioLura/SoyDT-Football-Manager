@@ -1,0 +1,19 @@
+{
+  "id": 14023015,
+  "first_name": "Guillermo",
+  "last_name": "Pfund",
+  "birth_date": "1989-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 100,
+  "potential_ability": 106
+}

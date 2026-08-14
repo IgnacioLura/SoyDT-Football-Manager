@@ -1,0 +1,30 @@
+{
+  "id": 2000298903,
+  "first_name": "Gian",
+  "last_name": "Piaggio",
+  "birth_date": "2005-03-30",
+  "country_id": 1649,
+  "club_id": 102462,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": -6,
+  "value": 191000,
+  "contract": {
+    "salary": 111,
+    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 102462, "p": 0 }
+  ]
+}

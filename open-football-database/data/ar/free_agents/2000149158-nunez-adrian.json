@@ -1,0 +1,23 @@
+{
+  "id": 2000149158,
+  "first_name": "Adrián",
+  "last_name": "Núñez",
+  "birth_date": "2000-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 96,
+  "potential_ability": 108
+}

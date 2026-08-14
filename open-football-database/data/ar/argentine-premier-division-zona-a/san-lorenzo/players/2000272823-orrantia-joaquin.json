@@ -1,0 +1,28 @@
+{
+  "id": 2000272823,
+  "first_name": "Joaquín",
+  "last_name": "Orrantia",
+  "birth_date": "2006-01-23",
+  "country_id": 1649,
+  "club_id": 96,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 80,
+  "potential_ability": -6,
+  "value": 193000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 78, "p": 0 }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "id": 19382829,
+  "first_name": "Gabriel",
+  "last_name": "Tigrão",
+  "birth_date": "2001-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 60
+  },
+  "current_ability": 102,
+  "potential_ability": 126
+}

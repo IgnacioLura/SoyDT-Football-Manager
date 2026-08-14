@@ -1,0 +1,23 @@
+{
+  "id": 14213997,
+  "first_name": "Alexis",
+  "last_name": "Coman",
+  "birth_date": "1998-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 50
+  },
+  "current_ability": 92,
+  "potential_ability": 100
+}

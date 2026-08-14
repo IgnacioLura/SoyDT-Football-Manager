@@ -1,0 +1,32 @@
+{
+  "id": 2000378961,
+  "first_name": "Felipe",
+  "last_name": "Kisner",
+  "birth_date": "2007-04-25",
+  "country_id": 1651,
+  "club_id": 315,
+  "positions": [
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 66,
+  "potential_ability": -6,
+  "value": 0,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2021, "c": 2000314888, "p": 10, "g": 1 },
+    { "s": 2022, "c": 2000314888, "p": 14 },
+    { "s": 2023, "c": 2000180672, "p": 8 },
+    { "s": 2023, "c": 2000314888, "p": 3 },
+    { "s": 2024, "c": 2000180672, "p": 11 }
+  ]
+}

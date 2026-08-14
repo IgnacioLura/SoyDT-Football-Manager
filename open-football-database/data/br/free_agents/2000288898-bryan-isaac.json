@@ -1,0 +1,23 @@
+{
+  "id": 2000288898,
+  "first_name": "Isaac",
+  "last_name": "Bryan",
+  "birth_date": "1997-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DL",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 30
+  },
+  "current_ability": 88,
+  "potential_ability": 92
+}

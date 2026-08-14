@@ -1,0 +1,42 @@
+{
+  "id": 2000272707,
+  "first_name": "Rodrigo",
+  "last_name": "Haruki",
+  "birth_date": "2007-02-27",
+  "country_id": 1651,
+  "club_id": 107216,
+  "positions": [
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 76,
+  "potential_ability": -65,
+  "value": 54000,
+  "contract": {    "expiration": "2028-01-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 320,
+    "expiration": "2027-08-31",    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2015, "c": 2000019722, "p": 0 },
+    { "s": 2016, "c": 2000019722, "p": 0 },
+    { "s": 2023, "c": 83113796, "p": 8 }
+  ]
+}

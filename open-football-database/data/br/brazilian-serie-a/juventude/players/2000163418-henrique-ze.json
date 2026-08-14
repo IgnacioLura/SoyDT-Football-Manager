@@ -1,0 +1,36 @@
+{
+  "id": 2000163418,
+  "first_name": "Zé",
+  "last_name": "Henrique",
+  "birth_date": "2004-10-23",
+  "country_id": 1651,
+  "club_id": 327,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 76,
+  "potential_ability": -6,
+  "value": 0,
+  "contract": {    "expiration": "2025-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2019, "c": 329, "p": 0 },
+    { "s": 2020, "c": 329, "p": 0 },
+    { "s": 2021, "c": 329, "p": 0 },
+    { "s": 2022, "c": 329, "p": 0 },
+    { "s": 2022, "c": 2397, "p": 0 },
+    { "s": 2023, "c": 2397, "p": 0 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1031409"
+  }
+}

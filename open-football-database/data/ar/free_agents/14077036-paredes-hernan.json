@@ -1,0 +1,23 @@
+{
+  "id": 14077036,
+  "first_name": "Hernán",
+  "last_name": "Paredes",
+  "birth_date": "1991-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "AMC",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": 100
+}

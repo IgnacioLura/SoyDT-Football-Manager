@@ -1,0 +1,29 @@
+{
+  "id": 2000261942,
+  "first_name": "Facundo",
+  "last_name": "Cruz",
+  "birth_date": "2006-05-22",
+  "country_id": 1649,
+  "club_id": 89,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 96,
+  "potential_ability": -65,
+  "value": 375000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2023, "c": 20049737, "p": 19, "g": 1 },
+    { "s": 2024, "c": 20049733, "p": 11 }
+  ]
+}

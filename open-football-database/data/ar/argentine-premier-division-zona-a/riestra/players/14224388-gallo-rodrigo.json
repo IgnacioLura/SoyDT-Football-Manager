@@ -1,0 +1,37 @@
+{
+  "id": 14224388,
+  "first_name": "Rodrigo",
+  "last_name": "Gallo",
+  "birth_date": "2000-11-04",
+  "country_id": 1649,
+  "club_id": 952707,
+  "positions": [
+    {
+      "code": "DL",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 110,
+  "potential_ability": 118,
+  "value": 199000,
+  "contract": {
+    "salary": 25012,
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2021, "c": 87, "p": 0 },
+    { "s": 2022, "c": 14031222, "p": 7 },
+    { "s": 2023, "c": 87, "p": 10 },
+    { "s": 2024, "c": 87, "p": 11 },
+    { "s": 2025, "c": 952707, "p": 11 }
+  ],
+  "ids": {
+    "transfermarkt.com": "852747"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "id": 2000250535,
+  "first_name": "Jhon",
+  "last_name": "Guzmán",
+  "birth_date": "2005-03-20",
+  "country_id": 1653,
+  "club_id": 2000326587,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 60,
+    "right": 100
+  },
+  "current_ability": 94,
+  "potential_ability": -65,
+  "value": 315000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 1921,
+    "expiration": "2027-12-31",    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2022, "c": 312, "p": 0 },
+    { "s": 2023, "c": 312, "p": 2 },
+    { "s": 2024, "c": 2000326587, "p": 2 },
+    { "s": 2025, "c": 2000326587, "p": 35, "g": 1 }
+  ]
+}

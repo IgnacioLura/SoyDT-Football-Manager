@@ -1,0 +1,27 @@
+{
+  "id": 14150924,
+  "first_name": "Ismael",
+  "last_name": "Torres",
+  "birth_date": "1995-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    },
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 35
+  },
+  "current_ability": 88,
+  "potential_ability": 90
+}

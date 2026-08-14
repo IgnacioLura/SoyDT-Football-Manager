@@ -1,0 +1,27 @@
+{
+  "id": 2000036027,
+  "first_name": "Matías",
+  "last_name": "Figueredo",
+  "birth_date": "2003-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 50
+  },
+  "current_ability": 90,
+  "potential_ability": -6
+}

@@ -1,0 +1,27 @@
+{
+  "id": 75020255,
+  "first_name": "Juan",
+  "last_name": "Ignacio Duma",
+  "birth_date": "1993-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 70,
+    "right": 100
+  },
+  "current_ability": 104,
+  "potential_ability": 122
+}

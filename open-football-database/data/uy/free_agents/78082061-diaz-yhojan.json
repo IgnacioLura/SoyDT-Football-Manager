@@ -1,0 +1,35 @@
+{
+  "id": 78082061,
+  "first_name": "Yhojan",
+  "last_name": "Díaz",
+  "birth_date": "1998-01-01",
+  "country_id": 1657,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 102
+}

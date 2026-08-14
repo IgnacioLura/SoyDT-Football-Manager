@@ -1,0 +1,19 @@
+{
+  "id": 961947,
+  "first_name": "Ezequiel",
+  "last_name": "Viola",
+  "birth_date": "1987-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 96,
+  "potential_ability": 102
+}

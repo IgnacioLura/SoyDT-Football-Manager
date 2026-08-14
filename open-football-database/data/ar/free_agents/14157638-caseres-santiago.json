@@ -1,0 +1,23 @@
+{
+  "id": 14157638,
+  "first_name": "Santiago",
+  "last_name": "Cáseres",
+  "birth_date": "1997-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 124,
+  "potential_ability": 136
+}

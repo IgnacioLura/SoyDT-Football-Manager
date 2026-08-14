@@ -1,0 +1,40 @@
+{
+  "id": 2000053834,
+  "first_name": "Rwan",
+  "last_name": "Cruz",
+  "birth_date": "2001-05-20",
+  "country_id": 1651,
+  "club_id": 316,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 122,
+  "potential_ability": 132,
+  "value": 8000000,
+  "contract": {    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 22003969,
+    "expiration": "2027-12-31",    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2022, "c": 335, "p": 17, "g": 2 },
+    { "s": 2023, "c": 339, "p": 0 },
+    { "s": 2023, "c": 22003969, "p": 32, "g": 14 },
+    { "s": 2024, "c": 335, "p": 0 },
+    { "s": 2024, "c": 22003969, "p": 18, "g": 10 },
+    { "s": 2025, "c": 980543, "p": 10 }
+  ],
+  "ids": {
+    "transfermarkt.com": "973569"
+  }
+}

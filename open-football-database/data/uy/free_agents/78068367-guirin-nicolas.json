@@ -1,0 +1,19 @@
+{
+  "id": 78068367,
+  "first_name": "Nicolás",
+  "last_name": "Guirin",
+  "birth_date": "1995-01-01",
+  "country_id": 1657,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 55,
+    "right": 100
+  },
+  "current_ability": 102,
+  "potential_ability": 110
+}

@@ -1,0 +1,23 @@
+{
+  "id": 19249483,
+  "first_name": "Willians",
+  "last_name": "",
+  "birth_date": "1995-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 102
+}

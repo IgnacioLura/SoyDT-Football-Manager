@@ -1,0 +1,33 @@
+{
+  "id": 2000194763,
+  "first_name": "Agustín",
+  "last_name": "Sciaroni",
+  "birth_date": "2006-01-16",
+  "country_id": 1649,
+  "club_id": 952695,
+  "positions": [
+    {
+      "code": "DL",
+      "level": 20
+    },
+    {
+      "code": "WBL",
+      "level": 20
+    },
+    {
+      "code": "ML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 45
+  },
+  "current_ability": 70,
+  "potential_ability": -6,
+  "value": 45000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

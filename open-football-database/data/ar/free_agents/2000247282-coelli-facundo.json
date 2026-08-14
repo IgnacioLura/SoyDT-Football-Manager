@@ -1,0 +1,19 @@
+{
+  "id": 2000247282,
+  "first_name": "Facundo",
+  "last_name": "Coelli",
+  "birth_date": "2003-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": 100
+}

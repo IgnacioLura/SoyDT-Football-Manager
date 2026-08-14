@@ -1,0 +1,101 @@
+use crate::r#match::goalkeepers::states::common::{ActivityIntensity, GoalkeeperCondition};
+use crate::r#match::goalkeepers::states::state::GoalkeeperState;
+use crate::r#match::player::events::PlayerEvent;
+use crate::r#match::player::strategies::players::ops::goalkeeper_skill::GoalkeeperSkillProfile;
+use crate::r#match::{
+    ConditionContext, StateChangeResult, StateProcessingContext, StateProcessingHandler,
+};
+use nalgebra::Vector3;
+
+const PUNCHING_DISTANCE_THRESHOLD: f32 = 2.0; // Maximum distance to attempt punching
+
+#[derive(Default, Clone)]
+pub struct GoalkeeperPunchingState {}
+
+impl StateProcessingHandler for GoalkeeperPunchingState {
+    fn process(&self, ctx: &StateProcessingContext) -> Option<StateChangeResult> {
+        let prof = GoalkeeperSkillProfile::from_ctx(ctx);
+        // Punch reach now scales with aerial command + parry control:
+        // weak ~1.6u, elite ~3.0u against the previous flat 2.0u.
+        let punch_threshold = PUNCHING_DISTANCE_THRESHOLD
+            * (0.85 + prof.aerial_command * 0.40 + prof.parry_control * 0.25);
+        if ctx.ball().distance() > punch_threshold {
+            return Some(StateChangeResult::with_goalkeeper_state(
+                GoalkeeperState::Jumping,
+            ));
+        }
+
+        // Crowd / pressure from nearby opponents — high crowd punishes
+        // weak claim quality more.
+        let crowd = (ctx.players().opponents().nearby(8.0).count() as f32 / 4.0).clamp(0.0, 1.0);
+        let claim_quality = (prof.aerial_command * 0.46
+            + prof.positioning * 0.18
+            + prof.rushing_out_profile * 0.12
+            + prof.communication * 0.10
+            + prof.condition_mult * 0.06)
+            .clamp(0.0, 1.0);
+        let claim_difficulty =
+            (crowd * 0.32 + (1.0 - prof.parry_control) * 0.20 + prof.poor_skill_penalty * 0.18)
+                .clamp(0.0, 1.0);
+        // Punch success rolls between ~0.40 (weak in heavy traffic) and
+        // ~0.92 (elite in space).
+        let punch_success_prob =
+            (claim_quality * 0.85 - claim_difficulty * 0.30 + prof.elite_lift).clamp(0.20, 0.95);
+        let punch_success = ctx.context.rng.unit_f32() < punch_success_prob;
+
+        if punch_success {
+            // Punch is successful
+            let mut state_change =
+                StateChangeResult::with_goalkeeper_state(GoalkeeperState::Standing);
+
+            // Punch AWAY from the own goal, through the ball, with real
+            // loft. `direction_to_own_goal()` returns the own-goal
+            // POSITION (not a direction), so the outward line is
+            // ball-minus-goal. A punch is a shorter, flatter contact
+            // than the Clearing hoof (3.8-4.8 h / 4.5-5.5 v): strong
+            // aerial keepers push it toward midfield, weak ones only
+            // shift the danger a few metres.
+            let ball_pos = ctx.tick_context.positions.ball.position;
+            let own_goal = ctx.ball().direction_to_own_goal();
+            let fallback_x = ctx.player.side.map_or(1.0, |s| s.forward_dir_x());
+            let outward = Vector3::new(ball_pos.x - own_goal.x, ball_pos.y - own_goal.y, 0.0);
+            let outward_dir = outward
+                .try_normalize(1e-4)
+                .unwrap_or_else(|| Vector3::new(fallback_x, 0.0, 0.0));
+            // Lateral spray — a punch is a deflection under pressure,
+            // not an aimed pass.
+            let y_jitter: f32 = ctx.context.rng.random_range(-0.35..0.35);
+            let punch_dir = Vector3::new(outward_dir.x, outward_dir.y + y_jitter, 0.0)
+                .try_normalize(1e-4)
+                .unwrap_or(outward_dir);
+            let punch_power = 2.8 + prof.aerial_command * 1.2; // 2.8 - 4.0 u/tick
+            let punch_velocity = Vector3::new(
+                punch_dir.x * punch_power,
+                punch_dir.y * punch_power,
+                2.6 + prof.aerial_command * 0.8, // flatter arc than a kicked clearance
+            );
+
+            // Generate a punch event
+            state_change
+                .events
+                .add_player_event(PlayerEvent::ClearBall(punch_velocity));
+
+            Some(state_change)
+        } else {
+            // Punch failed, transition to appropriate state (e.g., Diving)
+            Some(StateChangeResult::with_goalkeeper_state(
+                GoalkeeperState::Diving,
+            ))
+        }
+    }
+
+    fn velocity(&self, _ctx: &StateProcessingContext) -> Option<Vector3<f32>> {
+        // Remain stationary while punching
+        Some(Vector3::new(0.0, 0.0, 0.0))
+    }
+
+    fn process_conditions(&self, ctx: ConditionContext) {
+        // Punching is a very high intensity activity requiring explosive effort
+        GoalkeeperCondition::new(ActivityIntensity::VeryHigh).process(ctx);
+    }
+}

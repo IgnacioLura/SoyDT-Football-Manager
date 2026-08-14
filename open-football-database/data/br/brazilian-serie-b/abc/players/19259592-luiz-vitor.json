@@ -1,0 +1,37 @@
+{
+  "id": 19259592,
+  "first_name": "Vitor",
+  "last_name": "Luiz",
+  "birth_date": "1996-01-11",
+  "country_id": 1651,
+  "club_id": 107205,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 25,
+    "right": 100
+  },
+  "current_ability": 84,
+  "potential_ability": 98,
+  "value": 3000,
+  "contract": {    "expiration": "2025-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2018, "c": 83208744, "p": 9 },
+    { "s": 2019, "c": 2383, "p": 0 },
+    { "s": 2019, "c": 2000048710, "p": 0 },
+    { "s": 2020, "c": 83208744, "p": 0 },
+    { "s": 2022, "c": 301264, "p": 5 },
+    { "s": 2024, "c": 313350, "p": 14 },
+    { "s": 2025, "c": 19220160, "p": 11 }
+  ],
+  "ids": {
+    "transfermarkt.com": "671656"
+  }
+}

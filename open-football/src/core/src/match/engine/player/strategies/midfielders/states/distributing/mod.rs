@@ -1,0 +1,106 @@
+use crate::r#match::events::Event;
+use crate::r#match::midfielders::states::MidfielderState;
+use crate::r#match::midfielders::states::common::{ActivityIntensity, MidfielderCondition};
+use crate::r#match::player::events::{PassingEventContext, PlayerEvent};
+use crate::r#match::{
+    ConditionContext, MatchPlayerLite, StateChangeResult, StateProcessingContext,
+    StateProcessingHandler,
+};
+use nalgebra::Vector3;
+use std::cmp::Ordering;
+
+#[derive(Default, Clone)]
+pub struct MidfielderDistributingState {}
+
+impl StateProcessingHandler for MidfielderDistributingState {
+    fn process(&self, ctx: &StateProcessingContext) -> Option<StateChangeResult> {
+        // Lost possession — transition out
+        if !ctx.player.has_ball(ctx) {
+            return Some(StateChangeResult::with_midfielder_state(
+                MidfielderState::Running,
+            ));
+        }
+
+        // Find the best passing option
+        if let Some(teammate) = self.find_best_pass_option(ctx) {
+            return Some(StateChangeResult::with_midfielder_state_and_event(
+                MidfielderState::Running,
+                Event::PlayerEvent(PlayerEvent::PassTo(
+                    PassingEventContext::new()
+                        .with_from_player_id(ctx.player.id)
+                        .with_to_player_id(teammate.id)
+                        .with_reason("MID_DISTRIBUTING")
+                        .build(ctx),
+                )),
+            ));
+        }
+
+        // Timeout: if no pass option found, transition to running with ball
+        if ctx.in_state_time > 30 {
+            return Some(StateChangeResult::with_midfielder_state(
+                MidfielderState::Running,
+            ));
+        }
+
+        None
+    }
+
+    fn velocity(&self, _ctx: &StateProcessingContext) -> Option<Vector3<f32>> {
+        Some(Vector3::new(0.0, 0.0, 0.0))
+    }
+
+    fn process_conditions(&self, ctx: ConditionContext) {
+        // Distributing is moderate intensity
+        MidfielderCondition::new(ActivityIntensity::Moderate).process(ctx);
+    }
+}
+
+impl MidfielderDistributingState {
+    fn find_best_pass_option<'a>(
+        &self,
+        ctx: &StateProcessingContext<'a>,
+    ) -> Option<MatchPlayerLite> {
+        let vision_range = ctx.player.skills.mental.vision * 10.0; // Adjust the factor as needed
+
+        ctx.players()
+            .teammates()
+            .nearby(vision_range)
+            .filter(|t| !t.tactical_positions.is_goalkeeper())
+            .filter(|t| self.is_teammate_open(ctx, t) && ctx.player().has_clear_pass(t.id))
+            .max_by(|a, b| {
+                let recency_a = ctx.ball().passer_recency_penalty(a.id);
+                let recency_b = ctx.ball().passer_recency_penalty(b.id);
+                let space_a = self.calculate_space_around_player(ctx, a) * recency_a;
+                let space_b = self.calculate_space_around_player(ctx, b) * recency_b;
+                space_a.partial_cmp(&space_b).unwrap_or(Ordering::Equal)
+            })
+    }
+
+    fn is_teammate_open(&self, ctx: &StateProcessingContext, teammate: &MatchPlayerLite) -> bool {
+        let opponent_distance_threshold = 5.0; // Adjust the threshold as needed
+
+        // Use distance closure: from teammate's perspective, opponents are nearby
+        ctx.tick_context
+            .grid
+            .opponents(teammate.id, opponent_distance_threshold)
+            .next()
+            .is_none()
+    }
+
+    fn calculate_space_around_player(
+        &self,
+        ctx: &StateProcessingContext,
+        player: &MatchPlayerLite,
+    ) -> f32 {
+        let space_radius = 10.0; // Adjust the radius as needed
+
+        // Use distance closure instead of scanning all opponents
+        let num_opponents_nearby = ctx
+            .tick_context
+            .grid
+            .opponents(player.id, space_radius)
+            .count();
+
+        space_radius - num_opponents_nearby as f32
+    }
+}

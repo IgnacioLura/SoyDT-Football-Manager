@@ -1,0 +1,39 @@
+{
+  "id": 2000522722,
+  "first_name": "Maximiliano",
+  "last_name": "Rojas",
+  "birth_date": "2008-08-17",
+  "country_id": 1657,
+  "club_id": 78027478,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    },
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 55,
+    "right": 100
+  },
+  "current_ability": 64,
+  "potential_ability": -5,
+  "value": 47000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2023, "c": 78047833, "p": 0 },
+    { "s": 2024, "c": 2000369851, "p": 0 },
+    { "s": 2025, "c": 116309, "p": 0 },
+    { "s": 2025, "c": 2000369851, "p": 9 }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "id": 14047186,
+  "first_name": "Sebastián",
+  "last_name": "Martelli",
+  "birth_date": "1996-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 75,
+    "right": 100
+  },
+  "current_ability": 100,
+  "potential_ability": 116
+}

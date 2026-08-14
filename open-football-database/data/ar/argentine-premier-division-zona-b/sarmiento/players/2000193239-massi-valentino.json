@@ -1,0 +1,36 @@
+{
+  "id": 2000193239,
+  "first_name": "Valentino",
+  "last_name": "Massi",
+  "birth_date": "2005-12-02",
+  "country_id": 1649,
+  "club_id": 3101516,
+  "positions": [
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 96,
+  "potential_ability": -65,
+  "value": 324000,
+  "contract": {
+    "salary": 15392,
+    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2022, "c": 2000034768, "p": 22, "g": 5 },
+    { "s": 2023, "c": 7000014, "p": 25 },
+    { "s": 2024, "c": 2749, "p": 23, "g": 1 }
+  ]
+}

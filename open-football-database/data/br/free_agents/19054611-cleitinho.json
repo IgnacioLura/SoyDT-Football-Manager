@@ -1,0 +1,19 @@
+{
+  "id": 19054611,
+  "first_name": "Cleitinho",
+  "last_name": "",
+  "birth_date": "1990-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 110
+}

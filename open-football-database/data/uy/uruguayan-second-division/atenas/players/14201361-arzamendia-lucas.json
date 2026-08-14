@@ -1,0 +1,52 @@
+{
+  "id": 14201361,
+  "first_name": "Lucas",
+  "last_name": "Arzamendia",
+  "birth_date": "1999-02-23",
+  "country_id": 1649,
+  "club_id": 8825225,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 98,
+  "potential_ability": 108,
+  "value": 30000,
+  "contract": {    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2019, "c": 82, "p": 0 },
+    { "s": 2019, "c": 8825223, "p": 5 },
+    { "s": 2020, "c": 82, "p": 0 },
+    { "s": 2021, "c": 82, "p": 0 },
+    { "s": 2021, "c": 14018428, "p": 0 },
+    { "s": 2022, "c": 14018428, "p": 0 },
+    { "s": 2023, "c": 3101496, "p": 28, "g": 4 },
+    { "s": 2024, "c": 3101496, "p": 35, "g": 1 },
+    { "s": 2025, "c": 1924, "p": 22 }
+  ]
+}

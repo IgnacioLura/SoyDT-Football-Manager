@@ -1,0 +1,23 @@
+{
+  "id": 78042731,
+  "first_name": "Adrián",
+  "last_name": "Leites",
+  "birth_date": "1992-01-01",
+  "country_id": 1657,
+  "positions": [
+    {
+      "code": "AMC",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 94,
+  "potential_ability": 112
+}

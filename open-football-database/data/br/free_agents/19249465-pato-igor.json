@@ -1,0 +1,23 @@
+{
+  "id": 19249465,
+  "first_name": "Igor",
+  "last_name": "Pato",
+  "birth_date": "1993-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 60,
+    "right": 100
+  },
+  "current_ability": 98,
+  "potential_ability": 116
+}

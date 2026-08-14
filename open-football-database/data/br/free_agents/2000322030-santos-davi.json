@@ -1,0 +1,23 @@
+{
+  "id": 2000322030,
+  "first_name": "Davi",
+  "last_name": "Santos",
+  "birth_date": "1998-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 98
+}

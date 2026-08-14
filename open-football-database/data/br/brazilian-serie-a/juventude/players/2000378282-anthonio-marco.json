@@ -1,0 +1,33 @@
+{
+  "id": 2000378282,
+  "first_name": "Marco",
+  "last_name": "Anthônio",
+  "birth_date": "2007-03-26",
+  "country_id": 1651,
+  "club_id": 327,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 60,
+    "right": 100
+  },
+  "current_ability": 60,
+  "potential_ability": -6,
+  "value": 0,
+  "contract": {    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2021, "c": 43611057, "p": 0 },
+    { "s": 2023, "c": 831167, "p": 0 }
+  ]
+}

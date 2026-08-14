@@ -1,0 +1,51 @@
+{
+  "id": 14242246,
+  "first_name": "Lucas",
+  "last_name": "González",
+  "birth_date": "2000-06-03",
+  "country_id": 1649,
+  "club_id": 108526,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 122,
+  "potential_ability": 126,
+  "value": 5000000,
+  "contract": {
+    "salary": 208000,
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 14018428,
+    "expiration": "2027-12-31",
+    "salary": 208000,
+    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2019, "c": 89, "p": 2 },
+    { "s": 2020, "c": 89, "p": 7 },
+    { "s": 2021, "c": 89, "p": 24 },
+    { "s": 2022, "c": 89, "p": 26, "g": 1 },
+    { "s": 2023, "c": 89, "p": 10, "g": 1 },
+    { "s": 2023, "c": 106029, "p": 14, "g": 1 },
+    { "s": 2024, "c": 89, "p": 29, "g": 1 },
+    { "s": 2025, "c": 108526, "p": 19, "g": 1 }
+  ]
+}

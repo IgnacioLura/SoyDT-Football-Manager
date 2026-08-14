@@ -1,0 +1,23 @@
+{
+  "id": 19125313,
+  "first_name": "Juninho",
+  "last_name": "",
+  "birth_date": "1993-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 96
+}

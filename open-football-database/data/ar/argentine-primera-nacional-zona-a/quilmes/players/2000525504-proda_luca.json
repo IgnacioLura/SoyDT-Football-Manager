@@ -1,0 +1,38 @@
+{
+  "id": 2000525504,
+  "first_name": "Luca",
+  "last_name": "Proda",
+  "birth_date": "2006-07-07",
+  "country_id": 1649,
+  "club_id": 102487,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 76,
+  "potential_ability": -55,
+  "value": 96000,
+  "contract": {
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

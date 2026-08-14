@@ -1,0 +1,49 @@
+{
+  "id": 14240710,
+  "first_name": "Federico",
+  "last_name": "Tevez",
+  "birth_date": "1999-08-12",
+  "country_id": 1649,
+  "club_id": 3100018,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "DC",
+      "level": 20
+    },
+    {
+      "code": "DM",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 114,
+  "potential_ability": 118,
+  "value": 446000,
+  "contract": {
+    "salary": 104000,
+    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 86,
+    "expiration": "2027-12-31",
+    "salary": 104000,
+    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2021, "c": 102487, "p": 0 },
+    { "s": 2022, "c": 102487, "p": 18, "g": 1 },
+    { "s": 2023, "c": 102487, "p": 13, "g": 1 },
+    { "s": 2024, "c": 102487, "p": 33, "g": 1 },
+    { "s": 2025, "c": 102487, "p": 7 },
+    { "s": 2025, "c": 3100018, "p": 0 }
+  ]
+}

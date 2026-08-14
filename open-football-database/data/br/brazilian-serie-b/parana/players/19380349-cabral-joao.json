@@ -1,0 +1,38 @@
+{
+  "id": 19380349,
+  "first_name": "João",
+  "last_name": "Cabral",
+  "birth_date": "2001-06-04",
+  "country_id": 1651,
+  "club_id": 301113,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 80,
+  "potential_ability": 96,
+  "value": 0,
+  "contract": {    "expiration": "2026-05-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 330,
+    "expiration": "2027-05-31",    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2019, "c": 340, "p": 0 },
+    { "s": 2020, "c": 340, "p": 0 },
+    { "s": 2022, "c": 340, "p": 0 },
+    { "s": 2024, "c": 312324, "p": 16 },
+    { "s": 2024, "c": 19072706, "p": 0 },
+    { "s": 2025, "c": 19213392, "p": 1 },
+    { "s": 2026, "c": 301113, "p": 0 }
+  ]
+}

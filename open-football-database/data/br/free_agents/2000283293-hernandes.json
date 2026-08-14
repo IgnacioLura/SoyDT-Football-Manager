@@ -1,0 +1,23 @@
+{
+  "id": 2000283293,
+  "first_name": "Hernandes",
+  "last_name": "",
+  "birth_date": "2005-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": -6
+}

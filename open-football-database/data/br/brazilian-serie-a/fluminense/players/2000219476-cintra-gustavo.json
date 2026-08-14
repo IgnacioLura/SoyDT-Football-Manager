@@ -1,0 +1,42 @@
+{
+  "id": 2000219476,
+  "first_name": "Gustavo",
+  "last_name": "Cintra",
+  "birth_date": "2005-10-16",
+  "country_id": 1651,
+  "club_id": 323,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    },
+    {
+      "code": "DM",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 45
+  },
+  "current_ability": 78,
+  "potential_ability": -65,
+  "value": 0,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 301325,
+    "expiration": "2027-03-30",    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2021, "c": 541, "p": 0 },
+    { "s": 2022, "c": 27147895, "p": 0 },
+    { "s": 2023, "c": 27147895, "p": 0 },
+    { "s": 2024, "c": 27147895, "p": 6 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1124886"
+  }
+}

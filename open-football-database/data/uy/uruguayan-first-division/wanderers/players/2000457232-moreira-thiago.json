@@ -1,0 +1,32 @@
+{
+  "id": 2000457232,
+  "first_name": "Thiago",
+  "last_name": "Moreira",
+  "birth_date": "2006-06-30",
+  "country_id": 1657,
+  "club_id": 1926,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 86,
+  "potential_ability": -55,
+  "value": 71000,
+  "contract": {    "expiration": "2025-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2021, "c": 78027478, "p": 0 },
+    { "s": 2022, "c": 130849, "p": 0 },
+    { "s": 2023, "c": 130849, "p": 0 },
+    { "s": 2024, "c": 130849, "p": 0 },
+    { "s": 2025, "c": 78027478, "p": 0 }
+  ]
+}

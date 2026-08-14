@@ -1,0 +1,29 @@
+{
+  "id": 2000508740,
+  "first_name": "Amy",
+  "last_name": "Fleurilus",
+  "birth_date": "2007-05-22",
+  "country_id": 375,
+  "club_id": 81,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 84,
+  "potential_ability": -65,
+  "value": 351000,
+  "contract": {    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

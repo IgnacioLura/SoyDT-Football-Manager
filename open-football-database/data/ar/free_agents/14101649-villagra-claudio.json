@@ -1,0 +1,31 @@
+{
+  "id": 14101649,
+  "first_name": "Claudio",
+  "last_name": "Villagra",
+  "birth_date": "1996-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ML",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 110,
+  "potential_ability": 120
+}

@@ -1,0 +1,49 @@
+{
+  "id": 2000258392,
+  "first_name": "Ian",
+  "last_name": "Subiabre",
+  "birth_date": "2007-01-01",
+  "country_id": 1649,
+  "club_id": 94,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 55
+  },
+  "current_ability": 112,
+  "potential_ability": -8,
+  "value": 13000000,
+  "contract": {
+    "salary": 44304,
+    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2021, "c": 951334, "p": 0 },
+    { "s": 2022, "c": 94, "p": 0 },
+    { "s": 2023, "c": 94, "p": 0 },
+    { "s": 2024, "c": 94, "p": 3 },
+    { "s": 2025, "c": 94, "p": 12, "g": 1 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1074969"
+  }
+}

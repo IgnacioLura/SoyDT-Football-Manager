@@ -1,0 +1,23 @@
+{
+  "id": 14034250,
+  "first_name": "Adrián",
+  "last_name": "Acevedo",
+  "birth_date": "1993-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 96,
+  "potential_ability": 96
+}

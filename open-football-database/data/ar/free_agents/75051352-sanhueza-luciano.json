@@ -1,0 +1,19 @@
+{
+  "id": 75051352,
+  "first_name": "Luciano",
+  "last_name": "Sanhueza",
+  "birth_date": "1996-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 88,
+  "potential_ability": 90
+}

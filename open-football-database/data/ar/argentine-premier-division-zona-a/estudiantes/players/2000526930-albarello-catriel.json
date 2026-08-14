@@ -1,0 +1,25 @@
+{
+  "id": 2000526930,
+  "first_name": "Catriel",
+  "last_name": "Albarello",
+  "birth_date": "2006-06-23",
+  "country_id": 1649,
+  "club_id": 85,
+  "positions": [
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 82,
+  "potential_ability": -6,
+  "value": 313000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

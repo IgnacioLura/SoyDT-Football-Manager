@@ -1,0 +1,35 @@
+{
+  "id": 2000297319,
+  "first_name": "Bruno",
+  "last_name": "Solotar",
+  "birth_date": "2006-02-22",
+  "country_id": 1649,
+  "club_id": 108514,
+  "positions": [
+    {
+      "code": "ML",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 80,
+  "potential_ability": -6,
+  "value": 202000,
+  "contract": {
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2022, "c": 524, "p": 0 },
+    { "s": 2023, "c": 27147895, "p": 0 },
+    { "s": 2024, "c": 524, "p": 0 }
+  ]
+}

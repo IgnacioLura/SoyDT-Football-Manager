@@ -1,0 +1,43 @@
+{
+  "id": 2000246368,
+  "first_name": "Aranha",
+  "last_name": "",
+  "birth_date": "2005-02-07",
+  "country_id": 1651,
+  "club_id": 329,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": -65,
+  "value": 624000,
+  "contract": {    "expiration": "2029-06-30",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2018, "c": 1827, "p": 0 },
+    { "s": 2019, "c": 4301107, "p": 7, "g": 3 },
+    { "s": 2020, "c": 2624, "p": 6 },
+    { "s": 2020, "c": 4301107, "p": 5, "g": 1 },
+    { "s": 2021, "c": 2624, "p": 20 },
+    { "s": 2022, "c": 2624, "p": 14 },
+    { "s": 2023, "c": 4300678, "p": 0 },
+    { "s": 2025, "c": 4301107, "p": 20, "g": 2 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1093863"
+  },
+  "loan": {
+    "to_club_id": 2389,
+    "expiration": "2026-06-30",
+    "wage_contribution_pct": 100
+  }
+}

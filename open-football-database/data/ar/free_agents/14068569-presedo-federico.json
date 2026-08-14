@@ -1,0 +1,23 @@
+{
+  "id": 14068569,
+  "first_name": "Federico",
+  "last_name": "Presedo",
+  "birth_date": "1992-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 100,
+  "potential_ability": 108
+}

@@ -1,0 +1,27 @@
+{
+  "id": 14095642,
+  "first_name": "Lautaro",
+  "last_name": "Belleggia",
+  "birth_date": "1997-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 112,
+  "potential_ability": 118
+}

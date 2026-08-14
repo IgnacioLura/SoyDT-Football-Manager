@@ -1,0 +1,48 @@
+{
+  "id": 19371559,
+  "first_name": "Willean",
+  "last_name": "Lepo",
+  "birth_date": "1997-01-16",
+  "country_id": 1651,
+  "club_id": 340,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 114,
+  "potential_ability": 120,
+  "value": 740000,
+  "contract": {    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 320,
+    "expiration": "2027-11-30",    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2016, "c": 311971, "p": 9 },
+    { "s": 2017, "c": 311971, "p": 12 },
+    { "s": 2018, "c": 315, "p": 0 },
+    { "s": 2020, "c": 19144990, "p": 15, "g": 2 },
+    { "s": 2021, "c": 19144990, "p": 21, "g": 1 },
+    { "s": 2022, "c": 19144990, "p": 28 },
+    { "s": 2023, "c": 19144990, "p": 33 },
+    { "s": 2024, "c": 340, "p": 28 },
+    { "s": 2025, "c": 102555, "p": 31, "g": 1 }
+  ]
+}

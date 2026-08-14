@@ -1,0 +1,23 @@
+{
+  "id": 14086717,
+  "first_name": "Matías",
+  "last_name": "Costas",
+  "birth_date": "1996-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "ML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 90
+}

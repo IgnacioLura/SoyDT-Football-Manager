@@ -1,0 +1,29 @@
+{
+  "id": 2000524687,
+  "first_name": "Damián",
+  "last_name": "García",
+  "birth_date": "1999-06-02",
+  "country_id": 1649,
+  "club_id": 108574,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 78,
+  "potential_ability": 80,
+  "value": 6000,
+  "contract": {
+    "expiration": "2026-02-28",
+    "started": "2025-07-01",
+    "contract_type": "PartTime"
+  },
+  "history": [
+    { "s": 2024, "c": 102959, "p": 7, "g": 1 }
+  ]
+}

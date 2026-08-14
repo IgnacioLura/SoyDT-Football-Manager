@@ -1,0 +1,27 @@
+{
+  "id": 19019169,
+  "first_name": "Luís",
+  "last_name": "Carlos",
+  "birth_date": "1987-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "ML",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 108
+}

@@ -1,0 +1,23 @@
+{
+  "id": 2000074413,
+  "first_name": "Rodrigo",
+  "last_name": "Godoy",
+  "birth_date": "2001-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 98,
+  "potential_ability": 112
+}

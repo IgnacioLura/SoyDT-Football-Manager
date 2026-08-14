@@ -1,0 +1,28 @@
+{
+  "id": 19393052,
+  "first_name": "Favorito",
+  "last_name": "",
+  "birth_date": "2002-05-14",
+  "country_id": 1651,
+  "club_id": 311028,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 60,
+  "potential_ability": 80,
+  "value": 0,
+  "contract": {    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2021, "c": 311028, "p": 1 }
+  ]
+}

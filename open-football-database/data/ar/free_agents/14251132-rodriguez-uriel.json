@@ -1,0 +1,23 @@
+{
+  "id": 14251132,
+  "first_name": "Uriel",
+  "last_name": "Rodríguez",
+  "birth_date": "1997-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    },
+    {
+      "code": "DM",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": 108
+}

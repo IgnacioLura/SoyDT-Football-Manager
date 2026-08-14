@@ -1,0 +1,29 @@
+{
+  "id": 2000447946,
+  "first_name": "Franco",
+  "last_name": "Sassone",
+  "birth_date": "2005-04-21",
+  "country_id": 1649,
+  "club_id": 3101504,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": -55,
+  "value": 161000,
+  "contract": {
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 3101504, "p": 0 }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "id": 2000355445,
+  "first_name": "Nicolás",
+  "last_name": "Spaltro",
+  "birth_date": "2007-02-16",
+  "country_id": 1649,
+  "club_id": 85,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 82,
+  "potential_ability": -65,
+  "value": 229000,
+  "contract": {    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2019, "c": 53025475, "p": 2 },
+    { "s": 2020, "c": 53025475, "p": 0 },
+    { "s": 2021, "c": 801051, "p": 5 },
+    { "s": 2022, "c": 801051, "p": 3 },
+    { "s": 2023, "c": 1366, "p": 2 },
+    { "s": 2023, "c": 801051, "p": 4 },
+    { "s": 2024, "c": 1313, "p": 12 }
+  ]
+}

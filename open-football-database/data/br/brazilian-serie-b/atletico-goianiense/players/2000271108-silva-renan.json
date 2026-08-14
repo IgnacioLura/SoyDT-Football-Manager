@@ -1,0 +1,37 @@
+{
+  "id": 2000271108,
+  "first_name": "Renan",
+  "last_name": "Silva",
+  "birth_date": "2004-01-11",
+  "country_id": 1651,
+  "club_id": 301151,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 76,
+  "potential_ability": 96,
+  "value": 0,
+  "contract": {    "expiration": "2026-04-30",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 301159,
+    "expiration": "2027-04-30",    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2023, "c": 301151, "p": 5 },
+    { "s": 2025, "c": 301157, "p": 6 }
+  ]
+}

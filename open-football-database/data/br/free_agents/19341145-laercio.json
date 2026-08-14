@@ -1,0 +1,19 @@
+{
+  "id": 19341145,
+  "first_name": "Laércio",
+  "last_name": "",
+  "birth_date": "1993-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 108,
+  "potential_ability": 116
+}

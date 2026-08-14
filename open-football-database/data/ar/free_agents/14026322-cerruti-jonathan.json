@@ -1,0 +1,23 @@
+{
+  "id": 14026322,
+  "first_name": "Jonathan",
+  "last_name": "Cerruti",
+  "birth_date": "1992-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "AMC",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 100
+}

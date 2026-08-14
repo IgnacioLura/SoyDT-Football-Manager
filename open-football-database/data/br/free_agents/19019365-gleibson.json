@@ -1,0 +1,19 @@
+{
+  "id": 19019365,
+  "first_name": "Gleibson",
+  "last_name": "",
+  "birth_date": "1987-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 55,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 100
+}

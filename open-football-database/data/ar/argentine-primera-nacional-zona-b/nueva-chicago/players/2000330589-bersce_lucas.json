@@ -1,0 +1,31 @@
+{
+  "id": 2000330589,
+  "first_name": "Lucas",
+  "last_name": "Bersce",
+  "birth_date": "2005-07-06",
+  "country_id": 1649,
+  "club_id": 102486,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": -6,
+  "value": 182000,
+  "contract": {
+    "salary": 111,
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2023, "c": 1100, "p": 0 },
+    { "s": 2024, "c": 1100, "p": 0 }
+  ]
+}

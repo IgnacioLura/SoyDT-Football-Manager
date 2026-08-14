@@ -1,0 +1,30 @@
+{
+  "id": 2000336963,
+  "first_name": "Ignacio",
+  "last_name": "Schneider",
+  "birth_date": "2007-08-30",
+  "country_id": 1655,
+  "club_id": 1921,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 66,
+  "potential_ability": -55,
+  "value": 55000,
+  "contract": {    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2023, "c": 8825221, "p": 1 },
+    { "s": 2024, "c": 8825221, "p": 0 },
+    { "s": 2025, "c": 1921, "p": 0 }
+  ]
+}

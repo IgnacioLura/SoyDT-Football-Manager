@@ -1,0 +1,28 @@
+{
+  "id": 2000230694,
+  "first_name": "Ignacio",
+  "last_name": "Isla",
+  "birth_date": "2006-07-03",
+  "country_id": 1649,
+  "club_id": 102467,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 20,
+    "right": 100
+  },
+  "current_ability": 98,
+  "potential_ability": -7,
+  "value": 950000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 102467, "p": 0 }
+  ]
+}

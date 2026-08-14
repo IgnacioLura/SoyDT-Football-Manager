@@ -1,0 +1,34 @@
+{
+  "id": 2000487308,
+  "first_name": "Dudu",
+  "last_name": "Wozniak",
+  "birth_date": "2009-03-21",
+  "country_id": 1651,
+  "club_id": 321,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 64,
+  "potential_ability": -7,
+  "value": 162000,
+  "contract": {    "expiration": "2029-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2022, "c": 1478, "p": 0 },
+    { "s": 2023, "c": 1478, "p": 0 },
+    { "s": 2024, "c": 1478, "p": 0 }
+  ]
+}

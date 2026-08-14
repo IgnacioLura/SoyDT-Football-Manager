@@ -1,0 +1,23 @@
+{
+  "id": 83167973,
+  "first_name": "Lucas",
+  "last_name": "Salinas",
+  "birth_date": "1995-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 45
+  },
+  "current_ability": 102,
+  "potential_ability": 110
+}

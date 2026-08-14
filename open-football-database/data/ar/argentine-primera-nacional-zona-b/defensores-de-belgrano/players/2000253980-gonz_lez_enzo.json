@@ -1,0 +1,38 @@
+{
+  "id": 2000253980,
+  "first_name": "Enzo",
+  "last_name": "González",
+  "birth_date": "2000-09-25",
+  "country_id": 1649,
+  "club_id": 3101504,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 104,
+  "potential_ability": 114,
+  "value": 303000,
+  "contract": {
+    "salary": 185,
+    "expiration": "2029-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2022, "c": 14077180, "p": 4 },
+    { "s": 2023, "c": 952745, "p": 25, "g": 10 },
+    { "s": 2024, "c": 952745, "p": 22, "g": 15 },
+    { "s": 2024, "c": 3101504, "p": 16, "g": 1 },
+    { "s": 2025, "c": 3101504, "p": 30, "g": 6 }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "id": 2000136297,
+  "first_name": "Robert",
+  "last_name": "Renan",
+  "birth_date": "2003-10-11",
+  "country_id": 1651,
+  "club_id": 1301108,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 60
+  },
+  "current_ability": 124,
+  "potential_ability": 144,
+  "value": 4000000,
+  "contract": {    "expiration": "2027-06-30",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 339,
+    "expiration": "2027-06-30",    "wage_contribution_pct": 100
+  },
+  "ids": {
+    "transfermarkt.com": "958598"
+  },
+  "history": [
+    { "s": 2018, "c": 19144990, "p": 0 },
+    { "s": 2019, "c": 319, "p": 0 },
+    { "s": 2019, "c": 19144990, "p": 0 },
+    { "s": 2020, "c": 319, "p": 0 },
+    { "s": 2021, "c": 319, "p": 0 },
+    { "s": 2022, "c": 319, "p": 10 },
+    { "s": 2022, "c": 1301108, "p": 9 },
+    { "s": 2023, "c": 1301108, "p": 4 },
+    { "s": 2024, "c": 326, "p": 12 },
+    { "s": 2024, "c": 1535, "p": 31 },
+    { "s": 2025, "c": 339, "p": 15 }
+  ]
+}

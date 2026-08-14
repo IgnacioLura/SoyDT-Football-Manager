@@ -1,0 +1,19 @@
+{
+  "id": 14031369,
+  "first_name": "Christian",
+  "last_name": "Cepeda",
+  "birth_date": "1991-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 108,
+  "potential_ability": 110
+}

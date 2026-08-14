@@ -1,0 +1,30 @@
+{
+  "id": 2000336034,
+  "first_name": "Tomás",
+  "last_name": "Barbero",
+  "birth_date": "2002-08-07",
+  "country_id": 1649,
+  "club_id": 952734,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 116,
+  "value": 39000,
+  "contract": {
+    "salary": 74,
+    "expiration": "2025-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 952734, "p": 0 }
+  ]
+}

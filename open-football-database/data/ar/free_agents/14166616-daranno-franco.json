@@ -1,0 +1,27 @@
+{
+  "id": 14166616,
+  "first_name": "Franco",
+  "last_name": "Daranno",
+  "birth_date": "1999-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 90,
+  "potential_ability": 94
+}

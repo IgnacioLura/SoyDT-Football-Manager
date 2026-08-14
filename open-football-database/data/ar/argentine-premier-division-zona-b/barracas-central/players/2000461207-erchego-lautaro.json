@@ -1,0 +1,25 @@
+{
+  "id": 2000461207,
+  "first_name": "Lautaro",
+  "last_name": "Erchego",
+  "birth_date": "2006-01-09",
+  "country_id": 1649,
+  "club_id": 952695,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 65,
+    "right": 100
+  },
+  "current_ability": 76,
+  "potential_ability": -55,
+  "value": 161000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "id": 19074783,
+  "first_name": "Jefferson",
+  "last_name": "Araújo",
+  "birth_date": "1989-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 25,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 100
+}

@@ -1,0 +1,30 @@
+{
+  "id": 2000248634,
+  "first_name": "Lucas",
+  "last_name": "Cuffia",
+  "birth_date": "2007-01-28",
+  "country_id": 1649,
+  "club_id": 102462,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 94,
+  "potential_ability": -65,
+  "value": 164000,
+  "contract": {
+    "salary": 122,
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 102462, "p": 0 }
+  ]
+}

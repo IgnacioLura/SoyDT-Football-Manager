@@ -1,0 +1,27 @@
+{
+  "id": 14227187,
+  "first_name": "Juan",
+  "last_name": "Román Zarza",
+  "birth_date": "2001-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 25,
+    "right": 100
+  },
+  "current_ability": 98,
+  "potential_ability": 108
+}

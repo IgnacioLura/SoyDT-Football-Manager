@@ -1,0 +1,27 @@
+{
+  "id": 14110840,
+  "first_name": "Lucas",
+  "last_name": "Ferraz Vila",
+  "birth_date": "1998-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ML",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 55
+  },
+  "current_ability": 94,
+  "potential_ability": 100
+}

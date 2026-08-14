@@ -1,0 +1,19 @@
+{
+  "id": 14222244,
+  "first_name": "Deian",
+  "last_name": "Verón",
+  "birth_date": "2000-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 100,
+  "potential_ability": 108
+}

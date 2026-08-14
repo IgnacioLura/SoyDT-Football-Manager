@@ -1,0 +1,29 @@
+{
+  "id": 2000516247,
+  "first_name": "Thiago",
+  "last_name": "Ocampo",
+  "birth_date": "2008-09-07",
+  "country_id": 1649,
+  "club_id": 102486,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": -6,
+  "value": 330000,
+  "contract": {
+    "expiration": "2029-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 102486, "p": 2 }
+  ]
+}

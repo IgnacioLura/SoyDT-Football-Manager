@@ -1,0 +1,35 @@
+{
+  "id": 2000277783,
+  "first_name": "Lautaro",
+  "last_name": "Valiente",
+  "birth_date": "2005-04-19",
+  "country_id": 1649,
+  "club_id": 102482,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 45
+  },
+  "current_ability": 80,
+  "potential_ability": -55,
+  "value": 73000,
+  "contract": {
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2022, "c": 78, "p": 0 },
+    { "s": 2024, "c": 2000325490, "p": 18 },
+    { "s": 2025, "c": 2000325490, "p": 0 }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "id": 2000009465,
+  "first_name": "Benjamín",
+  "last_name": "Rodríguez",
+  "birth_date": "2003-01-01",
+  "country_id": 1657,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 75,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 100
+}

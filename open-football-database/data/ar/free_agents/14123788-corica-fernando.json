@@ -1,0 +1,19 @@
+{
+  "id": 14123788,
+  "first_name": "Fernando",
+  "last_name": "Corica",
+  "birth_date": "1997-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 94,
+  "potential_ability": 94
+}

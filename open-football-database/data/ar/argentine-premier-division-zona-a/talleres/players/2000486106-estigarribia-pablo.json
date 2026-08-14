@@ -1,0 +1,29 @@
+{
+  "id": 2000486106,
+  "first_name": "Pablo",
+  "last_name": "Estigarribia",
+  "birth_date": "2008-04-04",
+  "country_id": 1649,
+  "club_id": 102489,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 78,
+  "potential_ability": -6,
+  "value": 231000,
+  "contract": {    "expiration": "2029-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

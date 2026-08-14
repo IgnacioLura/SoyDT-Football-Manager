@@ -1,0 +1,30 @@
+{
+  "id": 2000472306,
+  "first_name": "Valentino",
+  "last_name": "Bossio",
+  "birth_date": "2007-03-27",
+  "country_id": 1649,
+  "club_id": 96,
+  "positions": [
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 50
+  },
+  "current_ability": 88,
+  "potential_ability": -65,
+  "value": 325000,
+  "contract": {
+    "salary": 11544,
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 74010319, "p": 4, "g": 2 }
+  ]
+}

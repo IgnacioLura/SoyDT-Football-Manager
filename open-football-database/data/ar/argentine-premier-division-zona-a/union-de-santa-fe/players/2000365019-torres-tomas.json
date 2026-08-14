@@ -1,0 +1,28 @@
+{
+  "id": 2000365019,
+  "first_name": "Tomás",
+  "last_name": "Torres",
+  "birth_date": "2007-10-15",
+  "country_id": 1649,
+  "club_id": 102467,
+  "positions": [
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 20,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": -6,
+  "value": 548000,
+  "contract": {    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 102467, "p": 0 }
+  ]
+}

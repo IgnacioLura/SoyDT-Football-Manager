@@ -1,0 +1,19 @@
+{
+  "id": 19080661,
+  "first_name": "Rafael",
+  "last_name": "Broetto",
+  "birth_date": "1990-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 110
+}

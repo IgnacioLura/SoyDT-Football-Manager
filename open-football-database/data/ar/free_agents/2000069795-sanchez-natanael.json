@@ -1,0 +1,19 @@
+{
+  "id": 2000069795,
+  "first_name": "Natanael",
+  "last_name": "Sánchez",
+  "birth_date": "1998-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 25,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 102
+}

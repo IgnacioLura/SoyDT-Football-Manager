@@ -1,0 +1,32 @@
+{
+  "id": 2000480888,
+  "first_name": "Santino",
+  "last_name": "Gianini",
+  "birth_date": "2008-09-24",
+  "country_id": 1649,
+  "club_id": 78,
+  "positions": [
+    {
+      "code": "DL",
+      "level": 20
+    },
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 86,
+  "potential_ability": 124,
+  "value": 1000000,
+  "contract": {    "expiration": "2029-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 78, "p": 0 }
+  ]
+}

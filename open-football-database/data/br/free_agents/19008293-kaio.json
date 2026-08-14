@@ -1,0 +1,23 @@
+{
+  "id": 19008293,
+  "first_name": "Kaio",
+  "last_name": "",
+  "birth_date": "1987-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "AMC",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 55
+  },
+  "current_ability": 100,
+  "potential_ability": 128
+}

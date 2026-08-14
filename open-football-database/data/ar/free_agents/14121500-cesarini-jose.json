@@ -1,0 +1,19 @@
+{
+  "id": 14121500,
+  "first_name": "José",
+  "last_name": "Cesarini",
+  "birth_date": "1992-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 98,
+  "potential_ability": 100
+}

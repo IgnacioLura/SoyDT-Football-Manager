@@ -1,0 +1,30 @@
+{
+  "id": 2000185311,
+  "first_name": "Luca",
+  "last_name": "Acevedo",
+  "birth_date": "2005-06-27",
+  "country_id": 1649,
+  "club_id": 102487,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 70,
+  "potential_ability": -55,
+  "value": 20000,
+  "contract": {
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

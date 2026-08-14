@@ -1,0 +1,43 @@
+{
+  "id": 14187958,
+  "first_name": "Tiago",
+  "last_name": "Banega",
+  "birth_date": "1999-07-01",
+  "country_id": 1649,
+  "club_id": 102464,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 110,
+  "potential_ability": 118,
+  "value": 453000,
+  "contract": {
+    "salary": 518,
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2016, "c": 14046424, "p": 4 },
+    { "s": 2019, "c": 93, "p": 4, "g": 1 },
+    { "s": 2020, "c": 93, "p": 7, "g": 1 },
+    { "s": 2021, "c": 93, "p": 0 },
+    { "s": 2021, "c": 3101457, "p": 6 },
+    { "s": 2022, "c": 3101457, "p": 22 },
+    { "s": 2023, "c": 102467, "p": 9 },
+    { "s": 2023, "c": 102476, "p": 15, "g": 1 },
+    { "s": 2024, "c": 102467, "p": 5 },
+    { "s": 2025, "c": 14002958, "p": 27 }
+  ]
+}

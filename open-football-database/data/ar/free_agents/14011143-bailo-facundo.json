@@ -1,0 +1,23 @@
+{
+  "id": 14011143,
+  "first_name": "Facundo",
+  "last_name": "Bailó",
+  "birth_date": "1990-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 55
+  },
+  "current_ability": 94,
+  "potential_ability": 102
+}

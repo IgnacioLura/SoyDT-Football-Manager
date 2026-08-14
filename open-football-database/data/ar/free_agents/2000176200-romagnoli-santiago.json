@@ -1,0 +1,23 @@
+{
+  "id": 2000176200,
+  "first_name": "Santiago",
+  "last_name": "Romagnoli",
+  "birth_date": "2001-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 102
+}

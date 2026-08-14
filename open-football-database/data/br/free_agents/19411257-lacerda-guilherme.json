@@ -1,0 +1,19 @@
+{
+  "id": 19411257,
+  "first_name": "Guilherme",
+  "last_name": "Lacerda",
+  "birth_date": "2000-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 30
+  },
+  "current_ability": 94,
+  "potential_ability": 110
+}

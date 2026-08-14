@@ -1,0 +1,36 @@
+{
+  "id": 2000520994,
+  "first_name": "Murillo",
+  "last_name": "",
+  "birth_date": "2006-07-21",
+  "country_id": 1651,
+  "club_id": 19227768,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 78,
+  "potential_ability": -65,
+  "value": 0,
+  "contract": {    "expiration": "2026-08-12",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 314,
+    "expiration": "2027-08-12",    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2025, "c": 8832317, "p": 3 }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": 19352363,
+  "first_name": "Lucas",
+  "last_name": "Bento",
+  "birth_date": "2001-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 110
+}

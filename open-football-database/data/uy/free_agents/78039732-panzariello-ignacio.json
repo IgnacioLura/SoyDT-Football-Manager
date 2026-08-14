@@ -1,0 +1,27 @@
+{
+  "id": 78039732,
+  "first_name": "Ignacio",
+  "last_name": "Panzariello",
+  "birth_date": "1990-01-01",
+  "country_id": 1657,
+  "positions": [
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": 104
+}

@@ -1,0 +1,19 @@
+{
+  "id": 2000336441,
+  "first_name": "Gianluca",
+  "last_name": "Cangiano",
+  "birth_date": "2004-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": -6
+}

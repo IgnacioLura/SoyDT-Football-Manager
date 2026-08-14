@@ -1,0 +1,34 @@
+{
+  "id": 2000165891,
+  "first_name": "Agustín",
+  "last_name": "Olavarría",
+  "birth_date": "2004-10-16",
+  "country_id": 1657,
+  "club_id": 5512562,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 50
+  },
+  "current_ability": 90,
+  "potential_ability": 102,
+  "value": 37000,
+  "contract": {    "expiration": "2025-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2019, "c": 78014931, "p": 0 },
+    { "s": 2020, "c": 78027478, "p": 0 },
+    { "s": 2021, "c": 78027478, "p": 0 },
+    { "s": 2022, "c": 78027478, "p": 0 },
+    { "s": 2023, "c": 78027478, "p": 0 },
+    { "s": 2024, "c": 78027478, "p": 0 },
+    { "s": 2025, "c": 5512562, "p": 2 }
+  ]
+}

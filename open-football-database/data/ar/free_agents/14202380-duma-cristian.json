@@ -1,0 +1,19 @@
+{
+  "id": 14202380,
+  "first_name": "Cristian",
+  "last_name": "Duma",
+  "birth_date": "1996-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 50
+  },
+  "current_ability": 100,
+  "potential_ability": 112
+}

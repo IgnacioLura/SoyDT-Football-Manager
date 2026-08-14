@@ -1,0 +1,35 @@
+{
+  "id": 2000206863,
+  "first_name": "Gabriel",
+  "last_name": "Bontempo",
+  "birth_date": "2005-01-16",
+  "country_id": 1651,
+  "club_id": 335,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 60,
+    "right": 100
+  },
+  "current_ability": 122,
+  "potential_ability": -8,
+  "value": 11000000,
+  "contract": {    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 335, "p": 25, "g": 2 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1089958"
+  }
+}

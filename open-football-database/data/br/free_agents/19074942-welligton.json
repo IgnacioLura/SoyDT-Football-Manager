@@ -1,0 +1,19 @@
+{
+  "id": 19074942,
+  "first_name": "Welligton",
+  "last_name": "",
+  "birth_date": "1990-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 25
+  },
+  "current_ability": 94,
+  "potential_ability": 110
+}

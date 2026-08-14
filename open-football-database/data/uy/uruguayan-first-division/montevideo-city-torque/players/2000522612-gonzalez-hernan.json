@@ -1,0 +1,34 @@
+{
+  "id": 2000522612,
+  "first_name": "Hernán",
+  "last_name": "González",
+  "birth_date": "2006-04-03",
+  "country_id": 1657,
+  "club_id": 78027478,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 80,
+  "potential_ability": -6,
+  "value": 67000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 1915,
+    "expiration": "2027-12-31",    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2021, "c": 1926, "p": 0 },
+    { "s": 2025, "c": 78027478, "p": 0 },
+    { "s": 2026, "c": 78027478, "p": 0 }
+  ]
+}

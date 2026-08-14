@@ -1,0 +1,27 @@
+{
+  "id": 19343374,
+  "first_name": "Leandro",
+  "last_name": "Soares",
+  "birth_date": "1997-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 98,
+  "potential_ability": 110
+}

@@ -1,0 +1,23 @@
+{
+  "id": 19252410,
+  "first_name": "Thiago",
+  "last_name": "Ennes",
+  "birth_date": "1996-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 20,
+    "right": 100
+  },
+  "current_ability": 106,
+  "potential_ability": 112
+}

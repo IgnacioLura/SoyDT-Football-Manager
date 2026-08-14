@@ -1,0 +1,31 @@
+{
+  "id": 78042224,
+  "first_name": "Facundo",
+  "last_name": "Guichón",
+  "birth_date": "1991-01-01",
+  "country_id": 1657,
+  "positions": [
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 50
+  },
+  "current_ability": 98,
+  "potential_ability": 122
+}

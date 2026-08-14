@@ -1,0 +1,27 @@
+{
+  "id": 14173680,
+  "first_name": "Gonzalo",
+  "last_name": "Pulido",
+  "birth_date": "1995-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DL",
+      "level": 20
+    },
+    {
+      "code": "DC",
+      "level": 20
+    },
+    {
+      "code": "WBL",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 30
+  },
+  "current_ability": 94,
+  "potential_ability": 96
+}

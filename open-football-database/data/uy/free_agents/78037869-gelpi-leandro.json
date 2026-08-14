@@ -1,0 +1,19 @@
+{
+  "id": 78037869,
+  "first_name": "Leandro",
+  "last_name": "Gelpi",
+  "birth_date": "1991-01-01",
+  "country_id": 1657,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 35
+  },
+  "current_ability": 90,
+  "potential_ability": 120
+}

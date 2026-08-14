@@ -1,0 +1,19 @@
+{
+  "id": 78016334,
+  "first_name": "Rodrigo",
+  "last_name": "Pastorini",
+  "birth_date": "1990-01-01",
+  "country_id": 1657,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 70,
+    "right": 100
+  },
+  "current_ability": 98,
+  "potential_ability": 122
+}

@@ -1,0 +1,23 @@
+{
+  "id": 2000141254,
+  "first_name": "Carlos",
+  "last_name": "Campos",
+  "birth_date": "2003-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": 110
+}

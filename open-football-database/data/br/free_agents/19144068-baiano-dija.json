@@ -1,0 +1,27 @@
+{
+  "id": 19144068,
+  "first_name": "Dija",
+  "last_name": "Baiano",
+  "birth_date": "1990-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "ML",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 30,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 116
+}

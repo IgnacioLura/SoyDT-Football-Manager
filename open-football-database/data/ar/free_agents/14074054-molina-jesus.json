@@ -1,0 +1,23 @@
+{
+  "id": 14074054,
+  "first_name": "Jesús",
+  "last_name": "Molina",
+  "birth_date": "1995-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 94
+}

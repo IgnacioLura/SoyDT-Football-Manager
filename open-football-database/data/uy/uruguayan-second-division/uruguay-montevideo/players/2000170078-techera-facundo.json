@@ -1,0 +1,35 @@
+{
+  "id": 2000170078,
+  "first_name": "Facundo",
+  "last_name": "Techera",
+  "birth_date": "2006-04-05",
+  "country_id": 1657,
+  "club_id": 5512787,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 80,
+  "potential_ability": 110,
+  "value": 38000,
+  "contract": {    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2022, "c": 1919, "p": 0 },
+    { "s": 2023, "c": 1919, "p": 0 },
+    { "s": 2024, "c": 1919, "p": 0 },
+    { "s": 2025, "c": 1917, "p": 9, "g": 1 }
+  ]
+}

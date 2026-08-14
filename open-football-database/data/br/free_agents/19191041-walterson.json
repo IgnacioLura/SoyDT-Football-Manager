@@ -1,0 +1,27 @@
+{
+  "id": 19191041,
+  "first_name": "Walterson",
+  "last_name": "",
+  "birth_date": "1995-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 96,
+  "potential_ability": 126
+}

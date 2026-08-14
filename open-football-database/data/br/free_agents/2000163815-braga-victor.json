@@ -1,0 +1,23 @@
+{
+  "id": 2000163815,
+  "first_name": "Victor",
+  "last_name": "Braga",
+  "birth_date": "2001-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 50
+  },
+  "current_ability": 100,
+  "potential_ability": 116
+}

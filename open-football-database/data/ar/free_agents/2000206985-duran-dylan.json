@@ -1,0 +1,23 @@
+{
+  "id": 2000206985,
+  "first_name": "Dylan",
+  "last_name": "Duran",
+  "birth_date": "2004-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 100,
+  "potential_ability": -65
+}

@@ -1,0 +1,19 @@
+{
+  "id": 14255105,
+  "first_name": "Alan",
+  "last_name": "Zalazar",
+  "birth_date": "1999-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 88,
+  "potential_ability": 114
+}

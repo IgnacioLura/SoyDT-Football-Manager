@@ -1,0 +1,23 @@
+{
+  "id": 14024695,
+  "first_name": "Gastón",
+  "last_name": "Rossi",
+  "birth_date": "1990-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 96,
+  "potential_ability": 112
+}

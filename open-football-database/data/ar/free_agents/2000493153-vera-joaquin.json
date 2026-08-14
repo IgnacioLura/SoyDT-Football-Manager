@@ -1,0 +1,19 @@
+{
+  "id": 2000493153,
+  "first_name": "Joaquín",
+  "last_name": "Vera",
+  "birth_date": "2004-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 100
+}

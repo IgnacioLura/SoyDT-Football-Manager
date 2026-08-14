@@ -1,0 +1,42 @@
+{
+  "id": 2000414670,
+  "first_name": "Ignacio",
+  "last_name": "Soto",
+  "birth_date": "2006-01-03",
+  "country_id": 1649,
+  "club_id": 86,
+  "positions": [
+    {
+      "code": "DL",
+      "level": 20
+    },
+    {
+      "code": "WBL",
+      "level": 20
+    },
+    {
+      "code": "ML",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 76,
+  "potential_ability": -6,
+  "value": 145000,
+  "contract": {
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

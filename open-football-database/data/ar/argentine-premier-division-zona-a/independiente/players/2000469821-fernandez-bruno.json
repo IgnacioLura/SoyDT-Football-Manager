@@ -1,0 +1,28 @@
+{
+  "id": 2000469821,
+  "first_name": "Bruno",
+  "last_name": "Fernández",
+  "birth_date": "2007-04-14",
+  "country_id": 1649,
+  "club_id": 89,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 82,
+  "potential_ability": -65,
+  "value": 376000,
+  "contract": {    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 2000270021, "p": 2 }
+  ]
+}

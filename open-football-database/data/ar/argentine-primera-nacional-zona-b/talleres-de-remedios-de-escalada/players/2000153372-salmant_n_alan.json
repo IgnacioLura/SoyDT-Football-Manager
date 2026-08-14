@@ -1,0 +1,36 @@
+{
+  "id": 2000153372,
+  "first_name": "Alan",
+  "last_name": "Salmantón",
+  "birth_date": "2002-10-24",
+  "country_id": 1649,
+  "club_id": 3101518,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    },
+    {
+      "code": "DM",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 84,
+  "potential_ability": 106,
+  "value": 101000,
+  "contract": {
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2022, "c": 3101518, "p": 4 },
+    { "s": 2023, "c": 3101518, "p": 1 },
+    { "s": 2024, "c": 3101518, "p": 0 },
+    { "s": 2025, "c": 952753, "p": 18, "g": 2 }
+  ]
+}

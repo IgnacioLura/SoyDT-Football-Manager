@@ -1,0 +1,27 @@
+{
+  "id": 2000144714,
+  "first_name": "Nazareno",
+  "last_name": "Luque",
+  "birth_date": "2005-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": -6
+}

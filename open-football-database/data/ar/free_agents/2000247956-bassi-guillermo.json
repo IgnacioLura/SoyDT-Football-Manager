@@ -1,0 +1,23 @@
+{
+  "id": 2000247956,
+  "first_name": "Guillermo",
+  "last_name": "Bassi",
+  "birth_date": "1999-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 94,
+  "potential_ability": 98
+}

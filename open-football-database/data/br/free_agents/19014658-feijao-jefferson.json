@@ -1,0 +1,23 @@
+{
+  "id": 19014658,
+  "first_name": "Jefferson",
+  "last_name": "Feijão",
+  "birth_date": "1987-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 118
+}

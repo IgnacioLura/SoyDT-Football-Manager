@@ -1,0 +1,36 @@
+{
+  "id": 2000253098,
+  "first_name": "Dunkan",
+  "last_name": "Dorrego",
+  "birth_date": "2006-02-06",
+  "country_id": 1657,
+  "club_id": 130848,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 84,
+  "potential_ability": -55,
+  "value": 63000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2022, "c": 130848, "p": 0 },
+    { "s": 2023, "c": 130848, "p": 1 },
+    { "s": 2024, "c": 116204, "p": 0 },
+    { "s": 2024, "c": 130848, "p": 0 },
+    { "s": 2025, "c": 130848, "p": 0 }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": 14033332,
+  "first_name": "Gerardo",
+  "last_name": "Martínez",
+  "birth_date": "1991-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 94,
+  "potential_ability": 116
+}

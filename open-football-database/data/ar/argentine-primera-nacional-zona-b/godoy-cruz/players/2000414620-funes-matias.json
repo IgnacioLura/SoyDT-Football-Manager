@@ -1,0 +1,33 @@
+{
+  "id": 2000414620,
+  "first_name": "Matías",
+  "last_name": "Funes",
+  "birth_date": "2005-07-13",
+  "country_id": 1649,
+  "club_id": 102491,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": -65,
+  "value": 349000,
+  "contract": {
+    "salary": 9620,
+    "expiration": "2029-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 102491, "p": 0 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1305915"
+  }
+}

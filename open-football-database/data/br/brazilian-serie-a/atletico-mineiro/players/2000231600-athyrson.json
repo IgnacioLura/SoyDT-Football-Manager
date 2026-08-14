@@ -1,0 +1,36 @@
+{
+  "id": 2000231600,
+  "first_name": "Athyrson",
+  "last_name": "",
+  "birth_date": "2004-01-06",
+  "country_id": 1651,
+  "club_id": 314,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 82,
+  "potential_ability": 106,
+  "value": 0,
+  "contract": {    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 314772,
+    "expiration": "2027-07-20",    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2022, "c": 5340761, "p": 0 },
+    { "s": 2022, "c": 5340763, "p": 9 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1082521"
+  }
+}

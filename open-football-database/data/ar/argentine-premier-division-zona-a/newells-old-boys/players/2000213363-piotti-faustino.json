@@ -1,0 +1,39 @@
+{
+  "id": 2000213363,
+  "first_name": "Faustino",
+  "last_name": "Piotti",
+  "birth_date": "2003-11-07",
+  "country_id": 1649,
+  "club_id": 91,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 84,
+  "potential_ability": 120,
+  "value": 310000,
+  "contract": {
+    "salary": 5928,
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 91, "p": 0 },
+    { "s": 2025, "c": 91, "p": 0 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1273496"
+  },
+  "loan": {
+    "to_club_id": 120939,
+    "expiration": "2027-12-31",
+    "wage_contribution_pct": 100
+  }
+}

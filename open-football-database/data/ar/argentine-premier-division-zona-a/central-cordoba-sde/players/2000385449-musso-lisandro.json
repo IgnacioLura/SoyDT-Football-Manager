@@ -1,0 +1,25 @@
+{
+  "id": 2000385449,
+  "first_name": "Lisandro",
+  "last_name": "Musso",
+  "birth_date": "2007-07-27",
+  "country_id": 1649,
+  "club_id": 14018428,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 86,
+  "potential_ability": -65,
+  "value": 424000,
+  "contract": {    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

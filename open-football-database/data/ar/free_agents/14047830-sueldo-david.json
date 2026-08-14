@@ -1,0 +1,19 @@
+{
+  "id": 14047830,
+  "first_name": "David",
+  "last_name": "Sueldo",
+  "birth_date": "1995-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 90,
+  "potential_ability": 100
+}

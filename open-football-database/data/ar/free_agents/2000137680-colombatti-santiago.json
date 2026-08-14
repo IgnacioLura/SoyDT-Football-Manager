@@ -1,0 +1,23 @@
+{
+  "id": 2000137680,
+  "first_name": "Santiago",
+  "last_name": "Colombatti",
+  "birth_date": "2002-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": 120
+}

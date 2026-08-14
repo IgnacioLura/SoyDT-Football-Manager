@@ -1,0 +1,37 @@
+{
+  "id": 14222102,
+  "first_name": "Damián",
+  "last_name": "Fernández",
+  "birth_date": "2001-01-02",
+  "country_id": 1649,
+  "club_id": 108526,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 124,
+  "potential_ability": 132,
+  "value": 5000000,
+  "contract": {
+    "salary": 104000,
+    "expiration": "2029-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2019, "c": 98, "p": 1 },
+    { "s": 2020, "c": 98, "p": 1 },
+    { "s": 2021, "c": 98, "p": 4 },
+    { "s": 2022, "c": 98, "p": 11, "g": 1 },
+    { "s": 2023, "c": 98, "p": 10 },
+    { "s": 2024, "c": 98, "p": 17, "g": 1 },
+    { "s": 2025, "c": 98, "p": 13 },
+    { "s": 2025, "c": 108526, "p": 15 }
+  ]
+}

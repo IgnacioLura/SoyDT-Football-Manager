@@ -1,0 +1,19 @@
+{
+  "id": 78093448,
+  "first_name": "Andrés",
+  "last_name": "García",
+  "birth_date": "1995-01-01",
+  "country_id": 1657,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 98
+}

@@ -1,0 +1,39 @@
+{
+  "id": 2000475808,
+  "first_name": "Jaider",
+  "last_name": "Victoria",
+  "birth_date": "2005-10-15",
+  "country_id": 1653,
+  "club_id": 130800,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": -6,
+  "value": 67000,
+  "contract": {    "expiration": "2028-06-30",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 80,
+    "expiration": "2027-12-31",    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2022, "c": 2000256519, "p": 0 },
+    { "s": 2023, "c": 2000256519, "p": 17, "g": 3 },
+    { "s": 2024, "c": 2000256519, "p": 0 },
+    { "s": 2025, "c": 130800, "p": 1 },
+    { "s": 2025, "c": 2000256519, "p": 0 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1432786"
+  }
+}

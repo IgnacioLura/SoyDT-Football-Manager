@@ -1,0 +1,34 @@
+{
+  "id": 2000443746,
+  "first_name": "Lautaro",
+  "last_name": "Vera",
+  "birth_date": "2007-05-03",
+  "country_id": 1649,
+  "club_id": 92,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 90,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": -65,
+  "value": 555000,
+  "contract": {    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2020, "c": 2000338079, "p": 0 },
+    { "s": 2021, "c": 2000344562, "p": 6, "g": 5 },
+    { "s": 2021, "c": 2000355350, "p": 12 },
+    { "s": 2022, "c": 2000344562, "p": 18, "g": 1 },
+    { "s": 2024, "c": 2000343234, "p": 6 },
+    { "s": 2024, "c": 2000344562, "p": 12, "g": 5 },
+    { "s": 2025, "c": 2000217568, "p": 19 }
+  ]
+}

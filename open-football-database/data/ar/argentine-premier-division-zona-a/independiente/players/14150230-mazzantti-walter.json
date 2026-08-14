@@ -1,0 +1,59 @@
+{
+  "id": 14150230,
+  "first_name": "Walter",
+  "last_name": "Mazzantti",
+  "birth_date": "1996-09-05",
+  "country_id": 1649,
+  "club_id": 89,
+  "positions": [
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 126,
+  "potential_ability": 128,
+  "value": 6000000,
+  "contract": {
+    "salary": 364000,
+    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 91,
+    "expiration": "2027-12-31",
+    "salary": 364000,
+    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2016, "c": 3100018, "p": 2 },
+    { "s": 2017, "c": 108517, "p": 15 },
+    { "s": 2017, "c": 3100018, "p": 0 },
+    { "s": 2018, "c": 108517, "p": 21 },
+    { "s": 2019, "c": 108517, "p": 20, "g": 4 },
+    { "s": 2020, "c": 104362, "p": 14, "g": 3 },
+    { "s": 2021, "c": 104362, "p": 31, "g": 3 },
+    { "s": 2022, "c": 104362, "p": 23, "g": 4 },
+    { "s": 2023, "c": 88, "p": 29, "g": 4 },
+    { "s": 2024, "c": 88, "p": 37, "g": 6 },
+    { "s": 2025, "c": 88, "p": 16, "g": 2 },
+    { "s": 2025, "c": 89, "p": 11 },
+    { "s": 2026, "c": 89, "p": 6 }
+  ],
+  "ids": {
+    "transfermarkt.com": "477458"
+  }
+}

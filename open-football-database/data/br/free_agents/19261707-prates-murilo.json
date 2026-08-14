@@ -1,0 +1,19 @@
+{
+  "id": 19261707,
+  "first_name": "Murilo",
+  "last_name": "Prates",
+  "birth_date": "1993-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 25,
+    "right": 100
+  },
+  "current_ability": 98,
+  "potential_ability": 110
+}

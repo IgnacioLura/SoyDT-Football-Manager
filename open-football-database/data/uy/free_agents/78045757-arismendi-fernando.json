@@ -1,0 +1,23 @@
+{
+  "id": 78045757,
+  "first_name": "Fernando",
+  "last_name": "Arismendi",
+  "birth_date": "1991-01-01",
+  "country_id": 1657,
+  "positions": [
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 106,
+  "potential_ability": 118
+}

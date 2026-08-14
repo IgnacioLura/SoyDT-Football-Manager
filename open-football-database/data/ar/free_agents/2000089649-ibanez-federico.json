@@ -1,0 +1,31 @@
+{
+  "id": 2000089649,
+  "first_name": "Federico",
+  "last_name": "Ibáñez",
+  "birth_date": "2002-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "ML",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 60,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": 116
+}

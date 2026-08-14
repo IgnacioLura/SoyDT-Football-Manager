@@ -1,0 +1,38 @@
+{
+  "id": 2000212612,
+  "first_name": "Mateusinho",
+  "last_name": "",
+  "birth_date": "1998-10-07",
+  "country_id": 1651,
+  "club_id": 340,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 118,
+  "potential_ability": 126,
+  "value": 2000000,
+  "contract": {    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2022, "c": 107230, "p": 34, "g": 1 },
+    { "s": 2023, "c": 318915, "p": 5, "g": 1 },
+    { "s": 2024, "c": 318915, "p": 0 },
+    { "s": 2025, "c": 318915, "p": 31, "g": 4 }
+  ],
+  "ids": {
+    "transfermarkt.com": "870778"
+  }
+}

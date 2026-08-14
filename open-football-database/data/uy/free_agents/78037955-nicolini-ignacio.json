@@ -1,0 +1,23 @@
+{
+  "id": 78037955,
+  "first_name": "Ignacio",
+  "last_name": "Nicolini",
+  "birth_date": "1988-01-01",
+  "country_id": 1657,
+  "positions": [
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 96,
+  "potential_ability": 120
+}

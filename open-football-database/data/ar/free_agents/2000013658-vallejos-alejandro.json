@@ -1,0 +1,19 @@
+{
+  "id": 2000013658,
+  "first_name": "Alejandro",
+  "last_name": "Vallejos",
+  "birth_date": "2000-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 94,
+  "potential_ability": -65
+}

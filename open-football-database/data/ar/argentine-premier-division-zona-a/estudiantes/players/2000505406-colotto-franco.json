@@ -1,0 +1,33 @@
+{
+  "id": 2000505406,
+  "first_name": "Franco",
+  "last_name": "Colotto",
+  "birth_date": "2008-10-25",
+  "country_id": 1649,
+  "club_id": 85,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 78,
+  "potential_ability": -7,
+  "value": 513000,
+  "contract": {    "expiration": "2029-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2021, "c": 130848, "p": 0 },
+    { "s": 2021, "c": 5512556, "p": 0 },
+    { "s": 2022, "c": 5512556, "p": 0 },
+    { "s": 2023, "c": 5512789, "p": 0 },
+    { "s": 2024, "c": 5512556, "p": 0 },
+    { "s": 2025, "c": 78012164, "p": 0 }
+  ]
+}

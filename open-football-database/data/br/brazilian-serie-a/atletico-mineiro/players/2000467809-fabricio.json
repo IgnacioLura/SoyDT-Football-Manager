@@ -1,0 +1,37 @@
+{
+  "id": 2000467809,
+  "first_name": "Fabricio",
+  "last_name": "",
+  "birth_date": "2006-12-10",
+  "country_id": 1651,
+  "club_id": 301102,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 45
+  },
+  "current_ability": 76,
+  "potential_ability": 112,
+  "value": 33000,
+  "contract": {    "expiration": "2028-11-30",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 314,
+    "expiration": "2027-06-02",    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2019, "c": 2000337912, "p": 22, "g": 2 },
+    { "s": 2020, "c": 2000230555, "p": 3 },
+    { "s": 2020, "c": 2000366310, "p": 9, "g": 2 },
+    { "s": 2021, "c": 2000366310, "p": 5 },
+    { "s": 2022, "c": 2000366310, "p": 4 },
+    { "s": 2025, "c": 2000366310, "p": 16, "g": 12 }
+  ]
+}

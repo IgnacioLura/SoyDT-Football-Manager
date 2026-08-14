@@ -1,0 +1,35 @@
+{
+  "id": 2000272456,
+  "first_name": "Lucca",
+  "last_name": "",
+  "birth_date": "2007-06-14",
+  "country_id": 1651,
+  "club_id": 337,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 100,
+  "potential_ability": -8,
+  "value": 5000000,
+  "contract": {    "expiration": "2028-04-30",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 337, "p": 8 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1269378"
+  }
+}

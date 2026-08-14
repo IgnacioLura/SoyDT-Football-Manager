@@ -1,0 +1,27 @@
+{
+  "id": 14235822,
+  "first_name": "Javier",
+  "last_name": "Gómez",
+  "birth_date": "1974-04-10",
+  "country_id": 1649,
+  "club_id": 3101518,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 14
+    }
+  ],
+  "current_ability": 30,
+  "potential_ability": 30,
+  "value": 0,
+  "contract": {
+    "expiration": "2027-06-30",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 1994, "c": 90, "p": 4 },
+    { "s": 1995, "c": 90, "p": 8 },
+    { "s": 1996, "c": 90, "p": 4 }
+  ]
+}

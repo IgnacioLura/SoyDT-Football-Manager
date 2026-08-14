@@ -1,0 +1,33 @@
+{
+  "id": 2000218977,
+  "first_name": "JP",
+  "last_name": "Murilo",
+  "birth_date": "2005-04-19",
+  "country_id": 1651,
+  "club_id": 339,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 65,
+    "right": 100
+  },
+  "current_ability": 112,
+  "potential_ability": -75,
+  "value": 4000000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 339, "p": 10 },
+    { "s": 2025, "c": 107208, "p": 28, "g": 5 }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "id": 14149018,
+  "first_name": "Alejandro",
+  "last_name": "Vera",
+  "birth_date": "1994-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 94,
+  "potential_ability": 98
+}

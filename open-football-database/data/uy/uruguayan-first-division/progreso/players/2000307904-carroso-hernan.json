@@ -1,0 +1,32 @@
+{
+  "id": 2000307904,
+  "first_name": "Hernán",
+  "last_name": "Carroso",
+  "birth_date": "2006-01-06",
+  "country_id": 1657,
+  "club_id": 1923,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": -55,
+  "value": 68000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2021, "c": 1923, "p": 0 },
+    { "s": 2022, "c": 1923, "p": 0 },
+    { "s": 2023, "c": 1923, "p": 0 },
+    { "s": 2024, "c": 1923, "p": 0 },
+    { "s": 2025, "c": 1923, "p": 22 }
+  ]
+}

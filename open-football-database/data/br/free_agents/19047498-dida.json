@@ -1,0 +1,19 @@
+{
+  "id": 19047498,
+  "first_name": "Dida",
+  "last_name": "",
+  "birth_date": "1988-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 96,
+  "potential_ability": 116
+}

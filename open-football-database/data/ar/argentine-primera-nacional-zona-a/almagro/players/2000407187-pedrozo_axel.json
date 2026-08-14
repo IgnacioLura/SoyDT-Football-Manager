@@ -1,0 +1,26 @@
+{
+  "id": 2000407187,
+  "first_name": "Axel",
+  "last_name": "Pedrozo",
+  "birth_date": "2006-08-21",
+  "country_id": 1649,
+  "club_id": 108514,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 84,
+  "potential_ability": -6,
+  "value": 220000,
+  "contract": {
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

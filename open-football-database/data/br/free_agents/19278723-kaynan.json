@@ -1,0 +1,23 @@
+{
+  "id": 19278723,
+  "first_name": "Kaynan",
+  "last_name": "",
+  "birth_date": "1997-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 94,
+  "potential_ability": 102
+}

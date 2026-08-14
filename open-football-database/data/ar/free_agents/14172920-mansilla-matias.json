@@ -1,0 +1,23 @@
+{
+  "id": 14172920,
+  "first_name": "Matías",
+  "last_name": "Mansilla",
+  "birth_date": "1997-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": 108
+}

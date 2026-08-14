@@ -1,0 +1,30 @@
+{
+  "id": 2000438595,
+  "first_name": "Thiago",
+  "last_name": "Chamorro",
+  "birth_date": "2005-06-28",
+  "country_id": 1649,
+  "club_id": 108574,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 60,
+    "right": 100
+  },
+  "current_ability": 86,
+  "potential_ability": 100,
+  "value": 124000,
+  "contract": {
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 108574, "p": 3 },
+    { "s": 2025, "c": 108574, "p": 2 }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": 14172470,
+  "first_name": "Pablo",
+  "last_name": "Negro Villarreal",
+  "birth_date": "1995-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 30
+  },
+  "current_ability": 88,
+  "potential_ability": 92
+}

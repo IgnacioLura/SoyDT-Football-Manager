@@ -1,0 +1,37 @@
+{
+  "id": 31041605,
+  "first_name": "Gabriel",
+  "last_name": "Pinheiro",
+  "birth_date": "1997-04-19",
+  "country_id": 1651,
+  "club_id": 107240,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 30,
+    "right": 100
+  },
+  "current_ability": 100,
+  "potential_ability": 106,
+  "value": 55000,
+  "contract": {    "expiration": "2027-11-30",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 327,
+    "expiration": "2027-11-30",    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2018, "c": 104887, "p": 1 },
+    { "s": 2020, "c": 310700, "p": 4 },
+    { "s": 2022, "c": 311107, "p": 12, "g": 1 },
+    { "s": 2024, "c": 301302, "p": 5 },
+    { "s": 2024, "c": 311107, "p": 17 },
+    { "s": 2025, "c": 107240, "p": 25, "g": 2 }
+  ]
+}

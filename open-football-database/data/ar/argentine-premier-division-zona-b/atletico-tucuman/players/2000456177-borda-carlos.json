@@ -1,0 +1,30 @@
+{
+  "id": 2000456177,
+  "first_name": "Carlos",
+  "last_name": "Borda",
+  "birth_date": "2009-03-11",
+  "country_id": 1650,
+  "club_id": 102474,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 60,
+    "right": 100
+  },
+  "current_ability": 66,
+  "potential_ability": -55,
+  "value": 154000,
+  "contract": {
+    "salary": 5876,
+    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "ids": {
+    "transfermarkt.com": "1329652"
+  }
+}

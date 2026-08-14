@@ -1,0 +1,28 @@
+{
+  "id": 2000278031,
+  "first_name": "Murilo",
+  "last_name": "Picorelli",
+  "birth_date": "2007-04-09",
+  "country_id": 1651,
+  "club_id": 301344,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 50,
+  "potential_ability": 110,
+  "value": 0,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2023, "c": 5290523, "p": 1 }
+  ]
+}

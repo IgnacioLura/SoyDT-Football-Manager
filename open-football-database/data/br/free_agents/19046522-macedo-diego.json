@@ -1,0 +1,23 @@
+{
+  "id": 19046522,
+  "first_name": "Diego",
+  "last_name": "Macedo",
+  "birth_date": "1987-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 134
+}

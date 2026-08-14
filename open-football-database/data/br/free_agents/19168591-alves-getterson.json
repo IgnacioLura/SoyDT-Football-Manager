@@ -1,0 +1,23 @@
+{
+  "id": 19168591,
+  "first_name": "Getterson",
+  "last_name": "Alves",
+  "birth_date": "1991-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 104,
+  "potential_ability": 108
+}

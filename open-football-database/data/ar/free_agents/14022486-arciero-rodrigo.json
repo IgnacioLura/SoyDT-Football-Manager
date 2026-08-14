@@ -1,0 +1,27 @@
+{
+  "id": 14022486,
+  "first_name": "Rodrigo",
+  "last_name": "Arciero",
+  "birth_date": "1993-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "DL",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 70,
+    "right": 100
+  },
+  "current_ability": 110,
+  "potential_ability": 126
+}

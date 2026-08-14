@@ -1,0 +1,19 @@
+{
+  "id": 2000114546,
+  "first_name": "Jeremías",
+  "last_name": "James",
+  "birth_date": "2001-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 106,
+  "potential_ability": 114
+}

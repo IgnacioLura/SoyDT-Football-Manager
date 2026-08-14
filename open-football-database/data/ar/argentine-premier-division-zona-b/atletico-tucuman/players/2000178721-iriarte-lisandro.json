@@ -1,0 +1,29 @@
+{
+  "id": 2000178721,
+  "first_name": "Lisandro",
+  "last_name": "Iriarte",
+  "birth_date": "2005-04-07",
+  "country_id": 1649,
+  "club_id": 102474,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 35
+  },
+  "current_ability": 80,
+  "potential_ability": -55,
+  "value": 40000,
+  "contract": {    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 2000052103,
+    "expiration": "2025-12-31",    "wage_contribution_pct": 100
+  }
+}

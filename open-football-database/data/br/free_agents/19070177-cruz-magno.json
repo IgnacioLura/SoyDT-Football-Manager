@@ -1,0 +1,43 @@
+{
+  "id": 19070177,
+  "first_name": "Magno",
+  "last_name": "Cruz",
+  "birth_date": "1988-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "ML",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 110,
+  "potential_ability": 132
+}

@@ -1,0 +1,29 @@
+{
+  "id": 2000293055,
+  "first_name": "Matías",
+  "last_name": "Duarte",
+  "birth_date": "2006-11-04",
+  "country_id": 1649,
+  "club_id": 102490,
+  "positions": [
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 80,
+  "potential_ability": -6,
+  "value": 194000,
+  "contract": {
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 102490, "p": 0 }
+  ]
+}

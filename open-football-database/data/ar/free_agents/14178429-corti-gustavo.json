@@ -1,0 +1,23 @@
+{
+  "id": 14178429,
+  "first_name": "Gustavo",
+  "last_name": "Corti",
+  "birth_date": "1990-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "WBR",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 100,
+  "potential_ability": 104
+}

@@ -1,0 +1,27 @@
+{
+  "id": 2000063473,
+  "first_name": "Douglas",
+  "last_name": "Dias",
+  "birth_date": "1991-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 94
+}

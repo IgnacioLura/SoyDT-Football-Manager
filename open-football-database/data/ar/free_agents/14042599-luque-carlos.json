@@ -1,0 +1,23 @@
+{
+  "id": 14042599,
+  "first_name": "Carlos",
+  "last_name": "Luque",
+  "birth_date": "1993-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ML",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 35
+  },
+  "current_ability": 90,
+  "potential_ability": 118
+}

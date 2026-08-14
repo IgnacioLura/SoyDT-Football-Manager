@@ -1,0 +1,23 @@
+{
+  "id": 14089805,
+  "first_name": "Brian",
+  "last_name": "Machuca",
+  "birth_date": "1995-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 110,
+  "potential_ability": 114
+}

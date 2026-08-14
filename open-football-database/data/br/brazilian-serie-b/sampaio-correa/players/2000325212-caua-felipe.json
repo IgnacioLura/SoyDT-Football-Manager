@@ -1,0 +1,25 @@
+{
+  "id": 2000325212,
+  "first_name": "Felipe",
+  "last_name": "Cauã",
+  "birth_date": "2004-05-06",
+  "country_id": 1651,
+  "club_id": 107230,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 76,
+  "potential_ability": -6,
+  "value": 2000,
+  "contract": {    "expiration": "2025-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

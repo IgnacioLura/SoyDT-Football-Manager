@@ -1,0 +1,23 @@
+{
+  "id": 19019230,
+  "first_name": "Pedro",
+  "last_name": "Beda",
+  "birth_date": "1989-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "AMC",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 55,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 96
+}

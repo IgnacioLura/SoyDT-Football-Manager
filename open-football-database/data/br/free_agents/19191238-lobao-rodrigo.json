@@ -1,0 +1,19 @@
+{
+  "id": 19191238,
+  "first_name": "Rodrigo",
+  "last_name": "Lobão",
+  "birth_date": "1993-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 25,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 112
+}

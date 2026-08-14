@@ -1,0 +1,31 @@
+{
+  "id": 14024909,
+  "first_name": "Emiliano",
+  "last_name": "Ellacopulos",
+  "birth_date": "1992-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "ML",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 50
+  },
+  "current_ability": 110,
+  "potential_ability": 118
+}

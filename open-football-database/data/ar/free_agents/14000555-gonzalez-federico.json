@@ -1,0 +1,27 @@
+{
+  "id": 14000555,
+  "first_name": "Federico",
+  "last_name": "González",
+  "birth_date": "1987-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 60,
+    "right": 100
+  },
+  "current_ability": 112,
+  "potential_ability": 130
+}

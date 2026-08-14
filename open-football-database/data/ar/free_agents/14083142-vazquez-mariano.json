@@ -1,0 +1,23 @@
+{
+  "id": 14083142,
+  "first_name": "Mariano",
+  "last_name": "Vázquez",
+  "birth_date": "1993-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 60
+  },
+  "current_ability": 110,
+  "potential_ability": 130
+}

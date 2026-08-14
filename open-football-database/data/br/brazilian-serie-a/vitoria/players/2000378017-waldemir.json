@@ -1,0 +1,32 @@
+{
+  "id": 2000378017,
+  "first_name": "Waldemir",
+  "last_name": "",
+  "birth_date": "2007-03-05",
+  "country_id": 1651,
+  "club_id": 340,
+  "positions": [
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 66,
+  "potential_ability": -65,
+  "value": 44000,
+  "contract": {    "expiration": "2027-08-09",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 2000053380, "p": 0 }
+  ]
+}

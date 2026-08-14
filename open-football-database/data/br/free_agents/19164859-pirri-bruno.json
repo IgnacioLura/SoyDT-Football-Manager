@@ -1,0 +1,19 @@
+{
+  "id": 19164859,
+  "first_name": "Bruno",
+  "last_name": "Pirri",
+  "birth_date": "1992-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 114,
+  "potential_ability": 120
+}

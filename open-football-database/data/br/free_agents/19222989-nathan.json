@@ -1,0 +1,31 @@
+{
+  "id": 19222989,
+  "first_name": "Nathan",
+  "last_name": "",
+  "birth_date": "1996-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 65,
+    "right": 100
+  },
+  "current_ability": 118,
+  "potential_ability": 134
+}

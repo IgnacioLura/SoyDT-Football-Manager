@@ -1,0 +1,19 @@
+{
+  "id": 19125042,
+  "first_name": "Alvinho",
+  "last_name": "",
+  "birth_date": "1992-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 96,
+  "potential_ability": 110
+}

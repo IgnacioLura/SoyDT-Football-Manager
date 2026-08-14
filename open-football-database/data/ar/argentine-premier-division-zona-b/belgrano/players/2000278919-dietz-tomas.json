@@ -1,0 +1,25 @@
+{
+  "id": 2000278919,
+  "first_name": "Tomás",
+  "last_name": "Dietz",
+  "birth_date": "2006-01-28",
+  "country_id": 1649,
+  "club_id": 81,
+  "positions": [
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 45
+  },
+  "current_ability": 84,
+  "potential_ability": -55,
+  "value": 193000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

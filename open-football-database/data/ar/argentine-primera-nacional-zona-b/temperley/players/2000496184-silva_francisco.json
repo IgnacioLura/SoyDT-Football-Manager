@@ -1,0 +1,26 @@
+{
+  "id": 2000496184,
+  "first_name": "Francisco",
+  "last_name": "Silva",
+  "birth_date": "2005-04-29",
+  "country_id": 1649,
+  "club_id": 3100019,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 55,
+    "right": 100
+  },
+  "current_ability": 86,
+  "potential_ability": -65,
+  "value": 258000,
+  "contract": {
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

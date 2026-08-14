@@ -1,0 +1,42 @@
+{
+  "id": 83278923,
+  "first_name": "Kevin",
+  "last_name": "Serna",
+  "birth_date": "1997-12-17",
+  "country_id": 1653,
+  "club_id": 323,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 30,
+    "right": 100
+  },
+  "current_ability": 130,
+  "potential_ability": 130,
+  "value": 6000000,
+  "contract": {    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2019, "c": 106072, "p": 4, "g": 1 },
+    { "s": 2020, "c": 106072, "p": 16 },
+    { "s": 2021, "c": 77050930, "p": 22, "g": 10 },
+    { "s": 2022, "c": 5290626, "p": 34, "g": 9 },
+    { "s": 2023, "c": 5290626, "p": 36, "g": 6 },
+    { "s": 2024, "c": 323, "p": 16, "g": 3 },
+    { "s": 2024, "c": 117754, "p": 17, "g": 1 },
+    { "s": 2025, "c": 323, "p": 33, "g": 7 }
+  ],
+  "ids": {
+    "transfermarkt.com": "745927"
+  }
+}

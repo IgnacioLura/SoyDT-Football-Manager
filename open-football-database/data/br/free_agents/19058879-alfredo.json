@@ -1,0 +1,19 @@
+{
+  "id": 19058879,
+  "first_name": "Alfredo",
+  "last_name": "",
+  "birth_date": "1992-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 55,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": 106
+}

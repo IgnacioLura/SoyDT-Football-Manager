@@ -1,0 +1,19 @@
+{
+  "id": 19135096,
+  "first_name": "Raúl",
+  "last_name": "Silva",
+  "birth_date": "1989-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 30
+  },
+  "current_ability": 110,
+  "potential_ability": 134
+}

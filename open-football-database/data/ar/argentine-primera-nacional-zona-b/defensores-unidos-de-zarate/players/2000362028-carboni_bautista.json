@@ -1,0 +1,39 @@
+{
+  "id": 2000362028,
+  "first_name": "Bautista",
+  "last_name": "Carboni",
+  "birth_date": "2006-11-07",
+  "country_id": 1649,
+  "club_id": 952734,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 104,
+  "potential_ability": -7,
+  "value": 1000000,
+  "contract": {
+    "salary": 99,
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 952734, "p": 0 },
+    { "s": 2025, "c": 952734, "p": 21 }
+  ]
+}

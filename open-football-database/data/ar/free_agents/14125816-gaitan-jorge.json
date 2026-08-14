@@ -1,0 +1,19 @@
+{
+  "id": 14125816,
+  "first_name": "Jorge",
+  "last_name": "Gaitán",
+  "birth_date": "1993-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 98,
+  "potential_ability": 100
+}

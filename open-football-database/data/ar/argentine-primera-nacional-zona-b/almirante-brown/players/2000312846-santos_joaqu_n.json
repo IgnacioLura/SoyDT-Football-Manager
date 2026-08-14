@@ -1,0 +1,29 @@
+{
+  "id": 2000312846,
+  "first_name": "Joaquín",
+  "last_name": "Santos",
+  "birth_date": "2005-08-27",
+  "country_id": 1649,
+  "club_id": 102470,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 76,
+  "potential_ability": -5,
+  "value": 120000,
+  "contract": {
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2023, "c": 2608, "p": 11 }
+  ]
+}

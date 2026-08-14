@@ -1,0 +1,32 @@
+{
+  "id": 2000213289,
+  "first_name": "Santino",
+  "last_name": "Duarte",
+  "birth_date": "2005-07-20",
+  "country_id": 1649,
+  "club_id": 91,
+  "positions": [
+    {
+      "code": "AMC",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 76,
+  "potential_ability": -65,
+  "value": 16000,
+  "contract": {    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2022, "c": 2000038055, "p": 0 }
+  ]
+}

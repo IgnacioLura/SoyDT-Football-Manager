@@ -1,0 +1,31 @@
+{
+  "id": 19226200,
+  "first_name": "Lucas",
+  "last_name": "Fernandes",
+  "birth_date": "1997-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 60,
+    "right": 100
+  },
+  "current_ability": 112,
+  "potential_ability": 136
+}

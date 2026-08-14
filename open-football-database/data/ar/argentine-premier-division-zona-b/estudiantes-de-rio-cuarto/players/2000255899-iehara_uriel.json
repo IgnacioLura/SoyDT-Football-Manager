@@ -1,0 +1,31 @@
+{
+  "id": 2000255899,
+  "first_name": "Uriel",
+  "last_name": "Iehara",
+  "birth_date": "2002-12-16",
+  "country_id": 1649,
+  "club_id": 3101435,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 102,
+  "potential_ability": 112,
+  "value": 216000,
+  "contract": {
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2023, "c": 14089901, "p": 11, "g": 4 },
+    { "s": 2024, "c": 14037344, "p": 10, "g": 6 },
+    { "s": 2025, "c": 14089901, "p": 11, "g": 2 }
+  ]
+}

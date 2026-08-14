@@ -1,0 +1,29 @@
+{
+  "id": 2000248642,
+  "first_name": "Nahuel",
+  "last_name": "Ciro",
+  "birth_date": "2005-02-08",
+  "country_id": 1649,
+  "club_id": 102462,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": -6,
+  "value": 9000,
+  "contract": {
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 102462, "p": 10, "g": 1 }
+  ]
+}

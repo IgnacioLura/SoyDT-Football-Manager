@@ -1,0 +1,41 @@
+{
+  "id": 14239394,
+  "first_name": "Matías",
+  "last_name": "Morello",
+  "birth_date": "2001-02-12",
+  "country_id": 1649,
+  "club_id": 108510,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    },
+    {
+      "code": "DM",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 110,
+  "potential_ability": 118,
+  "value": 410000,
+  "contract": {
+    "salary": 26936,
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2021, "c": 108510, "p": 0 },
+    { "s": 2022, "c": 108510, "p": 16 },
+    { "s": 2023, "c": 108510, "p": 25, "g": 1 },
+    { "s": 2024, "c": 108510, "p": 0 },
+    { "s": 2025, "c": 102464, "p": 18 }
+  ],
+  "ids": {
+    "transfermarkt.com": "907004"
+  }
+}

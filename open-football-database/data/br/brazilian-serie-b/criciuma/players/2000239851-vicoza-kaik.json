@@ -1,0 +1,46 @@
+{
+  "id": 2000239851,
+  "first_name": "Kaik",
+  "last_name": "Viçoza",
+  "birth_date": "2004-04-02",
+  "country_id": 1651,
+  "club_id": 320,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 78,
+  "potential_ability": 102,
+  "value": 0,
+  "contract": {    "expiration": "2026-09-30",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 301148,
+    "expiration": "2027-09-30",    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2020, "c": 1183, "p": 0 },
+    { "s": 2021, "c": 1183, "p": 0 },
+    { "s": 2022, "c": 1183, "p": 0 }
+  ]
+}

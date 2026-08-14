@@ -1,0 +1,32 @@
+{
+  "id": 2000245715,
+  "first_name": "Nicolás",
+  "last_name": "Vila",
+  "birth_date": "2006-01-26",
+  "country_id": 1649,
+  "club_id": 952707,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 60,
+    "right": 100
+  },
+  "current_ability": 78,
+  "potential_ability": -6,
+  "value": 247000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2023, "c": 92, "p": 0 }
+  ]
+}

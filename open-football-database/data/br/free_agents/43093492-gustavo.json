@@ -1,0 +1,23 @@
+{
+  "id": 43093492,
+  "first_name": "Gustavo",
+  "last_name": "",
+  "birth_date": "1991-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 110,
+  "potential_ability": 120
+}

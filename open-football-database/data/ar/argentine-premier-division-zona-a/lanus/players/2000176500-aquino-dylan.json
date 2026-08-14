@@ -1,0 +1,39 @@
+{
+  "id": 2000176500,
+  "first_name": "Dylan",
+  "last_name": "Aquino",
+  "birth_date": "2005-06-04",
+  "country_id": 1649,
+  "club_id": 90,
+  "positions": [
+    {
+      "code": "ML",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 118,
+  "potential_ability": -8,
+  "value": 12000000,
+  "contract": {
+    "salary": 52000,
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2023, "c": 90, "p": 4 },
+    { "s": 2024, "c": 90, "p": 18, "g": 1 },
+    { "s": 2025, "c": 90, "p": 29 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1150206"
+  }
+}

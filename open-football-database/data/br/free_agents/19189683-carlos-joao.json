@@ -1,0 +1,23 @@
+{
+  "id": 19189683,
+  "first_name": "João",
+  "last_name": "Carlos",
+  "birth_date": "1992-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 98
+}

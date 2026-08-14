@@ -1,0 +1,28 @@
+{
+  "id": 2000530725,
+  "first_name": "Salvador",
+  "last_name": "Fuster",
+  "birth_date": "2009-05-05",
+  "country_id": 1649,
+  "club_id": 87,
+  "positions": [
+    {
+      "code": "DL",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 76,
+  "potential_ability": -7,
+  "value": 1000000,
+  "contract": {    "expiration": "2030-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 12019927, "p": 13 }
+  ]
+}

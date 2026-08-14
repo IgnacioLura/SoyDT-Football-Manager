@@ -1,0 +1,23 @@
+{
+  "id": 14219618,
+  "first_name": "Jesús",
+  "last_name": "Portillo",
+  "birth_date": "1999-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ML",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": 108
+}

@@ -1,0 +1,33 @@
+{
+  "id": 2000153865,
+  "first_name": "Thiago",
+  "last_name": "Dubroca",
+  "birth_date": "2003-09-15",
+  "country_id": 390,
+  "club_id": 5512782,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 74,
+  "potential_ability": 80,
+  "value": 34000,
+  "contract": {    "expiration": "2025-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2019, "c": 78014831, "p": 0 },
+    { "s": 2020, "c": 78014831, "p": 0 },
+    { "s": 2021, "c": 78014831, "p": 1 },
+    { "s": 2022, "c": 78014831, "p": 1 },
+    { "s": 2023, "c": 78014831, "p": 10, "g": 1 },
+    { "s": 2025, "c": 5512782, "p": 0 }
+  ]
+}

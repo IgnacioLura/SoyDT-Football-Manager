@@ -1,0 +1,35 @@
+{
+  "id": 2000427322,
+  "first_name": "Cayetano",
+  "last_name": "Santarelli",
+  "birth_date": "2008-03-14",
+  "country_id": 1649,
+  "club_id": 102489,
+  "positions": [
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 80,
+  "potential_ability": -65,
+  "value": 314000,
+  "contract": {    "expiration": "2029-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2022, "c": 2661, "p": 2 },
+    { "s": 2023, "c": 2661, "p": 1 },
+    { "s": 2024, "c": 2661, "p": 7 },
+    { "s": 2025, "c": 2661, "p": 8 }
+  ]
+}

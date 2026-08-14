@@ -1,0 +1,30 @@
+{
+  "id": 950848,
+  "first_name": "Gabriel",
+  "last_name": "Viglianti",
+  "birth_date": "1979-06-12",
+  "country_id": 1649,
+  "club_id": 14008993,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 14
+    }
+  ],
+  "current_ability": 30,
+  "potential_ability": 30,
+  "value": 0,
+  "contract": {
+    "expiration": "2027-06-30",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2007, "c": 309, "p": 27, "g": 4 },
+    { "s": 2008, "c": 1508, "p": 21, "g": 5 },
+    { "s": 2009, "c": 1508, "p": 16, "g": 1 },
+    { "s": 2010, "c": 1508, "p": 25, "g": 3 },
+    { "s": 2011, "c": 1508, "p": 17 },
+    { "s": 2012, "c": 1508, "p": 15, "g": 5 }
+  ]
+}

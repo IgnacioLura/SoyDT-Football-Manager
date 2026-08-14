@@ -1,0 +1,23 @@
+{
+  "id": 19162730,
+  "first_name": "Pedro",
+  "last_name": "Paulo",
+  "birth_date": "1994-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "AMC",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 50
+  },
+  "current_ability": 100,
+  "potential_ability": 118
+}

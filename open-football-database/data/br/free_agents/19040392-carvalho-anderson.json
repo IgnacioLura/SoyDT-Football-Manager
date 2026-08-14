@@ -1,0 +1,23 @@
+{
+  "id": 19040392,
+  "first_name": "Anderson",
+  "last_name": "Carvalho",
+  "birth_date": "1990-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 60,
+    "right": 100
+  },
+  "current_ability": 104,
+  "potential_ability": 128
+}

@@ -1,0 +1,9 @@
+target/
+*.db
+*.db.tmp
+/.claude/settings.local.json
+/scraper/
+/history_scraper/
+/transfer_scraper/
+/fmf_update/
+/tools/

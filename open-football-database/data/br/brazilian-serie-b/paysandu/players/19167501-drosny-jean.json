@@ -1,0 +1,34 @@
+{
+  "id": 19167501,
+  "first_name": "Jean",
+  "last_name": "Drosny",
+  "birth_date": "1994-01-30",
+  "country_id": 1651,
+  "club_id": 331,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 25,
+    "right": 100
+  },
+  "current_ability": 104,
+  "potential_ability": 114,
+  "contract": {    "expiration": "2025-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2012, "c": 301306, "p": 0 },
+    { "s": 2015, "c": 309142, "p": 0 },
+    { "s": 2018, "c": 301321, "p": 8 },
+    { "s": 2019, "c": 301323, "p": 12 },
+    { "s": 2022, "c": 301129, "p": 3 },
+    { "s": 2023, "c": 107240, "p": 21 },
+    { "s": 2024, "c": 107240, "p": 23 },
+    { "s": 2025, "c": 107240, "p": 22 }
+  ]
+}

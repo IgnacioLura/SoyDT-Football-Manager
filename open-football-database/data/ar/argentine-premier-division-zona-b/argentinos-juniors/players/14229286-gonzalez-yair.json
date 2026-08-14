@@ -1,0 +1,56 @@
+{
+  "id": 14229286,
+  "first_name": "Yair",
+  "last_name": "González",
+  "birth_date": "2002-03-21",
+  "country_id": 1649,
+  "club_id": 78,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 116,
+  "potential_ability": 128,
+  "value": 602000,
+  "contract": {
+    "salary": 36868,
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 5512793,
+    "expiration": "2027-12-31",
+    "salary": 36868,
+    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2018, "c": 102493, "p": 1 },
+    { "s": 2019, "c": 102493, "p": 4, "g": 1 },
+    { "s": 2020, "c": 5250019, "p": 0 },
+    { "s": 2021, "c": 78, "p": 0 },
+    { "s": 2022, "c": 78, "p": 0 },
+    { "s": 2023, "c": 2000152191, "p": 23, "g": 1 },
+    { "s": 2024, "c": 78, "p": 0 },
+    { "s": 2024, "c": 5512556, "p": 14 },
+    { "s": 2025, "c": 102482, "p": 32, "g": 8 }
+  ]
+}

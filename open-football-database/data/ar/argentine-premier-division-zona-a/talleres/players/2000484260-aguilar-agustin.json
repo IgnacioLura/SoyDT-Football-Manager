@@ -1,0 +1,29 @@
+{
+  "id": 2000484260,
+  "first_name": "Agustín",
+  "last_name": "Aguilar",
+  "birth_date": "2007-06-05",
+  "country_id": 1649,
+  "club_id": 102489,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 78,
+  "potential_ability": -55,
+  "value": 93000,
+  "contract": {    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

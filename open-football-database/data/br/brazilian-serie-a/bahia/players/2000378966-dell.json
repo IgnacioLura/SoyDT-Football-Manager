@@ -1,0 +1,32 @@
+{
+  "id": 2000378966,
+  "first_name": "Dell",
+  "last_name": "",
+  "birth_date": "2008-06-09",
+  "country_id": 1651,
+  "club_id": 315,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 96,
+  "potential_ability": -8,
+  "value": 8000000,
+  "contract": {    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 2000173571, "p": 0 },
+    { "s": 2025, "c": 2000173571, "p": 0 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1328021"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": 78041942,
+  "first_name": "Mauricio",
+  "last_name": "Felipe",
+  "birth_date": "1990-01-01",
+  "country_id": 1657,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 118
+}

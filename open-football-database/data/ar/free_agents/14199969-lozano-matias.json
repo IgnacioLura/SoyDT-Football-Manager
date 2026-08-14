@@ -1,0 +1,19 @@
+{
+  "id": 14199969,
+  "first_name": "Matías",
+  "last_name": "Lozano",
+  "birth_date": "1990-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 96
+}

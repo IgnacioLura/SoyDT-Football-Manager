@@ -1,0 +1,34 @@
+{
+  "id": 2000248631,
+  "first_name": "Tomás",
+  "last_name": "Gallay",
+  "birth_date": "2004-08-10",
+  "country_id": 1649,
+  "club_id": 102462,
+  "positions": [
+    {
+      "code": "ML",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 102,
+  "potential_ability": -65,
+  "value": 476000,
+  "contract": {
+    "salary": 103,
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 102462, "p": 12 }
+  ]
+}

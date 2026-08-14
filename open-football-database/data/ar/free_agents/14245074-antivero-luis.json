@@ -1,0 +1,19 @@
+{
+  "id": 14245074,
+  "first_name": "Luis",
+  "last_name": "Antivero",
+  "birth_date": "2002-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": 112
+}

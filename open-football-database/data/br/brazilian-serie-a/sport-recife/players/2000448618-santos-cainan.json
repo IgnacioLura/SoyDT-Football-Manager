@@ -1,0 +1,32 @@
+{
+  "id": 2000448618,
+  "first_name": "Cainan",
+  "last_name": "Santos",
+  "birth_date": "2008-02-13",
+  "country_id": 1651,
+  "club_id": 337,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 68,
+  "potential_ability": -7,
+  "value": 50000,
+  "contract": {    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 1708, "p": 0 }
+  ]
+}

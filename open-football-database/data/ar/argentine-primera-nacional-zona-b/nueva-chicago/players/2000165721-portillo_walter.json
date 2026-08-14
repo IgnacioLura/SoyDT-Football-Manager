@@ -1,0 +1,29 @@
+{
+  "id": 2000165721,
+  "first_name": "Walter",
+  "last_name": "Portillo",
+  "birth_date": "2003-03-29",
+  "country_id": 1649,
+  "club_id": 102486,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 66,
+  "potential_ability": -5,
+  "value": 4000,
+  "contract": {
+    "expiration": "2025-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2022, "c": 102486, "p": 0 }
+  ]
+}

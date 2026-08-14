@@ -1,0 +1,23 @@
+{
+  "id": 14141490,
+  "first_name": "Joel",
+  "last_name": "Godoy Gill",
+  "birth_date": "1992-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 90,
+  "potential_ability": 96
+}

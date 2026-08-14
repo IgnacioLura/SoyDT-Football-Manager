@@ -1,0 +1,27 @@
+{
+  "id": 14188994,
+  "first_name": "Maximiliano",
+  "last_name": "Gay Rey",
+  "birth_date": "1983-10-14",
+  "country_id": 1653,
+  "club_id": 102490,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "current_ability": 30,
+  "potential_ability": 30,
+  "value": 31,
+  "contract": {
+    "expiration": "2027-06-30",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2006, "c": 952707, "p": 2 },
+    { "s": 2007, "c": 952737, "p": 5 },
+    { "s": 2008, "c": 952737, "p": 5 }
+  ]
+}

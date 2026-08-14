@@ -1,0 +1,39 @@
+{
+  "id": 14245591,
+  "first_name": "Ignacio",
+  "last_name": "Russo",
+  "birth_date": "2000-12-13",
+  "country_id": 1649,
+  "club_id": 3100018,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 126,
+  "potential_ability": 126,
+  "value": 5000000,
+  "contract": {
+    "salary": 208000,
+    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2019, "c": 95, "p": 0 },
+    { "s": 2020, "c": 95, "p": 3 },
+    { "s": 2021, "c": 95, "p": 4, "g": 1 },
+    { "s": 2022, "c": 102493, "p": 33, "g": 9 },
+    { "s": 2023, "c": 3101457, "p": 33, "g": 6 },
+    { "s": 2024, "c": 102485, "p": 38, "g": 6 },
+    { "s": 2025, "c": 3100018, "p": 32, "g": 10 }
+  ],
+  "ids": {
+    "transfermarkt.com": "833130"
+  }
+}

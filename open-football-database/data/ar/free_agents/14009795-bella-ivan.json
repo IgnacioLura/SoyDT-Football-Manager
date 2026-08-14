@@ -1,0 +1,27 @@
+{
+  "id": 14009795,
+  "first_name": "Iván",
+  "last_name": "Bella",
+  "birth_date": "1989-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "ML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 45
+  },
+  "current_ability": 106,
+  "potential_ability": 126
+}

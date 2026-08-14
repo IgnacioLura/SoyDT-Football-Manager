@@ -1,0 +1,237 @@
+//! Post-match world-wide writes: caps/goals/reputation, Elo, schedule.
+//!
+//! Each helper walks every continent so foreign-based squad members
+//! receive their stat bumps regardless of where the match was played
+//! or which competition it belonged to. Reused by both the
+//! continental qualifier orchestrator and the global tournament
+//! processor — single source of truth for "what happens after a
+//! national-team match".
+
+use chrono::NaiveDate;
+use std::collections::{HashMap, HashSet};
+
+use super::lookups::world_country_elo;
+use crate::continent::Continent;
+use crate::country::national::{NationalTeamFixture, NationalTeamMatchResult};
+use crate::{HappinessEventType, NationalTeamLevel};
+
+/// Update apps/goals/reputation for every player who actually appeared
+/// in the match, no matter which continent their club sits on.
+/// `appearance_ids` is the on-pitch appearance set (starters + subs
+/// used) — squad members who didn't play are skipped here so they
+/// don't get a fake cap or a fake `NationalTeamDebut` event. Caller
+/// derives this from the raw match's `player_stats` keys.
+///
+/// Country-weighted reputation gains: stronger nations push the
+/// reputation needle further (a goal at a World Cup for Brazil counts
+/// for more than the same goal for a Tier-3 nation), bounded at 0.5x
+/// to 2.0x so the curve doesn't explode at extremes.
+pub fn apply_world_international_stats(
+    continents: &mut [Continent],
+    home_country_id: u32,
+    away_country_id: u32,
+    player_goals: &HashMap<u32, u16>,
+    appearance_ids: &HashSet<u32>,
+) {
+    apply_world_international_stats_for_level(
+        continents,
+        home_country_id,
+        away_country_id,
+        player_goals,
+        appearance_ids,
+        NationalTeamLevel::Senior,
+    );
+}
+
+/// Level-aware caps/goals update. Senior bumps `international_apps` /
+/// `international_goals`, reputation, and fires the first-cap debut event.
+/// U21 bumps only `under_21_international_apps` / `under_21_international_goals`
+/// — it never touches senior caps or fires the senior debut event, so a
+/// player's senior record is built solely by senior appearances.
+pub fn apply_world_international_stats_for_level(
+    continents: &mut [Continent],
+    home_country_id: u32,
+    away_country_id: u32,
+    player_goals: &HashMap<u32, u16>,
+    appearance_ids: &HashSet<u32>,
+    level: NationalTeamLevel,
+) {
+    if level == NationalTeamLevel::Under21 {
+        for continent in continents.iter_mut() {
+            for country in continent.countries.iter_mut() {
+                for club in country.clubs.iter_mut() {
+                    for team in club.teams.iter_mut() {
+                        for player in team.players.iter_mut() {
+                            if !appearance_ids.contains(&player.id) {
+                                continue;
+                            }
+                            player.player_attributes.under_21_international_apps += 1;
+                            if let Some(&goals) = player_goals.get(&player.id) {
+                                player.player_attributes.under_21_international_goals += goals;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return;
+    }
+
+    let mut country_weights: HashMap<u32, f32> = HashMap::new();
+
+    for continent in continents.iter() {
+        for country in continent.countries.iter() {
+            if country.id != home_country_id && country.id != away_country_id {
+                continue;
+            }
+            let country_rep = country.reputation as f32;
+            // Country reputation is a 0..10000 scale. Dividing by 500
+            // saturated the clamp for every real footballing nation, so a
+            // San Marino cap was worth exactly as much international fame
+            // as a Brazil cap. Scale across the real range instead, with
+            // an average nation landing near 1.0.
+            let country_weight = (0.4 + 1.6 * (country_rep / 10_000.0)).clamp(0.4, 2.0);
+            for s in &country.national_team.squad {
+                country_weights.insert(s.player_id, country_weight);
+            }
+        }
+    }
+
+    for continent in continents.iter_mut() {
+        for country in continent.countries.iter_mut() {
+            for club in country.clubs.iter_mut() {
+                for team in club.teams.iter_mut() {
+                    for player in team.players.iter_mut() {
+                        if !appearance_ids.contains(&player.id) {
+                            continue;
+                        }
+                        let country_weight =
+                            country_weights.get(&player.id).copied().unwrap_or(1.0);
+
+                        let was_uncapped = player.player_attributes.international_apps == 0;
+                        player.player_attributes.international_apps += 1;
+
+                        let mut goal_bonus: f32 = 0.0;
+                        if let Some(&goals) = player_goals.get(&player.id) {
+                            player.player_attributes.international_goals += goals;
+                            goal_bonus = goals.min(3) as f32 * 20.0;
+                        }
+
+                        let base = 15.0;
+                        let raw = base + goal_bonus;
+                        let current_delta = (raw * 0.6 * country_weight) as i16;
+                        let home_delta = (raw * 0.8 * country_weight) as i16;
+                        let world_delta = (raw * 1.0 * country_weight) as i16;
+
+                        player.player_attributes.update_reputation(
+                            current_delta,
+                            home_delta,
+                            world_delta,
+                        );
+
+                        if was_uncapped {
+                            // First international cap — fires on the
+                            // actual on-pitch appearance, not call-up.
+                            player.happiness.add_event_default_with_cooldown(
+                                HappinessEventType::NationalTeamDebut,
+                                3650,
+                            );
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/// Update Elo for both countries after a national-team match.
+/// Operates across the entire world so a continental qualifier and a
+/// global tournament both go through the same Elo path.
+pub fn apply_world_elo(
+    continents: &mut [Continent],
+    home_country_id: u32,
+    away_country_id: u32,
+    home_score: u8,
+    away_score: u8,
+) {
+    let home_elo = world_country_elo(continents, home_country_id);
+    let away_elo = world_country_elo(continents, away_country_id);
+
+    for continent in continents.iter_mut() {
+        for country in continent.countries.iter_mut() {
+            if country.id == home_country_id {
+                country
+                    .national_team
+                    .update_elo(home_score, away_score, away_elo);
+            } else if country.id == away_country_id {
+                country
+                    .national_team
+                    .update_elo(away_score, home_score, home_elo);
+            }
+        }
+    }
+}
+
+/// Push a fixture entry into each country's national-team schedule so
+/// the web layer can render the match in both teams' fixture lists.
+#[allow(clippy::too_many_arguments)]
+pub fn record_world_country_schedule(
+    continents: &mut [Continent],
+    date: NaiveDate,
+    home_country_id: u32,
+    away_country_id: u32,
+    home_name: &str,
+    away_name: &str,
+    home_score: u8,
+    away_score: u8,
+    competition_name: &str,
+    match_id: &str,
+    level: NationalTeamLevel,
+) {
+    for continent in continents.iter_mut() {
+        for country in continent.countries.iter_mut() {
+            // Route the fixture into the schedule of the matching level —
+            // U21 fixtures must not appear in the senior fixture list.
+            let is_home = country.id == home_country_id;
+            let is_away = country.id == away_country_id;
+            if !is_home && !is_away {
+                continue;
+            }
+            let schedule = match level {
+                NationalTeamLevel::Senior => &mut country.national_team.schedule,
+                NationalTeamLevel::Under21 => &mut country.u21_national_team.schedule,
+            };
+            if is_home {
+                schedule.push(NationalTeamFixture {
+                    date,
+                    opponent_country_id: away_country_id,
+                    opponent_country_name: away_name.to_string(),
+                    is_home: true,
+                    competition_name: competition_name.to_string(),
+                    match_id: match_id.to_string(),
+                    result: Some(NationalTeamMatchResult {
+                        home_score,
+                        away_score,
+                        date,
+                        opponent_country_id: away_country_id,
+                    }),
+                });
+            } else {
+                schedule.push(NationalTeamFixture {
+                    date,
+                    opponent_country_id: home_country_id,
+                    opponent_country_name: home_name.to_string(),
+                    is_home: false,
+                    competition_name: competition_name.to_string(),
+                    match_id: match_id.to_string(),
+                    result: Some(NationalTeamMatchResult {
+                        home_score: away_score,
+                        away_score: home_score,
+                        date,
+                        opponent_country_id: home_country_id,
+                    }),
+                });
+            }
+        }
+    }
+}

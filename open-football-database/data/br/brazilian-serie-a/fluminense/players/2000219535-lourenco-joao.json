@@ -1,0 +1,32 @@
+{
+  "id": 2000219535,
+  "first_name": "João",
+  "last_name": "Lourenço",
+  "birth_date": "2005-07-15",
+  "country_id": 1651,
+  "club_id": 323,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 25,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": -65,
+  "value": 624000,
+  "contract": {    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 5661074, "p": 2 }
+  ]
+}

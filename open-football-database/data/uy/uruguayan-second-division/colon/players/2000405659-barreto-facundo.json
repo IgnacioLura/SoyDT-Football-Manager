@@ -1,0 +1,37 @@
+{
+  "id": 2000405659,
+  "first_name": "Facundo",
+  "last_name": "Barreto",
+  "birth_date": "2005-08-11",
+  "country_id": 1657,
+  "club_id": 5512562,
+  "positions": [
+    {
+      "code": "AMC",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 45
+  },
+  "current_ability": 78,
+  "potential_ability": 94,
+  "value": 13000,
+  "contract": {    "expiration": "2025-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2020, "c": 1925, "p": 0 },
+    { "s": 2021, "c": 1925, "p": 0 },
+    { "s": 2022, "c": 1925, "p": 0 },
+    { "s": 2023, "c": 1925, "p": 0 },
+    { "s": 2024, "c": 1925, "p": 0 },
+    { "s": 2025, "c": 5512562, "p": 11 }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "id": 2000219959,
+  "first_name": "Kevin",
+  "last_name": "Mendoza",
+  "birth_date": "2006-03-10",
+  "country_id": 1649,
+  "club_id": 102467,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 30,
+    "right": 100
+  },
+  "current_ability": 86,
+  "potential_ability": -7,
+  "value": 302000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 102467, "p": 0 }
+  ]
+}

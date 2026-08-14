@@ -1,0 +1,35 @@
+{
+  "id": 2000382044,
+  "first_name": "Ruan",
+  "last_name": "Pablo",
+  "birth_date": "2008-07-23",
+  "country_id": 1651,
+  "club_id": 315,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 85,
+    "right": 100
+  },
+  "current_ability": 94,
+  "potential_ability": -8,
+  "value": 3000000,
+  "contract": {    "expiration": "2030-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 315, "p": 1 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1220614"
+  }
+}

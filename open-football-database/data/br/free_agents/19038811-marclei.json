@@ -1,0 +1,23 @@
+{
+  "id": 19038811,
+  "first_name": "Marclei",
+  "last_name": "",
+  "birth_date": "1989-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "AMC",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 50
+  },
+  "current_ability": 90,
+  "potential_ability": 94
+}

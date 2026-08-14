@@ -1,0 +1,19 @@
+{
+  "id": 2000108990,
+  "first_name": "Reydson",
+  "last_name": "",
+  "birth_date": "2002-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 35
+  },
+  "current_ability": 94,
+  "potential_ability": 108
+}

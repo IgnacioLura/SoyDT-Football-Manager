@@ -1,0 +1,19 @@
+{
+  "id": 19159357,
+  "first_name": "Nathan",
+  "last_name": "Cachorrão",
+  "birth_date": "1994-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 98,
+  "potential_ability": 110
+}

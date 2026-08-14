@@ -1,0 +1,23 @@
+{
+  "id": 14024547,
+  "first_name": "Rodrigo",
+  "last_name": "Lemos",
+  "birth_date": "1990-01-01",
+  "country_id": 1657,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 55,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": 94
+}

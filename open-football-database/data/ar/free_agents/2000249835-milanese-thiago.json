@@ -1,0 +1,27 @@
+{
+  "id": 2000249835,
+  "first_name": "Thiago",
+  "last_name": "Milanese",
+  "birth_date": "2001-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "ML",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 60,
+    "right": 100
+  },
+  "current_ability": 94,
+  "potential_ability": 106
+}

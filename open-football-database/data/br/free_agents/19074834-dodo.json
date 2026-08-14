@@ -1,0 +1,23 @@
+{
+  "id": 19074834,
+  "first_name": "Dodô",
+  "last_name": "",
+  "birth_date": "1991-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DL",
+      "level": 20
+    },
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 118,
+  "potential_ability": 136
+}

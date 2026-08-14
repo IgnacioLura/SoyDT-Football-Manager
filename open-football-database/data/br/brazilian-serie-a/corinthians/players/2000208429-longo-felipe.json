@@ -1,0 +1,31 @@
+{
+  "id": 2000208429,
+  "first_name": "Felipe",
+  "last_name": "Longo",
+  "birth_date": "2005-03-05",
+  "country_id": 1651,
+  "club_id": 319,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 96,
+  "potential_ability": -75,
+  "value": 2000000,
+  "contract": {    "expiration": "2029-03-30",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 319, "p": 6 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1005656"
+  }
+}

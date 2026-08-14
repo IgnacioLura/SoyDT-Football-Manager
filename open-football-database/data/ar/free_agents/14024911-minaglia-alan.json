@@ -1,0 +1,19 @@
+{
+  "id": 14024911,
+  "first_name": "Alan",
+  "last_name": "Minaglia",
+  "birth_date": "1992-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 102,
+  "potential_ability": 116
+}

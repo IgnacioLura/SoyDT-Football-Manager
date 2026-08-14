@@ -1,0 +1,37 @@
+{
+  "id": 2000460060,
+  "first_name": "Ângelo",
+  "last_name": "",
+  "birth_date": "2008-10-20",
+  "country_id": 1651,
+  "club_id": 337,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 70,
+    "right": 100
+  },
+  "current_ability": 78,
+  "potential_ability": -8,
+  "value": 520000,
+  "contract": {    "expiration": "2027-11-30",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

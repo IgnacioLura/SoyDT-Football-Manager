@@ -1,0 +1,23 @@
+{
+  "id": 14187301,
+  "first_name": "Mariano",
+  "last_name": "Filiosi",
+  "birth_date": "1996-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 35
+  },
+  "current_ability": 88,
+  "potential_ability": 90
+}

@@ -1,0 +1,201 @@
+use crate::PlayerFieldPositionGroup;
+use crate::r#match::events::Event;
+use crate::r#match::goalkeepers::states::common::{ActivityIntensity, GoalkeeperCondition};
+use crate::r#match::goalkeepers::states::state::GoalkeeperState;
+use crate::r#match::player::events::{PassingEventContext, PlayerEvent};
+use crate::r#match::player::strategies::players::ops::goalkeeper_skill::GoalkeeperSkillProfile;
+use crate::r#match::{
+    ConditionContext, MatchPlayerLite, PassEvaluator, StateChangeResult, StateProcessingContext,
+    StateProcessingHandler,
+};
+use nalgebra::Vector3;
+
+#[derive(Default, Clone)]
+pub struct GoalkeeperKickingState {}
+
+impl StateProcessingHandler for GoalkeeperKickingState {
+    fn process(&self, ctx: &StateProcessingContext) -> Option<StateChangeResult> {
+        // 1. Check if the goalkeeper has the ball
+        if !ctx.player.has_ball(ctx) {
+            return Some(StateChangeResult::with_goalkeeper_state(
+                GoalkeeperState::Standing,
+            ));
+        }
+
+        // 2. Find the best teammate to kick the ball to
+        if let Some((teammate, _reason)) = self.find_best_pass_option(ctx) {
+            return Some(StateChangeResult::with_goalkeeper_state_and_event(
+                GoalkeeperState::Standing,
+                Event::PlayerEvent(PlayerEvent::PassTo(
+                    PassingEventContext::new()
+                        .with_from_player_id(ctx.player.id)
+                        .with_to_player_id(teammate.id)
+                        .with_reason("GK_KICKING")
+                        .build(ctx),
+                )),
+            ));
+        }
+
+        // No target worth aiming at — hoof it clear rather than hold the
+        // ball. Mirrors the Distributing / Throwing timeout so no release
+        // path can stall with the ball in hand.
+        if ctx.in_state_time > 20 {
+            return Some(StateChangeResult::with_goalkeeper_state(
+                GoalkeeperState::Clearing,
+            ));
+        }
+
+        None
+    }
+
+    fn velocity(&self, _ctx: &StateProcessingContext) -> Option<Vector3<f32>> {
+        Some(Vector3::new(0.0, 0.0, 0.0))
+    }
+
+    fn process_conditions(&self, ctx: ConditionContext) {
+        // Kicking requires moderate intensity with focused effort
+        GoalkeeperCondition::new(ActivityIntensity::Moderate).process(ctx);
+    }
+}
+
+impl GoalkeeperKickingState {
+    fn find_best_pass_option<'a>(
+        &self,
+        ctx: &StateProcessingContext<'a>,
+    ) -> Option<(MatchPlayerLite, &'static str)> {
+        // Kicking range scales with the unified distribution profile —
+        // weak keepers can't reliably reach 300m, so cap the search.
+        let prof = GoalkeeperSkillProfile::from_ctx(ctx);
+        let max_distance = ctx.context.field_size.width as f32 * (1.2 + prof.distribution * 1.6);
+
+        let vision_skill = ctx.player.skills.mental.vision / 20.0;
+        let kicking_skill = ctx.player.skills.goalkeeping.kicking / 20.0;
+
+        // Extreme-kick capability is now the unified distribution
+        // composite — concentration / decisions / composure already
+        // baked in.
+        let extreme_capability = prof.distribution;
+        let can_attempt_extreme = extreme_capability > 0.62;
+        let prefers_extreme = extreme_capability > 0.78;
+
+        let mut best_option: Option<MatchPlayerLite> = None;
+        let mut best_score = 0.0;
+
+        for teammate in ctx.players().teammates().nearby(max_distance) {
+            // GRADUATED RECENCY PENALTY: Penalize recent passers instead of hard-skipping
+            let recency_penalty = ctx.ball().passer_recency_penalty(teammate.id);
+
+            let distance = (teammate.position - ctx.player.position).norm();
+
+            // Calculate base score using vision-weighted evaluation
+            // (side-aware: "upfield" flips for Right teams)
+            let forward_progress = ctx
+                .player
+                .side
+                .map_or(0.0, |s| {
+                    s.forward_delta(ctx.player.position.x, teammate.position.x)
+                })
+                .max(0.0);
+            let field_progress = forward_progress / ctx.context.field_size.width as f32;
+
+            // Check if receiver is a forward
+            let is_forward = matches!(
+                teammate.tactical_positions.position_group(),
+                PlayerFieldPositionGroup::Forward
+            );
+
+            // Check space around receiver
+            let nearby_opponents = ctx.tick_context.grid.opponents(teammate.id, 15.0).count();
+            let space_factor = match nearby_opponents {
+                0 => 3.0, // Completely free
+                1 => 1.8,
+                2 => 1.0,
+                _ => 0.4,
+            };
+
+            // Distance-based scoring with vision weighting
+            let distance_score = if distance > 300.0 {
+                // Extreme long kicks (300m+)
+                if !can_attempt_extreme {
+                    0.2 // Very poor option without skills
+                } else if prefers_extreme && is_forward {
+                    // Elite kicker targeting forward - spectacular play
+                    let extreme_bonus = (extreme_capability - 0.8) * 10.0; // 0.0 to 2.0
+                    3.5 + extreme_bonus
+                } else if is_forward {
+                    2.5 + (extreme_capability * 1.5)
+                } else {
+                    1.0 // Avoid extreme passes to non-forwards
+                }
+            } else if distance > 200.0 {
+                // Ultra-long kicks (200-300m)
+                if extreme_capability > 0.75 {
+                    if is_forward {
+                        3.0 + (vision_skill * 2.0) // Vision helps spot forwards
+                    } else {
+                        1.8
+                    }
+                } else if extreme_capability > 0.6 {
+                    2.0 + (kicking_skill * 1.5)
+                } else {
+                    1.2
+                }
+            } else if distance > 100.0 {
+                // Very long kicks (100-200m)
+                if is_forward {
+                    2.5 + (vision_skill * 1.0)
+                } else {
+                    1.8
+                }
+            } else if distance > 60.0 {
+                // Long kicks (60-100m)
+                2.0
+            } else {
+                // Short kicks - less ideal for kicking state
+                0.8
+            };
+
+            // Position bonus
+            let position_bonus = match teammate.tactical_positions.position_group() {
+                PlayerFieldPositionGroup::Forward => {
+                    if distance > 300.0 && prefers_extreme {
+                        2.5 // Extreme clearance to striker
+                    } else if distance > 200.0 {
+                        2.0 // Ultra-long to striker
+                    } else {
+                        1.5
+                    }
+                }
+                PlayerFieldPositionGroup::Midfielder => {
+                    if distance > 200.0 {
+                        0.7 // Avoid ultra-long to midfield
+                    } else {
+                        1.2
+                    }
+                }
+                PlayerFieldPositionGroup::Defender => 0.3, // Avoid kicking to defenders
+                PlayerFieldPositionGroup::Goalkeeper => 0.1,
+            };
+
+            // Combine all factors with vision-based weighting and recency penalty
+            let score = distance_score
+                * space_factor
+                * position_bonus
+                * (1.0 + field_progress)
+                * (0.5 + vision_skill * 0.5)
+                * recency_penalty;
+
+            if score > best_score {
+                best_score = score;
+                best_option = Some(teammate);
+            }
+        }
+
+        // Fallback to standard evaluator if no good option found
+        if best_option.is_none() || best_score < 1.0 {
+            PassEvaluator::find_best_pass_option(ctx, max_distance)
+        } else {
+            best_option.map(|teammate| (teammate, "GK_KICKING_CUSTOM_EVALUATION"))
+        }
+    }
+}

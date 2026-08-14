@@ -1,0 +1,34 @@
+{
+  "id": 2000059674,
+  "first_name": "Bruno",
+  "last_name": "Ponce",
+  "birth_date": "2001-08-15",
+  "country_id": 1649,
+  "club_id": 3101518,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 76,
+  "potential_ability": 96,
+  "value": 6000,
+  "contract": {
+    "salary": 88,
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2021, "c": 3101518, "p": 0 },
+    { "s": 2022, "c": 3101518, "p": 1 },
+    { "s": 2023, "c": 3101518, "p": 2 },
+    { "s": 2024, "c": 3101518, "p": 0 },
+    { "s": 2025, "c": 952753, "p": 9 }
+  ]
+}

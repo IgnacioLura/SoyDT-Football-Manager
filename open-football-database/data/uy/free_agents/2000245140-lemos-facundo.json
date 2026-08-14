@@ -1,0 +1,19 @@
+{
+  "id": 2000245140,
+  "first_name": "Facundo",
+  "last_name": "Lemos",
+  "birth_date": "2001-01-01",
+  "country_id": 1657,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 50
+  },
+  "current_ability": 88,
+  "potential_ability": 98
+}

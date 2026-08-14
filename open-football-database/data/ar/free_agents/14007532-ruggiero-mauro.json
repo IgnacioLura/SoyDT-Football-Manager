@@ -1,0 +1,19 @@
+{
+  "id": 14007532,
+  "first_name": "Mauro",
+  "last_name": "Ruggiero",
+  "birth_date": "1987-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 106,
+  "potential_ability": 106
+}

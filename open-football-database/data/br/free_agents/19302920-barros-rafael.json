@@ -1,0 +1,19 @@
+{
+  "id": 19302920,
+  "first_name": "Rafael",
+  "last_name": "Barros",
+  "birth_date": "1991-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 70,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": 106
+}

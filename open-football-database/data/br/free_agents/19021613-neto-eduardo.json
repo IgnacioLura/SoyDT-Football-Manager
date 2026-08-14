@@ -1,0 +1,27 @@
+{
+  "id": 19021613,
+  "first_name": "Eduardo",
+  "last_name": "Neto",
+  "birth_date": "1988-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    },
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "WBL",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 55
+  },
+  "current_ability": 100,
+  "potential_ability": 132
+}

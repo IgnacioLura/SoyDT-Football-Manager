@@ -1,0 +1,79 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import CountriesPage from './features/countries/CountriesPage'
+import FreeAgentsPage from './features/countries/FreeAgentsPage'
+import NationalSquadPage from './features/countries/NationalSquadPage'
+import SchedulePage from './features/countries/SchedulePage'
+import StaffPage from './features/countries/StaffPage'
+import PipeCheckPage from './features/debug/PipeCheckPage'
+import LeaguesPage from './features/leagues/LeaguesPage'
+import LeagueAwardsPage from './features/leagues/LeagueAwardsPage'
+import LeagueTablePage from './features/leagues/LeagueTablePage'
+import LeagueTransfersPage from './features/leagues/LeagueTransfersPage'
+import PlayerPage from './features/players/PlayerPage'
+import PlayerContractPage from './features/players/PlayerContractPage'
+import PlayerHistoryPage from './features/players/PlayerHistoryPage'
+import PlayerAwardsPage from './features/players/PlayerAwardsPage'
+import PlayerMatchesPage from './features/players/PlayerMatchesPage'
+import PlayerPersonalPage from './features/players/PlayerPersonalPage'
+import PlayerTransfersPage from './features/players/PlayerTransfersPage'
+import TeamPage from './features/teams/TeamPage'
+import TeamSchedulePage from './features/teams/TeamSchedulePage'
+import TeamTransfersPage from './features/teams/TeamTransfersPage'
+import TeamFinancesPage from './features/teams/TeamFinancesPage'
+import TeamStaffPage from './features/teams/TeamStaffPage'
+import TeamStatsPage from './features/teams/TeamStatsPage'
+import TeamRelationsPage from './features/teams/TeamRelationsPage'
+import TeamAcademyPage from './features/teams/TeamAcademyPage'
+import TeamScoutingPage from './features/teams/TeamScoutingPage'
+import TeamTacticsPage from './features/teams/TeamTacticsPage'
+import PlayerEventsPage from './features/players/PlayerEventsPage'
+import PlayerRelationsPage from './features/players/PlayerRelationsPage'
+import StaffMemberPage from './features/staff/StaffPage'
+import StaffPersonalPage from './features/staff/StaffPersonalPage'
+import LeagueSchedulePage from './features/leagues/LeagueSchedulePage'
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<CountriesPage />} />
+        <Route path="/countries" element={<CountriesPage />} />
+        <Route path="/countries/:countryId" element={<NationalSquadPage />} />
+        <Route path="/countries/:countryId/schedule" element={<SchedulePage />} />
+        <Route path="/countries/:countryId/staff" element={<StaffPage />} />
+        <Route path="/countries/:countryId/leagues" element={<LeaguesPage />} />
+        <Route path="/countries/:countryId/free-agents" element={<FreeAgentsPage />} />
+        <Route path="/leagues/:leagueId" element={<LeagueTablePage />} />
+        <Route path="/leagues/:leagueId/transfers" element={<LeagueTransfersPage />} />
+        <Route path="/leagues/:leagueId/awards" element={<LeagueAwardsPage />} />
+        <Route path="/leagues/:leagueId/schedule" element={<LeagueSchedulePage />} />
+        <Route path="/teams/:teamId" element={<TeamPage />} />
+        <Route path="/teams/:teamId/schedule" element={<TeamSchedulePage />} />
+        <Route path="/teams/:teamId/transfers" element={<TeamTransfersPage />} />
+        <Route path="/teams/:teamId/finances" element={<TeamFinancesPage />} />
+        <Route path="/teams/:teamId/staff" element={<TeamStaffPage />} />
+        <Route path="/teams/:teamId/stats" element={<TeamStatsPage />} />
+        <Route path="/teams/:teamId/relations" element={<TeamRelationsPage />} />
+        <Route path="/teams/:teamId/academy" element={<TeamAcademyPage />} />
+        <Route path="/teams/:teamId/scouting" element={<TeamScoutingPage />} />
+        <Route path="/teams/:teamId/tactics" element={<TeamTacticsPage />} />
+        <Route path="/players/:playerId" element={<PlayerPage />} />
+        <Route path="/players/:playerId/history" element={<PlayerHistoryPage />} />
+        <Route path="/players/:playerId/contract" element={<PlayerContractPage />} />
+        <Route path="/players/:playerId/awards" element={<PlayerAwardsPage />} />
+        <Route path="/players/:playerId/matches" element={<PlayerMatchesPage />} />
+        <Route path="/players/:playerId/personal" element={<PlayerPersonalPage />} />
+        <Route path="/players/:playerId/transfers" element={<PlayerTransfersPage />} />
+        <Route path="/players/:playerId/events" element={<PlayerEventsPage />} />
+        <Route path="/players/:playerId/relations" element={<PlayerRelationsPage />} />
+        <Route path="/staff/:staffId" element={<StaffMemberPage />} />
+        <Route path="/staff/:staffId/personal" element={<StaffPersonalPage />} />
+        {/* Not part of the original app's UI — internal tool for verifying
+            the React -> .NET -> engine-ffi pipe, reachable by URL only. */}
+        <Route path="/debug" element={<PipeCheckPage />} />
+      </Routes>
+    </BrowserRouter>
+  )
+}
+
+export default App

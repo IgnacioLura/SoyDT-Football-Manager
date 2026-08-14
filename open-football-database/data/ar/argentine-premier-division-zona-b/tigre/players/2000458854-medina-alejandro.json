@@ -1,0 +1,33 @@
+{
+  "id": 2000458854,
+  "first_name": "Alejandro",
+  "last_name": "Medina",
+  "birth_date": "2005-01-18",
+  "country_id": 1649,
+  "club_id": 3100018,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 86,
+  "potential_ability": -55,
+  "value": 209000,
+  "contract": {
+    "salary": 5928,
+    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 498464, "p": 0 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1393485"
+  }
+}

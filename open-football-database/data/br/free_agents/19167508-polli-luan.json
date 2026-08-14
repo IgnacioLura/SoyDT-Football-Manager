@@ -1,0 +1,19 @@
+{
+  "id": 19167508,
+  "first_name": "Luan",
+  "last_name": "Polli",
+  "birth_date": "1993-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 30,
+    "right": 100
+  },
+  "current_ability": 116,
+  "potential_ability": 126
+}

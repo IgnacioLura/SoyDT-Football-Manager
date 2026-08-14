@@ -1,0 +1,19 @@
+{
+  "id": 14000697,
+  "first_name": "Federico",
+  "last_name": "Nicosia",
+  "birth_date": "1990-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 25,
+    "right": 100
+  },
+  "current_ability": 112,
+  "potential_ability": 116
+}

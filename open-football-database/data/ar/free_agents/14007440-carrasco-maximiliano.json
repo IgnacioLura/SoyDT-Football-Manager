@@ -1,0 +1,27 @@
+{
+  "id": 14007440,
+  "first_name": "Maximiliano",
+  "last_name": "Carrasco",
+  "birth_date": "1988-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 94,
+  "potential_ability": 110
+}

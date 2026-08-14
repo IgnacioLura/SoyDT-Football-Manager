@@ -1,0 +1,19 @@
+{
+  "id": 19194030,
+  "first_name": "Ítalo",
+  "last_name": "Pica-Pau",
+  "birth_date": "1995-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 75,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 102
+}

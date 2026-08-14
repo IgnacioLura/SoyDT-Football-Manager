@@ -1,0 +1,19 @@
+{
+  "id": 19073930,
+  "first_name": "Rafael",
+  "last_name": "Gladiador",
+  "birth_date": "1992-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 60,
+    "right": 100
+  },
+  "current_ability": 94,
+  "potential_ability": 108
+}

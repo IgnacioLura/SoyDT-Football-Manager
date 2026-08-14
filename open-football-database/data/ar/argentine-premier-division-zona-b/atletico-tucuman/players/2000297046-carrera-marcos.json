@@ -1,0 +1,35 @@
+{
+  "id": 2000297046,
+  "first_name": "Marcos",
+  "last_name": "Carrera",
+  "birth_date": "2005-09-25",
+  "country_id": 1649,
+  "club_id": 102474,
+  "positions": [
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 80,
+  "potential_ability": -6,
+  "value": 236000,
+  "contract": {    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2021, "c": 2000117808, "p": 1 },
+    { "s": 2022, "c": 2000042971, "p": 27, "g": 6 },
+    { "s": 2023, "c": 83231684, "p": 25, "g": 2 },
+    { "s": 2024, "c": 83202726, "p": 15, "g": 4 }
+  ]
+}

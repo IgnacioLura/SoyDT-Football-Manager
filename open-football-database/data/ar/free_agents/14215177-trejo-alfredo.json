@@ -1,0 +1,23 @@
+{
+  "id": 14215177,
+  "first_name": "Alfredo",
+  "last_name": "Trejo",
+  "birth_date": "1996-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 106
+}

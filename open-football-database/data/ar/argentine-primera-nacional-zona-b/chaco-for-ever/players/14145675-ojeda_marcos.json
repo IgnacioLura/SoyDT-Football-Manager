@@ -1,0 +1,36 @@
+{
+  "id": 14145675,
+  "first_name": "Marcos",
+  "last_name": "Ojeda",
+  "birth_date": "1995-03-07",
+  "country_id": 1649,
+  "club_id": 108574,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 55,
+    "right": 100
+  },
+  "current_ability": 96,
+  "potential_ability": 98,
+  "value": 61000,
+  "contract": {
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2015, "c": 108574, "p": 7 },
+    { "s": 2016, "c": 108574, "p": 2 },
+    { "s": 2017, "c": 108574, "p": 2 },
+    { "s": 2019, "c": 14057778, "p": 6 },
+    { "s": 2022, "c": 14057778, "p": 6 },
+    { "s": 2023, "c": 14046674, "p": 4 },
+    { "s": 2024, "c": 14046674, "p": 20 },
+    { "s": 2025, "c": 14046674, "p": 22 }
+  ]
+}

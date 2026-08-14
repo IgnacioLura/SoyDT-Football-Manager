@@ -1,0 +1,19 @@
+{
+  "id": 2000459363,
+  "first_name": "Santiago",
+  "last_name": "Martín Pereyra",
+  "birth_date": "2002-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 106
+}

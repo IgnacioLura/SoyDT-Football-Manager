@@ -1,0 +1,29 @@
+{
+  "id": 2000329107,
+  "first_name": "Santiago",
+  "last_name": "Sánchez",
+  "birth_date": "2004-10-30",
+  "country_id": 373,
+  "club_id": 14037231,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 76,
+  "potential_ability": 96,
+  "value": 9000,
+  "contract": {
+    "expiration": "2025-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 14037231, "p": 0 }
+  ]
+}

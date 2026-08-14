@@ -1,0 +1,29 @@
+{
+  "id": 2000443333,
+  "first_name": "Vicente",
+  "last_name": "Spinetti",
+  "birth_date": "2008-02-15",
+  "country_id": 1649,
+  "club_id": 87,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "ML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 72,
+  "potential_ability": -6,
+  "value": 210000,
+  "contract": {    "expiration": "2029-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

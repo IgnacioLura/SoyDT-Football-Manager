@@ -1,0 +1,36 @@
+{
+  "id": 2000303546,
+  "first_name": "Thomas",
+  "last_name": "Blázquez",
+  "birth_date": "2007-03-12",
+  "country_id": 1649,
+  "club_id": 108526,
+  "positions": [
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": -65,
+  "value": 282000,
+  "contract": {    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 108526, "p": 0 }
+  ]
+}

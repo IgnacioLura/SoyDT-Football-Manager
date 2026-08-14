@@ -1,0 +1,19 @@
+{
+  "id": 19042286,
+  "first_name": "Agenor",
+  "last_name": "",
+  "birth_date": "1990-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 50
+  },
+  "current_ability": 90,
+  "potential_ability": 126
+}

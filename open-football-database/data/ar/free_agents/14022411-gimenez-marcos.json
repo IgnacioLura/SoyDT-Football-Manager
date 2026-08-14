@@ -1,0 +1,27 @@
+{
+  "id": 14022411,
+  "first_name": "Marcos",
+  "last_name": "Giménez",
+  "birth_date": "1989-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ML",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 45
+  },
+  "current_ability": 100,
+  "potential_ability": 116
+}

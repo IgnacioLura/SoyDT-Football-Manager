@@ -1,0 +1,23 @@
+{
+  "id": 2000082899,
+  "first_name": "Agustín",
+  "last_name": "Reule",
+  "birth_date": "2004-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ML",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 90,
+  "potential_ability": -55
+}

@@ -1,0 +1,33 @@
+{
+  "id": 14231060,
+  "first_name": "Elías",
+  "last_name": "Machuca",
+  "birth_date": "2003-03-28",
+  "country_id": 1649,
+  "club_id": 102486,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 98,
+  "potential_ability": 120,
+  "value": 312000,
+  "contract": {
+    "salary": 222,
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2020, "c": 93, "p": 1 },
+    { "s": 2021, "c": 93, "p": 0 },
+    { "s": 2022, "c": 93, "p": 0 },
+    { "s": 2025, "c": 102486, "p": 0 }
+  ]
+}

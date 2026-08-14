@@ -1,0 +1,36 @@
+{
+  "id": 14242935,
+  "first_name": "Mariano",
+  "last_name": "Moyano",
+  "birth_date": "1999-09-06",
+  "country_id": 1649,
+  "club_id": 14008993,
+  "positions": [
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 100,
+  "potential_ability": 118,
+  "value": 57000,
+  "contract": {
+    "expiration": "2025-12-31",
+    "started": "2025-07-01",
+    "contract_type": "PartTime"
+  },
+  "history": [
+    { "s": 2018, "c": 14008993, "p": 1 },
+    { "s": 2019, "c": 14008993, "p": 1 },
+    { "s": 2022, "c": 14031550, "p": 4 },
+    { "s": 2023, "c": 14158107, "p": 3 }
+  ]
+}

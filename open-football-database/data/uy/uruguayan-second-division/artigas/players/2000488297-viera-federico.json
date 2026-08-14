@@ -1,0 +1,31 @@
+{
+  "id": 2000488297,
+  "first_name": "Federico",
+  "last_name": "Viera",
+  "birth_date": "2004-05-14",
+  "country_id": 1657,
+  "club_id": 78014919,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 68,
+  "potential_ability": -5,
+  "value": 0,
+  "contract": {    "expiration": "2034-06-30",
+    "started": "2025-07-01",
+    "contract_type": "Amateur"
+  },
+  "history": [
+    { "s": 2021, "c": 5512337, "p": 0 },
+    { "s": 2022, "c": 5512337, "p": 0 },
+    { "s": 2023, "c": 5512337, "p": 0 },
+    { "s": 2025, "c": 78014919, "p": 1 }
+  ]
+}

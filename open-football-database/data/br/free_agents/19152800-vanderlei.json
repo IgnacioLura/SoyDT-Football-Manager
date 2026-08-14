@@ -1,0 +1,23 @@
+{
+  "id": 19152800,
+  "first_name": "Vanderlei",
+  "last_name": "",
+  "birth_date": "1987-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": 102
+}

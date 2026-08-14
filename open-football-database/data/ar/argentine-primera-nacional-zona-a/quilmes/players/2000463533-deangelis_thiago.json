@@ -1,0 +1,30 @@
+{
+  "id": 2000463533,
+  "first_name": "Thiago",
+  "last_name": "Deangelis",
+  "birth_date": "2006-05-16",
+  "country_id": 1649,
+  "club_id": 102487,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 60,
+    "right": 100
+  },
+  "current_ability": 78,
+  "potential_ability": -6,
+  "value": 149000,
+  "contract": {
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 301325, "p": 7 },
+    { "s": 2025, "c": 19112334, "p": 7 }
+  ]
+}

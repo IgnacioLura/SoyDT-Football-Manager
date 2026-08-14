@@ -1,0 +1,25 @@
+{
+  "id": 2000380237,
+  "first_name": "Ramon",
+  "last_name": "Rique",
+  "birth_date": "2007-10-02",
+  "country_id": 1651,
+  "club_id": 339,
+  "positions": [
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 65,
+    "right": 100
+  },
+  "current_ability": 66,
+  "potential_ability": -6,
+  "value": 12000,
+  "contract": {    "expiration": "2029-09-30",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

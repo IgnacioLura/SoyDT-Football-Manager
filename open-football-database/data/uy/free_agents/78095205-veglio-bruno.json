@@ -1,0 +1,23 @@
+{
+  "id": 78095205,
+  "first_name": "Bruno",
+  "last_name": "Veglio",
+  "birth_date": "1998-01-01",
+  "country_id": 1657,
+  "positions": [
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 106,
+  "potential_ability": 120
+}

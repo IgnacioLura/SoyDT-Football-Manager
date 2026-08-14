@@ -1,0 +1,34 @@
+{
+  "id": 2000330665,
+  "first_name": "Juninho",
+  "last_name": "",
+  "birth_date": "2004-06-15",
+  "country_id": 1651,
+  "club_id": 311028,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 94,
+  "potential_ability": 116,
+  "value": 11000,
+  "contract": {    "expiration": "2026-05-16",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 19072706, "p": 5 },
+    { "s": 2025, "c": 107208, "p": 5 },
+    { "s": 2025, "c": 301344, "p": 0 }
+  ]
+}

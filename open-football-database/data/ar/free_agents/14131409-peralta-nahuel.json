@@ -1,0 +1,23 @@
+{
+  "id": 14131409,
+  "first_name": "Nahuel",
+  "last_name": "Peralta",
+  "birth_date": "1991-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ML",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 45
+  },
+  "current_ability": 94,
+  "potential_ability": 108
+}

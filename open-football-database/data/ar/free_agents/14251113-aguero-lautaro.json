@@ -1,0 +1,19 @@
+{
+  "id": 14251113,
+  "first_name": "Lautaro",
+  "last_name": "Agüero",
+  "birth_date": "1993-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 92
+}

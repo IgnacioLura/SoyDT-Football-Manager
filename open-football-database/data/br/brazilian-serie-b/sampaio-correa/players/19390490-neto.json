@@ -1,0 +1,34 @@
+{
+  "id": 19390490,
+  "first_name": "Neto",
+  "last_name": "",
+  "birth_date": "1998-01-31",
+  "country_id": 1651,
+  "club_id": 107230,
+  "positions": [
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 82,
+  "potential_ability": 106,
+  "value": 0,
+  "contract": {    "expiration": "2025-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2019, "c": 107230, "p": 3 },
+    { "s": 2022, "c": 107234, "p": 3 },
+    { "s": 2024, "c": 313350, "p": 1 }
+  ]
+}

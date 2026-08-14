@@ -1,0 +1,29 @@
+{
+  "id": 2000458863,
+  "first_name": "Santiago",
+  "last_name": "Maratea",
+  "birth_date": "1992-06-25",
+  "country_id": 1649,
+  "club_id": 951312,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 56,
+  "potential_ability": 56,
+  "value": 0,
+  "contract": {
+    "expiration": "2025-12-31",
+    "started": "2025-07-01",
+    "contract_type": "PartTime"
+  },
+  "history": [
+    { "s": 2025, "c": 5430566, "p": 14 }
+  ]
+}

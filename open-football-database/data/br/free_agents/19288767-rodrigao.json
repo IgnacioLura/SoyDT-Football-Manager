@@ -1,0 +1,19 @@
+{
+  "id": 19288767,
+  "first_name": "Rodrigão",
+  "last_name": "",
+  "birth_date": "1993-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 55,
+    "right": 100
+  },
+  "current_ability": 104,
+  "potential_ability": 130
+}

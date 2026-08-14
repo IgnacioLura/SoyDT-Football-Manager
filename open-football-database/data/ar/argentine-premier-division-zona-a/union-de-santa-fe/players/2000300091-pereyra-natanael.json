@@ -1,0 +1,33 @@
+{
+  "id": 2000300091,
+  "first_name": "Natanael",
+  "last_name": "Pereyra",
+  "birth_date": "2006-05-02",
+  "country_id": 1649,
+  "club_id": 102467,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 80,
+  "potential_ability": -6,
+  "value": 169000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 108526, "p": 0 },
+    { "s": 2025, "c": 102467, "p": 0 }
+  ]
+}

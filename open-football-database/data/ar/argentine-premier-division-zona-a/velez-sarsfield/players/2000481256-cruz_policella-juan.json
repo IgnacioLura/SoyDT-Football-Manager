@@ -1,0 +1,38 @@
+{
+  "id": 2000481256,
+  "first_name": "Juan",
+  "last_name": "Cruz Policella",
+  "birth_date": "2009-08-03",
+  "country_id": 1649,
+  "club_id": 98,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": -75,
+  "value": 12000000,
+  "contract": {
+    "salary": 8632,
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2022, "c": 4200483, "p": 0 },
+    { "s": 2023, "c": 4200483, "p": 0 },
+    { "s": 2024, "c": 2000196808, "p": 1 },
+    { "s": 2025, "c": 67034790, "p": 10 },
+    { "s": 2025, "c": 2000196808, "p": 2, "g": 1 }
+  ]
+}

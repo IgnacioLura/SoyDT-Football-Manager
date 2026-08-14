@@ -1,0 +1,19 @@
+{
+  "id": 14027301,
+  "first_name": "César",
+  "last_name": "Horst",
+  "birth_date": "1989-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 90,
+  "potential_ability": 98
+}

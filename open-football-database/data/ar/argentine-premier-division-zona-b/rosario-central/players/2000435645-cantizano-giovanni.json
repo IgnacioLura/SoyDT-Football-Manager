@@ -1,0 +1,53 @@
+{
+  "id": 2000435645,
+  "first_name": "Giovanni",
+  "last_name": "Cantizano",
+  "birth_date": "2007-03-21",
+  "country_id": 1649,
+  "club_id": 95,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "ML",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 106,
+  "potential_ability": -75,
+  "value": 3000000,
+  "contract": {
+    "salary": 15392,
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 95, "p": 8 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1213079"
+  }
+}

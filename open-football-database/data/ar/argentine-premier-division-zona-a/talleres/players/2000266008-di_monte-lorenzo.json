@@ -1,0 +1,32 @@
+{
+  "id": 2000266008,
+  "first_name": "Lorenzo",
+  "last_name": "Di Monte",
+  "birth_date": "2006-03-10",
+  "country_id": 1649,
+  "club_id": 102489,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 55,
+    "right": 100
+  },
+  "current_ability": 78,
+  "potential_ability": -55,
+  "value": 215000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2022, "c": 2000211064, "p": 0 }
+  ]
+}

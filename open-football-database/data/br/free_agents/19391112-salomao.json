@@ -1,0 +1,27 @@
+{
+  "id": 19391112,
+  "first_name": "Salomão",
+  "last_name": "",
+  "birth_date": "1993-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DL",
+      "level": 20
+    },
+    {
+      "code": "ML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 30
+  },
+  "current_ability": 92,
+  "potential_ability": 98
+}

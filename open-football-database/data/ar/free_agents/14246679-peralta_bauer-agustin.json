@@ -1,0 +1,23 @@
+{
+  "id": 14246679,
+  "first_name": "Agustín",
+  "last_name": "Peralta Bauer",
+  "birth_date": "2000-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 106
+}

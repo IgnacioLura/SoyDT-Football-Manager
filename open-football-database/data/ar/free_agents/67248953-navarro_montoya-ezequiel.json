@@ -1,0 +1,19 @@
+{
+  "id": 67248953,
+  "first_name": "Ezequiel",
+  "last_name": "Navarro Montoya",
+  "birth_date": "1998-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 92,
+  "potential_ability": 94
+}

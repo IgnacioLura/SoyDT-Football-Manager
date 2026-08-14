@@ -1,0 +1,49 @@
+{
+  "id": 2000325713,
+  "first_name": "Patricio",
+  "last_name": "Madero",
+  "birth_date": "1998-12-15",
+  "country_id": 1649,
+  "club_id": 952737,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "ML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 98,
+  "potential_ability": 98,
+  "value": 81000,
+  "contract": {
+    "salary": 11544,
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 952707,
+    "expiration": "2027-12-31",
+    "salary": 11544,
+    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2023, "c": 14037348, "p": 1 },
+    { "s": 2024, "c": 102477, "p": 43, "g": 2 },
+    { "s": 2025, "c": 952737, "p": 37, "g": 1 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1375675"
+  }
+}

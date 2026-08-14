@@ -1,0 +1,32 @@
+{
+  "id": 2000272196,
+  "first_name": "Igor",
+  "last_name": "Felisberto",
+  "birth_date": "2007-03-07",
+  "country_id": 1651,
+  "club_id": 337,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": -8,
+  "value": 2000000,
+  "contract": {    "expiration": "2029-03-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "ids": {
+    "transfermarkt.com": "1219848"
+  }
+}

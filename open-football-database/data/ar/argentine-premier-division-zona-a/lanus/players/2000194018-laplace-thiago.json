@@ -1,0 +1,33 @@
+{
+  "id": 2000194018,
+  "first_name": "Thiago",
+  "last_name": "Laplace",
+  "birth_date": "2006-04-03",
+  "country_id": 1649,
+  "club_id": 90,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 98,
+  "potential_ability": -75,
+  "value": 4000000,
+  "contract": {
+    "salary": 11076,
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 90, "p": 0 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1197918"
+  }
+}

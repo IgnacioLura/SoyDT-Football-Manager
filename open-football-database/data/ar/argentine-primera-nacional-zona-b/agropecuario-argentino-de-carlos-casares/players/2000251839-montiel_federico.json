@@ -1,0 +1,26 @@
+{
+  "id": 2000251839,
+  "first_name": "Federico",
+  "last_name": "Montiel",
+  "birth_date": "2005-02-28",
+  "country_id": 1649,
+  "club_id": 14064697,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 84,
+  "potential_ability": -55,
+  "value": 165000,
+  "contract": {
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

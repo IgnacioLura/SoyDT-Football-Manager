@@ -1,0 +1,38 @@
+{
+  "id": 2000181990,
+  "first_name": "Tomás",
+  "last_name": "Buenrostro",
+  "birth_date": "2001-02-23",
+  "country_id": 1649,
+  "club_id": 951312,
+  "positions": [
+    {
+      "code": "DL",
+      "level": 20
+    },
+    {
+      "code": "DC",
+      "level": 20
+    },
+    {
+      "code": "WBL",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 30
+  },
+  "current_ability": 82,
+  "potential_ability": 88,
+  "value": 5000,
+  "contract": {
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2022, "c": 952751, "p": 0 },
+    { "s": 2025, "c": 3101512, "p": 1 }
+  ]
+}

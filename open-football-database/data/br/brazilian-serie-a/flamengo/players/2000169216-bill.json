@@ -1,0 +1,36 @@
+{
+  "id": 2000169216,
+  "first_name": "Bill",
+  "last_name": "",
+  "birth_date": "2006-02-01",
+  "country_id": 1651,
+  "club_id": 322,
+  "positions": [
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 60,
+  "potential_ability": -6,
+  "value": 0,
+  "contract": {    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2021, "c": 8325027, "p": 15, "g": 8 },
+    { "s": 2022, "c": 8325027, "p": 7 },
+    { "s": 2023, "c": 5103857, "p": 2 },
+    { "s": 2023, "c": 90069862, "p": 15, "g": 2 },
+    { "s": 2024, "c": 90069862, "p": 0 }
+  ]
+}

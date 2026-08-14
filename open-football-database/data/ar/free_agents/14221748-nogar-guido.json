@@ -1,0 +1,19 @@
+{
+  "id": 14221748,
+  "first_name": "Guido",
+  "last_name": "Nogar",
+  "birth_date": "1996-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 96,
+  "potential_ability": 98
+}

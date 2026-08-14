@@ -1,0 +1,41 @@
+{
+  "id": 19398966,
+  "first_name": "Vanderlan",
+  "last_name": "",
+  "birth_date": "2002-09-07",
+  "country_id": 1651,
+  "club_id": 317,
+  "positions": [
+    {
+      "code": "DL",
+      "level": 20
+    },
+    {
+      "code": "WBL",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 25
+  },
+  "current_ability": 120,
+  "potential_ability": 138,
+  "value": 7000000,
+  "contract": {    "expiration": "2030-07-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2020, "c": 329, "p": 2 },
+    { "s": 2021, "c": 329, "p": 3 },
+    { "s": 2022, "c": 329, "p": 13, "g": 1 },
+    { "s": 2023, "c": 329, "p": 14 },
+    { "s": 2024, "c": 329, "p": 25 },
+    { "s": 2025, "c": 317, "p": 17 },
+    { "s": 2025, "c": 329, "p": 3 }
+  ],
+  "ids": {
+    "transfermarkt.com": "816129"
+  }
+}

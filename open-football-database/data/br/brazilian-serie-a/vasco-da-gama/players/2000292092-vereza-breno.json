@@ -1,0 +1,35 @@
+{
+  "id": 2000292092,
+  "first_name": "Breno",
+  "last_name": "Vereza",
+  "birth_date": "2007-09-03",
+  "country_id": 1651,
+  "club_id": 339,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 86,
+  "potential_ability": -75,
+  "value": 1000000,
+  "contract": {    "expiration": "2029-09-30",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2023, "c": 79012659, "p": 7, "g": 1 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1220467"
+  }
+}

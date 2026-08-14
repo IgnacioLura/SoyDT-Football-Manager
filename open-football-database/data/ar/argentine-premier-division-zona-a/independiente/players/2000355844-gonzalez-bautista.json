@@ -1,0 +1,30 @@
+{
+  "id": 2000355844,
+  "first_name": "Bautista",
+  "last_name": "González",
+  "birth_date": "2008-06-19",
+  "country_id": 1649,
+  "club_id": 89,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 98,
+  "potential_ability": -65,
+  "value": 4000000,
+  "contract": {
+    "salary": 7280,
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 2000390927, "p": 14, "g": 5 }
+  ]
+}

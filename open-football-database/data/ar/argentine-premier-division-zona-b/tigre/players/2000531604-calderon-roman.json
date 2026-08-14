@@ -1,0 +1,30 @@
+{
+  "id": 2000531604,
+  "first_name": "Román",
+  "last_name": "Calderón",
+  "birth_date": "2009-07-29",
+  "country_id": 1649,
+  "club_id": 3100018,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 70,
+  "potential_ability": -65,
+  "value": 618000,
+  "contract": {    "expiration": "2030-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2023, "c": 2000370694, "p": 0 },
+    { "s": 2024, "c": 2000370694, "p": 8, "g": 1 },
+    { "s": 2025, "c": 2000370694, "p": 6, "g": 2 }
+  ]
+}

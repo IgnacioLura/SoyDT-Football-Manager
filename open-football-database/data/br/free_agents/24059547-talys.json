@@ -1,0 +1,31 @@
+{
+  "id": 24059547,
+  "first_name": "Talys",
+  "last_name": "",
+  "birth_date": "1999-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DL",
+      "level": 20
+    },
+    {
+      "code": "WBL",
+      "level": 20
+    },
+    {
+      "code": "ML",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 45
+  },
+  "current_ability": 106,
+  "potential_ability": 112
+}

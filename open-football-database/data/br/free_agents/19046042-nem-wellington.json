@@ -1,0 +1,27 @@
+{
+  "id": 19046042,
+  "first_name": "Wellington",
+  "last_name": "Nem",
+  "birth_date": "1992-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 45
+  },
+  "current_ability": 106,
+  "potential_ability": 130
+}

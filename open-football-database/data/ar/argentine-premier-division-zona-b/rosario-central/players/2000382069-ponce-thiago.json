@@ -1,0 +1,38 @@
+{
+  "id": 2000382069,
+  "first_name": "Thiago",
+  "last_name": "Ponce",
+  "birth_date": "2005-01-09",
+  "country_id": 1649,
+  "club_id": 95,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 98,
+  "potential_ability": -7,
+  "value": 343000,
+  "contract": {
+    "salary": 7696,
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 95, "p": 1 },
+    { "s": 2025, "c": 95, "p": 0 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1240041"
+  }
+}

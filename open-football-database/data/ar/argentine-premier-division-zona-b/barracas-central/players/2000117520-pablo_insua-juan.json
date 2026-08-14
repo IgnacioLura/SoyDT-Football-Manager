@@ -1,0 +1,34 @@
+{
+  "id": 2000117520,
+  "first_name": "Juan",
+  "last_name": "Pablo Insúa",
+  "birth_date": "2005-01-04",
+  "country_id": 1649,
+  "club_id": 952695,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": -65,
+  "value": 317000,
+  "contract": {
+    "salary": 6032,
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2022, "c": 86, "p": 0 },
+    { "s": 2025, "c": 952695, "p": 0 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1307273"
+  }
+}

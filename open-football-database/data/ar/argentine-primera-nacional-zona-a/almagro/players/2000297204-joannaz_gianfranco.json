@@ -1,0 +1,30 @@
+{
+  "id": 2000297204,
+  "first_name": "Gianfranco",
+  "last_name": "Joannaz",
+  "birth_date": "2004-03-23",
+  "country_id": 1649,
+  "club_id": 108514,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": -6,
+  "value": 216000,
+  "contract": {
+    "salary": 88,
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 108514, "p": 6 }
+  ]
+}

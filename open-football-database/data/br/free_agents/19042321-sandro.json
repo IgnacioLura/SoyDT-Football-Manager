@@ -1,0 +1,23 @@
+{
+  "id": 19042321,
+  "first_name": "Sandro",
+  "last_name": "",
+  "birth_date": "1989-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 110,
+  "potential_ability": 158
+}

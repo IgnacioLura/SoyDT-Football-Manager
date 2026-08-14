@@ -1,0 +1,55 @@
+{
+  "id": 14221703,
+  "first_name": "Lautaro",
+  "last_name": "Díaz",
+  "birth_date": "1998-05-21",
+  "country_id": 1649,
+  "club_id": 321,
+  "positions": [
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 126,
+  "potential_ability": 140,
+  "value": 4000000,
+  "contract": {    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 93,
+    "expiration": "2027-07-31",    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2017, "c": 108531, "p": 0 },
+    { "s": 2018, "c": 108531, "p": 3 },
+    { "s": 2019, "c": 108531, "p": 6 },
+    { "s": 2020, "c": 108531, "p": 5, "g": 1 },
+    { "s": 2021, "c": 108531, "p": 9, "g": 1 },
+    { "s": 2021, "c": 952724, "p": 16, "g": 1 },
+    { "s": 2022, "c": 952724, "p": 15, "g": 6 },
+    { "s": 2022, "c": 80001277, "p": 11 },
+    { "s": 2023, "c": 80001277, "p": 23, "g": 4 },
+    { "s": 2024, "c": 321, "p": 18, "g": 1 },
+    { "s": 2024, "c": 80001277, "p": 5 },
+    { "s": 2025, "c": 321, "p": 6 },
+    { "s": 2025, "c": 335, "p": 15, "g": 3 }
+  ],
+  "ids": {
+    "transfermarkt.com": "720294"
+  }
+}

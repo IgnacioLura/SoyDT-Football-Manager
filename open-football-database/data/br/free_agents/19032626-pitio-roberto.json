@@ -1,0 +1,19 @@
+{
+  "id": 19032626,
+  "first_name": "Roberto",
+  "last_name": "Pitio",
+  "birth_date": "1987-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 65,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 102
+}

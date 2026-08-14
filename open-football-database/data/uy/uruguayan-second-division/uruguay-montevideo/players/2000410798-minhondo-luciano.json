@@ -1,0 +1,45 @@
+{
+  "id": 2000410798,
+  "first_name": "Luciano",
+  "last_name": "Minhondo",
+  "birth_date": "2004-07-01",
+  "country_id": 1649,
+  "club_id": 5512787,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 106,
+  "value": 29000,
+  "contract": {    "expiration": "2025-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2019, "c": 14181541, "p": 0 },
+    { "s": 2020, "c": 14181541, "p": 0 },
+    { "s": 2021, "c": 94, "p": 0 },
+    { "s": 2022, "c": 94, "p": 0 },
+    { "s": 2024, "c": 5512636, "p": 15 },
+    { "s": 2025, "c": 78012164, "p": 12 }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "id": 14022972,
+  "first_name": "Valentín",
+  "last_name": "Viola",
+  "birth_date": "1991-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 60,
+    "right": 100
+  },
+  "current_ability": 108,
+  "potential_ability": 126
+}

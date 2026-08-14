@@ -1,0 +1,25 @@
+{
+  "id": 2000533923,
+  "first_name": "Thiago",
+  "last_name": "Charras",
+  "birth_date": "2009-01-14",
+  "country_id": 1649,
+  "club_id": 81,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 80,
+  "potential_ability": -65,
+  "value": 465000,
+  "contract": {    "expiration": "2030-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

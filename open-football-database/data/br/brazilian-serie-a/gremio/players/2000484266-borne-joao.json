@@ -1,0 +1,28 @@
+{
+  "id": 2000484266,
+  "first_name": "João",
+  "last_name": "Borne",
+  "birth_date": "2008-02-29",
+  "country_id": 1651,
+  "club_id": 324,
+  "positions": [
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": -85,
+  "value": 2000000,
+  "contract": {    "expiration": "2026-09-01",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2023, "c": 71016317, "p": 0 }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "id": 2000459041,
+  "first_name": "Alejandro",
+  "last_name": "Hermes",
+  "birth_date": "2006-03-14",
+  "country_id": 1649,
+  "club_id": 952695,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 45
+  },
+  "current_ability": 76,
+  "potential_ability": -55,
+  "value": 97000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

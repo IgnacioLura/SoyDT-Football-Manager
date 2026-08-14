@@ -1,0 +1,30 @@
+{
+  "id": 2000437828,
+  "first_name": "Facundo",
+  "last_name": "Binzugna",
+  "birth_date": "2007-08-02",
+  "country_id": 1649,
+  "club_id": 82,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 80,
+  "potential_ability": -6,
+  "value": 272000,
+  "contract": {    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2023, "c": 5100134, "p": 14, "g": 3 },
+    { "s": 2024, "c": 5100134, "p": 2 },
+    { "s": 2024, "c": 5100161, "p": 10, "g": 1 }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": 2000442245,
+  "first_name": "Román",
+  "last_name": "Zalazar",
+  "birth_date": "2005-01-03",
+  "country_id": 1649,
+  "club_id": 102486,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": -6,
+  "value": 298000,
+  "contract": {
+    "salary": 81,
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 102486, "p": 10 }
+  ]
+}

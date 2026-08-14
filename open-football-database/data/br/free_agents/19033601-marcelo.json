@@ -1,0 +1,19 @@
+{
+  "id": 19033601,
+  "first_name": "Marcelo",
+  "last_name": "",
+  "birth_date": "1987-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 126,
+  "potential_ability": 140
+}

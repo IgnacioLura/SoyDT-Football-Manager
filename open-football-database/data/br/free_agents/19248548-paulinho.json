@@ -1,0 +1,19 @@
+{
+  "id": 19248548,
+  "first_name": "Paulinho",
+  "last_name": "",
+  "birth_date": "1987-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 70,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 108
+}

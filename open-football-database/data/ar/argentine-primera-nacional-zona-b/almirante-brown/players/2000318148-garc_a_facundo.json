@@ -1,0 +1,34 @@
+{
+  "id": 2000318148,
+  "first_name": "Facundo",
+  "last_name": "García",
+  "birth_date": "2005-02-07",
+  "country_id": 1649,
+  "club_id": 102470,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": -6,
+  "value": 149000,
+  "contract": {
+    "salary": 96,
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2021, "c": 102470, "p": 0 },
+    { "s": 2022, "c": 102470, "p": 0 },
+    { "s": 2023, "c": 102470, "p": 0 },
+    { "s": 2024, "c": 102470, "p": 1 },
+    { "s": 2025, "c": 102470, "p": 2 }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": 2000052839,
+  "first_name": "Breno",
+  "last_name": "Pereira",
+  "birth_date": "2000-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 110
+}

@@ -1,0 +1,19 @@
+{
+  "id": 14248217,
+  "first_name": "Lautaro",
+  "last_name": "Urtasún",
+  "birth_date": "1997-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 96
+}

@@ -1,0 +1,23 @@
+{
+  "id": 2000135786,
+  "first_name": "José",
+  "last_name": "Parra",
+  "birth_date": "2003-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 96
+}

@@ -1,0 +1,34 @@
+{
+  "id": 2000358071,
+  "first_name": "Facundo",
+  "last_name": "Sánchez",
+  "birth_date": "2006-04-17",
+  "country_id": 1655,
+  "club_id": 102495,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 86,
+  "potential_ability": -6,
+  "value": 218000,
+  "contract": {
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2023, "c": 93, "p": 0 },
+    { "s": 2024, "c": 93, "p": 0 }
+  ]
+}

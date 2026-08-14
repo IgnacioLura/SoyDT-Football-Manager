@@ -1,0 +1,28 @@
+{
+  "id": 2000375257,
+  "first_name": "Diego",
+  "last_name": "Bolaños",
+  "birth_date": "2006-06-21",
+  "country_id": 373,
+  "club_id": 78,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 65,
+    "right": 100
+  },
+  "current_ability": 76,
+  "potential_ability": -55,
+  "value": 36000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 78, "p": 0 }
+  ]
+}

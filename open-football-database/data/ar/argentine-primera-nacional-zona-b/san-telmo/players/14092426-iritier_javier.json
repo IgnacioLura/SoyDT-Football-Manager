@@ -1,0 +1,56 @@
+{
+  "id": 14092426,
+  "first_name": "Javier",
+  "last_name": "Iritier",
+  "birth_date": "1994-12-20",
+  "country_id": 1649,
+  "club_id": 3101514,
+  "positions": [
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "ML",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 110,
+  "potential_ability": 114,
+  "value": 322000,
+  "contract": {
+    "salary": 603,
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2016, "c": 85, "p": 0 },
+    { "s": 2016, "c": 88, "p": 5 },
+    { "s": 2017, "c": 3100018, "p": 11, "g": 1 },
+    { "s": 2018, "c": 108510, "p": 15, "g": 1 },
+    { "s": 2019, "c": 968, "p": 8, "g": 1 },
+    { "s": 2020, "c": 108510, "p": 8 },
+    { "s": 2021, "c": 108510, "p": 20 },
+    { "s": 2022, "c": 108510, "p": 12 },
+    { "s": 2023, "c": 108574, "p": 13 },
+    { "s": 2024, "c": 108574, "p": 33, "g": 2 },
+    { "s": 2025, "c": 3101514, "p": 8 }
+  ]
+}

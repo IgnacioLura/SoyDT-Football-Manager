@@ -1,0 +1,31 @@
+{
+  "id": 955467,
+  "first_name": "Rodrigo",
+  "last_name": "Cariaga",
+  "birth_date": "1981-12-15",
+  "country_id": 1649,
+  "club_id": 102462,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 14
+    }
+  ],
+  "current_ability": 30,
+  "potential_ability": 30,
+  "value": 0,
+  "contract": {
+    "expiration": "2027-06-30",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2002, "c": 108538, "p": 2 },
+    { "s": 2004, "c": 3101446, "p": 24 },
+    { "s": 2005, "c": 14022190, "p": 17 },
+    { "s": 2006, "c": 3101457, "p": 7 },
+    { "s": 2006, "c": 14028710, "p": 15 },
+    { "s": 2007, "c": 14031195, "p": 17 },
+    { "s": 2008, "c": 138206, "p": 12 }
+  ]
+}

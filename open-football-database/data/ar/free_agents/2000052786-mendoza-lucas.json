@@ -1,0 +1,31 @@
+{
+  "id": 2000052786,
+  "first_name": "Lucas",
+  "last_name": "Mendoza",
+  "birth_date": "2004-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 30
+  },
+  "current_ability": 88,
+  "potential_ability": 100
+}

@@ -1,0 +1,23 @@
+{
+  "id": 14242621,
+  "first_name": "Andrés",
+  "last_name": "Gigena",
+  "birth_date": "2001-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 88,
+  "potential_ability": 112
+}

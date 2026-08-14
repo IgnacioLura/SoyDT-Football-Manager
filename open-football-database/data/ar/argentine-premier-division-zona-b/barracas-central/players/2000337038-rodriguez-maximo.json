@@ -1,0 +1,31 @@
+{
+  "id": 2000337038,
+  "first_name": "Máximo",
+  "last_name": "Rodríguez",
+  "birth_date": "2005-02-05",
+  "country_id": 1649,
+  "club_id": 952695,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 80,
+  "potential_ability": -55,
+  "value": 36000,
+  "contract": {    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2021, "c": 74039780, "p": 3 },
+    { "s": 2022, "c": 74039780, "p": 1 },
+    { "s": 2023, "c": 74039780, "p": 9 },
+    { "s": 2024, "c": 74039780, "p": 14 }
+  ]
+}

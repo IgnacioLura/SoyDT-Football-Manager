@@ -1,0 +1,42 @@
+{
+  "id": 2000006360,
+  "first_name": "Joaquín",
+  "last_name": "Ávila",
+  "birth_date": "2001-03-23",
+  "country_id": 1649,
+  "club_id": 102474,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 100,
+  "potential_ability": 108,
+  "value": 43000,
+  "contract": {
+    "salary": 5876,
+    "expiration": "2025-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 2000154388,
+    "expiration": "2025-12-31",
+    "salary": 5876,
+    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2023, "c": 102474, "p": 0 },
+    { "s": 2023, "c": 14031193, "p": 1 },
+    { "s": 2024, "c": 102474, "p": 0 }
+  ]
+}

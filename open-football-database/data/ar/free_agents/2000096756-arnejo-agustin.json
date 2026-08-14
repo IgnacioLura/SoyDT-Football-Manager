@@ -1,0 +1,23 @@
+{
+  "id": 2000096756,
+  "first_name": "Agustín",
+  "last_name": "Arnejo",
+  "birth_date": "1993-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 50
+  },
+  "current_ability": 92,
+  "potential_ability": 106
+}

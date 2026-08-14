@@ -1,0 +1,23 @@
+{
+  "id": 19220447,
+  "first_name": "Mazinho",
+  "last_name": "",
+  "birth_date": "1989-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 60
+  },
+  "current_ability": 98,
+  "potential_ability": 108
+}

@@ -1,0 +1,43 @@
+{
+  "id": 2000116320,
+  "first_name": "Leandro",
+  "last_name": "Ilari",
+  "birth_date": "2004-07-11",
+  "country_id": 1649,
+  "club_id": 3101457,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": -6,
+  "value": 283000,
+  "contract": {
+    "salary": 74,
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2021, "c": 14046424, "p": 3 },
+    { "s": 2022, "c": 14046424, "p": 8 },
+    { "s": 2023, "c": 14046424, "p": 20, "g": 3 },
+    { "s": 2024, "c": 965366, "p": 7, "g": 1 },
+    { "s": 2024, "c": 14046424, "p": 23 },
+    { "s": 2025, "c": 3101457, "p": 0 }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": 19311530,
+  "first_name": "Lucão",
+  "last_name": "",
+  "birth_date": "2000-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 30,
+    "right": 100
+  },
+  "current_ability": 94,
+  "potential_ability": 116
+}

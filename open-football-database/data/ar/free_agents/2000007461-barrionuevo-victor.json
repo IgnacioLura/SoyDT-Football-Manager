@@ -1,0 +1,23 @@
+{
+  "id": 2000007461,
+  "first_name": "Víctor",
+  "last_name": "Barrionuevo",
+  "birth_date": "2001-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": 116
+}

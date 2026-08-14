@@ -1,0 +1,32 @@
+{
+  "id": 2000176004,
+  "first_name": "Ian",
+  "last_name": "De Filippi",
+  "birth_date": "2005-04-26",
+  "country_id": 1649,
+  "club_id": 96,
+  "positions": [
+    {
+      "code": "AMC",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 70,
+    "right": 100
+  },
+  "current_ability": 84,
+  "potential_ability": -6,
+  "value": 39000,
+  "contract": {    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 96, "p": 18 }
+  ]
+}

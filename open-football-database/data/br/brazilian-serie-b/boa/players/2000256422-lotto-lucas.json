@@ -1,0 +1,36 @@
+{
+  "id": 2000256422,
+  "first_name": "Lucas",
+  "last_name": "Lotto",
+  "birth_date": "2002-04-20",
+  "country_id": 1651,
+  "club_id": 310700,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 25,
+    "right": 100
+  },
+  "current_ability": 66,
+  "potential_ability": 86,
+  "value": 0,
+  "contract": {    "expiration": "2026-03-15",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 313902,
+    "expiration": "2027-03-15",    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2025, "c": 107242, "p": 5, "g": 1 }
+  ]
+}

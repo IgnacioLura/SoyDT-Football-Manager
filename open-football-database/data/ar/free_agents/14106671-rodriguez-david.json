@@ -1,0 +1,19 @@
+{
+  "id": 14106671,
+  "first_name": "David",
+  "last_name": "Rodríguez",
+  "birth_date": "1996-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 100
+}

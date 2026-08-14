@@ -1,0 +1,34 @@
+{
+  "id": 2000410002,
+  "first_name": "Joe",
+  "last_name": "Arreche",
+  "birth_date": "2004-09-12",
+  "country_id": 1657,
+  "club_id": 5512562,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 72,
+  "potential_ability": 86,
+  "value": 33000,
+  "contract": {    "expiration": "2025-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2020, "c": 1915, "p": 0 },
+    { "s": 2021, "c": 1915, "p": 0 },
+    { "s": 2022, "c": 1915, "p": 0 },
+    { "s": 2023, "c": 1917, "p": 0 },
+    { "s": 2024, "c": 78046974, "p": 7 },
+    { "s": 2024, "c": 2000277838, "p": 3 },
+    { "s": 2025, "c": 5512793, "p": 0 }
+  ]
+}

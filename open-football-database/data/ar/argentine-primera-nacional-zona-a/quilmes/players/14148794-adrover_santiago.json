@@ -1,0 +1,26 @@
+{
+  "id": 14148794,
+  "first_name": "Santiago",
+  "last_name": "Adrover",
+  "birth_date": "1993-09-13",
+  "country_id": 1649,
+  "club_id": 102487,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 14
+    }
+  ],
+  "current_ability": 30,
+  "potential_ability": 30,
+  "value": 0,
+  "contract": {
+    "expiration": "2027-06-30",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2009, "c": 951314, "p": 19, "g": 5 },
+    { "s": 2015, "c": 952755, "p": 0 }
+  ]
+}

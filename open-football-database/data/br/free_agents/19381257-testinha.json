@@ -1,0 +1,27 @@
+{
+  "id": 19381257,
+  "first_name": "Testinha",
+  "last_name": "",
+  "birth_date": "1992-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 55,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 90
+}

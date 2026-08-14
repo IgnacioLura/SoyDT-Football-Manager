@@ -1,0 +1,19 @@
+{
+  "id": 14254709,
+  "first_name": "Rodrigo",
+  "last_name": "Rodríguez",
+  "birth_date": "2003-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": 106
+}

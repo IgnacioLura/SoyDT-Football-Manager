@@ -1,0 +1,27 @@
+{
+  "id": 19152918,
+  "first_name": "Cristian",
+  "last_name": "Santos",
+  "birth_date": "1993-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 92,
+  "potential_ability": 94
+}

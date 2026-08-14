@@ -1,0 +1,19 @@
+{
+  "id": 14003163,
+  "first_name": "Emiliano",
+  "last_name": "Mayola",
+  "birth_date": "1987-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 45
+  },
+  "current_ability": 106,
+  "potential_ability": 108
+}

@@ -1,0 +1,35 @@
+{
+  "id": 2000525453,
+  "first_name": "Kauan",
+  "last_name": "Dias",
+  "birth_date": "2006-08-19",
+  "country_id": 1651,
+  "club_id": 19200887,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 68,
+  "potential_ability": -6,
+  "value": 0,
+  "contract": {    "expiration": "2028-10-08",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 326,
+    "expiration": "2027-01-31",    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2025, "c": 59135022, "p": 0 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1094530"
+  }
+}

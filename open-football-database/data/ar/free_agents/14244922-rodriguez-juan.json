@@ -1,0 +1,19 @@
+{
+  "id": 14244922,
+  "first_name": "Juan",
+  "last_name": "Rodríguez",
+  "birth_date": "2002-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DL",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 90,
+  "potential_ability": 106
+}

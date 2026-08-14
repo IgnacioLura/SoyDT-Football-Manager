@@ -1,0 +1,31 @@
+{
+  "id": 2000390485,
+  "first_name": "Franco",
+  "last_name": "Pinoni",
+  "birth_date": "2007-03-20",
+  "country_id": 1649,
+  "club_id": 14004603,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 25,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": -7,
+  "value": 454000,
+  "contract": {
+    "salary": 74,
+    "expiration": "2025-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 14004603, "p": 0 },
+    { "s": 2025, "c": 14004603, "p": 0 }
+  ]
+}

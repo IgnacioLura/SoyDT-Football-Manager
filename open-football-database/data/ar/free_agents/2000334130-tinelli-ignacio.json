@@ -1,0 +1,23 @@
+{
+  "id": 2000334130,
+  "first_name": "Ignacio",
+  "last_name": "Tinelli",
+  "birth_date": "2002-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    },
+    {
+      "code": "DM",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 116
+}

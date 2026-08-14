@@ -1,0 +1,23 @@
+{
+  "id": 19286631,
+  "first_name": "Alexandre",
+  "last_name": "Tam",
+  "birth_date": "1999-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 50
+  },
+  "current_ability": 88,
+  "potential_ability": 106
+}

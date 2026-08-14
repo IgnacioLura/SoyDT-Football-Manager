@@ -1,0 +1,27 @@
+{
+  "id": 14189066,
+  "first_name": "Lautaro",
+  "last_name": "Calderón",
+  "birth_date": "1999-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 94,
+  "potential_ability": 104
+}

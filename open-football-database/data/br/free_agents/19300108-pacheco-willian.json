@@ -1,0 +1,23 @@
+{
+  "id": 19300108,
+  "first_name": "Willian",
+  "last_name": "Pacheco",
+  "birth_date": "1992-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    },
+    {
+      "code": "DM",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 90,
+    "right": 100
+  },
+  "current_ability": 94,
+  "potential_ability": 102
+}

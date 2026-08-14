@@ -1,0 +1,29 @@
+{
+  "id": 2000496164,
+  "first_name": "Joel",
+  "last_name": "Abregu",
+  "birth_date": "2009-03-06",
+  "country_id": 1649,
+  "club_id": 3100019,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 76,
+  "potential_ability": -6,
+  "value": 226000,
+  "contract": {
+    "expiration": "2030-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 14189565, "p": 8, "g": 2 }
+  ]
+}

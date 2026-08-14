@@ -1,0 +1,23 @@
+{
+  "id": 14060554,
+  "first_name": "Israel",
+  "last_name": "Coll",
+  "birth_date": "1993-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 110,
+  "potential_ability": 110
+}

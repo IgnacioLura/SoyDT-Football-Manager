@@ -1,0 +1,30 @@
+{
+  "id": 964826,
+  "first_name": "Augusto",
+  "last_name": "Prono",
+  "birth_date": "1984-01-28",
+  "country_id": 1649,
+  "club_id": 3101457,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 14
+    }
+  ],
+  "current_ability": 30,
+  "potential_ability": 30,
+  "value": 0,
+  "contract": {
+    "expiration": "2027-06-30",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2004, "c": 102467, "p": 2 },
+    { "s": 2005, "c": 3101457, "p": 19 },
+    { "s": 2006, "c": 14031213, "p": 21 },
+    { "s": 2007, "c": 3101457, "p": 38, "g": 2 },
+    { "s": 2009, "c": 3101457, "p": 2 },
+    { "s": 2010, "c": 14031210, "p": 13 }
+  ]
+}

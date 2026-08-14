@@ -1,0 +1,19 @@
+{
+  "id": 2000207371,
+  "first_name": "Ezequiel",
+  "last_name": "Orbe",
+  "birth_date": "2005-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": -6
+}

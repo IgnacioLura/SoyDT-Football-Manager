@@ -1,0 +1,26 @@
+{
+  "id": 2000505434,
+  "first_name": "Franco",
+  "last_name": "Maidana",
+  "birth_date": "2007-12-17",
+  "country_id": 1649,
+  "club_id": 86,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 72,
+  "potential_ability": -6,
+  "value": 173000,
+  "contract": {
+    "expiration": "2029-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

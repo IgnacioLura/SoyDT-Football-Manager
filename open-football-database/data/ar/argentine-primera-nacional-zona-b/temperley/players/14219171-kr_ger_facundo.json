@@ -1,0 +1,37 @@
+{
+  "id": 14219171,
+  "first_name": "Facundo",
+  "last_name": "Krüger",
+  "birth_date": "2000-06-05",
+  "country_id": 1649,
+  "club_id": 3100019,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 70,
+    "right": 100
+  },
+  "current_ability": 114,
+  "potential_ability": 118,
+  "value": 2000000,
+  "contract": {
+    "salary": 504,
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2018, "c": 952697, "p": 9, "g": 1 },
+    { "s": 2019, "c": 952697, "p": 20, "g": 3 },
+    { "s": 2020, "c": 952697, "p": 5 },
+    { "s": 2021, "c": 75000008, "p": 10 },
+    { "s": 2022, "c": 952697, "p": 30, "g": 10 },
+    { "s": 2023, "c": 3100019, "p": 25, "g": 4 },
+    { "s": 2024, "c": 952695, "p": 1 },
+    { "s": 2024, "c": 3100019, "p": 19, "g": 1 }
+  ]
+}

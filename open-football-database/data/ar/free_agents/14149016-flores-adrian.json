@@ -1,0 +1,19 @@
+{
+  "id": 14149016,
+  "first_name": "Adrián",
+  "last_name": "Flores",
+  "birth_date": "1987-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 50
+  },
+  "current_ability": 90,
+  "potential_ability": 90
+}

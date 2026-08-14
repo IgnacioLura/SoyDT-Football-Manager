@@ -1,0 +1,27 @@
+{
+  "id": 2000041287,
+  "first_name": "Kennedy",
+  "last_name": "Rocha",
+  "birth_date": "1989-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "ML",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 50
+  },
+  "current_ability": 100,
+  "potential_ability": 106
+}

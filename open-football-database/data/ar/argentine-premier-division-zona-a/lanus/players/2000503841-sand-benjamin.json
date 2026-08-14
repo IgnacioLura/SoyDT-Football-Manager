@@ -1,0 +1,25 @@
+{
+  "id": 2000503841,
+  "first_name": "Benjamín",
+  "last_name": "Sand",
+  "birth_date": "2008-10-27",
+  "country_id": 1649,
+  "club_id": 90,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 70,
+  "potential_ability": -6,
+  "value": 261000,
+  "contract": {    "expiration": "2029-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

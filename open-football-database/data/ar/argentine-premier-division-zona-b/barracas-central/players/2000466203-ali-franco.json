@@ -1,0 +1,28 @@
+{
+  "id": 2000466203,
+  "first_name": "Franco",
+  "last_name": "Ali",
+  "birth_date": "2007-11-06",
+  "country_id": 1649,
+  "club_id": 952695,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 55,
+    "right": 100
+  },
+  "current_ability": 70,
+  "potential_ability": -5,
+  "value": 95000,
+  "contract": {    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 7800516, "p": 0 }
+  ]
+}

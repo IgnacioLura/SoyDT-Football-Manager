@@ -1,0 +1,27 @@
+{
+  "id": 8832817,
+  "first_name": "Erick",
+  "last_name": "Flores",
+  "birth_date": "1989-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 60,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 122
+}

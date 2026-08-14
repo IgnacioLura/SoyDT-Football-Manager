@@ -1,0 +1,25 @@
+{
+  "id": 2000282584,
+  "first_name": "Gino",
+  "last_name": "Podestá",
+  "birth_date": "2007-05-09",
+  "country_id": 1649,
+  "club_id": 91,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 80,
+  "potential_ability": -65,
+  "value": 376000,
+  "contract": {    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

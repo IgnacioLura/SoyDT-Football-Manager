@@ -1,0 +1,23 @@
+{
+  "id": 14118217,
+  "first_name": "Gabriel",
+  "last_name": "Díaz",
+  "birth_date": "1997-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DL",
+      "level": 20
+    },
+    {
+      "code": "WBL",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 35
+  },
+  "current_ability": 94,
+  "potential_ability": 98
+}

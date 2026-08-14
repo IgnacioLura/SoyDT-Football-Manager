@@ -1,0 +1,42 @@
+{
+  "id": 2000164399,
+  "first_name": "Lelê",
+  "last_name": "",
+  "birth_date": "1997-10-01",
+  "country_id": 1651,
+  "club_id": 323,
+  "positions": [
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 120,
+  "potential_ability": 124,
+  "value": 1000000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 26031118,
+    "expiration": "2027-05-31",    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2022, "c": 107240, "p": 20, "g": 7 },
+    { "s": 2023, "c": 323, "p": 29, "g": 2 },
+    { "s": 2025, "c": 104749, "p": 7 },
+    { "s": 2025, "c": 301151, "p": 17, "g": 6 }
+  ],
+  "ids": {
+    "transfermarkt.com": "972864"
+  }
+}

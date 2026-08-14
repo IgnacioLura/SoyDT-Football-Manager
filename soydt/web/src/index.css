@@ -1,0 +1,4 @@
+/* Intentionally empty — pixel-perfect clone requirement means page styling
+   comes entirely from the ported open-football stylesheets (bootstrap.min.css,
+   style.css, images.css, flags.css, font.min.css — linked in index.html),
+   not from Vite's starter template styles. */

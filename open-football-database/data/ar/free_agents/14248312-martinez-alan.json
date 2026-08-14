@@ -1,0 +1,19 @@
+{
+  "id": 14248312,
+  "first_name": "Alan",
+  "last_name": "Martínez",
+  "birth_date": "2000-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 100
+}

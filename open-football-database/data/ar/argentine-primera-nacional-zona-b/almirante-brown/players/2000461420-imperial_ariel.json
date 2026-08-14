@@ -1,0 +1,33 @@
+{
+  "id": 2000461420,
+  "first_name": "Ariel",
+  "last_name": "Imperial",
+  "birth_date": "2006-08-08",
+  "country_id": 1649,
+  "club_id": 102470,
+  "positions": [
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 86,
+  "potential_ability": -6,
+  "value": 164000,
+  "contract": {
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 102470, "p": 1 }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": 2000106883,
+  "first_name": "Gianfranco",
+  "last_name": "Leiva",
+  "birth_date": "2001-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 102
+}

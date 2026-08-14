@@ -1,0 +1,23 @@
+{
+  "id": 19174929,
+  "first_name": "Lucas",
+  "last_name": "Souza",
+  "birth_date": "1990-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 110,
+  "potential_ability": 120
+}

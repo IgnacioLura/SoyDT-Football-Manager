@@ -1,0 +1,38 @@
+{
+  "id": 2000230642,
+  "first_name": "Thiago",
+  "last_name": "Lauro",
+  "birth_date": "2005-05-24",
+  "country_id": 1649,
+  "club_id": 102482,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 106,
+  "potential_ability": -75,
+  "value": 4000000,
+  "contract": {
+    "salary": 63,
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2022, "c": 951314, "p": 6 },
+    { "s": 2023, "c": 951314, "p": 26, "g": 1 },
+    { "s": 2024, "c": 102482, "p": 10, "g": 1 },
+    { "s": 2025, "c": 316, "p": 0 },
+    { "s": 2025, "c": 102482, "p": 2 }
+  ]
+}

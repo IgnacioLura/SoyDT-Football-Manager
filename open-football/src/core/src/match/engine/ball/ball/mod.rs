@@ -1,0 +1,1511 @@
+//! Match-engine ball model, split by concern. The `Ball` struct lives
+//! here together with the per-tick orchestrator (`update` / `update_light`)
+//! and the simple state queries the rest of the engine reads. The
+//! heavier domain passes are sibling modules:
+//!
+//! | Submodule       | Concern                                                      |
+//! |-----------------|--------------------------------------------------------------|
+//! | [`ownership`]   | Pass-target claims, deadlock resolution, stall safety nets, ball-ownership claim flow |
+//! | [`interactions`]| Intercept / shot-block / shot-save resolution                |
+//! | [`goal`]        | Goal / over-the-bar / wide-of-goal handling                  |
+//! | [`motion`]      | Velocity integration, owner tracking, boundary inset         |
+//! | [`stall`]       | Position-anchor stall detector + snapshot diagnostics        |
+
+mod goal;
+pub mod interactions;
+mod motion;
+pub mod ownership;
+mod restart;
+mod stall;
+
+use crate::r#match::engine::ball::events::BallEvent;
+use crate::r#match::engine::set_pieces::CornerRoutine;
+use crate::r#match::events::EventCollection;
+use crate::r#match::{GameTickContext, MatchContext, MatchPlayer, PlayerSide};
+use nalgebra::Vector3;
+use std::collections::VecDeque;
+
+/// Origin of the most recent live pass / restart. Read by the offside
+/// resolver: only goal kicks, throw-ins, and corners are exempt from
+/// offside; free kicks (direct/indirect) and penalties are not.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum PassOriginRestart {
+    OpenPlay,
+    GoalKick,
+    Corner,
+    ThrowIn,
+    /// Generic free kick (legacy / offside fallback). Treated like a
+    /// direct free kick by the offside resolver.
+    FreeKick,
+    /// Foul outside the penalty area, severity Normal+: ball can be shot
+    /// at goal directly.
+    DirectFreeKick,
+    /// Offside or technical infringement: cannot be shot directly into
+    /// goal — needs a touch from a second player first.
+    IndirectFreeKick,
+    /// Foul inside defending penalty area: ball at penalty spot.
+    Penalty,
+}
+
+impl Default for PassOriginRestart {
+    fn default() -> Self {
+        PassOriginRestart::OpenPlay
+    }
+}
+
+impl PassOriginRestart {
+    /// Set-piece restarts that exempt the receiver from offside.
+    pub fn is_offside_exempt(self) -> bool {
+        matches!(
+            self,
+            PassOriginRestart::GoalKick | PassOriginRestart::Corner | PassOriginRestart::ThrowIn
+        )
+    }
+
+    /// True for any free-kick-style restart (direct/indirect/legacy).
+    /// Penalties and corners are NOT free kicks for routine selection.
+    pub fn is_free_kick(self) -> bool {
+        matches!(
+            self,
+            PassOriginRestart::FreeKick
+                | PassOriginRestart::DirectFreeKick
+                | PassOriginRestart::IndirectFreeKick
+        )
+    }
+}
+
+/// Snapshot of the offside-relevant geometry at the moment a pass is
+/// kicked. Stored on the ball for the duration of an in-flight pass so
+/// the offside check can fire on receiver involvement (touch / claim /
+/// active challenge) instead of at pass start.
+#[derive(Debug, Clone, Copy)]
+pub struct OffsideSnapshot {
+    pub origin: PassOriginRestart,
+    pub passer_id: u32,
+    pub passer_side: PlayerSide,
+    pub receiver_id: u32,
+    pub ball_x_at_kick: f32,
+    pub second_last_defender_x: f32,
+    pub receiver_x_at_kick: f32,
+    pub receiver_y_at_kick: f32,
+    pub set_tick: u64,
+}
+
+impl OffsideSnapshot {
+    /// Decide whether the snapshot represents an offside position.
+    /// Tolerance 1.5u absorbs foot-vs-shoulder ambiguity.
+    pub fn is_offside(&self) -> bool {
+        const TOLERANCE: f32 = 1.5;
+        match self.passer_side {
+            PlayerSide::Left => {
+                if self.receiver_x_at_kick <= self.ball_x_at_kick + TOLERANCE {
+                    return false;
+                }
+                self.receiver_x_at_kick > self.second_last_defender_x + TOLERANCE
+            }
+            PlayerSide::Right => {
+                if self.receiver_x_at_kick >= self.ball_x_at_kick - TOLERANCE {
+                    return false;
+                }
+                self.receiver_x_at_kick < self.second_last_defender_x - TOLERANCE
+            }
+        }
+    }
+}
+
+/// Why a goal did or didn't carry an assist. The credited-assist rate is
+/// a headline realism number (real football assists ~70% of goals), and
+/// the count alone can't say whether the resolver is too strict or the
+/// engine simply isn't scoring off passes. These split the outcomes at
+/// the one decision point that knows: `assist_for_goal`.
+#[cfg(feature = "match-logs")]
+pub mod assist_diag {
+    use std::sync::atomic::{AtomicU64, Ordering};
+
+    /// Non-own goals that reached the resolver.
+    pub static GOALS: AtomicU64 = AtomicU64::new(0);
+    /// Pass chain was empty — nothing was recorded, or a clear wiped it.
+    pub static EMPTY_CHAIN: AtomicU64 = AtomicU64::new(0);
+    /// Newest chain entry belongs to the conceding team: the scoring team
+    /// won the ball and finished without completing a pass of its own.
+    pub static OPPONENT_CHAIN: AtomicU64 = AtomicU64::new(0);
+    /// Of those, how many still had a scoring-team pass deeper in the
+    /// ring — i.e. the same-possession rule is what rejected them, not
+    /// the absence of a teammate's pass.
+    pub static OPPONENT_CHAIN_HAS_TEAMMATE: AtomicU64 = AtomicU64::new(0);
+    /// Age in ticks of the blocking opponent entry, summed.
+    pub static OPPONENT_CHAIN_AGE: AtomicU64 = AtomicU64::new(0);
+    /// Only the scorer appears in the chain (they passed, got it back).
+    pub static SCORER_ONLY: AtomicU64 = AtomicU64::new(0);
+    /// A teammate's pass was there but older than `ASSIST_WINDOW_TICKS`.
+    pub static STALE: AtomicU64 = AtomicU64::new(0);
+    pub static CREDITED: AtomicU64 = AtomicU64::new(0);
+    /// Sum of (goal tick − assist pass tick) over credited assists, so
+    /// the harness can print the mean delay and size the window.
+    pub static CREDITED_DELAY_TICKS: AtomicU64 = AtomicU64::new(0);
+
+    pub fn reset() {
+        for c in [
+            &GOALS,
+            &EMPTY_CHAIN,
+            &OPPONENT_CHAIN,
+            &OPPONENT_CHAIN_HAS_TEAMMATE,
+            &OPPONENT_CHAIN_AGE,
+            &SCORER_ONLY,
+            &STALE,
+            &CREDITED,
+            &CREDITED_DELAY_TICKS,
+        ] {
+            c.store(0, Ordering::Relaxed);
+        }
+    }
+
+    /// `(goals, empty, opponent, scorer_only, stale, credited, delay_sum)`
+    pub fn snapshot() -> (u64, u64, u64, u64, u64, u64, u64) {
+        (
+            GOALS.load(Ordering::Relaxed),
+            EMPTY_CHAIN.load(Ordering::Relaxed),
+            OPPONENT_CHAIN.load(Ordering::Relaxed),
+            SCORER_ONLY.load(Ordering::Relaxed),
+            STALE.load(Ordering::Relaxed),
+            CREDITED.load(Ordering::Relaxed),
+            CREDITED_DELAY_TICKS.load(Ordering::Relaxed),
+        )
+    }
+
+    /// `(opponent_chain_with_teammate_deeper, opponent_entry_age_sum)`
+    pub fn opponent_chain_detail() -> (u64, u64) {
+        (
+            OPPONENT_CHAIN_HAS_TEAMMATE.load(Ordering::Relaxed),
+            OPPONENT_CHAIN_AGE.load(Ordering::Relaxed),
+        )
+    }
+}
+
+/// Per-tick rolling-friction decay for a ball on the ground: each tick
+/// its horizontal speed is multiplied by `1 - GROUND_FRICTION`.
+///
+/// Derived from the real figure rather than fitted: a football on grass
+/// loses roughly **15% of its speed per second**. At 100 ticks to the
+/// second that is `k^100 = 0.85`, so `k = 0.85^(1/100) = 0.998375` and
+/// the coefficient is 0.001625.
+///
+/// It was 0.006 — a 45%/s loss, ~3.7× real. That single number is why
+/// `calculate_horizontal_velocity` had to aim every pass 79-157% BEYOND
+/// its target (the old `overshoot` table): with the ball dying that fast,
+/// a pass weighted to arrive at its man arrived at walking pace or not at
+/// all, so the code compensated by hitting it 5-12 m too far. Both halves
+/// are fixed together; neither works alone.
+///
+/// Shared so the physics and the pass-weighting can never disagree again
+/// — they were separate literals in `motion.rs` and `players.rs`.
+pub const GROUND_FRICTION: f32 = 0.0016;
+
+/// How close a player must be to the ball to take control of it, in game
+/// units (1u = 0.125 m, so this is 1.5 m — one stride, a real first-touch
+/// distance).
+///
+/// This MUST stay at or below [`MAX_OWNER_TRACK_DISTANCE`]. The two used
+/// to be independent numbers that disagreed by a factor of six: the
+/// pass-target claim granted ownership at 100u while `Ball::move_to`
+/// refused to track the ball to an owner beyond 15u and dropped the
+/// ownership again. The effect was that a pass was booked COMPLETED on
+/// the first tick of its flight — the receiver is within 100u of the
+/// ball the moment it leaves the passer's foot — and then instantly
+/// released, so the ball flew its whole course as a loose ball with no
+/// owner and no intended receiver (the claim had already consumed
+/// `pass_target_player_id`). Measured: 100% of receptions landed beyond
+/// the tracking cap, `move_to` dropped ownership 5.4k times a match, and
+/// 86% of all shots were struck off loose balls against a real ~15%.
+/// Pass accuracy read 87% the whole time — the metric counted claims,
+/// not deliveries.
+pub const CONTROL_DISTANCE: f32 = 12.0;
+
+/// Hard cap on how far the ball will track to its owner before ownership
+/// is treated as impossible and dropped (1.9 m). See [`CONTROL_DISTANCE`].
+pub const MAX_OWNER_TRACK_DISTANCE: f32 = 15.0;
+
+/// How close the ball has to be for a player to kick it (1.9 m — within
+/// reach at a stretch, which is what makes a first-time pass legal).
+///
+/// `PlayerEvent::PassTo` had no such check: any player in a passing state
+/// rewrote the ball's velocity from anywhere on the pitch, whether or not
+/// they had the ball. 59% of all passes were emitted on top of a pass
+/// that was still in the air, which is why the engine recorded ~1150
+/// passes a team against a real ~500 — the surplus was players kicking a
+/// ball that was 40 m away, and each one destroyed the pass already in
+/// flight.
+pub const KICKABLE_DISTANCE: f32 = MAX_OWNER_TRACK_DISTANCE;
+
+/// How long a pass stays assist-eligible, in ticks (100 ticks ≈ 1 s).
+///
+/// An assist is the pass that *led to* the goal, so the two have to be
+/// close together. 6 s covers the slowest legitimate chain the engine
+/// produces — a long ball is ~3 s of flight, plus a touch and a strike —
+/// while excluding the case that used to dominate the charts: a goal
+/// kick counted as the assist for a solo run that ended half a minute
+/// later. The same-possession rule in `assist_for_goal` does most of the
+/// work; this is the backstop for a phase that never changes hands.
+pub const ASSIST_WINDOW_TICKS: u64 = 600;
+
+/// How the current ball carrier came by the ball.
+///
+/// Stamped at the event-dispatch choke point (every acquisition emits
+/// exactly one ball event), so it stays correct without threading a
+/// reason through the ~20 sites that assign `current_owner`. Read at
+/// shot time by `shot_supply_diag`: in real football roughly 55-60% of
+/// shots are struck by the player who was just passed to, and this is
+/// the counter that says whether the engine feeds its shooters or lets
+/// them scavenge.
+#[derive(Copy, Clone, Debug, PartialEq, Eq)]
+pub enum PossessionSource {
+    /// No acquisition recorded since the last restart.
+    Unknown,
+    /// Received a teammate's pass — the one that should dominate.
+    PassReception,
+    /// Won an uncontrolled ball: rebound, spill, deflection, failed
+    /// first touch, or a clearance that dropped to them.
+    LooseBall,
+    /// Picked off an opponent's pass.
+    Interception,
+    /// Took it off an opponent in a challenge.
+    Tackle,
+}
+
+impl PossessionSource {
+    pub const COUNT: usize = 5;
+
+    pub fn index(self) -> usize {
+        match self {
+            PossessionSource::Unknown => 0,
+            PossessionSource::PassReception => 1,
+            PossessionSource::LooseBall => 2,
+            PossessionSource::Interception => 3,
+            PossessionSource::Tackle => 4,
+        }
+    }
+
+    pub const NAMES: [&'static str; Self::COUNT] =
+        ["unknown", "pass", "loose", "intercept", "tackle"];
+}
+
+/// One kick in the current possession's pass chain.
+///
+/// The chain used to be a bare `VecDeque<u32>` of player ids, which is
+/// enough for the AI heuristics that read it (one-two detection, the
+/// "don't pass straight back" recency penalty) but not for crediting an
+/// assist. An assist has to answer three questions a lone id cannot:
+/// is the passer a TEAMMATE of the scorer, was the pass in the SAME
+/// possession phase, and was it RECENT. Carrying the team and the tick
+/// on every entry answers all three at the point of use.
+#[derive(Copy, Clone, Debug, PartialEq, Eq)]
+pub struct PassChainEntry {
+    pub player_id: u32,
+    pub team_id: u32,
+    pub tick: u64,
+}
+
+pub struct Ball {
+    pub start_position: Vector3<f32>,
+    pub position: Vector3<f32>,
+    pub velocity: Vector3<f32>,
+    pub center_field_position: f32,
+
+    pub field_width: f32,
+    pub field_height: f32,
+
+    pub flags: BallFlags,
+
+    pub previous_owner: Option<u32>,
+    pub current_owner: Option<u32>,
+    pub take_ball_notified_players: Vec<u32>,
+    pub notification_cooldown: u32,
+    pub notification_timeout: u32,
+    pub last_boundary_position: Option<Vector3<f32>>,
+    pub unowned_stopped_ticks: u32,
+    pub ownership_duration: u32,
+    pub claim_cooldown: u32,
+    pub pass_target_player_id: Option<u32>,
+    /// Passer id of the most-recent live pass. Set on pass emit,
+    /// cleared on any opponent touch or when the pass's natural
+    /// window (150 ticks ≈ 1.5 s) expires. The pass-completion stat
+    /// uses this as the source of truth for "was this claim a pass
+    /// reception?" — `pass_target_player_id` gets cleared in too
+    /// many unrelated paths to serve that role. None outside an
+    /// active pass window.
+    pub pending_pass_passer: Option<u32>,
+    pub pending_pass_set_tick: u64,
+    pub recent_passers: VecDeque<PassChainEntry>,
+    /// How `current_owner` came by the ball. See [`PossessionSource`].
+    pub possession_source: PossessionSource,
+    /// Who `possession_source` describes, so a repeat event for the
+    /// player who already has the ball cannot relabel their acquisition.
+    pub possession_source_for: Option<u32>,
+    /// Whether the current pass has already had its one interception
+    /// attempt. Mirrors `ShotTarget::block_rolled`: without a latch the
+    /// intercept test fires every tick the ball is in flight, so its
+    /// rate is set by how long the flight window happens to be rather
+    /// than by the defending. Reset when a pass is struck.
+    pub intercept_rolled: bool,
+    pub contested_claim_count: u32,
+    pub unowned_ticks: u32,
+    /// Snapshot captured at the moment the ball became uncontrolled — ball
+    /// kinematics plus every player's state/position/velocity. Held until
+    /// the stall resolves, then attached to the resolution log (only if
+    /// the stall was long enough to log). Provides the "what did the
+    /// pitch look like when this got stuck" context in the same line as
+    /// the duration. Cleared on ownership resume.
+    pub stall_start_snapshot: Option<String>,
+    pub goal_scored: bool,
+    pub kickoff_team_side: Option<PlayerSide>,
+    pub cached_landing_position: Vector3<f32>,
+    /// When a set-piece (corner, goal kick) rewrites ownership to a
+    /// specific player, the ball can only mutate itself here — player
+    /// teleport requires &mut field.players which lives one layer up.
+    /// Populated inside `check_wide_of_goal` and drained by the engine
+    /// after `ball.update` returns, so the owner is on the ball before
+    /// the next `move_to` distance check can null their ownership.
+    pub pending_set_piece_teleport: Option<(u32, Vector3<f32>)>,
+    /// Attacking centre-backs to teleport into the box when a corner is
+    /// awarded — the dead-ball set-up (in real football the big men walk
+    /// up during the stoppage). Populated in the corner branch of
+    /// `check_wide_of_goal`, drained by the engine alongside the taker
+    /// teleport. Each entry is (player_id, box_target_position). Without
+    /// this the CBs cannot cover the length of the pitch before the cross
+    /// is delivered, so defenders never get to attack corners.
+    pub pending_corner_teleports: Vec<(u32, Vector3<f32>)>,
+    /// Fire-once guard for the discrete corner aerial contest. A played-out
+    /// lofted corner can't thread the congested box to a specific runner, so
+    /// once the cross is struck the engine resolves a single skill-weighted
+    /// aerial contest (attacking headers vs the defending line + GK command)
+    /// and, if an attacker wins, drops the ball on their head to be headed
+    /// on goal. False = armed (a corner has been awarded, not yet resolved);
+    /// true = nothing to resolve.
+    pub corner_contest_resolved: bool,
+    /// Corner routine picked by `pick_corner_routine` at corner setup.
+    /// Lets the corner aerial-contest in `resolve_corner_contest` and
+    /// downstream xG accounting know whether the delivery is targeting
+    /// the near post, far post, penalty spot, or short. Cleared after
+    /// the corner resolves. `None` whenever a corner isn't pending.
+    pub pending_corner_routine: Option<CornerRoutine>,
+    /// Counter for "ball is owned but nothing is happening" stalls.
+    /// The unowned-stall warning can't see these because ownership is
+    /// set, but visually the ball sits with a player who isn't moving,
+    /// isn't passing, isn't dribbling — same "ball stuck" symptom, no
+    /// warning. Reset whenever owner changes or any meaningful motion
+    /// resumes; fires a separate warning once it crosses the threshold.
+    pub owned_stuck_ticks: u32,
+    pub owned_stuck_logged: bool,
+    /// Position-based stall detector — catches cases the owned/unowned
+    /// counters miss, specifically: rapid ownership flipping keeps
+    /// resetting both counters (each "change" looks like progress) but
+    /// the ball physically never leaves a small region. We sample the
+    /// ball's position every N ticks and if it hasn't moved more than
+    /// a threshold distance over a window, it's stuck regardless of
+    /// who "owns" it at any given instant.
+    pub stall_anchor_pos: Vector3<f32>,
+    pub stall_anchor_tick: u32,
+
+    /// Trajectory projection cached at the moment a shot is fired. Lets
+    /// the goalkeeper commit to an intercept line instead of re-chasing
+    /// the ball's current position every tick (which lost ground vs a
+    /// 5.6 u/tick shot). `None` whenever the ball isn't a shot in
+    /// flight; cleared on catch, goal, or any ownership event.
+    pub cached_shot_target: Option<ShotTarget>,
+
+    /// Per-shot lifecycle marker: when the physics-level `try_save_shot`
+    /// resolves a shot mid-flight (catch / parry / dangerous parry), it
+    /// stores `(keeper_id, shooter_id)` here so the post-tick stat
+    /// credit can fire saves and on-target without relying on the GK
+    /// state machine to also re-detect the same shot.
+    /// Consumed (cleared to `None`) by the event dispatcher once
+    /// stats have been credited. This makes saves-on-target match
+    /// physics-resolved saves 1:1 — the previous architecture had two
+    /// independent save systems (physics and state-machine) where one
+    /// changed ball state without crediting and the other rolled
+    /// independent saves that often missed.
+    pub pending_save_credit: Option<(u32, u32)>,
+
+    /// Last meaningful touch on the ball. Drives restart resolution
+    /// (throw-ins, corners, goal kicks) and pass-origin metadata. Updated
+    /// from any path that hands ownership to a player (claim, intercept,
+    /// block, save, pass) and from foot-deflections that don't transfer
+    /// ownership but still count as a touch for the dead-ball decision.
+    pub last_touch_player_id: Option<u32>,
+    pub last_touch_team_id: Option<u32>,
+    pub last_touch_tick: u64,
+    pub last_touch_was_controlled: bool,
+    /// Latest tick captured at update entry. Lets per-update helpers
+    /// (intercept, block, save, claim, throw-in) record_touch without
+    /// having to thread the tick through every signature.
+    pub current_tick_cached: u64,
+
+    /// Origin of the most recent live pass — set when a PassTo event
+    /// fires from a restart (goal kick, throw-in, corner, free kick).
+    /// Read by the delayed-offside resolver. Resets to OpenPlay on any
+    /// non-restart pass or once the pass-window expires.
+    pub pass_origin_restart: PassOriginRestart,
+    /// Set at pass-kick. Lives for the pass window (~220 ticks) and the
+    /// offside resolver fires the call only when the receiver becomes
+    /// active (touches the ball or claims). Cleared on resolution,
+    /// opponent touch, or expiry.
+    pub offside_snapshot: Option<OffsideSnapshot>,
+
+    /// Origin of the most-recent live pass (passer's position when the
+    /// pass was emitted). Read by the pass-completion classifier to
+    /// decide if the pass was progressive / cross / box-entry. None
+    /// outside an active pass window.
+    pub pending_pass_origin: Option<Vector3<f32>>,
+    /// Intended target position of the most-recent live pass. Cleared
+    /// alongside `pending_pass_passer`.
+    pub pending_pass_target: Option<Vector3<f32>>,
+    /// Pass was emitted from the wide channel toward the box — flagged
+    /// at emit-time so the completion classifier can credit
+    /// `crosses_completed` when the same pass is received.
+    pub pending_pass_was_cross: bool,
+
+    /// Snapshot of the most recently *completed* pass — populated by
+    /// `credit_completed_pass` AFTER it bumps `passes_completed` and
+    /// BEFORE it clears `pending_pass_*`. The shot-handler key-pass
+    /// linker reads these (rather than `pending_pass_*` which the
+    /// completion path nulls out) so a receive-then-shoot sequence
+    /// still credits the assister with a key pass. None outside the
+    /// shot-after-pass window.
+    pub last_completed_pass_passer_id: Option<u32>,
+    pub last_completed_pass_receiver_id: Option<u32>,
+    pub last_completed_pass_tick: u64,
+
+    /// Opponents that were within the pressing radius of the passer at
+    /// pass-emit time. Read by the interception handler to credit a
+    /// successful pressure when their close-range presence forced the
+    /// turnover. Capped at 4 entries — the count of "real" pressers in
+    /// any single moment is small. Cleared at pass-completion or
+    /// pass-window expiry.
+    pub pressers_at_pass: [u32; 4],
+    pub pressers_at_pass_count: u8,
+
+    /// Most-recent shot's **post-shot** expected goal — the probability a
+    /// league-average keeper concedes it, from
+    /// [`SaveModel::expected_goal_on_target`]. Booked against the
+    /// defending keeper by `note_shot_faced` as both the expectation his
+    /// goals-prevented is measured against and the sign of his
+    /// `xg_prevented` ledger. Cleared on resolution (save / goal / wide /
+    /// over) and on any non-shot ownership change.
+    ///
+    /// Post-shot, not pre-shot, and the distinction is the whole point:
+    /// the pre-shot value describes the SITUATION the defence conceded,
+    /// so charging the keeper's expectation with it made a keeper behind
+    /// a good defence look like one facing league-average chances however
+    /// tame the strikes actually were. This value describes the STRIKE.
+    pub last_shot_xgot: f32,
+    pub last_shot_shooter_id: Option<u32>,
+    /// Tick the ball was last STRUCK as a shot, whoever has touched it
+    /// since. `check_goal` needs a property of the BALL here, not of
+    /// whoever happens to be its `previous_owner` when it crosses the
+    /// line: a keeper who gets a hand to a shot becomes the previous
+    /// owner, and the shot-provenance test then failed on him and
+    /// refused the goal. Measured 2026-08: 2604 balls per 300 matches
+    /// crossed the line and were rejected — 34% of all shots, and the
+    /// single largest reason the engine scored 1.6 goals a game.
+    pub last_shot_struck_tick: u64,
+
+    /// Tick of the most recent live rebound — a dangerous GK parry or
+    /// a loose shot-block deflection that left the ball contestable in
+    /// front of goal. Read by the team shot gate: within the rebound
+    /// window (~3 s) the team-level shot SPACING and build-up gates
+    /// are suspended so the box scramble / tap-in — one of football's
+    /// core goal patterns — can actually fire. The per-possession shot
+    /// cap (2) still rules out machine-gun scrambles. 0 = no rebound.
+    pub last_rebound_tick: u64,
+
+    /// Last meaningful giveaway: the player who lost possession via a
+    /// misplaced pass that was intercepted by an opponent. Read by the
+    /// "errors leading to shot/goal" linker — when an opponent shoots
+    /// within the response window after this is stamped, the giver is
+    /// charged with the error.
+    pub last_giveaway_player_id: Option<u32>,
+    pub last_giveaway_team_id: Option<u32>,
+    pub last_giveaway_tick: u64,
+    /// Defensive zone the giveaway happened in (from the giver's
+    /// perspective). Lets the goal handler credit
+    /// `errors_to_goal_own_box` when an opponent converts a giveaway
+    /// from inside the giver's own box.
+    pub last_giveaway_was_own_box: bool,
+    /// Player charged with `errors_leading_to_shot` for the shot
+    /// currently in flight. Held from shoot-time until the shot
+    /// resolves; if the shot becomes a goal we also bump
+    /// `errors_leading_to_goal` on this player.
+    pub pending_error_to_shot_player_id: Option<u32>,
+    /// Goalkeeper who has just flapped a claim — dropped a cross, punched
+    /// it back into the box, missed the ball entirely. Held until the
+    /// possession resolves so a shot that follows can be charged to the
+    /// keeper as `gk_failed_claims_to_shot` (and, if it goes in,
+    /// `gk_failed_claims_to_goal`).
+    ///
+    /// Deliberately SEPARATE from `pending_error_to_shot_player_id`: the
+    /// rating de-dups nested mistake counters (see `errors_and_cards`),
+    /// and a failed claim that also stamped `errors_leading_to_goal`
+    /// would bill one incident through two lanes — the triple-counting
+    /// bug that once dropped a one-conceded keeper to ~3.9.
+    pub pending_failed_claim_gk_id: Option<u32>,
+    pub pending_failed_claim_tick: u64,
+    /// Set once the flap has been charged as `gk_failed_claims_to_shot`.
+    /// The id survives so a goal from the same scramble can still be
+    /// promoted, but a second shot in the same possession must not bill
+    /// the keeper twice for one mistake.
+    pub pending_failed_claim_charged: bool,
+
+    /// Carry tracking. `carry_owner` is the player currently dribbling /
+    /// running with the ball; `carry_start_position` is where the carry
+    /// began. Evaluated when the carry ends (owner change / shot / pass)
+    /// to credit progressive carries and box entries.
+    pub carry_owner: Option<u32>,
+    pub carry_start_position: Vector3<f32>,
+}
+
+/// Projection of a shot at the moment it's taken. The `PreparingForSave`
+/// and `Catching` goalkeeper states read this to know where the ball
+/// will actually arrive rather than chasing its current position — a
+/// diving keeper commits to a spot on the line, they don't track the
+/// ball every frame.
+#[derive(Debug, Clone, Copy)]
+pub struct ShotTarget {
+    /// y-coordinate at which the shot is projected to cross the goal
+    /// line, in field units. Falls outside the posts if the shot is
+    /// going wide — the keeper should still attempt the save, the
+    /// post-vs-net check happens in `check_goal`.
+    pub goal_line_y: f32,
+    /// z-coordinate (height) at projected crossing. Above `GOAL_HEIGHT`
+    /// (2.44) is an over-the-bar ball the keeper shouldn't commit to.
+    pub goal_line_z: f32,
+    /// Goal the ball is heading for — left (x=0) or right (x=field_w).
+    /// Used so the correct keeper reads the cache.
+    pub defending_side: PlayerSide,
+    /// True once the physics save roll has been resolved for THIS
+    /// shot. The roll used to run on every tick the ball sat inside the
+    /// keeper's reach window (~2-3 ticks), compounding to ~88% per shot
+    /// from a 0.55 per-tick cap — which is why `skill_mult` needed five
+    /// successive empirical retunes whenever state-machine timing moved
+    /// the window length. One shot, one roll: the probability below is
+    /// now a genuine per-shot save chance calibrated straight against
+    /// real save% (~67% of shots on target).
+    pub save_rolled: bool,
+    /// True once the block roll has been resolved for THIS shot — the
+    /// same one-shot-one-roll discipline `save_rolled` enforces. Without
+    /// it, widening the block window means rolling once per tick the
+    /// defender stays in the lane, so the block rate becomes a function
+    /// of flight timing rather than of the model.
+    pub block_rolled: bool,
+    /// Set when the shot took a deflection off a body in the lane.
+    /// Catching/Diving states damp the save probability — the keeper
+    /// was set for the original trajectory and the redirected ball is
+    /// arriving on a new line they haven't committed to.
+    pub deflected: bool,
+    /// The striker's `shot_threat` composite (0..1) at the moment he hit
+    /// it. Carried on the shot rather than looked up at save time
+    /// because the save resolves several ticks later, by which point
+    /// `previous_owner` may have moved on and the shooter's fatigue
+    /// bands have drifted.
+    ///
+    /// `SaveModel` reads this to score the save as a CONTEST against the
+    /// man who struck the ball instead of against an absolute bar — see
+    /// `SaveModel::skill_multiplier`. Defaults to
+    /// `SaveModel::NEUTRAL_THREAT` on the paths that synthesise a shot
+    /// target without a shooter, which reproduces the old
+    /// absolute-quality behaviour exactly for those cases.
+    pub shooter_threat: f32,
+}
+
+#[derive(Default, Clone)]
+pub struct BallFlags {
+    pub in_flight_state: usize,
+    pub running_for_ball: bool,
+}
+
+impl BallFlags {
+    pub fn reset(&mut self) {
+        self.in_flight_state = 0;
+        self.running_for_ball = false;
+    }
+}
+
+impl Ball {
+    pub fn with_coord(field_width: f32, field_height: f32) -> Self {
+        let x = field_width / 2.0;
+        let y = field_height / 2.0;
+
+        Ball {
+            position: Vector3::new(x, y, 0.0),
+            start_position: Vector3::new(x, y, 0.0),
+            field_width,
+            field_height,
+            velocity: Vector3::zeros(),
+            center_field_position: x, // initial ball position = center field
+            flags: BallFlags::default(),
+            previous_owner: None,
+            current_owner: None,
+            take_ball_notified_players: Vec::new(),
+            notification_cooldown: 0,
+            notification_timeout: 0,
+            last_boundary_position: None,
+            unowned_stopped_ticks: 0,
+            ownership_duration: 0,
+            claim_cooldown: 0,
+            pass_target_player_id: None,
+            pending_pass_passer: None,
+            pending_pass_set_tick: 0,
+            recent_passers: VecDeque::with_capacity(5),
+            possession_source: PossessionSource::Unknown,
+            possession_source_for: None,
+            intercept_rolled: false,
+            contested_claim_count: 0,
+            unowned_ticks: 0,
+            stall_start_snapshot: None,
+            goal_scored: false,
+            kickoff_team_side: None,
+            cached_landing_position: Vector3::new(x, y, 0.0),
+            pending_set_piece_teleport: None,
+            pending_corner_teleports: Vec::new(),
+            corner_contest_resolved: true,
+            pending_corner_routine: None,
+            owned_stuck_ticks: 0,
+            owned_stuck_logged: false,
+            stall_anchor_pos: Vector3::new(x, y, 0.0),
+            stall_anchor_tick: 0,
+            cached_shot_target: None,
+            pending_save_credit: None,
+            last_touch_player_id: None,
+            last_touch_team_id: None,
+            last_touch_tick: 0,
+            last_touch_was_controlled: false,
+            current_tick_cached: 0,
+            pass_origin_restart: PassOriginRestart::OpenPlay,
+            offside_snapshot: None,
+            pending_pass_origin: None,
+            pending_pass_target: None,
+            pending_pass_was_cross: false,
+            last_completed_pass_passer_id: None,
+            last_completed_pass_receiver_id: None,
+            last_completed_pass_tick: 0,
+            pressers_at_pass: [0; 4],
+            pressers_at_pass_count: 0,
+            last_shot_xgot: 0.0,
+            last_shot_shooter_id: None,
+            last_shot_struck_tick: 0,
+            last_rebound_tick: 0,
+            last_giveaway_player_id: None,
+            last_giveaway_team_id: None,
+            last_giveaway_tick: 0,
+            last_giveaway_was_own_box: false,
+            pending_error_to_shot_player_id: None,
+            pending_failed_claim_gk_id: None,
+            pending_failed_claim_tick: 0,
+            pending_failed_claim_charged: false,
+            carry_owner: None,
+            carry_start_position: Vector3::new(x, y, 0.0),
+        }
+    }
+
+    /// Record a meaningful touch. Drives restart resolution. `controlled`
+    /// distinguishes a clean reception from a deflection / failed save.
+    pub fn record_touch(&mut self, player_id: u32, team_id: u32, tick: u64, controlled: bool) {
+        self.last_touch_player_id = Some(player_id);
+        self.last_touch_team_id = Some(team_id);
+        self.last_touch_tick = tick;
+        self.last_touch_was_controlled = controlled;
+    }
+
+    /// Clear the offside snapshot. Called on opponent touch, claim, foul,
+    /// or pass expiry.
+    pub fn clear_offside_snapshot(&mut self) {
+        self.offside_snapshot = None;
+    }
+
+    /// Force the ball into a clean dead-ball restart state. Centralises
+    /// the flag clearing that every set-piece restart (corner / goal
+    /// kick / throw-in / kickoff after goal) used to do by hand,
+    /// dropping stale open-play metadata so a shot/pass that was in
+    /// flight when the ball went dead cannot leak across the restart.
+    ///
+    /// This is the canonical "ball just went dead — reset everything
+    /// open-play touched" helper. New restart paths should call this
+    /// rather than zeroing individual fields, so a future field added
+    /// to the open-play set is reset automatically.
+    pub fn clear_open_play_metadata(&mut self) {
+        #[cfg(feature = "match-logs")]
+        if self.pending_pass_passer.is_some() {
+            use std::sync::atomic::Ordering;
+            ownership::reception_diag::DIED_DEAD_BALL.fetch_add(1, Ordering::Relaxed);
+        }
+        self.cached_shot_target = None;
+        self.pass_target_player_id = None;
+        self.pending_pass_passer = None;
+        self.pending_pass_origin = None;
+        self.pending_pass_target = None;
+        self.pending_pass_was_cross = false;
+        self.offside_snapshot = None;
+        self.pending_save_credit = None;
+        self.pending_error_to_shot_player_id = None;
+        self.pending_failed_claim_gk_id = None;
+        self.pending_failed_claim_charged = false;
+        self.last_shot_xgot = 0.0;
+        self.last_shot_shooter_id = None;
+        // A dead ball ends the shot: without this a stale strike would
+        // let the next pass that rolls over the line stand as a goal.
+        self.last_shot_struck_tick = 0;
+    }
+
+    /// Soft invariant check on the ball's lifecycle flags. Returns the
+    /// first violation as `Err(msg)` so debug builds and tests can
+    /// assert the ball never enters a contradictory state. Production
+    /// callers ignore the result — the cost is a handful of field
+    /// reads.
+    ///
+    /// Invariants checked:
+    ///   * Open-play shot metadata implies a previous owner (someone
+    ///     fired the shot).
+    ///   * Pending save credit references a real shooter id (so the
+    ///     stat dispatch can fold the on-target back to a shot taker).
+    ///   * A pass target id implies a passer id was set when the pass
+    ///     was launched (else the receive-classifier has nothing to
+    ///     pair the completion to).
+    ///   * Ball/owner position coordinates are finite — non-finite x/y/z
+    ///     leak into distance comparisons and trigger
+    ///     `partial_cmp().unwrap()` panics in sort paths.
+    ///   * On a dead-ball restart (corner / goal kick / throw-in /
+    ///     free kick / penalty), open-play metadata (cached shot,
+    ///     pending pass envelope, save credit, offside snapshot) must
+    ///     be cleared — otherwise a shot that was in flight when the
+    ///     ball went dead can leak across the restart and credit
+    ///     phantom stats.
+    ///   * Pending shot xG implies a shooter id (paired metadata,
+    ///     consumed together).
+    ///   * Pending pass envelope is coherent: a passer implies an
+    ///     origin and target position.
+    ///   * Carry tracking is consistent: a carrying owner means the
+    ///     current owner matches the carrier.
+    pub fn check_invariants(&self) -> Result<(), &'static str> {
+        if self.cached_shot_target.is_some() && self.previous_owner.is_none() {
+            return Err("cached_shot_target without previous_owner");
+        }
+        if let Some((_keeper, shooter)) = self.pending_save_credit {
+            if shooter == 0 {
+                return Err("pending_save_credit shooter id is sentinel zero");
+            }
+        }
+        if self.pass_target_player_id.is_some() && self.pending_pass_passer.is_none() {
+            return Err("pass_target without pending_pass_passer");
+        }
+        // Non-finite coordinates leak into distance comparisons and
+        // trigger `partial_cmp().unwrap()` panics in nearby/sort paths.
+        if !self.position.x.is_finite()
+            || !self.position.y.is_finite()
+            || !self.position.z.is_finite()
+        {
+            return Err("ball position has non-finite coordinate");
+        }
+        if !self.velocity.x.is_finite()
+            || !self.velocity.y.is_finite()
+            || !self.velocity.z.is_finite()
+        {
+            return Err("ball velocity has non-finite coordinate");
+        }
+        // Dead-ball restart cleanliness — any restart origin must drop
+        // open-play metadata.
+        if matches!(
+            self.pass_origin_restart,
+            PassOriginRestart::Corner
+                | PassOriginRestart::GoalKick
+                | PassOriginRestart::ThrowIn
+                | PassOriginRestart::Penalty
+        ) {
+            if self.cached_shot_target.is_some() {
+                return Err("dead-ball restart with leftover cached_shot_target");
+            }
+            if self.pending_save_credit.is_some() {
+                return Err("dead-ball restart with leftover pending_save_credit");
+            }
+            if self.offside_snapshot.is_some() {
+                return Err("dead-ball restart with leftover offside_snapshot");
+            }
+        }
+        // Pending shot xG and shooter id are kept in lock-step.
+        if self.last_shot_xgot > 0.0 && self.last_shot_shooter_id.is_none() {
+            return Err("last_shot_xgot without last_shot_shooter_id");
+        }
+        // Pending pass envelope: any leg must imply the rest.
+        if self.pending_pass_passer.is_some()
+            && (self.pending_pass_origin.is_none() || self.pending_pass_target.is_none())
+        {
+            return Err("pending_pass_passer without origin/target metadata");
+        }
+        // Carry tracking — a current carrier must match the ball owner.
+        if let (Some(carrier), Some(owner)) = (self.carry_owner, self.current_owner) {
+            if carrier != owner {
+                return Err("carry_owner disagrees with current_owner");
+            }
+        }
+        Ok(())
+    }
+}
+
+#[allow(dead_code, unused_imports)]
+mod offside_snapshot_tests {
+    use super::*;
+
+    fn snap_left(receiver_x: f32, ball_x: f32, second_last: f32) -> OffsideSnapshot {
+        OffsideSnapshot {
+            origin: PassOriginRestart::OpenPlay,
+            passer_id: 1,
+            passer_side: PlayerSide::Left,
+            receiver_id: 2,
+            ball_x_at_kick: ball_x,
+            second_last_defender_x: second_last,
+            receiver_x_at_kick: receiver_x,
+            receiver_y_at_kick: 200.0,
+            set_tick: 0,
+        }
+    }
+
+    #[test]
+    fn left_attacker_beyond_second_last_is_offside() {
+        // Receiver ahead of ball AND past the second-last defender.
+        let snap = snap_left(700.0, 600.0, 680.0);
+        assert!(snap.is_offside());
+    }
+
+    #[test]
+    fn left_attacker_behind_ball_not_offside() {
+        // Receiver is behind the ball — offside cannot occur.
+        let snap = snap_left(500.0, 600.0, 680.0);
+        assert!(!snap.is_offside());
+    }
+
+    #[test]
+    fn left_attacker_level_with_defender_not_offside() {
+        // Within tolerance — onside.
+        let snap = snap_left(681.0, 600.0, 680.0);
+        assert!(!snap.is_offside());
+    }
+
+    #[test]
+    fn restart_origins_offside_exempt() {
+        assert!(PassOriginRestart::GoalKick.is_offside_exempt());
+        assert!(PassOriginRestart::Corner.is_offside_exempt());
+        assert!(PassOriginRestart::ThrowIn.is_offside_exempt());
+        assert!(!PassOriginRestart::OpenPlay.is_offside_exempt());
+        assert!(!PassOriginRestart::FreeKick.is_offside_exempt());
+    }
+}
+
+impl Ball {
+    /// Update cached landing position. Call after physics changes position/velocity.
+    #[inline]
+    pub fn update_landing_cache(&mut self) {
+        self.cached_landing_position = self.calculate_landing_position();
+    }
+
+    pub fn update(
+        &mut self,
+        context: &mut MatchContext,
+        players: &[MatchPlayer],
+        tick_context: &GameTickContext,
+        events: &mut EventCollection,
+    ) {
+        self.current_tick_cached = context.current_tick();
+
+        // Decrement claim cooldown
+        if self.claim_cooldown > 0 {
+            self.claim_cooldown -= 1;
+        }
+
+        self.update_velocity();
+
+        self.try_intercept(context, players, events);
+        self.try_block_shot(context, players, events);
+        self.try_save_shot(context, players, events);
+        self.try_notify_standing_ball(players, events);
+
+        // NUCLEAR OPTION: Force claiming if ball unowned and stopped for too long
+        self.force_claim_if_deadlock(players, events);
+
+        // Unconditional unowned safety net - forces nearest players to TakeBall
+        self.force_takeball_if_unowned_too_long(players, events);
+        // `detect_owned_stuck` was too sensitive — it fired on legitimate
+        // possession play (defender holding in back line for 6-12s is
+        // normal). `detect_position_stall` is the stricter signal: ball
+        // hasn't moved ANYWHERE in 1000 ticks, regardless of who owns
+        // it. That's a real stall.
+        self.detect_position_stall(players);
+
+        self.process_ownership(context, players, events);
+        self.tick_carry_tracker(events);
+
+        // Move ball FIRST, then check goal/boundary on new position
+        self.move_to(tick_context);
+        self.check_goal(context, events);
+        self.check_over_goal(context, players, events);
+        self.check_wide_of_goal(context, players, events);
+        self.check_throw_in(context, players, events);
+        self.check_boundary_collision(context);
+        self.expire_offside_snapshot(context);
+        self.update_landing_cache();
+    }
+
+    /// Light update: full ball logic but reads owner position from players slice directly.
+    pub fn update_light(
+        &mut self,
+        context: &mut MatchContext,
+        players: &[MatchPlayer],
+        events: &mut EventCollection,
+    ) {
+        self.current_tick_cached = context.current_tick();
+
+        if self.claim_cooldown > 0 {
+            self.claim_cooldown -= 1;
+        }
+
+        self.update_velocity();
+        self.try_intercept(context, players, events);
+        self.try_block_shot(context, players, events);
+        self.try_save_shot(context, players, events);
+        self.process_ownership(context, players, events);
+        self.tick_carry_tracker(events);
+
+        // Move ball: find owner position from players slice directly
+        self.move_to_with_players(players);
+        self.check_goal(context, events);
+        self.check_over_goal(context, players, events);
+        self.check_wide_of_goal(context, players, events);
+        self.check_throw_in(context, players, events);
+        self.check_boundary_collision(context);
+        self.expire_offside_snapshot(context);
+        self.update_landing_cache();
+    }
+
+    /// Calculate where an aerial ball will land (when z reaches 0).
+    /// Uses projectile motion: z(t) = h + vz·t − ½g·t² = 0, solving for
+    /// the positive root. Ignores air drag — close enough for chase
+    /// positioning, and erring long is better than erring short.
+    ///
+    /// Units are ticks, not seconds: position integration is
+    /// `position += velocity` per tick (no dt scaling), while gravity
+    /// applies `velocity.z += -GRAVITY * 0.016` per tick. So the
+    /// effective per-tick² gravity is `9.81 * 0.016 ≈ 0.157`, and the
+    /// resulting `time_to_ground` comes out in ticks — which matches
+    /// the horizontal integration `x += vx` per tick.
+    pub fn calculate_landing_position(&self) -> Vector3<f32> {
+        if self.position.z <= 0.1 || self.current_owner.is_some() {
+            return self.position;
+        }
+
+        const G_PER_TICK: f32 = 9.81 * 0.016;
+        let vz = self.velocity.z;
+        let h = self.position.z;
+
+        // Positive root of ½g·t² − vz·t − h = 0
+        let discriminant = vz * vz + 2.0 * G_PER_TICK * h;
+        let time_to_ground = (vz + discriminant.sqrt()) / G_PER_TICK;
+
+        let landing_x = self.position.x + self.velocity.x * time_to_ground;
+        let landing_y = self.position.y + self.velocity.y * time_to_ground;
+
+        let clamped_x = landing_x.clamp(0.0, self.field_width);
+        let clamped_y = landing_y.clamp(0.0, self.field_height);
+
+        Vector3::new(clamped_x, clamped_y, 0.0)
+    }
+
+    /// Check if the ball is aerial (in the air above player reach)
+    pub fn is_aerial(&self) -> bool {
+        const PLAYER_REACH_HEIGHT: f32 = 2.3;
+        self.position.z > PLAYER_REACH_HEIGHT && self.velocity.z.abs() > 0.1
+    }
+
+    pub fn is_stands_outside(&self) -> bool {
+        self.is_ball_outside()
+            && self.velocity.norm_squared() < 0.25 // 0.5^2, allow tiny velocities from physics
+            && self.current_owner.is_none()
+    }
+
+    pub fn is_ball_stopped_on_field(&self) -> bool {
+        !self.is_ball_outside()
+            && self.velocity.norm_squared() < 6.25 // 2.5^2, catch slow rolling balls that need claiming
+            && self.current_owner.is_none()
+    }
+
+    pub fn is_ball_outside(&self) -> bool {
+        self.position.x <= 0.0
+            || self.position.x >= self.field_width
+            || self.position.y <= 0.0
+            || self.position.y >= self.field_height
+    }
+
+    /// Lightweight movement: just apply velocity to position (no ownership logic)
+    pub fn apply_movement(&mut self) {
+        self.position.x += self.velocity.x;
+        self.position.y += self.velocity.y;
+        self.position.z += self.velocity.z;
+        if self.position.z < 0.0 {
+            self.position.z = 0.0;
+        }
+    }
+
+    pub fn reset(&mut self) {
+        self.position.x = self.start_position.x;
+        self.position.y = self.start_position.y;
+        self.position.z = 0.0;
+
+        self.velocity = Vector3::zeros();
+
+        self.current_owner = None;
+        self.previous_owner = None;
+        self.ownership_duration = 0;
+        self.claim_cooldown = 0;
+
+        self.flags.reset();
+        self.pass_target_player_id = None;
+        self.clear_pass_history();
+        self.possession_source = PossessionSource::Unknown;
+        self.possession_source_for = None;
+        self.intercept_rolled = false;
+        self.contested_claim_count = 0;
+        self.unowned_ticks = 0;
+        self.cached_landing_position = self.position;
+        self.pending_set_piece_teleport = None;
+        self.pending_corner_teleports.clear();
+        self.owned_stuck_ticks = 0;
+        self.owned_stuck_logged = false;
+        self.stall_anchor_pos = self.position;
+        self.stall_anchor_tick = 0;
+        self.cached_shot_target = None;
+        self.pending_save_credit = None;
+        self.last_touch_player_id = None;
+        self.last_touch_team_id = None;
+        self.last_touch_tick = 0;
+        self.last_touch_was_controlled = false;
+        self.pass_origin_restart = PassOriginRestart::OpenPlay;
+        self.offside_snapshot = None;
+        self.last_completed_pass_passer_id = None;
+        self.last_completed_pass_receiver_id = None;
+        self.last_completed_pass_tick = 0;
+        self.last_shot_struck_tick = 0;
+    }
+
+    /// Snapshot the most-recent completed pass so the shot-handler
+    /// key-pass linker can credit the passer when the receiver
+    /// shoots within the key-pass window. Called from
+    /// `credit_completed_pass` *before* `clear_pending_pass_metadata`
+    /// nulls out the live pass envelope.
+    #[inline]
+    pub fn record_completed_pass(&mut self, passer_id: u32, receiver_id: u32, tick: u64) {
+        self.last_completed_pass_passer_id = Some(passer_id);
+        self.last_completed_pass_receiver_id = Some(receiver_id);
+        self.last_completed_pass_tick = tick;
+    }
+
+    pub fn clear_player_reference(&mut self, player_id: u32) {
+        if self.current_owner == Some(player_id) {
+            self.current_owner = None;
+            self.ownership_duration = 0;
+        }
+        if self.previous_owner == Some(player_id) {
+            self.previous_owner = None;
+        }
+        if self.pass_target_player_id == Some(player_id) {
+            self.pass_target_player_id = None;
+        }
+        if self.last_completed_pass_passer_id == Some(player_id)
+            || self.last_completed_pass_receiver_id == Some(player_id)
+        {
+            self.last_completed_pass_passer_id = None;
+            self.last_completed_pass_receiver_id = None;
+        }
+        self.take_ball_notified_players
+            .retain(|&id| id != player_id);
+        self.recent_passers.retain(|e| e.player_id != player_id);
+    }
+
+    /// Record a passer in the recent passers ring buffer.
+    /// Skips consecutive duplicates and caps at 5 entries.
+    pub fn record_passer(&mut self, passer_id: u32, team_id: u32, tick: u64) {
+        // Skip consecutive duplicates
+        if self.recent_passers.back().map(|e| e.player_id) == Some(passer_id) {
+            return;
+        }
+        if self.recent_passers.len() >= 5 {
+            self.recent_passers.pop_front();
+        }
+        self.recent_passers.push_back(PassChainEntry {
+            player_id: passer_id,
+            team_id,
+            tick,
+        });
+    }
+
+    /// The teammate whose pass should be credited with an assist for a
+    /// goal scored by `scorer_id` of `scorer_team_id` at `tick`, if any.
+    ///
+    /// Walks the chain newest-first and applies the three rules a real
+    /// assist obeys:
+    ///
+    ///  1. **Same team.** The credited player must be a teammate of the
+    ///     scorer. Without this the resolver happily handed the assist to
+    ///     the goalkeeper whose goal kick got turned over — measured at
+    ///     71% of all assists, 63% of them to keepers.
+    ///  2. **Same possession.** Stop at the first opponent entry. A pass
+    ///     made before the other team had the ball belongs to an earlier
+    ///     phase of play, not to this goal.
+    ///  3. **Recent.** The pass has to have led to the goal, so it must
+    ///     land inside `ASSIST_WINDOW_TICKS`. This is what stops a goal
+    ///     kick from being an "assist" for a solo run half a minute later.
+    pub fn assist_for_goal(&self, scorer_id: u32, scorer_team_id: u32, tick: u64) -> Option<u32> {
+        #[cfg(feature = "match-logs")]
+        use std::sync::atomic::Ordering;
+        #[cfg(feature = "match-logs")]
+        assist_diag::GOALS.fetch_add(1, Ordering::Relaxed);
+
+        for entry in self.recent_passers.iter().rev() {
+            // Rule 2: an opponent touched the chain — earlier entries
+            // belong to a possession that is not this one.
+            if entry.team_id != scorer_team_id {
+                #[cfg(feature = "match-logs")]
+                {
+                    assist_diag::OPPONENT_CHAIN.fetch_add(1, Ordering::Relaxed);
+                    assist_diag::OPPONENT_CHAIN_AGE
+                        .fetch_add(tick.saturating_sub(entry.tick), Ordering::Relaxed);
+                    if self
+                        .recent_passers
+                        .iter()
+                        .any(|e| e.team_id == scorer_team_id && e.player_id != scorer_id)
+                    {
+                        assist_diag::OPPONENT_CHAIN_HAS_TEAMMATE.fetch_add(1, Ordering::Relaxed);
+                    }
+                }
+                return None;
+            }
+            if entry.player_id == scorer_id {
+                continue;
+            }
+            // Rule 3: `tick` is monotonic within a match, but stay
+            // defensive about the ordering anyway.
+            let delay = tick.saturating_sub(entry.tick);
+            if delay > ASSIST_WINDOW_TICKS {
+                #[cfg(feature = "match-logs")]
+                assist_diag::STALE.fetch_add(1, Ordering::Relaxed);
+                return None;
+            }
+            #[cfg(feature = "match-logs")]
+            {
+                assist_diag::CREDITED.fetch_add(1, Ordering::Relaxed);
+                assist_diag::CREDITED_DELAY_TICKS.fetch_add(delay, Ordering::Relaxed);
+            }
+            return Some(entry.player_id);
+        }
+        #[cfg(feature = "match-logs")]
+        {
+            if self.recent_passers.is_empty() {
+                assist_diag::EMPTY_CHAIN.fetch_add(1, Ordering::Relaxed);
+            } else {
+                assist_diag::SCORER_ONLY.fetch_add(1, Ordering::Relaxed);
+            }
+        }
+        None
+    }
+
+    /// Clear the recent passers history (e.g. on tackles, interceptions, clearances).
+    pub fn clear_pass_history(&mut self) {
+        self.recent_passers.clear();
+    }
+
+    /// Label how `player_id` came by the ball.
+    ///
+    /// Ignores repeat events for a player who already has it: `Claimed`
+    /// fires to re-affirm existing ownership as well as to acquire, so
+    /// without this guard a receiver's `PassReception` was relabelled
+    /// `LooseBall` a second later while the ball was still at his feet —
+    /// which read as 97% of shots coming from loose balls.
+    /// For the same carrier only a MORE SPECIFIC label may overwrite: a
+    /// repeat `Claimed` must not downgrade a reception to a loose ball,
+    /// but the pass-completion credit that lands just after a bare
+    /// `Claimed` (a teammate other than the intended target collected
+    /// it) must be allowed to upgrade it.
+    pub fn note_possession_source(&mut self, player_id: u32, source: PossessionSource) {
+        if self.possession_source_for == Some(player_id) && source == PossessionSource::LooseBall {
+            return;
+        }
+        self.possession_source_for = Some(player_id);
+        self.possession_source = source;
+    }
+
+    /// Note that `team_id` now has the ball, dropping the pass chain only
+    /// if the ball genuinely changed hands.
+    ///
+    /// The recovery paths (loose ball gained, ball headed clear, tackle)
+    /// all used to wipe the chain unconditionally. But a loose ball won
+    /// by a TEAMMATE is the same attacking phase: a cross flicked on at
+    /// the near post, a rebound off a block, a knock-down in the box. The
+    /// cross that started the move is still the assist if the move ends
+    /// in a goal, and wiping it left the resolver with nothing to credit
+    /// on roughly a third of all goals (`assist_diag::EMPTY_CHAIN`).
+    ///
+    /// Only a change of TEAM ends the phase.
+    pub fn note_possession(&mut self, team_id: u32) {
+        if self.recent_passers.back().map(|e| e.team_id) != Some(team_id) {
+            self.recent_passers.clear();
+        }
+    }
+
+    /// Clear the pass-window metadata used by the pass-completion classifier
+    /// and the key-pass linker. Called whenever the live pass is no longer
+    /// in flight (claim, interception, expiry, set-piece restart).
+    #[inline]
+    pub fn clear_pending_pass_metadata(&mut self) {
+        self.pending_pass_passer = None;
+        self.pending_pass_origin = None;
+        self.pending_pass_target = None;
+        self.pending_pass_was_cross = false;
+    }
+
+    /// Drop any in-flight shot metadata (xG / shooter id). Called once
+    /// the shot resolves (save / goal / wide / over / opponent claim).
+    #[inline]
+    pub fn clear_shot_metadata(&mut self) {
+        self.last_shot_xgot = 0.0;
+        self.last_shot_shooter_id = None;
+        // A dead ball ends the shot: without this a stale strike would
+        // let the next pass that rolls over the line stand as a goal.
+        self.last_shot_struck_tick = 0;
+    }
+
+    /// Stamp the giveaway tracker for the player who just lost the ball
+    /// via a misplaced pass / lost tackle / dispossession. Subsequent
+    /// shot / goal events from the opposing team within the response
+    /// window will be charged back as an error to this player. The
+    /// `was_own_box` flag is read later by the goal handler to layer the
+    /// own-box-extra penalty on top of `errors_leading_to_goal`.
+    #[inline]
+    pub fn stamp_giveaway(&mut self, player_id: u32, team_id: u32, tick: u64, was_own_box: bool) {
+        self.last_giveaway_player_id = Some(player_id);
+        self.last_giveaway_team_id = Some(team_id);
+        self.last_giveaway_tick = tick;
+        self.last_giveaway_was_own_box = was_own_box;
+    }
+
+    /// Drop the giveaway tracker — the response window has expired or
+    /// the giver's team has recovered the ball.
+    #[inline]
+    pub fn clear_giveaway(&mut self) {
+        self.last_giveaway_player_id = None;
+        self.last_giveaway_team_id = None;
+        self.last_giveaway_was_own_box = false;
+    }
+
+    /// Detect and resolve carry transitions. Called once per tick from
+    /// `update` / `update_light`, after `process_ownership` has settled
+    /// the current owner. When the owner changes (or goes None) we emit
+    /// a `BallEvent::CarryEnded` for the previous carrier; the
+    /// dispatcher classifies the carry and credits the carrier's stats.
+    /// A new carry starts the moment ownership lands on a player.
+    pub fn tick_carry_tracker(&mut self, events: &mut EventCollection) {
+        match (self.carry_owner, self.current_owner) {
+            (Some(prev), Some(curr)) if prev == curr => {
+                // Same carrier — nothing to emit.
+            }
+            (Some(prev), _) => {
+                // Carry ended (owner changed or went None).
+                events.add_ball_event(BallEvent::CarryEnded(
+                    prev,
+                    self.carry_start_position,
+                    self.position,
+                ));
+                self.carry_owner = self.current_owner;
+                self.carry_start_position = self.position;
+            }
+            (None, Some(curr)) => {
+                // Carry begins.
+                self.carry_owner = Some(curr);
+                self.carry_start_position = self.position;
+            }
+            (None, None) => {}
+        }
+    }
+}
+
+#[cfg(test)]
+mod completed_pass_tests {
+    use super::*;
+
+    #[test]
+    fn record_completed_pass_populates_snapshot() {
+        let mut ball = Ball::with_coord(840.0, 545.0);
+        ball.record_completed_pass(7, 11, 1234);
+        assert_eq!(ball.last_completed_pass_passer_id, Some(7));
+        assert_eq!(ball.last_completed_pass_receiver_id, Some(11));
+        assert_eq!(ball.last_completed_pass_tick, 1234);
+    }
+
+    #[test]
+    fn clear_pending_pass_metadata_does_not_clear_completed_snapshot() {
+        // Regression: the centralized completion path used to clear
+        // pending_pass_passer immediately, leaving the shot-handler
+        // key-pass linker without a passer to credit. The completed
+        // snapshot survives the pending clear.
+        let mut ball = Ball::with_coord(840.0, 545.0);
+        ball.pending_pass_passer = Some(7);
+        ball.pending_pass_set_tick = 100;
+        ball.pending_pass_origin = Some(Vector3::new(50.0, 100.0, 0.0));
+        ball.pending_pass_target = Some(Vector3::new(150.0, 100.0, 0.0));
+        ball.pending_pass_was_cross = true;
+        ball.record_completed_pass(7, 11, 200);
+        ball.clear_pending_pass_metadata();
+        assert!(ball.pending_pass_passer.is_none());
+        assert!(ball.pending_pass_origin.is_none());
+        assert!(ball.pending_pass_target.is_none());
+        assert!(!ball.pending_pass_was_cross);
+        // The completed snapshot stays — the key-pass linker reads it.
+        assert_eq!(ball.last_completed_pass_passer_id, Some(7));
+        assert_eq!(ball.last_completed_pass_receiver_id, Some(11));
+        assert_eq!(ball.last_completed_pass_tick, 200);
+    }
+
+    #[test]
+    fn clear_player_reference_drops_completed_pass_snapshot() {
+        // If a player is removed (red card, sub), any completed-pass
+        // metadata referencing them must be cleared so the next shot
+        // doesn't credit a phantom key pass.
+        let mut ball = Ball::with_coord(840.0, 545.0);
+        ball.record_completed_pass(7, 11, 200);
+        ball.clear_player_reference(7);
+        assert!(ball.last_completed_pass_passer_id.is_none());
+        assert!(ball.last_completed_pass_receiver_id.is_none());
+
+        // Receiver removal also wipes (consistency).
+        ball.record_completed_pass(7, 11, 300);
+        ball.clear_player_reference(11);
+        assert!(ball.last_completed_pass_passer_id.is_none());
+        assert!(ball.last_completed_pass_receiver_id.is_none());
+    }
+}
+
+#[cfg(test)]
+mod assist_tests {
+    use super::*;
+
+    const HOME: u32 = 1;
+    const AWAY: u32 = 2;
+
+    fn ball() -> Ball {
+        Ball::with_coord(840.0, 545.0)
+    }
+
+    #[test]
+    fn credits_the_teammate_who_played_the_last_pass() {
+        let mut ball = ball();
+        ball.record_passer(7, HOME, 1000);
+        ball.record_passer(9, HOME, 1200);
+        assert_eq!(ball.assist_for_goal(10, HOME, 1300), Some(9));
+    }
+
+    #[test]
+    fn never_credits_an_opponent() {
+        // The headline bug: an away keeper's goal kick sat in the ring,
+        // the home team turned it over and scored, and the resolver
+        // handed the keeper an assist for the goal he conceded. Across a
+        // season that put goalkeepers at the top of the assist charts.
+        let mut ball = ball();
+        ball.record_passer(200, AWAY, 1000); // away GK's goal kick
+        assert_eq!(ball.assist_for_goal(10, HOME, 1200), None);
+    }
+
+    #[test]
+    fn stops_at_a_possession_break() {
+        // Home passed, the away team had it and passed too, then home
+        // won it back and scored without a pass. The earlier home pass
+        // belongs to a different phase of play — no assist.
+        let mut ball = ball();
+        ball.record_passer(7, HOME, 800);
+        ball.record_passer(200, AWAY, 1000);
+        assert_eq!(ball.assist_for_goal(10, HOME, 1100), None);
+    }
+
+    #[test]
+    fn skips_the_scorer_but_keeps_walking_back() {
+        // Give-and-go: 7 passes, gets it back, scores. The assist is the
+        // teammate who returned it, not 7 himself.
+        let mut ball = ball();
+        ball.record_passer(9, HOME, 1000);
+        ball.record_passer(7, HOME, 1100);
+        ball.record_passer(9, HOME, 1200);
+        assert_eq!(ball.assist_for_goal(7, HOME, 1250), Some(9));
+    }
+
+    #[test]
+    fn a_chain_holding_only_the_scorer_yields_nothing() {
+        let mut ball = ball();
+        ball.record_passer(7, HOME, 1000);
+        assert_eq!(ball.assist_for_goal(7, HOME, 1100), None);
+    }
+
+    #[test]
+    fn a_stale_pass_is_not_an_assist() {
+        // A goal kick is not the assist for a solo run that ends half a
+        // minute later, however unbroken the possession was.
+        let mut ball = ball();
+        ball.record_passer(1, HOME, 1000);
+        let late = 1000 + ASSIST_WINDOW_TICKS + 1;
+        assert_eq!(ball.assist_for_goal(10, HOME, late), None);
+        // One tick inside the window still counts.
+        assert_eq!(
+            ball.assist_for_goal(10, HOME, 1000 + ASSIST_WINDOW_TICKS),
+            Some(1)
+        );
+    }
+
+    #[test]
+    fn empty_chain_yields_nothing() {
+        assert_eq!(ball().assist_for_goal(10, HOME, 500), None);
+    }
+
+    #[test]
+    fn possession_survives_a_teammate_winning_a_loose_ball() {
+        // A cross flicked on, a rebound off a block, a knock-down in the
+        // box — same attacking phase, so the cross is still the assist.
+        let mut ball = ball();
+        ball.record_passer(2, HOME, 1000);
+        ball.note_possession(HOME);
+        assert_eq!(ball.assist_for_goal(9, HOME, 1150), Some(2));
+    }
+
+    #[test]
+    fn possession_drops_the_chain_when_the_ball_changes_hands() {
+        let mut ball = ball();
+        ball.record_passer(2, HOME, 1000);
+        ball.note_possession(AWAY);
+        assert!(ball.recent_passers.is_empty());
+    }
+
+    #[test]
+    fn chain_entries_carry_team_and_tick() {
+        let mut ball = ball();
+        ball.record_passer(7, HOME, 1000);
+        // Consecutive duplicates are still collapsed.
+        ball.record_passer(7, HOME, 1050);
+        assert_eq!(ball.recent_passers.len(), 1);
+        let entry = ball.recent_passers.back().unwrap();
+        assert_eq!(entry.player_id, 7);
+        assert_eq!(entry.team_id, HOME);
+        assert_eq!(entry.tick, 1000);
+    }
+
+    #[test]
+    fn ring_caps_at_five_and_drops_the_oldest() {
+        let mut ball = ball();
+        for i in 0..7u32 {
+            ball.record_passer(i, HOME, 1000 + i as u64);
+        }
+        assert_eq!(ball.recent_passers.len(), 5);
+        assert_eq!(ball.recent_passers.front().unwrap().player_id, 2);
+        assert_eq!(ball.recent_passers.back().unwrap().player_id, 6);
+    }
+}

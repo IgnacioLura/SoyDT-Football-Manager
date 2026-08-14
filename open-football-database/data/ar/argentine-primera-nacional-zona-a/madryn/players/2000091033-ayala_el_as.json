@@ -1,0 +1,43 @@
+{
+  "id": 2000091033,
+  "first_name": "Elías",
+  "last_name": "Ayala",
+  "birth_date": "2001-02-16",
+  "country_id": 1655,
+  "club_id": 14031205,
+  "positions": [
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 55,
+    "right": 100
+  },
+  "current_ability": 104,
+  "potential_ability": 116,
+  "value": 58000,
+  "contract": {
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2021, "c": 102924, "p": 0 },
+    { "s": 2022, "c": 102924, "p": 2 },
+    { "s": 2022, "c": 5280339, "p": 6 },
+    { "s": 2023, "c": 102924, "p": 0 },
+    { "s": 2024, "c": 81, "p": 0 },
+    { "s": 2024, "c": 102957, "p": 10 },
+    { "s": 2025, "c": 14031205, "p": 19, "g": 1 }
+  ]
+}

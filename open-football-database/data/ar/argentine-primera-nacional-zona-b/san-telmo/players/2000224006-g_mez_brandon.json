@@ -1,0 +1,30 @@
+{
+  "id": 2000224006,
+  "first_name": "Brandon",
+  "last_name": "Gómez",
+  "birth_date": "2005-08-17",
+  "country_id": 1649,
+  "club_id": 3101514,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 86,
+  "potential_ability": -6,
+  "value": 169000,
+  "contract": {
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2022, "c": 3101514, "p": 0 },
+    { "s": 2023, "c": 3101514, "p": 0 }
+  ]
+}

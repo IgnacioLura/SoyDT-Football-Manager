@@ -1,0 +1,19 @@
+{
+  "id": 19244752,
+  "first_name": "João",
+  "last_name": "Carlos",
+  "birth_date": "1987-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": 118
+}

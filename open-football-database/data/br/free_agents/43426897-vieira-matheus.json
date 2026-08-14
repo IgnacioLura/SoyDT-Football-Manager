@@ -1,0 +1,31 @@
+{
+  "id": 43426897,
+  "first_name": "Matheus",
+  "last_name": "Vieira",
+  "birth_date": "1998-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "ML",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 25,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 98
+}

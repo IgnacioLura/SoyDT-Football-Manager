@@ -1,0 +1,23 @@
+{
+  "id": 14008314,
+  "first_name": "José",
+  "last_name": "Luis Fernández",
+  "birth_date": "1987-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "ML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 110,
+  "potential_ability": 116
+}

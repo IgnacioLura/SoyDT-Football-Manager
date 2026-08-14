@@ -1,0 +1,9 @@
+**/target
+**/node_modules
+**/bin
+**/obj
+**/dist
+soydt/web/node_modules
+open-football-database
+ffi-spike
+.git

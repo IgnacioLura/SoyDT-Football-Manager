@@ -1,0 +1,32 @@
+{
+  "id": 2000020492,
+  "first_name": "Anthoni",
+  "last_name": "",
+  "birth_date": "2002-01-23",
+  "country_id": 1651,
+  "club_id": 326,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 55,
+    "right": 100
+  },
+  "current_ability": 114,
+  "potential_ability": 130,
+  "value": 1000000,
+  "contract": {    "expiration": "2029-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 326, "p": 2 },
+    { "s": 2025, "c": 326, "p": 18 }
+  ],
+  "ids": {
+    "transfermarkt.com": "869437"
+  }
+}

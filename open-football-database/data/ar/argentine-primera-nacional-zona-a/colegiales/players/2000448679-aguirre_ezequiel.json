@@ -1,0 +1,31 @@
+{
+  "id": 2000448679,
+  "first_name": "Ezequiel",
+  "last_name": "Aguirre",
+  "birth_date": "2002-09-24",
+  "country_id": 1649,
+  "club_id": 951312,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 86,
+  "potential_ability": 96,
+  "value": 131000,
+  "contract": {
+    "expiration": "2029-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 14031220, "p": 5 },
+    { "s": 2025, "c": 952753, "p": 18, "g": 1 },
+    { "s": 2025, "c": 2000306910, "p": 0 }
+  ]
+}

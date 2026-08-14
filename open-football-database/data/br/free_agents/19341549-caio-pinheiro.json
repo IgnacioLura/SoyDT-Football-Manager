@@ -1,0 +1,27 @@
+{
+  "id": 19341549,
+  "first_name": "Pinheiro",
+  "last_name": "Caio",
+  "birth_date": "1998-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "DL",
+      "level": 20
+    },
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 30
+  },
+  "current_ability": 122,
+  "potential_ability": 130
+}

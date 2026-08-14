@@ -1,0 +1,34 @@
+{
+  "id": 2000374643,
+  "first_name": "Rodrigo",
+  "last_name": "Bacidalupe",
+  "birth_date": "2007-07-22",
+  "country_id": 1649,
+  "club_id": 82,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 100,
+  "potential_ability": -75,
+  "value": 9000000,
+  "contract": {
+    "salary": 16952,
+    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2020, "c": 67020459, "p": 0 },
+    { "s": 2021, "c": 67020459, "p": 0 },
+    { "s": 2022, "c": 67020459, "p": 0 },
+    { "s": 2023, "c": 67020459, "p": 0 },
+    { "s": 2024, "c": 2000052593, "p": 22 }
+  ]
+}

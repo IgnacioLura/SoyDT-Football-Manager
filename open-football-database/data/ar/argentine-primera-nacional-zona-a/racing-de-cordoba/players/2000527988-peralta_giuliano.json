@@ -1,0 +1,30 @@
+{
+  "id": 2000527988,
+  "first_name": "Giuliano",
+  "last_name": "Peralta",
+  "birth_date": "2006-06-03",
+  "country_id": 1649,
+  "club_id": 3102137,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 45
+  },
+  "current_ability": 74,
+  "potential_ability": -5,
+  "value": 58000,
+  "contract": {
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 2000370425, "p": 1 },
+    { "s": 2025, "c": 2000469809, "p": 12, "g": 6 }
+  ]
+}

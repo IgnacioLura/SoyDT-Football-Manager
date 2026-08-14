@@ -1,0 +1,49 @@
+{
+  "id": 14227704,
+  "first_name": "Juan",
+  "last_name": "Carlos Portillo",
+  "birth_date": "2000-05-18",
+  "country_id": 1649,
+  "club_id": 94,
+  "positions": [
+    {
+      "code": "DL",
+      "level": 20
+    },
+    {
+      "code": "DC",
+      "level": 20
+    },
+    {
+      "code": "DM",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 65,
+    "right": 100
+  },
+  "current_ability": 126,
+  "potential_ability": 130,
+  "value": 10000000,
+  "contract": {
+    "salary": 364000,
+    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2018, "c": 14022187, "p": 7 },
+    { "s": 2019, "c": 14022187, "p": 7 },
+    { "s": 2020, "c": 102467, "p": 3 },
+    { "s": 2021, "c": 102467, "p": 30 },
+    { "s": 2022, "c": 102467, "p": 36 },
+    { "s": 2023, "c": 102489, "p": 31, "g": 1 },
+    { "s": 2024, "c": 102489, "p": 33 },
+    { "s": 2025, "c": 94, "p": 11 },
+    { "s": 2025, "c": 102489, "p": 13 }
+  ],
+  "ids": {
+    "transfermarkt.com": "830842"
+  }
+}

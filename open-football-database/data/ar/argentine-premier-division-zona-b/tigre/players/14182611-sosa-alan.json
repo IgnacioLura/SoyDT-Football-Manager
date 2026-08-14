@@ -1,0 +1,50 @@
+{
+  "id": 14182611,
+  "first_name": "Alan",
+  "last_name": "Sosa",
+  "birth_date": "1996-04-27",
+  "country_id": 1649,
+  "club_id": 3100018,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 116,
+  "potential_ability": 116,
+  "value": 286000,
+  "contract": {
+    "salary": 52000,
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 3101457,
+    "expiration": "2027-12-31",
+    "salary": 52000,
+    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2017, "c": 102467, "p": 0 },
+    { "s": 2018, "c": 102467, "p": 0 },
+    { "s": 2019, "c": 102467, "p": 0 },
+    { "s": 2020, "c": 14188356, "p": 0 },
+    { "s": 2021, "c": 14188356, "p": 12 },
+    { "s": 2022, "c": 952724, "p": 26 },
+    { "s": 2023, "c": 102957, "p": 12 },
+    { "s": 2023, "c": 952724, "p": 13 },
+    { "s": 2024, "c": 102957, "p": 26 },
+    { "s": 2024, "c": 3100018, "p": 3 },
+    { "s": 2025, "c": 3100018, "p": 0 },
+    { "s": 2025, "c": 3101457, "p": 16 }
+  ],
+  "ids": {
+    "transfermarkt.com": "545408"
+  }
+}

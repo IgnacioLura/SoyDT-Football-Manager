@@ -1,0 +1,28 @@
+{
+  "id": 2000524978,
+  "first_name": "Jeremías",
+  "last_name": "Biani",
+  "birth_date": "2008-03-19",
+  "country_id": 1649,
+  "club_id": 81,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 80,
+  "potential_ability": -65,
+  "value": 374000,
+  "contract": {    "expiration": "2029-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 105998, "p": 1 }
+  ]
+}

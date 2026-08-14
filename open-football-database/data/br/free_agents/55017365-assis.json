@@ -1,0 +1,19 @@
+{
+  "id": 55017365,
+  "first_name": "Assis",
+  "last_name": "",
+  "birth_date": "1989-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 30,
+    "right": 100
+  },
+  "current_ability": 94,
+  "potential_ability": 116
+}

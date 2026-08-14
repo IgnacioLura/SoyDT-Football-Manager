@@ -1,0 +1,19 @@
+{
+  "id": 2000243441,
+  "first_name": "Alexander",
+  "last_name": "Acosta",
+  "birth_date": "2004-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 20,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": -65
+}

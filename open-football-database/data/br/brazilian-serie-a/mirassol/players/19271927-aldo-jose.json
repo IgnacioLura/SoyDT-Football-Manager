@@ -1,0 +1,50 @@
+{
+  "id": 19271927,
+  "first_name": "José",
+  "last_name": "Aldo",
+  "birth_date": "1998-07-25",
+  "country_id": 1651,
+  "club_id": 301344,
+  "positions": [
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 65,
+    "right": 100
+  },
+  "current_ability": 122,
+  "potential_ability": 128,
+  "value": 4000000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2019, "c": 326, "p": 1 },
+    { "s": 2020, "c": 326, "p": 0 },
+    { "s": 2021, "c": 331, "p": 5 },
+    { "s": 2021, "c": 301377, "p": 0 },
+    { "s": 2022, "c": 331, "p": 22, "g": 4 },
+    { "s": 2023, "c": 107216, "p": 27 },
+    { "s": 2024, "c": 107216, "p": 29, "g": 6 },
+    { "s": 2025, "c": 301344, "p": 30 }
+  ],
+  "ids": {
+    "transfermarkt.com": "644204"
+  }
+}

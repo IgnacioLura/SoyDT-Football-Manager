@@ -1,0 +1,19 @@
+{
+  "id": 2000443536,
+  "first_name": "Gustavo",
+  "last_name": "Pereira",
+  "birth_date": "2002-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 110
+}

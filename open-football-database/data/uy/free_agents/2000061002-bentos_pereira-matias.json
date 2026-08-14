@@ -1,0 +1,23 @@
+{
+  "id": 2000061002,
+  "first_name": "Matías",
+  "last_name": "Bentos-Pereira",
+  "birth_date": "2001-01-01",
+  "country_id": 1657,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 100
+}

@@ -1,0 +1,37 @@
+{
+  "id": 2000125496,
+  "first_name": "Caio",
+  "last_name": "Maia",
+  "birth_date": "2005-04-01",
+  "country_id": 1651,
+  "club_id": 314,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 94,
+  "potential_ability": -65,
+  "value": 220000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 900678,
+    "expiration": "2027-11-30",    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2024, "c": 314, "p": 2 },
+    { "s": 2025, "c": 314, "p": 0 }
+  ]
+}

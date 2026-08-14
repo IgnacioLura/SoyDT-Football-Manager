@@ -1,0 +1,28 @@
+{
+  "id": 2000458243,
+  "first_name": "Nazareno",
+  "last_name": "Fazzi",
+  "birth_date": "2006-12-30",
+  "country_id": 1649,
+  "club_id": 102467,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 76,
+  "potential_ability": -6,
+  "value": 208000,
+  "contract": {    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 102467, "p": 0 }
+  ]
+}

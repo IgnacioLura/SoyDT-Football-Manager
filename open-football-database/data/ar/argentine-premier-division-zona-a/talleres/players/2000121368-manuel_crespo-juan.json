@@ -1,0 +1,29 @@
+{
+  "id": 2000121368,
+  "first_name": "Juan",
+  "last_name": "Manuel Crespo",
+  "birth_date": "2002-09-29",
+  "country_id": 1649,
+  "club_id": 102489,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 82,
+  "potential_ability": 100,
+  "value": 10000,
+  "contract": {    "expiration": "2025-12-31",
+    "started": "2025-07-01",
+    "contract_type": "PartTime"
+  },
+  "history": [
+    { "s": 2023, "c": 102957, "p": 0 },
+    { "s": 2025, "c": 102489, "p": 0 }
+  ]
+}

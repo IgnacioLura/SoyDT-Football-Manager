@@ -1,0 +1,19 @@
+{
+  "id": 14060950,
+  "first_name": "Carlos",
+  "last_name": "Franco",
+  "birth_date": "1992-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 108,
+  "potential_ability": 112
+}

@@ -1,0 +1,19 @@
+{
+  "id": 14189059,
+  "first_name": "Pablo",
+  "last_name": "Barboza",
+  "birth_date": "1996-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 100,
+  "potential_ability": 112
+}

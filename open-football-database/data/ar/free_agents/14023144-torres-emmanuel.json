@@ -1,0 +1,19 @@
+{
+  "id": 14023144,
+  "first_name": "Emmanuel",
+  "last_name": "Torres",
+  "birth_date": "1992-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 94
+}

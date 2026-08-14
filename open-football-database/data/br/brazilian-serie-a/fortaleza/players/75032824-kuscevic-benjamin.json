@@ -1,0 +1,48 @@
+{
+  "id": 75032824,
+  "first_name": "Benjamín",
+  "last_name": "Kuscevic",
+  "birth_date": "1996-05-02",
+  "country_id": 1652,
+  "club_id": 104750,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 126,
+  "potential_ability": 132,
+  "value": 4000000,
+  "contract": {    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 72000789,
+    "expiration": "2027-12-31",    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2014, "c": 403, "p": 0 },
+    { "s": 2014, "c": 1736, "p": 0 },
+    { "s": 2015, "c": 403, "p": 5 },
+    { "s": 2016, "c": 403, "p": 13, "g": 1 },
+    { "s": 2017, "c": 403, "p": 6, "g": 1 },
+    { "s": 2018, "c": 403, "p": 22 },
+    { "s": 2019, "c": 403, "p": 13 },
+    { "s": 2020, "c": 329, "p": 11 },
+    { "s": 2020, "c": 403, "p": 7, "g": 1 },
+    { "s": 2021, "c": 329, "p": 11 },
+    { "s": 2022, "c": 329, "p": 5 },
+    { "s": 2023, "c": 104776, "p": 23, "g": 2 },
+    { "s": 2024, "c": 104750, "p": 22, "g": 2 },
+    { "s": 2025, "c": 104750, "p": 20, "g": 1 }
+  ],
+  "ids": {
+    "transfermarkt.com": "340840"
+  }
+}

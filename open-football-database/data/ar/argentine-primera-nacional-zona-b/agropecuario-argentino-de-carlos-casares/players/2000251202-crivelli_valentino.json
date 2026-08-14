@@ -1,0 +1,29 @@
+{
+  "id": 2000251202,
+  "first_name": "Valentino",
+  "last_name": "Crivelli",
+  "birth_date": "2006-07-20",
+  "country_id": 1649,
+  "club_id": 14064697,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 78,
+  "potential_ability": -55,
+  "value": 141000,
+  "contract": {
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2023, "c": 14031222, "p": 0 }
+  ]
+}

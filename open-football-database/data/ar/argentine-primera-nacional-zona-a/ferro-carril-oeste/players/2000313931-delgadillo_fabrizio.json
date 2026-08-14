@@ -1,0 +1,34 @@
+{
+  "id": 2000313931,
+  "first_name": "Fabrizio",
+  "last_name": "Delgadillo",
+  "birth_date": "2006-01-09",
+  "country_id": 1649,
+  "club_id": 86,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 76,
+  "potential_ability": -55,
+  "value": 114000,
+  "contract": {
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2018, "c": 2000290848, "p": 2 },
+    { "s": 2019, "c": 2000290848, "p": 9, "g": 2 },
+    { "s": 2020, "c": 2000290848, "p": 8, "g": 3 },
+    { "s": 2021, "c": 2000290848, "p": 3, "g": 1 },
+    { "s": 2022, "c": 2000290848, "p": 8 },
+    { "s": 2023, "c": 2000290848, "p": 17, "g": 3 }
+  ]
+}

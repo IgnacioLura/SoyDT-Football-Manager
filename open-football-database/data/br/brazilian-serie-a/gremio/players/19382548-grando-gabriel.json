@@ -1,0 +1,35 @@
+{
+  "id": 19382548,
+  "first_name": "Gabriel",
+  "last_name": "Grando",
+  "birth_date": "2000-03-29",
+  "country_id": 1651,
+  "club_id": 324,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 122,
+  "potential_ability": 130,
+  "value": 2000000,
+  "contract": {    "expiration": "2029-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2021, "c": 324, "p": 24 },
+    { "s": 2022, "c": 324, "p": 13 },
+    { "s": 2023, "c": 324, "p": 31 },
+    { "s": 2024, "c": 324, "p": 0 },
+    { "s": 2025, "c": 324, "p": 6 }
+  ],
+  "ids": {
+    "transfermarkt.com": "878037"
+  }
+}

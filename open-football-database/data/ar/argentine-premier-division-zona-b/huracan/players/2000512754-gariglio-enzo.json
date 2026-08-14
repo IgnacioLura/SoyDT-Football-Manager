@@ -1,0 +1,32 @@
+{
+  "id": 2000512754,
+  "first_name": "Enzo",
+  "last_name": "Gariglio",
+  "birth_date": "2008-04-13",
+  "country_id": 1649,
+  "club_id": 88,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 76,
+  "potential_ability": -6,
+  "value": 283000,
+  "contract": {    "expiration": "2029-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2021, "c": 91149229, "p": 5 },
+    { "s": 2022, "c": 35117249, "p": 0 },
+    { "s": 2023, "c": 2000261458, "p": 2 },
+    { "s": 2024, "c": 879193, "p": 1 },
+    { "s": 2025, "c": 2000207626, "p": 1 }
+  ]
+}

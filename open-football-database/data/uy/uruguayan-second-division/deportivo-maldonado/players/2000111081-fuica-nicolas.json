@@ -1,0 +1,38 @@
+{
+  "id": 2000111081,
+  "first_name": "Nicolás",
+  "last_name": "Fuica",
+  "birth_date": "2004-05-03",
+  "country_id": 1657,
+  "club_id": 116309,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 55,
+    "right": 100
+  },
+  "current_ability": 100,
+  "potential_ability": 116,
+  "value": 56000,
+  "contract": {    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2020, "c": 116309, "p": 0 },
+    { "s": 2021, "c": 116309, "p": 0 },
+    { "s": 2022, "c": 116309, "p": 0 },
+    { "s": 2023, "c": 116309, "p": 2 },
+    { "s": 2024, "c": 116309, "p": 12 },
+    { "s": 2025, "c": 1917, "p": 13 },
+    { "s": 2025, "c": 116309, "p": 2 }
+  ]
+}

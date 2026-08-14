@@ -1,0 +1,23 @@
+{
+  "id": 2000225842,
+  "first_name": "Isaías",
+  "last_name": "Ciavarelli",
+  "birth_date": "2002-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 114
+}

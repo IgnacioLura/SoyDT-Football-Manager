@@ -1,0 +1,19 @@
+{
+  "id": 19097925,
+  "first_name": "Junior",
+  "last_name": "Alves",
+  "birth_date": "1990-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 25,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 104
+}

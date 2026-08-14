@@ -1,0 +1,25 @@
+{
+  "id": 2000463755,
+  "first_name": "Davi",
+  "last_name": "Gomes",
+  "birth_date": "2008-02-29",
+  "country_id": 1651,
+  "club_id": 339,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 74,
+  "potential_ability": -6,
+  "value": 31000,
+  "contract": {    "expiration": "2027-07-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

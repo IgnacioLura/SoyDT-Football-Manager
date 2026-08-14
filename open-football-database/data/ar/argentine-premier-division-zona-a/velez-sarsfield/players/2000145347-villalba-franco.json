@@ -1,0 +1,27 @@
+{
+  "id": 2000145347,
+  "first_name": "Franco",
+  "last_name": "Villalba",
+  "birth_date": "2006-02-03",
+  "country_id": 1649,
+  "club_id": 98,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": -65,
+  "value": 324000,
+  "contract": {
+    "salary": 11544,
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

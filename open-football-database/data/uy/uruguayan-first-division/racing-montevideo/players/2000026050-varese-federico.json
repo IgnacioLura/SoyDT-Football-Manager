@@ -1,0 +1,36 @@
+{
+  "id": 2000026050,
+  "first_name": "Federico",
+  "last_name": "Varese",
+  "birth_date": "2003-03-25",
+  "country_id": 1657,
+  "club_id": 130849,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 55,
+    "right": 100
+  },
+  "current_ability": 104,
+  "potential_ability": 124,
+  "value": 364000,
+  "contract": {    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2018, "c": 1917, "p": 0 },
+    { "s": 2018, "c": 130848, "p": 0 },
+    { "s": 2019, "c": 130848, "p": 0 },
+    { "s": 2020, "c": 130848, "p": 0 },
+    { "s": 2021, "c": 130848, "p": 0 },
+    { "s": 2022, "c": 130848, "p": 0 },
+    { "s": 2023, "c": 130848, "p": 28 },
+    { "s": 2024, "c": 130848, "p": 30 },
+    { "s": 2025, "c": 130848, "p": 1 }
+  ]
+}

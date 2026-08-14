@@ -1,0 +1,25 @@
+{
+  "id": 2000464008,
+  "first_name": "Federico",
+  "last_name": "Rivas",
+  "birth_date": "2009-04-18",
+  "country_id": 1649,
+  "club_id": 98,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 76,
+  "potential_ability": -7,
+  "value": 465000,
+  "contract": {    "expiration": "2030-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

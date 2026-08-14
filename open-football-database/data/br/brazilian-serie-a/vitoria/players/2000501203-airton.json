@@ -1,0 +1,33 @@
+{
+  "id": 2000501203,
+  "first_name": "Airton",
+  "last_name": "",
+  "birth_date": "2008-06-14",
+  "country_id": 1651,
+  "club_id": 340,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 60,
+  "potential_ability": -6,
+  "value": 23000,
+  "contract": {    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

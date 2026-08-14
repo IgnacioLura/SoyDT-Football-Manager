@@ -1,0 +1,27 @@
+{
+  "id": 19010255,
+  "first_name": "Giuliano",
+  "last_name": "",
+  "birth_date": "1990-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 60,
+    "right": 100
+  },
+  "current_ability": 114,
+  "potential_ability": 150
+}

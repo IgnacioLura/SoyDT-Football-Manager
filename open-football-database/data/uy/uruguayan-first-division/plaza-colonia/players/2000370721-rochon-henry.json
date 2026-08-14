@@ -1,0 +1,30 @@
+{
+  "id": 2000370721,
+  "first_name": "Henry",
+  "last_name": "Rochón",
+  "birth_date": "2007-08-15",
+  "country_id": 1657,
+  "club_id": 5512779,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 66,
+  "potential_ability": -5,
+  "value": 37000,
+  "contract": {    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2023, "c": 5512779, "p": 0 },
+    { "s": 2024, "c": 5512779, "p": 0 },
+    { "s": 2025, "c": 5512779, "p": 0 }
+  ]
+}

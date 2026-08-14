@@ -1,0 +1,31 @@
+{
+  "id": 2000387869,
+  "first_name": "Caíque",
+  "last_name": "",
+  "birth_date": "2004-12-19",
+  "country_id": 1651,
+  "club_id": 327,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 65,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": -6,
+  "value": 53000,
+  "contract": {    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 8832365, "p": 5 }
+  ],
+  "ids": {
+    "transfermarkt.com": "555310"
+  }
+}

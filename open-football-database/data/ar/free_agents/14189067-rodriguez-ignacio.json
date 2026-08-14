@@ -1,0 +1,23 @@
+{
+  "id": 14189067,
+  "first_name": "Ignacio",
+  "last_name": "Rodríguez",
+  "birth_date": "1999-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ML",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 35
+  },
+  "current_ability": 92,
+  "potential_ability": 98
+}

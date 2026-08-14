@@ -1,0 +1,19 @@
+{
+  "id": 14022973,
+  "first_name": "Luis",
+  "last_name": "Fariña",
+  "birth_date": "1991-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 110,
+  "potential_ability": 126
+}

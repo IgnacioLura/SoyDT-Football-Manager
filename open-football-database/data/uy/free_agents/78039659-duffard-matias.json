@@ -1,0 +1,27 @@
+{
+  "id": 78039659,
+  "first_name": "Matías",
+  "last_name": "Duffard",
+  "birth_date": "1989-01-01",
+  "country_id": 1657,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 60,
+    "right": 100
+  },
+  "current_ability": 98,
+  "potential_ability": 112
+}

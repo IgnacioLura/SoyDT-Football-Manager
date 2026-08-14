@@ -1,0 +1,23 @@
+{
+  "id": 67232116,
+  "first_name": "Franchu",
+  "last_name": "",
+  "birth_date": "1998-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 70,
+    "right": 100
+  },
+  "current_ability": 118,
+  "potential_ability": 136
+}

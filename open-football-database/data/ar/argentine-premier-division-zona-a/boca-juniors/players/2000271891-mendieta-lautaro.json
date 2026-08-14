@@ -1,0 +1,32 @@
+{
+  "id": 2000271891,
+  "first_name": "Lautaro",
+  "last_name": "Mendieta",
+  "birth_date": "2006-04-27",
+  "country_id": 1649,
+  "club_id": 82,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": -6,
+  "value": 215000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 485686, "p": 12 }
+  ]
+}

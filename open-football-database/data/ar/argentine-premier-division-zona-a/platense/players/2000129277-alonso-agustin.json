@@ -1,0 +1,50 @@
+{
+  "id": 2000129277,
+  "first_name": "Agustín",
+  "last_name": "Alonso",
+  "birth_date": "2001-01-23",
+  "country_id": 1649,
+  "club_id": 92,
+  "positions": [
+    {
+      "code": "ML",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 60,
+    "right": 100
+  },
+  "current_ability": 108,
+  "potential_ability": 122,
+  "value": 233000,
+  "contract": {
+    "salary": 18408,
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 108574,
+    "expiration": "2027-12-31",
+    "salary": 18408,
+    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2022, "c": 92, "p": 1 },
+    { "s": 2023, "c": 92, "p": 7 },
+    { "s": 2024, "c": 108510, "p": 34, "g": 3 },
+    { "s": 2025, "c": 86, "p": 9, "g": 1 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1015522"
+  }
+}

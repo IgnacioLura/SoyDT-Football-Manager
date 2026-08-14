@@ -1,0 +1,23 @@
+{
+  "id": 14192188,
+  "first_name": "Mariano",
+  "last_name": "Klauss",
+  "birth_date": "1993-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    },
+    {
+      "code": "DM",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 92
+}

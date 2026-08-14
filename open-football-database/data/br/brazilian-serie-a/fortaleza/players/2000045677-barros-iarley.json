@@ -1,0 +1,41 @@
+{
+  "id": 2000045677,
+  "first_name": "Iarley",
+  "last_name": "Barros",
+  "birth_date": "2003-04-15",
+  "country_id": 1651,
+  "club_id": 104750,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 100,
+  "potential_ability": -6,
+  "value": 78000,
+  "contract": {    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 107203,
+    "expiration": "2027-10-30",    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2020, "c": 19270038, "p": 1 },
+    { "s": 2025, "c": 301100, "p": 3, "g": 3 }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "id": 2000248632,
+  "first_name": "Matías",
+  "last_name": "Schulz",
+  "birth_date": "2005-07-31",
+  "country_id": 1649,
+  "club_id": 102467,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 30,
+    "right": 100
+  },
+  "current_ability": 98,
+  "potential_ability": -75,
+  "value": 1000000,
+  "contract": {    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 102467, "p": 0 }
+  ]
+}

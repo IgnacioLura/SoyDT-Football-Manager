@@ -1,0 +1,29 @@
+{
+  "id": 2000389037,
+  "first_name": "Alex",
+  "last_name": "Costa Palomo",
+  "birth_date": "2006-03-02",
+  "country_id": 1649,
+  "club_id": 108531,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 86,
+  "potential_ability": -6,
+  "value": 262000,
+  "contract": {
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2023, "c": 96, "p": 0 }
+  ]
+}

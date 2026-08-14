@@ -1,0 +1,47 @@
+{
+  "id": 78104915,
+  "first_name": "Gastón",
+  "last_name": "Martirena",
+  "birth_date": "2000-01-05",
+  "country_id": 1657,
+  "club_id": 93,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 55,
+    "right": 100
+  },
+  "current_ability": 126,
+  "potential_ability": 130,
+  "value": 5000000,
+  "contract": {
+    "salary": 156000,
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2016, "c": 1920, "p": 0 },
+    { "s": 2017, "c": 1920, "p": 0 },
+    { "s": 2018, "c": 1920, "p": 0 },
+    { "s": 2019, "c": 1920, "p": 0 },
+    { "s": 2020, "c": 1920, "p": 2 },
+    { "s": 2021, "c": 1920, "p": 24, "g": 3 },
+    { "s": 2022, "c": 1920, "p": 34, "g": 1 },
+    { "s": 2023, "c": 93, "p": 9, "g": 1 },
+    { "s": 2023, "c": 1920, "p": 20, "g": 4 },
+    { "s": 2024, "c": 93, "p": 27, "g": 3 },
+    { "s": 2025, "c": 93, "p": 25, "g": 2 }
+  ],
+  "ids": {
+    "transfermarkt.com": "744324"
+  }
+}

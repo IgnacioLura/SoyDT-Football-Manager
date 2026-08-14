@@ -1,0 +1,29 @@
+{
+  "id": 2000531766,
+  "first_name": "Facundo",
+  "last_name": "Agüero",
+  "birth_date": "2006-04-21",
+  "country_id": 1649,
+  "club_id": 102474,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 74,
+  "potential_ability": -55,
+  "value": 103000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 2000416067,
+    "expiration": "2027-02-28",    "wage_contribution_pct": 100
+  }
+}

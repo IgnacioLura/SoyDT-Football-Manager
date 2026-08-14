@@ -1,0 +1,23 @@
+{
+  "id": 14078997,
+  "first_name": "Enrique",
+  "last_name": "Blanco",
+  "birth_date": "1997-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ML",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 50
+  },
+  "current_ability": 90,
+  "potential_ability": 106
+}

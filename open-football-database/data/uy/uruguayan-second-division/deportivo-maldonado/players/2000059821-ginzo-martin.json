@@ -1,0 +1,43 @@
+{
+  "id": 2000059821,
+  "first_name": "Martín",
+  "last_name": "Ginzo",
+  "birth_date": "2002-03-05",
+  "country_id": 1649,
+  "club_id": 116309,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "DL",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 102,
+  "potential_ability": 114,
+  "value": 60000,
+  "contract": {
+    "salary": 22100,
+    "expiration": "2027-06-30",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2022, "c": 1666, "p": 7 },
+    { "s": 2023, "c": 90, "p": 0 },
+    { "s": 2023, "c": 1666, "p": 0 },
+    { "s": 2024, "c": 90, "p": 0 },
+    { "s": 2024, "c": 116309, "p": 10 },
+    { "s": 2025, "c": 14064697, "p": 9 }
+  ]
+}

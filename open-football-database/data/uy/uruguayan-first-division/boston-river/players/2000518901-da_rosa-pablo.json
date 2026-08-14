@@ -1,0 +1,29 @@
+{
+  "id": 2000518901,
+  "first_name": "Pablo",
+  "last_name": "da Rosa",
+  "birth_date": "2008-12-27",
+  "country_id": 1657,
+  "club_id": 5512793,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 64,
+  "potential_ability": -6,
+  "value": 69000,
+  "contract": {    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 5512793, "p": 0 },
+    { "s": 2025, "c": 5512793, "p": 0 }
+  ]
+}

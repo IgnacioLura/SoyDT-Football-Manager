@@ -1,0 +1,27 @@
+{
+  "id": 78006761,
+  "first_name": "Pablo",
+  "last_name": "Caballero",
+  "birth_date": "1987-01-01",
+  "country_id": 1657,
+  "positions": [
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 60,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 124
+}

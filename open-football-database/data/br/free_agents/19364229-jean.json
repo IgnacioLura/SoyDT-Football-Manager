@@ -1,0 +1,27 @@
+{
+  "id": 19364229,
+  "first_name": "Jean",
+  "last_name": "",
+  "birth_date": "1997-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 120
+}

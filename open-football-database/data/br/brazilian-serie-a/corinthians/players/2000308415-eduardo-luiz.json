@@ -1,0 +1,32 @@
+{
+  "id": 2000308415,
+  "first_name": "Luiz",
+  "last_name": "Eduardo",
+  "birth_date": "2007-06-26",
+  "country_id": 1651,
+  "club_id": 319,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 25
+  },
+  "current_ability": 78,
+  "potential_ability": -65,
+  "value": 63000,
+  "contract": {    "expiration": "2029-04-07",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2023, "c": 2000252590, "p": 16, "g": 9 },
+    { "s": 2024, "c": 2000252485, "p": 18, "g": 6 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1096840"
+  }
+}

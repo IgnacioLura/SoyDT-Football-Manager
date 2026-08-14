@@ -1,0 +1,27 @@
+{
+  "id": 19170240,
+  "first_name": "Alan",
+  "last_name": "Pinheiro",
+  "birth_date": "1992-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 100,
+  "potential_ability": 124
+}

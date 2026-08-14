@@ -1,0 +1,23 @@
+{
+  "id": 19380661,
+  "first_name": "Fernando",
+  "last_name": "Pileggi",
+  "birth_date": "1999-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "DL",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 112
+}

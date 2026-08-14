@@ -1,0 +1,23 @@
+{
+  "id": 78021875,
+  "first_name": "Diego",
+  "last_name": "Polenta",
+  "birth_date": "1992-01-01",
+  "country_id": 1657,
+  "positions": [
+    {
+      "code": "DL",
+      "level": 20
+    },
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 118,
+  "potential_ability": 136
+}

@@ -1,0 +1,33 @@
+{
+  "id": 2000258331,
+  "first_name": "Sebastián",
+  "last_name": "Marfort",
+  "birth_date": "2002-09-17",
+  "country_id": 1649,
+  "club_id": 3102137,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 102,
+  "potential_ability": 112,
+  "value": 158000,
+  "contract": {
+    "salary": 276,
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2022, "c": 3102137, "p": 0 },
+    { "s": 2023, "c": 3102137, "p": 1, "g": 1 },
+    { "s": 2024, "c": 3102137, "p": 12, "g": 1 },
+    { "s": 2025, "c": 3102137, "p": 10 }
+  ]
+}

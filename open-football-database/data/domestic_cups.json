@@ -1,0 +1,17 @@
+[
+  {
+    "country_slug": "brazil",
+    "slug": "copa-do-brasil",
+    "name": "Copa do Brasil"
+  },
+  {
+    "country_slug": "argentina",
+    "slug": "copa-argentina",
+    "name": "Copa Argentina"
+  },
+  {
+    "country_slug": "uruguay",
+    "slug": "copa-uruguay",
+    "name": "Copa Uruguay"
+  }
+]

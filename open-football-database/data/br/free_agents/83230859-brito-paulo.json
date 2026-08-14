@@ -1,0 +1,19 @@
+{
+  "id": 83230859,
+  "first_name": "Paulo",
+  "last_name": "Brito",
+  "birth_date": "1998-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 100
+}

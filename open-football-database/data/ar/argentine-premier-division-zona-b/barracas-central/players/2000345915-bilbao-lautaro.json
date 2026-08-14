@@ -1,0 +1,32 @@
+{
+  "id": 2000345915,
+  "first_name": "Lautaro",
+  "last_name": "Bilbao",
+  "birth_date": "2006-06-16",
+  "country_id": 1649,
+  "club_id": 952695,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 76,
+  "potential_ability": -55,
+  "value": 177000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 2000448299, "p": 2 }
+  ]
+}

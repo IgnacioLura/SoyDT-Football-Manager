@@ -1,0 +1,29 @@
+{
+  "id": 2000522695,
+  "first_name": "Mauricio",
+  "last_name": "Villafañe",
+  "birth_date": "2002-10-12",
+  "country_id": 1649,
+  "club_id": 102464,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "current_ability": 30,
+  "potential_ability": 30,
+  "value": 0,
+  "contract": {
+    "expiration": "2027-06-30",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2020, "c": 102464, "p": 0 },
+    { "s": 2021, "c": 102464, "p": 0 },
+    { "s": 2022, "c": 102464, "p": 0 },
+    { "s": 2023, "c": 102464, "p": 0 },
+    { "s": 2023, "c": 108569, "p": 0 }
+  ]
+}

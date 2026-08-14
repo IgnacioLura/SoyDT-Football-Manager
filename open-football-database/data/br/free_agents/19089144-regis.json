@@ -1,0 +1,27 @@
+{
+  "id": 19089144,
+  "first_name": "Régis",
+  "last_name": "",
+  "birth_date": "1989-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 124
+}

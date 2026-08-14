@@ -1,0 +1,29 @@
+{
+  "id": 2000531611,
+  "first_name": "Francisco",
+  "last_name": "Delgado",
+  "birth_date": "2009-04-05",
+  "country_id": 1649,
+  "club_id": 3100018,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 70,
+  "potential_ability": -65,
+  "value": 302000,
+  "contract": {    "expiration": "2030-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

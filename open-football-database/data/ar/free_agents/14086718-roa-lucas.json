@@ -1,0 +1,19 @@
+{
+  "id": 14086718,
+  "first_name": "Lucas",
+  "last_name": "Roa",
+  "birth_date": "1993-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 25,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": 94
+}

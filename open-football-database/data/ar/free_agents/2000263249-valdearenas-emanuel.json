@@ -1,0 +1,19 @@
+{
+  "id": 2000263249,
+  "first_name": "Emanuel",
+  "last_name": "Valdearenas",
+  "birth_date": "1997-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 92
+}

@@ -1,0 +1,25 @@
+{
+  "id": 2000385683,
+  "first_name": "Davi",
+  "last_name": "Lucas",
+  "birth_date": "2008-02-14",
+  "country_id": 1651,
+  "club_id": 317,
+  "positions": [
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 70,
+  "potential_ability": -7,
+  "value": 68000,
+  "contract": {    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

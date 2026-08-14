@@ -1,0 +1,19 @@
+{
+  "id": 2000045688,
+  "first_name": "Franco",
+  "last_name": "Herrera",
+  "birth_date": "2003-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 100,
+  "potential_ability": 126
+}

@@ -1,0 +1,30 @@
+{
+  "id": 2000492520,
+  "first_name": "Diego",
+  "last_name": "Tonna",
+  "birth_date": "2005-03-08",
+  "country_id": 1657,
+  "club_id": 78014919,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 74,
+  "potential_ability": -5,
+  "value": 0,
+  "contract": {    "expiration": "2035-06-30",
+    "started": "2025-07-01",
+    "contract_type": "Amateur"
+  },
+  "history": [
+    { "s": 2023, "c": 1916, "p": 0 },
+    { "s": 2024, "c": 5512337, "p": 0 },
+    { "s": 2025, "c": 2000112971, "p": 1 }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "id": 19166176,
+  "first_name": "Agdon",
+  "last_name": "",
+  "birth_date": "1993-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 20,
+    "right": 100
+  },
+  "current_ability": 100,
+  "potential_ability": 118
+}

@@ -1,0 +1,19 @@
+{
+  "id": 14086720,
+  "first_name": "Brian",
+  "last_name": "Micceli",
+  "birth_date": "1996-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 88
+}

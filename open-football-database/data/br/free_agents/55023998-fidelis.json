@@ -1,0 +1,19 @@
+{
+  "id": 55023998,
+  "first_name": "Fidélis",
+  "last_name": "",
+  "birth_date": "1989-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 55
+  },
+  "current_ability": 98,
+  "potential_ability": 110
+}

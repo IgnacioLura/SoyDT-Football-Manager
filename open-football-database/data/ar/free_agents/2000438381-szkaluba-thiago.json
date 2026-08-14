@@ -1,0 +1,27 @@
+{
+  "id": 2000438381,
+  "first_name": "Thiago",
+  "last_name": "Szkaluba",
+  "birth_date": "2007-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": -65
+}

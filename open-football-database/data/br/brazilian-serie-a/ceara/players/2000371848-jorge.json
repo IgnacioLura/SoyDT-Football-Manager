@@ -1,0 +1,28 @@
+{
+  "id": 2000371848,
+  "first_name": "Jorge",
+  "last_name": "",
+  "birth_date": "2001-04-03",
+  "country_id": 1651,
+  "club_id": 104749,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 80,
+    "right": 100
+  },
+  "current_ability": 100,
+  "potential_ability": 118,
+  "value": 22000,
+  "contract": {    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 2000150767, "p": 2 }
+  ]
+}

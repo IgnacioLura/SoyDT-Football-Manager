@@ -1,0 +1,40 @@
+{
+  "id": 19249719,
+  "first_name": "Gabriel",
+  "last_name": "Batista",
+  "birth_date": "1998-06-03",
+  "country_id": 1651,
+  "club_id": 316,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 126,
+  "potential_ability": 130,
+  "value": 3000000,
+  "contract": {
+    "salary": 104000,
+    "expiration": "2028-06-30",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "ids": {
+    "transfermarkt.com": "401535"
+  },
+  "history": [
+    { "s": 2018, "c": 322, "p": 0 },
+    { "s": 2019, "c": 322, "p": 1 },
+    { "s": 2020, "c": 322, "p": 3 },
+    { "s": 2021, "c": 322, "p": 5 },
+    { "s": 2022, "c": 2448, "p": 26 },
+    { "s": 2022, "c": 107230, "p": 9 },
+    { "s": 2023, "c": 2448, "p": 34 },
+    { "s": 2024, "c": 2448, "p": 34 }
+  ]
+}

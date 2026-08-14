@@ -1,0 +1,23 @@
+{
+  "id": 14044026,
+  "first_name": "Marcos",
+  "last_name": "Minetti",
+  "birth_date": "1989-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DL",
+      "level": 20
+    },
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 102,
+  "potential_ability": 108
+}

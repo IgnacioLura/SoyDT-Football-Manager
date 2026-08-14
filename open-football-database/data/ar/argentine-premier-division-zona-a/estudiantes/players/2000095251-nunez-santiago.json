@@ -1,0 +1,37 @@
+{
+  "id": 2000095251,
+  "first_name": "Santiago",
+  "last_name": "Núñez",
+  "birth_date": "2000-04-29",
+  "country_id": 1649,
+  "club_id": 85,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 124,
+  "potential_ability": 130,
+  "value": 7000000,
+  "contract": {
+    "salary": 260000,
+    "expiration": "2029-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2022, "c": 85, "p": 4 },
+    { "s": 2023, "c": 85, "p": 28 },
+    { "s": 2023, "c": 106029, "p": 14 },
+    { "s": 2024, "c": 106029, "p": 11 },
+    { "s": 2025, "c": 85, "p": 25, "g": 1 }
+  ],
+  "ids": {
+    "transfermarkt.com": "959208"
+  }
+}

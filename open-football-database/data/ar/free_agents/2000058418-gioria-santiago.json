@@ -1,0 +1,19 @@
+{
+  "id": 2000058418,
+  "first_name": "Santiago",
+  "last_name": "Gioria",
+  "birth_date": "1999-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": 118
+}

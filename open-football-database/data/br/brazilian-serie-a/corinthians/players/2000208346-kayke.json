@@ -1,0 +1,36 @@
+{
+  "id": 2000208346,
+  "first_name": "Kayke",
+  "last_name": "",
+  "birth_date": "2004-04-28",
+  "country_id": 1651,
+  "club_id": 319,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 102,
+  "potential_ability": -7,
+  "value": 947000,
+  "contract": {    "expiration": "2027-06-30",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 319, "p": 2 },
+    { "s": 2025, "c": 319, "p": 8 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1082700"
+  }
+}

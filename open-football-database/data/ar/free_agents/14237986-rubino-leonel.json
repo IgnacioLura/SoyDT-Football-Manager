@@ -1,0 +1,23 @@
+{
+  "id": 14237986,
+  "first_name": "Leonel",
+  "last_name": "Rubiño",
+  "birth_date": "2001-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 96
+}

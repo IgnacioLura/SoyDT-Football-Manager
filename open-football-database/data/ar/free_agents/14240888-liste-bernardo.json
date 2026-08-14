@@ -1,0 +1,19 @@
+{
+  "id": 14240888,
+  "first_name": "Bernardo",
+  "last_name": "Liste",
+  "birth_date": "1992-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 90
+}

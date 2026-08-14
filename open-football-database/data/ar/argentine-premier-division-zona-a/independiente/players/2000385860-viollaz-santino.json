@@ -1,0 +1,45 @@
+{
+  "id": 2000385860,
+  "first_name": "Santino",
+  "last_name": "Viollaz",
+  "birth_date": "2008-06-06",
+  "country_id": 1649,
+  "club_id": 89,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 100,
+  "potential_ability": -8,
+  "value": 10000000,
+  "contract": {
+    "salary": 11232,
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 129859, "p": 0 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1231235"
+  }
+}

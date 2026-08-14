@@ -1,0 +1,22 @@
+/target
+**/*.rs.bk
+styles.min.css
+
+**/target
+
+.idea/
+.claude/
+CLAUDE.md
+
+training_result.json
+
+match_results
+publish
+
+artifacts
+
+dist
+
+# macOS finder metadata
+.DS_Store
+**/.DS_Store

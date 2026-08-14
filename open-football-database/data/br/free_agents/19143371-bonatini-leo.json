@@ -1,0 +1,19 @@
+{
+  "id": 19143371,
+  "first_name": "Léo",
+  "last_name": "Bonatini",
+  "birth_date": "1994-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 65,
+    "right": 100
+  },
+  "current_ability": 118,
+  "potential_ability": 130
+}

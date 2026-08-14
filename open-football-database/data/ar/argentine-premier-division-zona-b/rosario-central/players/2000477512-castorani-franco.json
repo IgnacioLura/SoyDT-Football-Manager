@@ -1,0 +1,28 @@
+{
+  "id": 2000477512,
+  "first_name": "Franco",
+  "last_name": "Castorani",
+  "birth_date": "2006-02-05",
+  "country_id": 1649,
+  "club_id": 95,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 65,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": -6,
+  "value": 302000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 95, "p": 0 }
+  ]
+}

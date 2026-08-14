@@ -1,0 +1,23 @@
+{
+  "id": 19202506,
+  "first_name": "Wandinho",
+  "last_name": "",
+  "birth_date": "1991-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 65,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 122
+}

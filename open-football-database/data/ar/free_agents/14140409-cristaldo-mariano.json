@@ -1,0 +1,19 @@
+{
+  "id": 14140409,
+  "first_name": "Mariano",
+  "last_name": "Cristaldo",
+  "birth_date": "1993-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "MR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 96
+}

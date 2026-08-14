@@ -1,0 +1,28 @@
+{
+  "id": 2000033505,
+  "first_name": "Franco",
+  "last_name": "Saucedo",
+  "birth_date": "2003-10-23",
+  "country_id": 1649,
+  "club_id": 102491,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 68,
+  "potential_ability": -6,
+  "value": 38000,
+  "contract": {    "expiration": "2025-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2023, "c": 102491, "p": 0 }
+  ]
+}

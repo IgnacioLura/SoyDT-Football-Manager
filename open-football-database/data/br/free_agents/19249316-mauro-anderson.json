@@ -1,0 +1,19 @@
+{
+  "id": 19249316,
+  "first_name": "Anderson",
+  "last_name": "Mauro",
+  "birth_date": "1993-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 55,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 108
+}

@@ -1,0 +1,19 @@
+{
+  "id": 2000108821,
+  "first_name": "Franco",
+  "last_name": "Déboli",
+  "birth_date": "2000-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 102,
+  "potential_ability": 106
+}

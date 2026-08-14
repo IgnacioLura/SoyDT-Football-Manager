@@ -1,0 +1,34 @@
+{
+  "id": 2000266004,
+  "first_name": "Santino",
+  "last_name": "Barbi",
+  "birth_date": "2005-06-14",
+  "country_id": 1649,
+  "club_id": 102489,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 108,
+  "potential_ability": -7,
+  "value": 664000,
+  "contract": {
+    "salary": 23244,
+    "expiration": "2029-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 102489, "p": 0 },
+    { "s": 2025, "c": 102489, "p": 0 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1197308"
+  }
+}

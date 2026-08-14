@@ -1,0 +1,37 @@
+{
+  "id": 2000088465,
+  "first_name": "Lucca",
+  "last_name": "",
+  "birth_date": "2003-04-02",
+  "country_id": 1651,
+  "club_id": 104749,
+  "positions": [
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 108,
+  "potential_ability": 128,
+  "value": 2000000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2023, "c": 326, "p": 19 },
+    { "s": 2024, "c": 326, "p": 9 },
+    { "s": 2025, "c": 104749, "p": 5 }
+  ],
+  "ids": {
+    "transfermarkt.com": "982549"
+  }
+}

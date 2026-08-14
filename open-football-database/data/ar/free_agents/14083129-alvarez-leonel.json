@@ -1,0 +1,23 @@
+{
+  "id": 14083129,
+  "first_name": "Leonel",
+  "last_name": "Álvarez",
+  "birth_date": "1995-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 60,
+    "right": 100
+  },
+  "current_ability": 106,
+  "potential_ability": 110
+}

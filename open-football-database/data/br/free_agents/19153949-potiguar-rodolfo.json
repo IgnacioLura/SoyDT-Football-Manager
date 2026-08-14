@@ -1,0 +1,23 @@
+{
+  "id": 19153949,
+  "first_name": "Rodolfo",
+  "last_name": "Potiguar",
+  "birth_date": "1988-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 100,
+  "potential_ability": 108
+}

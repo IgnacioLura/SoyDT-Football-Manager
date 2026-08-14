@@ -1,0 +1,35 @@
+{
+  "id": 2000266498,
+  "first_name": "Derly",
+  "last_name": "Da Silva",
+  "birth_date": "2007-05-04",
+  "country_id": 1649,
+  "club_id": 88,
+  "positions": [
+    {
+      "code": "DL",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 30
+  },
+  "current_ability": 76,
+  "potential_ability": -6,
+  "value": 197000,
+  "contract": {    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2018, "c": 1689, "p": 0 },
+    { "s": 2019, "c": 1717, "p": 0 },
+    { "s": 2020, "c": 67293321, "p": 0 },
+    { "s": 2021, "c": 1689, "p": 0 },
+    { "s": 2021, "c": 1717, "p": 0 },
+    { "s": 2022, "c": 1689, "p": 2 },
+    { "s": 2022, "c": 2000111487, "p": 17 },
+    { "s": 2023, "c": 67224636, "p": 31, "g": 1 }
+  ]
+}

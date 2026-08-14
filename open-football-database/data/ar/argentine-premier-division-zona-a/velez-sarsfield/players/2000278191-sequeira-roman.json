@@ -1,0 +1,25 @@
+{
+  "id": 2000278191,
+  "first_name": "Román",
+  "last_name": "Sequeira",
+  "birth_date": "2005-08-05",
+  "country_id": 1649,
+  "club_id": 98,
+  "positions": [
+    {
+      "code": "DL",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 84,
+  "potential_ability": -55,
+  "value": 169000,
+  "contract": {    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

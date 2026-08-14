@@ -1,0 +1,23 @@
+{
+  "id": 14253454,
+  "first_name": "Jesús",
+  "last_name": "Sandoval",
+  "birth_date": "1999-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 94,
+  "potential_ability": 96
+}

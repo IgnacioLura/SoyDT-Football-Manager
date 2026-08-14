@@ -1,0 +1,29 @@
+{
+  "id": 2000273221,
+  "first_name": "Kauan",
+  "last_name": "Mendes",
+  "birth_date": "2006-12-25",
+  "country_id": 1651,
+  "club_id": 107205,
+  "positions": [
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 68,
+  "potential_ability": -6,
+  "value": 10000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

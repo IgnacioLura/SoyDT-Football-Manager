@@ -1,0 +1,19 @@
+{
+  "id": 19157363,
+  "first_name": "Diego",
+  "last_name": "Augusto",
+  "birth_date": "1991-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 30
+  },
+  "current_ability": 94,
+  "potential_ability": 100
+}

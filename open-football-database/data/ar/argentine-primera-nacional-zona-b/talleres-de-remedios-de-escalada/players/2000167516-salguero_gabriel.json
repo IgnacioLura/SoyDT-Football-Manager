@@ -1,0 +1,29 @@
+{
+  "id": 2000167516,
+  "first_name": "Gabriel",
+  "last_name": "Salguero",
+  "birth_date": "2005-10-03",
+  "country_id": 1649,
+  "club_id": 3101518,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 66,
+  "potential_ability": -55,
+  "value": 66000,
+  "contract": {
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 3101518, "p": 0 }
+  ]
+}

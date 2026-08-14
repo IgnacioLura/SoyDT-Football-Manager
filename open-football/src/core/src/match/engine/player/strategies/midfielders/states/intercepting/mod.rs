@@ -1,0 +1,151 @@
+use crate::r#match::midfielders::states::MidfielderState;
+use crate::r#match::midfielders::states::common::{ActivityIntensity, MidfielderCondition};
+use crate::r#match::{
+    ConditionContext, StateChangeResult, StateProcessingContext, StateProcessingHandler,
+    SteeringBehavior,
+};
+use nalgebra::Vector3;
+use std::cmp::Ordering;
+
+/// Aerial-contest band. Same values the defender's Intercepting state
+/// uses, so the same dropping ball reads identically whichever role gets
+/// to it first.
+const HEADING_HEIGHT: f32 = 1.5;
+const HEADING_DISTANCE: f32 = 5.0;
+
+#[derive(Default, Clone)]
+pub struct MidfielderInterceptingState {}
+
+impl StateProcessingHandler for MidfielderInterceptingState {
+    fn process(&self, ctx: &StateProcessingContext) -> Option<StateChangeResult> {
+        if ctx.player.has_ball(ctx) {
+            return Some(StateChangeResult::with_midfielder_state(
+                MidfielderState::Running,
+            ));
+        }
+
+        // Aerial ball in reach — contest it in the air. Mirrors the
+        // defender's Intercepting → Heading hand-off. Checked BEFORE the
+        // possession branch because a lofted ball dropping into midfield
+        // has to be attacked whoever nominally "has" the ball: this is
+        // the second-ball contest, and without it midfielders were the
+        // only outfield role that could never head the ball.
+        // Own-corner deliveries are excluded: the discrete corner
+        // contest owns that aerial (same gate as the Running entry).
+        let ball_position = ctx.tick_context.positions.ball.position;
+        if ball_position.z > HEADING_HEIGHT
+            && ctx.ball().distance() < HEADING_DISTANCE
+            && ctx.ball().is_towards_player_with_angle(0.6)
+            && !ctx.ball().is_team_attacking_corner()
+        {
+            return Some(StateChangeResult::with_midfielder_state(
+                MidfielderState::Heading,
+            ));
+        }
+
+        // Team has ball — no need to intercept, transition out
+        if ctx.team().is_control_ball() {
+            return Some(StateChangeResult::with_midfielder_state(
+                MidfielderState::Running,
+            ));
+        } else {
+            let ball_distance = ctx.ball().distance();
+
+            // Loose ball nearby — claim it directly instead of tackling thin air
+            if !ctx.ball().is_owned() && ball_distance < 50.0 && ctx.ball().speed() < 3.0 {
+                return Some(StateChangeResult::with_midfielder_state(
+                    MidfielderState::TakeBall,
+                ));
+            }
+
+            if ball_distance < 30.0 {
+                return Some(StateChangeResult::with_midfielder_state(
+                    MidfielderState::Tackling,
+                ));
+            }
+
+            if !self.can_reach_before_opponent(ctx) {
+                return Some(StateChangeResult::with_midfielder_state(
+                    MidfielderState::Pressing,
+                ));
+            }
+        }
+
+        None
+    }
+
+    fn velocity(&self, ctx: &StateProcessingContext) -> Option<Vector3<f32>> {
+        Some(
+            SteeringBehavior::Pursuit {
+                target: ctx.tick_context.positions.ball.position,
+                target_velocity: ctx.tick_context.positions.ball.velocity,
+            }
+            .calculate(ctx.player)
+            .velocity,
+        )
+    }
+
+    fn process_conditions(&self, ctx: ConditionContext) {
+        // Intercepting is high intensity - sustained running to catch the ball
+        MidfielderCondition::with_velocity(ActivityIntensity::High).process(ctx);
+    }
+}
+
+impl MidfielderInterceptingState {
+    fn can_reach_before_opponent(&self, ctx: &StateProcessingContext) -> bool {
+        // Calculate time for defender to reach interception point
+        let interception_point = self.calculate_interception_point(ctx);
+        let defender_distance = (interception_point - ctx.player.position).magnitude();
+        let defender_speed = ctx.player.skills.physical.pace.max(0.1); // Avoid division by zero
+        let defender_time = defender_distance / defender_speed;
+
+        // Find the minimum time for any opponent to reach the interception point
+        let opponent_time = ctx
+            .players()
+            .opponents()
+            .all()
+            .map(|opponent| {
+                let player = ctx.player();
+                let skills = player.skills(opponent.id);
+
+                let opponent_speed = skills.physical.pace.max(0.1);
+                let opponent_distance = (interception_point - opponent.position).magnitude();
+                opponent_distance / opponent_speed
+            })
+            .min_by(|a, b| a.partial_cmp(b).unwrap_or(Ordering::Equal))
+            .unwrap_or(f32::MAX);
+
+        // Return true if defender can reach before any opponent
+        defender_time < opponent_time
+    }
+
+    /// Calculates the interception point of the ball
+    fn calculate_interception_point(&self, ctx: &StateProcessingContext) -> Vector3<f32> {
+        // For aerial balls, use the precalculated landing position
+        let ball_position = ctx.tick_context.positions.ball.position;
+        let landing_position = ctx.tick_context.positions.ball.landing_position;
+
+        // Check if ball is aerial (high enough that landing position differs significantly)
+        let is_aerial = (ball_position - landing_position).norm_squared() > 5.0 * 5.0;
+
+        if is_aerial {
+            // For aerial balls, target the landing position
+            landing_position
+        } else {
+            // For ground balls, do normal interception calculation
+            let ball_velocity = ctx.tick_context.positions.ball.velocity;
+            let defender_speed = ctx.player.skills.physical.pace.max(0.1);
+
+            // Relative position and velocity
+            let relative_position = ball_position - ctx.player.position;
+            let relative_velocity = ball_velocity;
+
+            // Time to intercept
+            let time_to_intercept = relative_position.magnitude()
+                / (defender_speed + relative_velocity.magnitude()).max(0.1);
+
+            // Predict ball position after time_to_intercept
+            ball_position + ball_velocity * time_to_intercept
+        }
+    }
+}

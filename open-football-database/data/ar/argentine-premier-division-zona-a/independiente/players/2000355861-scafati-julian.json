@@ -1,0 +1,25 @@
+{
+  "id": 2000355861,
+  "first_name": "Julián",
+  "last_name": "Scafati",
+  "birth_date": "2006-02-25",
+  "country_id": 1649,
+  "club_id": 89,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": -65,
+  "value": 280000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

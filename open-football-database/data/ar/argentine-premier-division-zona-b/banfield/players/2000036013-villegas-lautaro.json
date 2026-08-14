@@ -1,0 +1,34 @@
+{
+  "id": 2000036013,
+  "first_name": "Lautaro",
+  "last_name": "Villegas",
+  "birth_date": "2003-12-30",
+  "country_id": 1649,
+  "club_id": 80,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 25,
+    "right": 100
+  },
+  "current_ability": 106,
+  "potential_ability": 126,
+  "value": 2000000,
+  "contract": {
+    "salary": 9620,
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 80, "p": 6 },
+    { "s": 2025, "c": 3101520, "p": 28, "g": 1 }
+  ],
+  "ids": {
+    "transfermarkt.com": "883411"
+  }
+}

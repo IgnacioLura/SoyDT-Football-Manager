@@ -1,0 +1,23 @@
+{
+  "id": 19186352,
+  "first_name": "Ibson",
+  "last_name": "Melo",
+  "birth_date": "1989-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 75
+  },
+  "current_ability": 102,
+  "potential_ability": 106
+}

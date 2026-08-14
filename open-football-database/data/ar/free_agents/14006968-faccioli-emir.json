@@ -1,0 +1,19 @@
+{
+  "id": 14006968,
+  "first_name": "Emir",
+  "last_name": "Faccioli",
+  "birth_date": "1989-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 45
+  },
+  "current_ability": 110,
+  "potential_ability": 126
+}

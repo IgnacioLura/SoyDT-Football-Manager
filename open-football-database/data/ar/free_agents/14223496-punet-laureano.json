@@ -1,0 +1,19 @@
+{
+  "id": 14223496,
+  "first_name": "Laureano",
+  "last_name": "Puñet",
+  "birth_date": "1999-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DL",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 104,
+  "potential_ability": 112
+}

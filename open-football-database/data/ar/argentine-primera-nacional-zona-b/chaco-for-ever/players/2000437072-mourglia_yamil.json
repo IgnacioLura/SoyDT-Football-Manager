@@ -1,0 +1,29 @@
+{
+  "id": 2000437072,
+  "first_name": "Yamil",
+  "last_name": "Mourglia",
+  "birth_date": "2004-06-13",
+  "country_id": 1649,
+  "club_id": 108574,
+  "positions": [
+    {
+      "code": "MR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 100,
+  "value": 157000,
+  "contract": {
+    "expiration": "2025-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 2000307726, "p": 5 }
+  ]
+}

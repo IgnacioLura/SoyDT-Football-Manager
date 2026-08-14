@@ -1,0 +1,23 @@
+{
+  "id": 14036558,
+  "first_name": "Marcelo",
+  "last_name": "Pappano",
+  "birth_date": "1990-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ML",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 45
+  },
+  "current_ability": 104,
+  "potential_ability": 106
+}

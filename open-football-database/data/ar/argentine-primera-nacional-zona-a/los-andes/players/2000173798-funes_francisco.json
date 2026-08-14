@@ -1,0 +1,43 @@
+{
+  "id": 2000173798,
+  "first_name": "Francisco",
+  "last_name": "Funes",
+  "birth_date": "2001-11-02",
+  "country_id": 1649,
+  "club_id": 102495,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 98,
+  "potential_ability": 116,
+  "value": 122000,
+  "contract": {
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2023, "c": 14046672, "p": 17, "g": 1 },
+    { "s": 2024, "c": 958199, "p": 23, "g": 1 },
+    { "s": 2025, "c": 5300232, "p": 33, "g": 2 }
+  ]
+}

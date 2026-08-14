@@ -1,0 +1,19 @@
+{
+  "id": 14010210,
+  "first_name": "Jesús",
+  "last_name": "Vera",
+  "birth_date": "1989-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 50
+  },
+  "current_ability": 98,
+  "potential_ability": 112
+}

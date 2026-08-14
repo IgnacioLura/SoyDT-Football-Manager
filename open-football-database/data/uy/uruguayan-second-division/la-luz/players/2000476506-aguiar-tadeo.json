@@ -1,0 +1,34 @@
+{
+  "id": 2000476506,
+  "first_name": "Tadeo",
+  "last_name": "Aguiar",
+  "birth_date": "2004-09-15",
+  "country_id": 1657,
+  "club_id": 5512782,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 30,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": 104,
+  "value": 40000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2020, "c": 1921, "p": 0 },
+    { "s": 2021, "c": 115039, "p": 0 },
+    { "s": 2022, "c": 115039, "p": 0 },
+    { "s": 2023, "c": 115039, "p": 0 },
+    { "s": 2024, "c": 1922, "p": 0 },
+    { "s": 2025, "c": 130849, "p": 0 },
+    { "s": 2025, "c": 5512782, "p": 13, "g": 2 }
+  ]
+}

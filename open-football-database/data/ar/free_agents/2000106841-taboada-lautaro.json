@@ -1,0 +1,19 @@
+{
+  "id": 2000106841,
+  "first_name": "Lautaro",
+  "last_name": "Taboada",
+  "birth_date": "2004-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 100,
+  "potential_ability": 120
+}

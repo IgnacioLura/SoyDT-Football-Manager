@@ -1,0 +1,19 @@
+{
+  "id": 14072216,
+  "first_name": "Jorge",
+  "last_name": "Merlo",
+  "birth_date": "1992-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 92
+}

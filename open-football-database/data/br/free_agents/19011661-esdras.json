@@ -1,0 +1,27 @@
+{
+  "id": 19011661,
+  "first_name": "Esdras",
+  "last_name": "",
+  "birth_date": "1990-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    },
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 55,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 116
+}

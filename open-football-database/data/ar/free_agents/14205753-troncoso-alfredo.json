@@ -1,0 +1,23 @@
+{
+  "id": 14205753,
+  "first_name": "Alfredo",
+  "last_name": "Troncoso",
+  "birth_date": "1990-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 100,
+  "potential_ability": 102
+}

@@ -1,0 +1,19 @@
+{
+  "id": 14035146,
+  "first_name": "Adrián",
+  "last_name": "Reta",
+  "birth_date": "1992-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 98,
+  "potential_ability": 112
+}

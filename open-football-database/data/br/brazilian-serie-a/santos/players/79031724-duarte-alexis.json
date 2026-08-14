@@ -1,0 +1,44 @@
+{
+  "id": 79031724,
+  "first_name": "Alexis",
+  "last_name": "Duarte",
+  "birth_date": "2000-03-12",
+  "country_id": 1655,
+  "club_id": 335,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 55,
+    "right": 100
+  },
+  "current_ability": 122,
+  "potential_ability": 132,
+  "value": 3000000,
+  "contract": {    "expiration": "2027-09-14",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 5280161,
+    "expiration": "2027-06-30",    "wage_contribution_pct": 100
+  },
+  "ids": {
+    "transfermarkt.com": "491587"
+  },
+  "history": [
+    { "s": 2018, "c": 1445, "p": 0 },
+    { "s": 2019, "c": 1445, "p": 1 },
+    { "s": 2020, "c": 1445, "p": 25, "g": 1 },
+    { "s": 2021, "c": 1445, "p": 28 },
+    { "s": 2022, "c": 1445, "p": 38 },
+    { "s": 2022, "c": 1529, "p": 7 },
+    { "s": 2023, "c": 1529, "p": 27 },
+    { "s": 2024, "c": 1529, "p": 15 },
+    { "s": 2025, "c": 335, "p": 5 },
+    { "s": 2025, "c": 1529, "p": 6 }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "id": 2000451540,
+  "first_name": "Rafael",
+  "last_name": "Vaz",
+  "birth_date": "2006-01-11",
+  "country_id": 1651,
+  "club_id": 19363420,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 86,
+  "potential_ability": 116,
+  "value": 4000,
+  "contract": {    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 104750,
+    "expiration": "2027-11-30",    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2024, "c": 43204749, "p": 1 }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "id": 2000385306,
+  "first_name": "Foguete",
+  "last_name": "",
+  "birth_date": "2006-01-03",
+  "country_id": 1651,
+  "club_id": 107232,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 66,
+  "potential_ability": -55,
+  "value": 0,
+  "contract": {    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2016, "c": 2000207794, "p": 23 },
+    { "s": 2019, "c": 2000319997, "p": 19 },
+    { "s": 2020, "c": 2000319997, "p": 16 },
+    { "s": 2021, "c": 2000216295, "p": 16 }
+  ]
+}

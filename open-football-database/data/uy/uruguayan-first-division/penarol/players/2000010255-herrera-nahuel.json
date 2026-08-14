@@ -1,0 +1,34 @@
+{
+  "id": 2000010255,
+  "first_name": "Nahuel",
+  "last_name": "Herrera",
+  "birth_date": "2004-12-01",
+  "country_id": 1657,
+  "club_id": 1922,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 122,
+  "potential_ability": 140,
+  "value": 2000000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2019, "c": 1922, "p": 0 },
+    { "s": 2020, "c": 1922, "p": 0 },
+    { "s": 2021, "c": 1922, "p": 0 },
+    { "s": 2022, "c": 1922, "p": 0 },
+    { "s": 2023, "c": 1922, "p": 5 },
+    { "s": 2024, "c": 1922, "p": 5 },
+    { "s": 2025, "c": 1922, "p": 30, "g": 1 }
+  ]
+}

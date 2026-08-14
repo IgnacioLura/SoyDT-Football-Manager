@@ -1,0 +1,27 @@
+{
+  "id": 78096894,
+  "first_name": "Enzo",
+  "last_name": "Lemos",
+  "birth_date": "2001-01-01",
+  "country_id": 1657,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 35
+  },
+  "current_ability": 88,
+  "potential_ability": 106
+}

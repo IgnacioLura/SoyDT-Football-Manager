@@ -1,0 +1,23 @@
+{
+  "id": 55082745,
+  "first_name": "Dário",
+  "last_name": "Júnior",
+  "birth_date": "1991-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 98,
+  "potential_ability": 106
+}

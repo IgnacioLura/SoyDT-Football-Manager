@@ -1,0 +1,34 @@
+{
+  "id": 2000276968,
+  "first_name": "Javier",
+  "last_name": "Vallejos",
+  "birth_date": "2003-01-03",
+  "country_id": 1649,
+  "club_id": 14018428,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 94,
+  "potential_ability": 120,
+  "value": 321000,
+  "contract": {
+    "salary": 6136,
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 14018428, "p": 0 },
+    { "s": 2025, "c": 14018428, "p": 0 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1157296"
+  }
+}

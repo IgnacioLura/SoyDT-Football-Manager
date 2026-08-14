@@ -1,0 +1,19 @@
+{
+  "id": 19003706,
+  "first_name": "Rafael",
+  "last_name": "Martins",
+  "birth_date": "1989-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 110,
+  "potential_ability": 128
+}

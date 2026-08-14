@@ -1,0 +1,23 @@
+{
+  "id": 19220444,
+  "first_name": "Chiquinho",
+  "last_name": "Alagoano",
+  "birth_date": "1990-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 25,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 106
+}

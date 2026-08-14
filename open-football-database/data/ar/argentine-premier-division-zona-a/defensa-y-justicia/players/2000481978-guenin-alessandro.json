@@ -1,0 +1,30 @@
+{
+  "id": 2000481978,
+  "first_name": "Alessandro",
+  "last_name": "Guenin",
+  "birth_date": "2008-06-03",
+  "country_id": 1649,
+  "club_id": 108526,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 88,
+  "potential_ability": -65,
+  "value": 449000,
+  "contract": {    "expiration": "2029-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 53162169, "p": 9, "g": 1 },
+    { "s": 2025, "c": 1366, "p": 21, "g": 8 },
+    { "s": 2025, "c": 53162169, "p": 8, "g": 7 }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "id": 2000270864,
+  "first_name": "Gastón",
+  "last_name": "Unrein",
+  "birth_date": "2004-07-13",
+  "country_id": 1649,
+  "club_id": 14037231,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 86,
+  "potential_ability": -55,
+  "value": 149000,
+  "contract": {
+    "salary": 88,
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2022, "c": 14006367, "p": 0 },
+    { "s": 2025, "c": 14037231, "p": 0 }
+  ]
+}

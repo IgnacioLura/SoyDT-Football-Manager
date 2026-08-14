@@ -1,0 +1,27 @@
+{
+  "id": 14179261,
+  "first_name": "Iván",
+  "last_name": "Rojas",
+  "birth_date": "1995-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "DL",
+      "level": 20
+    },
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 94,
+  "potential_ability": 94
+}

@@ -1,0 +1,23 @@
+{
+  "id": 14006634,
+  "first_name": "Federico",
+  "last_name": "Freire",
+  "birth_date": "1990-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "ML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 98,
+  "potential_ability": 106
+}

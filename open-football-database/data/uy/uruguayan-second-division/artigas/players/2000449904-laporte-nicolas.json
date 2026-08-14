@@ -1,0 +1,35 @@
+{
+  "id": 2000449904,
+  "first_name": "Nicolás",
+  "last_name": "Laporte",
+  "birth_date": "2007-07-14",
+  "country_id": 1657,
+  "club_id": 78014919,
+  "positions": [
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 72,
+  "potential_ability": -5,
+  "value": 0,
+  "contract": {    "expiration": "2037-06-30",
+    "started": "2025-07-01",
+    "contract_type": "Amateur"
+  },
+  "history": [
+    { "s": 2022, "c": 78026676, "p": 0 },
+    { "s": 2023, "c": 78026676, "p": 0 },
+    { "s": 2024, "c": 1922, "p": 0 },
+    { "s": 2025, "c": 78014919, "p": 1 }
+  ]
+}

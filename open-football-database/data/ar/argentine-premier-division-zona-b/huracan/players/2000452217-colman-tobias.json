@@ -1,0 +1,25 @@
+{
+  "id": 2000452217,
+  "first_name": "Tobías",
+  "last_name": "Colman",
+  "birth_date": "2007-08-02",
+  "country_id": 1649,
+  "club_id": 88,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 86,
+  "potential_ability": -6,
+  "value": 504000,
+  "contract": {    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

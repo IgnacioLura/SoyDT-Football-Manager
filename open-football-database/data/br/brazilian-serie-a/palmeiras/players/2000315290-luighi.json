@@ -1,0 +1,41 @@
+{
+  "id": 2000315290,
+  "first_name": "Luighi",
+  "last_name": "",
+  "birth_date": "2006-04-30",
+  "country_id": 1651,
+  "club_id": 329,
+  "positions": [
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 106,
+  "potential_ability": -7,
+  "value": 6000000,
+  "contract": {    "expiration": "2029-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 329, "p": 3, "g": 1 },
+    { "s": 2025, "c": 329, "p": 11, "g": 1 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1158001"
+  },
+  "loan": {
+    "to_club_id": 72041885,
+    "expiration": "2025-12-31",
+    "wage_contribution_pct": 100
+  }
+}

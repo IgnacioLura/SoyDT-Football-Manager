@@ -1,0 +1,70 @@
+{
+  "id": 14078497,
+  "first_name": "Héctor",
+  "last_name": "Fertoli",
+  "birth_date": "1994-12-03",
+  "country_id": 1649,
+  "club_id": 93,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "ML",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 55,
+    "right": 100
+  },
+  "current_ability": 118,
+  "potential_ability": 124,
+  "value": 978000,
+  "contract": {
+    "salary": 104000,
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 1450,
+    "expiration": "2027-12-31",
+    "salary": 104000,
+    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2015, "c": 91, "p": 0 },
+    { "s": 2016, "c": 91, "p": 19, "g": 4 },
+    { "s": 2017, "c": 91, "p": 25, "g": 3 },
+    { "s": 2018, "c": 91, "p": 15, "g": 4 },
+    { "s": 2018, "c": 96, "p": 10 },
+    { "s": 2019, "c": 93, "p": 4, "g": 1 },
+    { "s": 2019, "c": 96, "p": 2 },
+    { "s": 2020, "c": 93, "p": 6, "g": 3 },
+    { "s": 2021, "c": 93, "p": 3 },
+    { "s": 2021, "c": 102489, "p": 19, "g": 2 },
+    { "s": 2022, "c": 102489, "p": 28 },
+    { "s": 2023, "c": 88, "p": 11 },
+    { "s": 2023, "c": 93, "p": 6 },
+    { "s": 2024, "c": 88, "p": 38, "g": 4 },
+    { "s": 2025, "c": 3100018, "p": 15 }
+  ]
+}

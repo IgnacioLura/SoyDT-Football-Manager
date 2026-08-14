@@ -1,0 +1,19 @@
+{
+  "id": 14001739,
+  "first_name": "Lucas",
+  "last_name": "Gómez",
+  "birth_date": "1987-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 60,
+    "right": 100
+  },
+  "current_ability": 108,
+  "potential_ability": 108
+}

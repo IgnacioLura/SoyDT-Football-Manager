@@ -1,0 +1,43 @@
+{
+  "id": 14047831,
+  "first_name": "Facundo",
+  "last_name": "Barboza",
+  "birth_date": "1996-06-05",
+  "country_id": 1649,
+  "club_id": 78,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 106,
+  "potential_ability": 120,
+  "value": 65000,
+  "contract": {
+    "salary": 19240,
+    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2011, "c": 78, "p": 0 },
+    { "s": 2014, "c": 78, "p": 0 },
+    { "s": 2015, "c": 78, "p": 0 },
+    { "s": 2016, "c": 78, "p": 36, "g": 3 },
+    { "s": 2017, "c": 78, "p": 7 },
+    { "s": 2018, "c": 102491, "p": 5 },
+    { "s": 2019, "c": 102491, "p": 4 },
+    { "s": 2019, "c": 51066844, "p": 4 },
+    { "s": 2020, "c": 78, "p": 0 },
+    { "s": 2022, "c": 952702, "p": 8 }
+  ]
+}

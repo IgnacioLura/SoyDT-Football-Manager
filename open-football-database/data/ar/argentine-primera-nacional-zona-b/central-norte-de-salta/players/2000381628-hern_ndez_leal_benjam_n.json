@@ -1,0 +1,34 @@
+{
+  "id": 2000381628,
+  "first_name": "Benjamín",
+  "last_name": "Hernández Leal",
+  "birth_date": "2007-02-21",
+  "country_id": 1649,
+  "club_id": 14002958,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 80,
+  "potential_ability": -65,
+  "value": 340000,
+  "contract": {
+    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 14002958, "p": 1 },
+    { "s": 2025, "c": 14002958, "p": 0 }
+  ]
+}

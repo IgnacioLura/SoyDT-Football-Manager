@@ -1,0 +1,23 @@
+{
+  "id": 14245086,
+  "first_name": "Danilo",
+  "last_name": "Gómez",
+  "birth_date": "2002-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "ML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 102,
+  "potential_ability": 124
+}

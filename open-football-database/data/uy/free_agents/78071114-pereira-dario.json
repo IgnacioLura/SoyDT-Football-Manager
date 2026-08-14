@@ -1,0 +1,27 @@
+{
+  "id": 78071114,
+  "first_name": "Darío",
+  "last_name": "Pereira",
+  "birth_date": "1996-01-01",
+  "country_id": 1657,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 55,
+    "right": 100
+  },
+  "current_ability": 94,
+  "potential_ability": 112
+}

@@ -1,0 +1,23 @@
+{
+  "id": 14024918,
+  "first_name": "Nicolás",
+  "last_name": "Camerlinckx",
+  "birth_date": "1992-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 92
+}

@@ -1,0 +1,49 @@
+{
+  "id": 19361039,
+  "first_name": "Edílson",
+  "last_name": "Júnior",
+  "birth_date": "1995-04-13",
+  "country_id": 1651,
+  "club_id": 331,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 30,
+    "right": 100
+  },
+  "current_ability": 108,
+  "potential_ability": 108,
+  "value": 493000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2016, "c": 301329, "p": 5 },
+    { "s": 2018, "c": 301302, "p": 7 },
+    { "s": 2019, "c": 332, "p": 7 },
+    { "s": 2019, "c": 301302, "p": 15 },
+    { "s": 2020, "c": 301302, "p": 19 },
+    { "s": 2021, "c": 301302, "p": 5 },
+    { "s": 2022, "c": 301302, "p": 11 },
+    { "s": 2023, "c": 331, "p": 22, "g": 1 },
+    { "s": 2024, "c": 331, "p": 31 },
+    { "s": 2025, "c": 331, "p": 27 }
+  ]
+}

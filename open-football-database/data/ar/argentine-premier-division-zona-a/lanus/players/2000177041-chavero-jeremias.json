@@ -1,0 +1,34 @@
+{
+  "id": 2000177041,
+  "first_name": "Jeremías",
+  "last_name": "Chavero",
+  "birth_date": "2006-05-30",
+  "country_id": 1649,
+  "club_id": 90,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": -65,
+  "value": 276000,
+  "contract": {
+    "salary": 6136,
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 90, "p": 1 },
+    { "s": 2025, "c": 1925, "p": 4 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1299458"
+  }
+}

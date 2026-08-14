@@ -1,0 +1,19 @@
+{
+  "id": 14035151,
+  "first_name": "Andrés",
+  "last_name": "Chávez",
+  "birth_date": "1991-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 100,
+  "potential_ability": 140
+}

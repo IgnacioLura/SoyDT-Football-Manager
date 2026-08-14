@@ -1,0 +1,23 @@
+{
+  "id": 2000083452,
+  "first_name": "Thomas",
+  "last_name": "Luciano",
+  "birth_date": "2002-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 55,
+    "right": 100
+  },
+  "current_ability": 106,
+  "potential_ability": 118
+}

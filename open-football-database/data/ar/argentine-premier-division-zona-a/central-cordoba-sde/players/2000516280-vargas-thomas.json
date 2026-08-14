@@ -1,0 +1,28 @@
+{
+  "id": 2000516280,
+  "first_name": "Thomás",
+  "last_name": "Vargas",
+  "birth_date": "2006-08-10",
+  "country_id": 1649,
+  "club_id": 14018428,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 55,
+    "right": 100
+  },
+  "current_ability": 78,
+  "potential_ability": -55,
+  "value": 197000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 102486, "p": 4, "g": 1 }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": 2000057469,
+  "first_name": "Anderson",
+  "last_name": "Sobral",
+  "birth_date": "1992-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DL",
+      "level": 20
+    },
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 50
+  },
+  "current_ability": 88,
+  "potential_ability": 90
+}

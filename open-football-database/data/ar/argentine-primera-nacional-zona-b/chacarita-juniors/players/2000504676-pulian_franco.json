@@ -1,0 +1,29 @@
+{
+  "id": 2000504676,
+  "first_name": "Franco",
+  "last_name": "Pulian",
+  "birth_date": "2007-03-23",
+  "country_id": 1649,
+  "club_id": 102493,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 50
+  },
+  "current_ability": 80,
+  "potential_ability": -6,
+  "value": 148000,
+  "contract": {
+    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 50050954, "p": 19, "g": 1 }
+  ]
+}

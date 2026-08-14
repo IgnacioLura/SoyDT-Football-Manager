@@ -1,0 +1,30 @@
+{
+  "id": 2000531129,
+  "first_name": "Matías",
+  "last_name": "Konecny",
+  "birth_date": "2008-01-25",
+  "country_id": 1649,
+  "club_id": 86,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 80,
+  "potential_ability": -6,
+  "value": 26000,
+  "contract": {
+    "expiration": "2029-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

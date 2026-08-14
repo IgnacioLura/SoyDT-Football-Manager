@@ -1,0 +1,37 @@
+{
+  "id": 2000351536,
+  "first_name": "Diago",
+  "last_name": "Guzmán",
+  "birth_date": "2005-10-12",
+  "country_id": 1649,
+  "club_id": 102485,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 70,
+  "potential_ability": -6,
+  "value": 45000,
+  "contract": {    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 102485, "p": 0 },
+    { "s": 2025, "c": 102485, "p": 0 }
+  ]
+}

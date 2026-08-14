@@ -1,0 +1,34 @@
+{
+  "id": 2000264420,
+  "first_name": "Ivo",
+  "last_name": "Junquera",
+  "birth_date": "2006-01-14",
+  "country_id": 1649,
+  "club_id": 952695,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 60,
+    "right": 100
+  },
+  "current_ability": 76,
+  "potential_ability": -55,
+  "value": 161000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2022, "c": 1312, "p": 0 },
+    { "s": 2023, "c": 1426, "p": 0 },
+    { "s": 2023, "c": 109105, "p": 16, "g": 3 },
+    { "s": 2024, "c": 1426, "p": 2 },
+    { "s": 2024, "c": 109105, "p": 10, "g": 2 },
+    { "s": 2025, "c": 1426, "p": 0 },
+    { "s": 2025, "c": 109105, "p": 20, "g": 21 }
+  ]
+}

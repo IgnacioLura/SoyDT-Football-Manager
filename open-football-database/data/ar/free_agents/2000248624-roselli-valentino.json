@@ -1,0 +1,19 @@
+{
+  "id": 2000248624,
+  "first_name": "Valentino",
+  "last_name": "Roselli",
+  "birth_date": "2001-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 45
+  },
+  "current_ability": 90,
+  "potential_ability": 96
+}

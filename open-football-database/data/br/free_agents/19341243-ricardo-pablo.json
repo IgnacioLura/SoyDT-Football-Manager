@@ -1,0 +1,19 @@
+{
+  "id": 19341243,
+  "first_name": "Pablo",
+  "last_name": "Ricardo",
+  "birth_date": "1991-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 25,
+    "right": 100
+  },
+  "current_ability": 94,
+  "potential_ability": 110
+}

@@ -1,0 +1,19 @@
+{
+  "id": 19138129,
+  "first_name": "Mário",
+  "last_name": "Lúcio",
+  "birth_date": "1990-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 128
+}

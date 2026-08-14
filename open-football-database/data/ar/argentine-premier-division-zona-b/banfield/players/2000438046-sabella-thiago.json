@@ -1,0 +1,28 @@
+{
+  "id": 2000438046,
+  "first_name": "Thiago",
+  "last_name": "Sabella",
+  "birth_date": "2007-07-30",
+  "country_id": 1649,
+  "club_id": 80,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 80,
+  "potential_ability": -65,
+  "value": 399000,
+  "contract": {    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 2000433045, "p": 7, "g": 4 }
+  ]
+}

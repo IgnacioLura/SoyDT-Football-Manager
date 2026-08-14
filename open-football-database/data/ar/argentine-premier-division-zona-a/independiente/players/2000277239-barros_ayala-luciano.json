@@ -1,0 +1,37 @@
+{
+  "id": 2000277239,
+  "first_name": "Luciano",
+  "last_name": "Barros Ayala",
+  "birth_date": "2005-01-17",
+  "country_id": 1649,
+  "club_id": 89,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 98,
+  "potential_ability": -65,
+  "value": 498000,
+  "contract": {
+    "salary": 12688,
+    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 1991, "c": 7000000, "p": 0 },
+    { "s": 1992, "c": 1471, "p": 0 },
+    { "s": 1992, "c": 7000000, "p": 0 },
+    { "s": 1993, "c": 2493, "p": 0 }
+  ]
+}

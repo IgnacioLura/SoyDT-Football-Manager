@@ -1,0 +1,37 @@
+{
+  "id": 19411615,
+  "first_name": "Kawê",
+  "last_name": "",
+  "birth_date": "2002-06-22",
+  "country_id": 1651,
+  "club_id": 317,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 30,
+    "right": 100
+  },
+  "current_ability": 84,
+  "potential_ability": 100,
+  "value": 0,
+  "contract": {    "expiration": "2027-06-30",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 311028,
+    "expiration": "2027-05-15",    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2020, "c": 107201, "p": 1 },
+    { "s": 2021, "c": 107201, "p": 1 },
+    { "s": 2022, "c": 317, "p": 2 }
+  ],
+  "ids": {
+    "transfermarkt.com": "791721"
+  }
+}

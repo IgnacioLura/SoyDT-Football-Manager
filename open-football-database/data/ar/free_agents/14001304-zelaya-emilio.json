@@ -1,0 +1,19 @@
+{
+  "id": 14001304,
+  "first_name": "Emilio",
+  "last_name": "Zelaya",
+  "birth_date": "1987-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 110,
+  "potential_ability": 130
+}

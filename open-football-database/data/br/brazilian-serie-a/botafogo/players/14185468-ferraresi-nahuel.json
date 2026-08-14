@@ -1,0 +1,47 @@
+{
+  "id": 14185468,
+  "first_name": "Nahuel",
+  "last_name": "Ferraresi",
+  "birth_date": "1998-11-19",
+  "country_id": 1658,
+  "club_id": 337,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 132,
+  "potential_ability": 138,
+  "value": 8000000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 316,
+    "expiration": "2027-12-31",    "wage_contribution_pct": 100
+  },
+  "ids": {
+    "transfermarkt.com": "466336"
+  },
+  "history": [
+    { "s": 2015, "c": 102486, "p": 0 },
+    { "s": 2016, "c": 102486, "p": 0 },
+    { "s": 2016, "c": 120998, "p": 0 },
+    { "s": 2017, "c": 78027478, "p": 6 },
+    { "s": 2018, "c": 7441062, "p": 29, "g": 2 },
+    { "s": 2018, "c": 78027478, "p": 8, "g": 1 },
+    { "s": 2019, "c": 55000308, "p": 23 },
+    { "s": 2020, "c": 2389, "p": 24, "g": 3 },
+    { "s": 2021, "c": 2390, "p": 24 },
+    { "s": 2022, "c": 337, "p": 9 },
+    { "s": 2023, "c": 337, "p": 1 },
+    { "s": 2024, "c": 337, "p": 14, "g": 1 },
+    { "s": 2025, "c": 337, "p": 24 }
+  ]
+}

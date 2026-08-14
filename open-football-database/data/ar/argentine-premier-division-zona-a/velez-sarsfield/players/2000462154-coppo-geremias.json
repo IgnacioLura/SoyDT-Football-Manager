@@ -1,0 +1,32 @@
+{
+  "id": 2000462154,
+  "first_name": "Geremías",
+  "last_name": "Coppo",
+  "birth_date": "2008-03-07",
+  "country_id": 1649,
+  "club_id": 98,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 86,
+  "potential_ability": -7,
+  "value": 2000000,
+  "contract": {    "expiration": "2029-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 2000372422, "p": 11, "g": 2 }
+  ]
+}

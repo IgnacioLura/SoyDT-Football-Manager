@@ -1,0 +1,31 @@
+{
+  "id": 2000277786,
+  "first_name": "Thiago",
+  "last_name": "Romero",
+  "birth_date": "2006-05-13",
+  "country_id": 1649,
+  "club_id": 952707,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": -7,
+  "value": 324000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2021, "c": 102464, "p": 1 },
+    { "s": 2022, "c": 102464, "p": 0 },
+    { "s": 2023, "c": 102464, "p": 4 },
+    { "s": 2024, "c": 102464, "p": 2 }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": 2000020814,
+  "first_name": "Randall",
+  "last_name": "Rodríguez",
+  "birth_date": "2003-01-01",
+  "country_id": 1657,
+  "club_id": 98,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 108,
+  "potential_ability": 124,
+  "loan": {
+    "to_club_id": 5512793,
+    "expiration": "2023-12-31",
+    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2019, "c": 1922, "p": 0 },
+    { "s": 2020, "c": 1922, "p": 0 },
+    { "s": 2021, "c": 1922, "p": 0 },
+    { "s": 2022, "c": 1922, "p": 0 },
+    { "s": 2023, "c": 1922, "p": 0 },
+    { "s": 2024, "c": 98, "p": 1 },
+    { "s": 2024, "c": 1922, "p": 2 },
+    { "s": 2025, "c": 98, "p": 1 },
+    { "s": 2025, "c": 5512793, "p": 0 }
+  ]
+}

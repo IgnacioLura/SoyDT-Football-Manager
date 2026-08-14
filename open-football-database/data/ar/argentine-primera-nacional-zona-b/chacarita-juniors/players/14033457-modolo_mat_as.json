@@ -1,0 +1,27 @@
+{
+  "id": 14033457,
+  "first_name": "Matías",
+  "last_name": "Modolo",
+  "birth_date": "1987-04-09",
+  "country_id": 1649,
+  "club_id": 102493,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 14
+    }
+  ],
+  "current_ability": 30,
+  "potential_ability": 30,
+  "value": 31,
+  "contract": {
+    "expiration": "2027-06-30",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2008, "c": 952708, "p": 0 },
+    { "s": 2009, "c": 108531, "p": 0 },
+    { "s": 2010, "c": 108531, "p": 4 }
+  ]
+}

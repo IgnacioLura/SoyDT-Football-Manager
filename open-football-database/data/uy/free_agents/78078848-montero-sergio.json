@@ -1,0 +1,27 @@
+{
+  "id": 78078848,
+  "first_name": "Sergio",
+  "last_name": "Montero",
+  "birth_date": "1997-01-01",
+  "country_id": 1657,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 106
+}

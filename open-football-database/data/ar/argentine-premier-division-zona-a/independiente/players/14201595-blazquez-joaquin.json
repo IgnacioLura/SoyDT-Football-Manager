@@ -1,0 +1,49 @@
+{
+  "id": 14201595,
+  "first_name": "Joaquín",
+  "last_name": "Blázquez",
+  "birth_date": "2001-01-28",
+  "country_id": 1649,
+  "club_id": 102489,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 114,
+  "potential_ability": 126,
+  "value": 912000,
+  "contract": {
+    "salary": 52000,
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 89,
+    "expiration": "2027-12-31",
+    "salary": 52000,
+    "wage_contribution_pct": 100
+  },
+  "ids": {
+    "transfermarkt.com": "668996"
+  },
+  "history": [
+    { "s": 2018, "c": 1776, "p": 0 },
+    { "s": 2019, "c": 1776, "p": 0 },
+    { "s": 2020, "c": 102489, "p": 4 },
+    { "s": 2021, "c": 102489, "p": 0 },
+    { "s": 2022, "c": 2061, "p": 1 },
+    { "s": 2022, "c": 102489, "p": 0 },
+    { "s": 2023, "c": 92, "p": 0 },
+    { "s": 2023, "c": 2061, "p": 0 },
+    { "s": 2024, "c": 92, "p": 0 },
+    { "s": 2024, "c": 102489, "p": 0 },
+    { "s": 2025, "c": 89, "p": 0 }
+  ]
+}

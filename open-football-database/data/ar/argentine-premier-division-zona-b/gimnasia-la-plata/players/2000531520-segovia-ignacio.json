@@ -1,0 +1,24 @@
+{
+  "id": 2000531520,
+  "first_name": "Ignacio",
+  "last_name": "Segovia",
+  "birth_date": "2008-04-14",
+  "country_id": 1649,
+  "club_id": 87,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 76,
+  "potential_ability": -6,
+  "value": 183000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01"
+  }
+}

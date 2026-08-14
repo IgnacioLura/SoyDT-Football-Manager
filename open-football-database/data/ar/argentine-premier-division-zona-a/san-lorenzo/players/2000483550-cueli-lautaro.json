@@ -1,0 +1,36 @@
+{
+  "id": 2000483550,
+  "first_name": "Lautaro",
+  "last_name": "Cueli",
+  "birth_date": "2006-05-02",
+  "country_id": 1649,
+  "club_id": 96,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 60,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": -65,
+  "value": 532000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2018, "c": 78047833, "p": 0 },
+    { "s": 2019, "c": 78047833, "p": 0 },
+    { "s": 2020, "c": 1921, "p": 0 },
+    { "s": 2020, "c": 78047833, "p": 0 },
+    { "s": 2021, "c": 1921, "p": 0 },
+    { "s": 2022, "c": 116309, "p": 0 },
+    { "s": 2022, "c": 8825225, "p": 0 },
+    { "s": 2025, "c": 5512636, "p": 0 },
+    { "s": 2025, "c": 2000369851, "p": 0 }
+  ]
+}

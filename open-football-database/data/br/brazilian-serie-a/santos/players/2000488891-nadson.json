@@ -1,0 +1,28 @@
+{
+  "id": 2000488891,
+  "first_name": "Nadson",
+  "last_name": "",
+  "birth_date": "2009-01-24",
+  "country_id": 1651,
+  "club_id": 335,
+  "positions": [
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 94,
+  "potential_ability": -8,
+  "value": 3000000,
+  "contract": {    "expiration": "2029-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "ids": {
+    "transfermarkt.com": "1355386"
+  }
+}

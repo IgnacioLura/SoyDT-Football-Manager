@@ -1,0 +1,23 @@
+{
+  "id": 14017991,
+  "first_name": "Raúl",
+  "last_name": "Quiroga",
+  "birth_date": "1989-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ML",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 92,
+  "potential_ability": 102
+}

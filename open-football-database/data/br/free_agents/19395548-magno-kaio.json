@@ -1,0 +1,19 @@
+{
+  "id": 19395548,
+  "first_name": "Kaio",
+  "last_name": "Magno",
+  "birth_date": "1999-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 60,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 106
+}

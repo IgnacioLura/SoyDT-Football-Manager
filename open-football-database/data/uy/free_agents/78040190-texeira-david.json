@@ -1,0 +1,19 @@
+{
+  "id": 78040190,
+  "first_name": "David",
+  "last_name": "Texeira",
+  "birth_date": "1991-01-01",
+  "country_id": 1657,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 55,
+    "right": 100
+  },
+  "current_ability": 104,
+  "potential_ability": 116
+}

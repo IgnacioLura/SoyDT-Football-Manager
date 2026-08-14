@@ -1,0 +1,230 @@
+use crate::IntegerUtils;
+use crate::r#match::defenders::states::DefenderState;
+use crate::r#match::defenders::states::common::{ActivityIntensity, DefenderCondition};
+use crate::r#match::player::events::PlayerEvent;
+use crate::r#match::{
+    ConditionContext, PlayerDistanceFromStartPosition, StateChangeResult, StateProcessingContext,
+    StateProcessingHandler, SteeringBehavior, VectorExtensions,
+};
+use nalgebra::Vector3;
+
+const INTERCEPTION_DISTANCE: f32 = 150.0;
+const MARKING_DISTANCE: f32 = 50.0;
+const PRESSING_DISTANCE: f32 = 80.0;
+const TACKLE_DISTANCE: f32 = 25.0;
+
+#[derive(Default, Clone)]
+pub struct DefenderWalkingState {}
+
+impl StateProcessingHandler for DefenderWalkingState {
+    fn process(&self, ctx: &StateProcessingContext) -> Option<StateChangeResult> {
+        let mut result = StateChangeResult::new();
+
+        // Attacking corner: centre-backs push up to attack the delivery.
+        if !ctx.player.has_ball(ctx)
+            && ctx
+                .player
+                .tactical_position
+                .current_position
+                .is_central_defender()
+            && ctx.ball().is_team_attacking_corner()
+        {
+            return Some(StateChangeResult::with_defender_state(
+                DefenderState::AttackingCorner,
+            ));
+        }
+
+        // Take ball only if best positioned — prevents swarming
+        if ctx.ball().should_take_ball_immediately() && ctx.team().is_best_player_to_chase_ball() {
+            return Some(StateChangeResult::with_defender_state(
+                DefenderState::TakeBall,
+            ));
+        }
+
+        // Loose-ball claim lives in the dispatcher.
+
+        // Priority 1: Check for opponents with the ball nearby - be aggressive!
+        if let Some(opponent) = ctx.players().opponents().with_ball().next() {
+            let distance_to_opponent = ctx.player.position.distance_to(&opponent.position);
+
+            // Tackle if very close
+            if distance_to_opponent < TACKLE_DISTANCE {
+                return Some(StateChangeResult::with_defender_state(
+                    DefenderState::Tackling,
+                ));
+            }
+
+            // Press if nearby
+            if distance_to_opponent < PRESSING_DISTANCE {
+                return Some(StateChangeResult::with_defender_state(
+                    DefenderState::Pressing,
+                ));
+            }
+
+            // Mark if within marking range
+            if distance_to_opponent < MARKING_DISTANCE {
+                return Some(StateChangeResult::with_defender_state(
+                    DefenderState::Marking,
+                ));
+            }
+        }
+
+        // Priority 2: Check for nearby opponents without the ball to mark
+        if let Some(opponent_to_mark) = ctx.players().opponents().without_ball().next() {
+            let distance = ctx.player.position.distance_to(&opponent_to_mark.position);
+            if distance < MARKING_DISTANCE / 2.0 {
+                return Some(StateChangeResult::with_defender_state(
+                    DefenderState::Marking,
+                ));
+            }
+        }
+
+        // Priority 2.5: When ball is on own side and opponent advancing, provide cover
+        if ctx.ball().on_own_side() {
+            if let Some(opponent) = ctx.players().opponents().with_ball().next() {
+                let distance = opponent.distance(ctx);
+                if distance < 120.0 {
+                    // Close enough to press or support
+                    if distance < PRESSING_DISTANCE {
+                        return Some(StateChangeResult::with_defender_state(
+                            DefenderState::Pressing,
+                        ));
+                    }
+                    // Provide cover depth — position between attacker and goal
+                    return Some(StateChangeResult::with_defender_state(
+                        DefenderState::Covering,
+                    ));
+                }
+            }
+        }
+
+        // Priority 3: Intercept ball if it's coming towards player
+        if ctx.ball().is_towards_player_with_angle(0.8)
+            && ctx.ball().distance() < INTERCEPTION_DISTANCE
+        {
+            return Some(StateChangeResult::with_defender_state(
+                DefenderState::Intercepting,
+            ));
+        }
+
+        // Priority 4: Return to position if far away and no immediate threats
+        if ctx.player().position_to_distance() != PlayerDistanceFromStartPosition::Small
+            && !self.has_nearby_threats(ctx)
+        {
+            return Some(StateChangeResult::with_defender_state(
+                DefenderState::Returning,
+            ));
+        }
+
+        // Priority 5: Adjust position if needed
+        let optimal_position = self.calculate_optimal_position(ctx);
+        if ctx.player.position.distance_to(&optimal_position) > 2.0 {
+            result
+                .events
+                .add_player_event(PlayerEvent::MovePlayer(ctx.player.id, optimal_position));
+            return Some(result);
+        }
+
+        None
+    }
+
+    fn velocity(&self, ctx: &StateProcessingContext) -> Option<Vector3<f32>> {
+        // Check if player should follow waypoints
+        if ctx.player.should_follow_waypoints(ctx) {
+            let waypoints = ctx.player.get_waypoints_as_vectors();
+
+            if !waypoints.is_empty() {
+                // Player has waypoints defined, follow them
+                return Some(
+                    SteeringBehavior::FollowPath {
+                        waypoints,
+                        current_waypoint: ctx.player.waypoint_manager.current_index,
+                        path_offset: 5.0, // Some randomness for natural movement
+                    }
+                    .calculate(ctx.player)
+                    .velocity,
+                );
+            }
+        }
+
+        // 1. If this is the first tick in the state, initialize wander behavior
+        if ctx.in_state_time % 100 == 0 {
+            return Some(
+                SteeringBehavior::Wander {
+                    target: ctx.player.start_position,
+                    radius: IntegerUtils::random(5, 15) as f32,
+                    jitter: IntegerUtils::random(1, 5) as f32,
+                    distance: IntegerUtils::random(10, 20) as f32,
+                    angle: IntegerUtils::random(0, 360) as f32,
+                }
+                .calculate(ctx.player)
+                .velocity,
+            );
+        }
+
+        // Fallback to moving towards optimal position
+        let optimal_position = self.calculate_optimal_position(ctx);
+        let direction = (optimal_position - ctx.player.position).normalize();
+
+        let walking_speed =
+            (ctx.player.skills.physical.acceleration + ctx.player.skills.physical.stamina) / 2.0
+                * 0.1;
+
+        Some(direction * walking_speed)
+    }
+
+    fn process_conditions(&self, ctx: ConditionContext) {
+        // Walking at low speed allows some recovery, velocity-based to account for pace
+        DefenderCondition::with_velocity(ActivityIntensity::Low).process(ctx);
+    }
+}
+
+impl DefenderWalkingState {
+    fn calculate_optimal_position(&self, ctx: &StateProcessingContext) -> Vector3<f32> {
+        // This is a simplified calculation. You might want to make it more sophisticated
+        // based on team formation, tactics, and the current game situation.
+        let team_center = self.calculate_team_center(ctx);
+        let ball_position = ctx.tick_context.positions.ball.position;
+
+        // Position between team center and ball, slightly closer to team center
+        (team_center * 0.7 + ball_position * 0.3).into()
+    }
+
+    fn calculate_team_center(&self, ctx: &StateProcessingContext) -> Vector3<f32> {
+        let (sum, count) = ctx
+            .players()
+            .teammates()
+            .all()
+            .fold((Vector3::zeros(), 0u32), |(s, c), p| {
+                (s + p.position, c + 1)
+            });
+
+        if count == 0 {
+            Vector3::zeros()
+        } else {
+            sum / count as f32
+        }
+    }
+
+    fn has_nearby_threats(&self, ctx: &StateProcessingContext) -> bool {
+        let threat_distance = 20.0; // Adjust this value as needed
+
+        if ctx.players().opponents().exists(threat_distance) {
+            return true;
+        }
+
+        // Check if the ball is close and moving towards the player
+        let ball_distance = ctx.ball().distance();
+        let ball_speed = ctx.ball().speed();
+        let ball_towards_player = ctx.ball().is_towards_player();
+
+        // Per-tick ball speeds are single-digit (shots ~1-2, lofted
+        // clearances ~6-7), so the threat gate keys on "meaningfully
+        // moving", not the old unreachable > 10.0.
+        if ball_distance < threat_distance && ball_speed > 2.0 && ball_towards_player {
+            return true;
+        }
+
+        false
+    }
+}

@@ -1,0 +1,33 @@
+{
+  "id": 2000501235,
+  "first_name": "Román",
+  "last_name": "Quiroga",
+  "birth_date": "2007-01-18",
+  "country_id": 1649,
+  "club_id": 3100019,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 80,
+  "potential_ability": -6,
+  "value": 220000,
+  "contract": {
+    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2019, "c": 43093774, "p": 0 }
+  ]
+}

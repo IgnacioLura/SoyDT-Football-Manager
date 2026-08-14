@@ -1,0 +1,23 @@
+{
+  "id": 78061405,
+  "first_name": "Rafael",
+  "last_name": "Acosta",
+  "birth_date": "1990-01-01",
+  "country_id": 1657,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 60,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 116
+}

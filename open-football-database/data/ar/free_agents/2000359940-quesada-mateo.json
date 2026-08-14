@@ -1,0 +1,19 @@
+{
+  "id": 2000359940,
+  "first_name": "Mateo",
+  "last_name": "Quesada",
+  "birth_date": "2005-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "MR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": -6
+}

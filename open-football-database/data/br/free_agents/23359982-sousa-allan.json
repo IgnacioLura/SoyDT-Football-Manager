@@ -1,0 +1,27 @@
+{
+  "id": 23359982,
+  "first_name": "Allan",
+  "last_name": "Sousa",
+  "birth_date": "1997-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 65
+  },
+  "current_ability": 110,
+  "potential_ability": 126
+}

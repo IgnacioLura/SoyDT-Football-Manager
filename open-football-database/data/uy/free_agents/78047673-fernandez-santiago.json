@@ -1,0 +1,19 @@
+{
+  "id": 78047673,
+  "first_name": "Santiago",
+  "last_name": "Fernández",
+  "birth_date": "1991-01-01",
+  "country_id": 1657,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 50
+  },
+  "current_ability": 88,
+  "potential_ability": 100
+}

@@ -1,0 +1,19 @@
+{
+  "id": 19010341,
+  "first_name": "Edson",
+  "last_name": "",
+  "birth_date": "1987-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 20
+  },
+  "current_ability": 92,
+  "potential_ability": 128
+}

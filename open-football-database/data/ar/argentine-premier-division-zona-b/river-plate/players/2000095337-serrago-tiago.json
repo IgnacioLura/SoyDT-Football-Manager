@@ -1,0 +1,54 @@
+{
+  "id": 2000095337,
+  "first_name": "Tiago",
+  "last_name": "Serrago",
+  "birth_date": "2004-02-05",
+  "country_id": 1649,
+  "club_id": 94,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 116,
+  "potential_ability": 130,
+  "value": 3000000,
+  "contract": {
+    "salary": 40612,
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 3100018,
+    "expiration": "2027-12-31",
+    "salary": 40612,
+    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2019, "c": 94, "p": 0 },
+    { "s": 2020, "c": 94, "p": 0 },
+    { "s": 2021, "c": 94, "p": 0 },
+    { "s": 2022, "c": 94, "p": 0 },
+    { "s": 2023, "c": 94, "p": 0 },
+    { "s": 2024, "c": 94, "p": 0 },
+    { "s": 2024, "c": 108526, "p": 1 },
+    { "s": 2025, "c": 108510, "p": 24, "g": 2 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1231128"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": 19069449,
+  "first_name": "Samuel",
+  "last_name": "Santos",
+  "birth_date": "1990-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 108,
+  "potential_ability": 122
+}

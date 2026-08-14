@@ -1,0 +1,47 @@
+{
+  "id": 14157796,
+  "first_name": "Yeison",
+  "last_name": "Murillo",
+  "birth_date": "1993-11-15",
+  "country_id": 1653,
+  "club_id": 952707,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 106,
+  "potential_ability": 106,
+  "value": 108000,
+  "contract": {
+    "salary": 29484,
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2015, "c": 14037206, "p": 7 },
+    { "s": 2016, "c": 14037206, "p": 28 },
+    { "s": 2017, "c": 952707, "p": 14 },
+    { "s": 2018, "c": 952707, "p": 32 },
+    { "s": 2019, "c": 952707, "p": 18 },
+    { "s": 2020, "c": 952707, "p": 2 },
+    { "s": 2021, "c": 952707, "p": 21 },
+    { "s": 2022, "c": 952707, "p": 34 },
+    { "s": 2023, "c": 952707, "p": 14 },
+    { "s": 2024, "c": 952707, "p": 6 },
+    { "s": 2025, "c": 952707, "p": 1 }
+  ],
+  "ids": {
+    "transfermarkt.com": "439088"
+  }
+}

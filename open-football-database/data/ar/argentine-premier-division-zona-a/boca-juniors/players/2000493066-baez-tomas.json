@@ -1,0 +1,28 @@
+{
+  "id": 2000493066,
+  "first_name": "Tomás",
+  "last_name": "Báez",
+  "birth_date": "2008-11-15",
+  "country_id": 1649,
+  "club_id": 82,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 78,
+  "potential_ability": -65,
+  "value": 302000,
+  "contract": {    "expiration": "2029-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 952746, "p": 2 }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "id": 2000382034,
+  "first_name": "Simón",
+  "last_name": "Sammarone",
+  "birth_date": "2007-01-29",
+  "country_id": 1649,
+  "club_id": 108510,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 25,
+    "right": 100
+  },
+  "current_ability": 80,
+  "potential_ability": -65,
+  "value": 208000,
+  "contract": {    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 1971, "p": 0 },
+    { "s": 2024, "c": 48038854, "p": 1 }
+  ]
+}

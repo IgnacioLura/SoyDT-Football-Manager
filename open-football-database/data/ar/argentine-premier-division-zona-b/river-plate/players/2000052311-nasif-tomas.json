@@ -1,0 +1,49 @@
+{
+  "id": 2000052311,
+  "first_name": "Tomás",
+  "last_name": "Nasif",
+  "birth_date": "2004-01-02",
+  "country_id": 1649,
+  "club_id": 94,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 116,
+  "potential_ability": 126,
+  "value": 2000000,
+  "contract": {
+    "salary": 22776,
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 92,
+    "expiration": "2027-12-31",
+    "salary": 22776,
+    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2015, "c": 94, "p": 0 },
+    { "s": 2016, "c": 94, "p": 0 },
+    { "s": 2017, "c": 94, "p": 0 },
+    { "s": 2018, "c": 94, "p": 0 },
+    { "s": 2019, "c": 94, "p": 0 },
+    { "s": 2020, "c": 94, "p": 0 },
+    { "s": 2021, "c": 94, "p": 0 },
+    { "s": 2022, "c": 94, "p": 0 },
+    { "s": 2023, "c": 94, "p": 0 },
+    { "s": 2024, "c": 94, "p": 0 },
+    { "s": 2025, "c": 80, "p": 9, "g": 3 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1291055"
+  }
+}

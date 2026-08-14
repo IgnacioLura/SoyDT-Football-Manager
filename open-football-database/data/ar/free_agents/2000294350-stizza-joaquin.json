@@ -1,0 +1,23 @@
+{
+  "id": 2000294350,
+  "first_name": "Joaquín",
+  "last_name": "Stizza",
+  "birth_date": "2003-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "WBR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 104,
+  "potential_ability": 120
+}

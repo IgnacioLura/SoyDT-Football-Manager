@@ -1,0 +1,34 @@
+{
+  "id": 2000493111,
+  "first_name": "Samuel",
+  "last_name": "Pires",
+  "birth_date": "2007-04-18",
+  "country_id": 1651,
+  "club_id": 338,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 86,
+  "potential_ability": 118,
+  "value": 316000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2022, "c": 67070379, "p": 0 },
+    { "s": 2023, "c": 67070379, "p": 0 },
+    { "s": 2024, "c": 4212406, "p": 0 }
+  ]
+}

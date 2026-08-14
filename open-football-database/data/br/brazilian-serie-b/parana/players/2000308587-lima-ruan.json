@@ -1,0 +1,25 @@
+{
+  "id": 2000308587,
+  "first_name": "Ruan",
+  "last_name": "Lima",
+  "birth_date": "2005-12-26",
+  "country_id": 1651,
+  "club_id": 330,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 70,
+  "potential_ability": 84,
+  "value": 0,
+  "contract": {    "expiration": "2025-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

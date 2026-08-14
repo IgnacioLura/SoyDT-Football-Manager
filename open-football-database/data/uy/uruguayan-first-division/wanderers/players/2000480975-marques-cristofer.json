@@ -1,0 +1,30 @@
+{
+  "id": 2000480975,
+  "first_name": "Cristofer",
+  "last_name": "Márques",
+  "birth_date": "2007-02-19",
+  "country_id": 1657,
+  "club_id": 1926,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 76,
+  "potential_ability": -55,
+  "value": 58000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2023, "c": 1926, "p": 0 },
+    { "s": 2024, "c": 1926, "p": 0 },
+    { "s": 2025, "c": 1926, "p": 0 }
+  ]
+}

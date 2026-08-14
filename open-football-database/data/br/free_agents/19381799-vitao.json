@@ -1,0 +1,19 @@
+{
+  "id": 19381799,
+  "first_name": "Vitão",
+  "last_name": "",
+  "birth_date": "2000-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 30,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 100
+}

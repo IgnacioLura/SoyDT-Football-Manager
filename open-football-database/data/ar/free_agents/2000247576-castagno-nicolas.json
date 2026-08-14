@@ -1,0 +1,19 @@
+{
+  "id": 2000247576,
+  "first_name": "Nicolás",
+  "last_name": "Castagno",
+  "birth_date": "2004-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": -6
+}

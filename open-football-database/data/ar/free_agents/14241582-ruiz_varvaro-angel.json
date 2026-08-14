@@ -1,0 +1,19 @@
+{
+  "id": 14241582,
+  "first_name": "Ángel",
+  "last_name": "Ruiz Varvaro",
+  "birth_date": "1992-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 92
+}

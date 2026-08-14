@@ -1,0 +1,23 @@
+{
+  "id": 19140426,
+  "first_name": "Ancelmo",
+  "last_name": "",
+  "birth_date": "1990-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 60,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 106
+}

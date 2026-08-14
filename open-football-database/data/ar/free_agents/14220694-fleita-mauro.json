@@ -1,0 +1,23 @@
+{
+  "id": 14220694,
+  "first_name": "Mauro",
+  "last_name": "Fleita",
+  "birth_date": "1999-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ML",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 88,
+  "potential_ability": 104
+}

@@ -1,0 +1,19 @@
+{
+  "id": 2000241121,
+  "first_name": "João",
+  "last_name": "Paulo",
+  "birth_date": "2003-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 60,
+    "right": 100
+  },
+  "current_ability": 96,
+  "potential_ability": -65
+}

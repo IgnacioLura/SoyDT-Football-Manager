@@ -1,0 +1,23 @@
+{
+  "id": 2000035750,
+  "first_name": "Abel",
+  "last_name": "Amaya",
+  "birth_date": "2002-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "DL",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 104,
+  "potential_ability": 120
+}

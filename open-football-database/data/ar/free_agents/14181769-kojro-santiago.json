@@ -1,0 +1,19 @@
+{
+  "id": 14181769,
+  "first_name": "Santiago",
+  "last_name": "Kojro",
+  "birth_date": "1995-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 92
+}

@@ -1,0 +1,23 @@
+{
+  "id": 14090101,
+  "first_name": "Mariano",
+  "last_name": "Buzzini",
+  "birth_date": "1993-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": 94
+}

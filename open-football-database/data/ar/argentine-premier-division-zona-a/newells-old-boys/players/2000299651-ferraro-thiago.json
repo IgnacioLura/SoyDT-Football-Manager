@@ -1,0 +1,28 @@
+{
+  "id": 2000299651,
+  "first_name": "Thiago",
+  "last_name": "Ferraro",
+  "birth_date": "2004-01-08",
+  "country_id": 1649,
+  "club_id": 91,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 78,
+  "potential_ability": 112,
+  "value": 232000,
+  "contract": {    "expiration": "2025-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 91, "p": 0 }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "id": 2000357670,
+  "first_name": "Nicolás",
+  "last_name": "Soria",
+  "birth_date": "2004-01-02",
+  "country_id": 1649,
+  "club_id": 14037231,
+  "positions": [
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 70,
+  "potential_ability": 102,
+  "value": 27000,
+  "contract": {
+    "expiration": "2025-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 14037231, "p": 0 }
+  ]
+}

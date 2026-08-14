@@ -1,0 +1,19 @@
+{
+  "id": 19259564,
+  "first_name": "Felipe",
+  "last_name": "",
+  "birth_date": "1997-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 60,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 118
+}

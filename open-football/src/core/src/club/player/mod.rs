@@ -1,0 +1,59 @@
+pub mod ability;
+pub mod calculators;
+pub mod condition;
+pub mod contract;
+pub mod core;
+pub mod development;
+pub mod events;
+pub mod generators;
+pub mod happiness;
+pub mod injury;
+pub mod lifecycle;
+pub mod mailbox;
+pub mod maturation;
+pub mod personality;
+pub mod squad;
+pub mod statistics;
+pub mod training;
+pub mod transfer;
+
+// Preserve `crate::club::player::{module}` paths for files that moved into
+// the new grouping folders.
+pub use ability::{attributes, position, position_weights, registry, skills, traits};
+pub use condition::load;
+pub use contract::agent;
+pub use core::{builder, collection, context, player, result, utils};
+pub use events::{
+    AwardReputationInput, AwardReputationKind, AwardTimelineEntry, PlayerAwardsCount,
+};
+pub use personality::{adaptation, behaviour_config, decisions, interaction, language, rapport};
+pub use squad::{plan, status};
+pub use transfer::free_agent_market;
+
+pub use attributes::*;
+pub use builder::*;
+pub use calculators::*;
+pub use collection::*;
+pub use context::*;
+pub use contract::*;
+pub use decisions::*;
+pub use generators::*;
+pub use happiness::*;
+pub use injury::*;
+pub use interaction::*;
+pub use language::*;
+pub use lifecycle::*;
+pub use load::*;
+pub use mailbox::*;
+pub use plan::*;
+pub use player::*;
+pub use position::*;
+pub use position_weights::*;
+pub use rapport::*;
+pub use result::*;
+pub use skills::*;
+pub use statistics::*;
+pub use status::*;
+pub use training::*;
+pub use traits::*;
+pub use utils::*;

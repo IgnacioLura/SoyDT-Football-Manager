@@ -1,0 +1,19 @@
+{
+  "id": 2000340168,
+  "first_name": "Jonatan",
+  "last_name": "",
+  "birth_date": "1997-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 92,
+  "potential_ability": 96
+}

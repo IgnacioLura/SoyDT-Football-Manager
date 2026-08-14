@@ -1,0 +1,19 @@
+{
+  "id": 78039451,
+  "first_name": "Carlos",
+  "last_name": "Núñez",
+  "birth_date": "1992-01-01",
+  "country_id": 1657,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 60,
+    "right": 100
+  },
+  "current_ability": 98,
+  "potential_ability": 128
+}

@@ -1,0 +1,23 @@
+{
+  "id": 2000028014,
+  "first_name": "Julián",
+  "last_name": "Ascacíbar",
+  "birth_date": "2001-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 50
+  },
+  "current_ability": 98,
+  "potential_ability": 106
+}

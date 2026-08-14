@@ -1,0 +1,37 @@
+{
+  "id": 2000394350,
+  "first_name": "Thalissinho",
+  "last_name": "",
+  "birth_date": "2005-12-04",
+  "country_id": 1651,
+  "club_id": 328,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": -6,
+  "value": 34000,
+  "contract": {    "expiration": "2026-10-30",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 107205,
+    "expiration": "2027-10-30",    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2024, "c": 328, "p": 7, "g": 1 },
+    { "s": 2025, "c": 328, "p": 5, "g": 1 }
+  ]
+}

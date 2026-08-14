@@ -1,0 +1,32 @@
+{
+  "id": 2000187724,
+  "first_name": "Ignacio",
+  "last_name": "Vittar",
+  "birth_date": "2004-07-19",
+  "country_id": 1649,
+  "club_id": 14018428,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 102,
+  "potential_ability": 126,
+  "value": 611000,
+  "contract": {
+    "salary": 9620,
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2023, "c": 14037233, "p": 3 },
+    { "s": 2024, "c": 14018428, "p": 2 },
+    { "s": 2025, "c": 14018428, "p": 0 }
+  ]
+}

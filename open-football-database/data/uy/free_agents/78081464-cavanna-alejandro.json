@@ -1,0 +1,19 @@
+{
+  "id": 78081464,
+  "first_name": "Alejandro",
+  "last_name": "Cavanna",
+  "birth_date": "1994-01-01",
+  "country_id": 1657,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 96
+}

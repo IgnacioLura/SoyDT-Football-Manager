@@ -1,0 +1,23 @@
+{
+  "id": 14082784,
+  "first_name": "Lucas",
+  "last_name": "Allosa",
+  "birth_date": "1992-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 94,
+  "potential_ability": 102
+}

@@ -1,0 +1,25 @@
+{
+  "id": 2000434996,
+  "first_name": "Luciano",
+  "last_name": "Agüero",
+  "birth_date": "2007-11-25",
+  "country_id": 1649,
+  "club_id": 93,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 86,
+  "potential_ability": -65,
+  "value": 424000,
+  "contract": {    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

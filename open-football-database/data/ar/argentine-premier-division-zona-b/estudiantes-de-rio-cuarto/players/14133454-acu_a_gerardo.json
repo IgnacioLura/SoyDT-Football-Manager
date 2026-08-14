@@ -1,0 +1,29 @@
+{
+  "id": 14133454,
+  "first_name": "Gerardo",
+  "last_name": "Acuña",
+  "birth_date": "1979-12-18",
+  "country_id": 1649,
+  "club_id": 3101435,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 14
+    }
+  ],
+  "current_ability": 30,
+  "potential_ability": 30,
+  "value": 0,
+  "contract": {
+    "expiration": "2027-06-30",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2000, "c": 102472, "p": 9 },
+    { "s": 2001, "c": 102472, "p": 6 },
+    { "s": 2007, "c": 14022190, "p": 10, "g": 4 },
+    { "s": 2007, "c": 14031219, "p": 12, "g": 2 },
+    { "s": 2010, "c": 14046686, "p": 22, "g": 11 }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "id": 2000449100,
+  "first_name": "Matheus",
+  "last_name": "Menezes",
+  "birth_date": "2007-08-15",
+  "country_id": 1651,
+  "club_id": 337,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 78,
+  "potential_ability": -65,
+  "value": 0,
+  "contract": {    "expiration": "2029-01-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2021, "c": 981817, "p": 16 },
+    { "s": 2022, "c": 981817, "p": 17, "g": 2 },
+    { "s": 2023, "c": 981817, "p": 13 },
+    { "s": 2024, "c": 981817, "p": 17, "g": 4 },
+    { "s": 2025, "c": 6800073, "p": 13 }
+  ]
+}

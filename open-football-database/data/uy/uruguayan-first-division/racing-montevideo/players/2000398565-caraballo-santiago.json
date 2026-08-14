@@ -1,0 +1,38 @@
+{
+  "id": 2000398565,
+  "first_name": "Santiago",
+  "last_name": "Caraballo",
+  "birth_date": "2006-09-06",
+  "country_id": 1657,
+  "club_id": 130849,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 78,
+  "potential_ability": -6,
+  "value": 30000,
+  "contract": {    "expiration": "2025-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2021, "c": 78030362, "p": 0 },
+    { "s": 2022, "c": 78030362, "p": 0 },
+    { "s": 2023, "c": 78030362, "p": 0 },
+    { "s": 2024, "c": 5512559, "p": 0 },
+    { "s": 2024, "c": 78030362, "p": 0 },
+    { "s": 2025, "c": 130849, "p": 0 },
+    { "s": 2025, "c": 5512559, "p": 0 }
+  ]
+}

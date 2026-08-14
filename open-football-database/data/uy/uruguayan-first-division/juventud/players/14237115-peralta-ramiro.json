@@ -1,0 +1,40 @@
+{
+  "id": 14237115,
+  "first_name": "Ramiro",
+  "last_name": "Peralta",
+  "birth_date": "2003-04-22",
+  "country_id": 1649,
+  "club_id": 130848,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 55,
+    "right": 100
+  },
+  "current_ability": 114,
+  "potential_ability": 128,
+  "value": 755000,
+  "contract": {
+    "salary": 52000,
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 95, "p": 0 },
+    { "s": 2024, "c": 130848, "p": 11, "g": 1 },
+    { "s": 2025, "c": 130848, "p": 36, "g": 1 }
+  ]
+}

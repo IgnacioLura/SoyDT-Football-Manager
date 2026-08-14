@@ -1,0 +1,29 @@
+{
+  "id": 2000051799,
+  "first_name": "Gianluca",
+  "last_name": "Motta",
+  "birth_date": "2002-03-05",
+  "country_id": 1649,
+  "club_id": 102486,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 78,
+  "potential_ability": 100,
+  "value": 6000,
+  "contract": {
+    "expiration": "2025-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2022, "c": 102486, "p": 0 }
+  ]
+}

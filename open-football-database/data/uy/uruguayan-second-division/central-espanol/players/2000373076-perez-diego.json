@@ -1,0 +1,37 @@
+{
+  "id": 2000373076,
+  "first_name": "Diego",
+  "last_name": "Pérez",
+  "birth_date": "2006-08-18",
+  "country_id": 1657,
+  "club_id": 1916,
+  "positions": [
+    {
+      "code": "AMC",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 66,
+  "potential_ability": -5,
+  "value": 5000,
+  "contract": {    "expiration": "2025-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2021, "c": 5512556, "p": 0 },
+    { "s": 2022, "c": 5512556, "p": 0 },
+    { "s": 2023, "c": 1919, "p": 0 },
+    { "s": 2024, "c": 5512556, "p": 0 },
+    { "s": 2025, "c": 1924, "p": 0 },
+    { "s": 2025, "c": 5512562, "p": 0 }
+  ]
+}

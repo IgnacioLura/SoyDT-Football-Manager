@@ -1,0 +1,33 @@
+{
+  "id": 2000109798,
+  "first_name": "Pedrão",
+  "last_name": "",
+  "birth_date": "2004-01-06",
+  "country_id": 1651,
+  "club_id": 321,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 106,
+  "potential_ability": 130,
+  "value": 1000000,
+  "contract": {    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 26031118,
+    "expiration": "2027-05-31",    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2022, "c": 321, "p": 1 },
+    { "s": 2025, "c": 107208, "p": 7 }
+  ]
+}

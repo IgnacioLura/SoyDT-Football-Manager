@@ -1,0 +1,34 @@
+{
+  "id": 2000419931,
+  "first_name": "Renzo",
+  "last_name": "Lescano",
+  "birth_date": "2004-04-29",
+  "country_id": 1657,
+  "club_id": 5512562,
+  "positions": [
+    {
+      "code": "DM",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 66,
+  "potential_ability": 72,
+  "value": 8000,
+  "contract": {    "expiration": "2025-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2020, "c": 5512337, "p": 0 },
+    { "s": 2020, "c": 5512556, "p": 0 },
+    { "s": 2021, "c": 5512556, "p": 0 },
+    { "s": 2022, "c": 5512556, "p": 0 },
+    { "s": 2023, "c": 2000112971, "p": 0 },
+    { "s": 2024, "c": 78041593, "p": 6 },
+    { "s": 2025, "c": 5512782, "p": 0 }
+  ]
+}

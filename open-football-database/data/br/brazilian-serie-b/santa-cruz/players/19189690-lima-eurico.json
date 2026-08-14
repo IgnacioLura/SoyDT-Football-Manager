@@ -1,0 +1,40 @@
+{
+  "id": 19189690,
+  "first_name": "Eurico",
+  "last_name": "Lima",
+  "birth_date": "1994-04-16",
+  "country_id": 1651,
+  "club_id": 107232,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    },
+    {
+      "code": "DM",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 20,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 92,
+  "value": 2000,
+  "contract": {    "expiration": "2025-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2014, "c": 321, "p": 3 },
+    { "s": 2015, "c": 321, "p": 0 },
+    { "s": 2016, "c": 332, "p": 0 },
+    { "s": 2017, "c": 321, "p": 0 },
+    { "s": 2020, "c": 2391, "p": 21, "g": 2 },
+    { "s": 2021, "c": 2391, "p": 27, "g": 1 },
+    { "s": 2022, "c": 2391, "p": 19 },
+    { "s": 2023, "c": 2460, "p": 22 },
+    { "s": 2025, "c": 107232, "p": 24, "g": 1 }
+  ]
+}

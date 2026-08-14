@@ -1,0 +1,34 @@
+{
+  "id": 2000512553,
+  "first_name": "Juan",
+  "last_name": "Manuel Solari",
+  "birth_date": "2007-03-28",
+  "country_id": 1649,
+  "club_id": 94,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 30,
+    "right": 100
+  },
+  "current_ability": 86,
+  "potential_ability": -65,
+  "value": 376000,
+  "contract": {    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2022, "c": 955211, "p": 0 },
+    { "s": 2023, "c": 955211, "p": 0 },
+    { "s": 2025, "c": 955211, "p": 1 }
+  ]
+}

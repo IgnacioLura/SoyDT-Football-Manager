@@ -1,0 +1,32 @@
+{
+  "id": 2000210215,
+  "first_name": "Leandro",
+  "last_name": "Ferreira",
+  "birth_date": "2005-09-29",
+  "country_id": 1651,
+  "club_id": 311028,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 60,
+  "potential_ability": -5,
+  "value": 0,
+  "contract": {    "expiration": "2026-08-26",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2022, "c": 57061113, "p": 10 }
+  ]
+}

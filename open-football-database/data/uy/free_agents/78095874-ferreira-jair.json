@@ -1,0 +1,19 @@
+{
+  "id": 78095874,
+  "first_name": "Jair",
+  "last_name": "Ferreira",
+  "birth_date": "1999-01-01",
+  "country_id": 1657,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 104
+}

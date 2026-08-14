@@ -1,0 +1,23 @@
+{
+  "id": 14044268,
+  "first_name": "Ignacio",
+  "last_name": "Irañeta",
+  "birth_date": "1987-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 100,
+  "potential_ability": 112
+}

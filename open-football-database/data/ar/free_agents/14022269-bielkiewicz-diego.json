@@ -1,0 +1,19 @@
+{
+  "id": 14022269,
+  "first_name": "Diego",
+  "last_name": "Bielkiewicz",
+  "birth_date": "1991-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 100,
+  "potential_ability": 116
+}

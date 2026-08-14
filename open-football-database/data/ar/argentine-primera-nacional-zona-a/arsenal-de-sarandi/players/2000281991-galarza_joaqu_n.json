@@ -1,0 +1,32 @@
+{
+  "id": 2000281991,
+  "first_name": "Joaquín",
+  "last_name": "Galarza",
+  "birth_date": "2007-04-20",
+  "country_id": 1649,
+  "club_id": 102476,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 82,
+  "potential_ability": -6,
+  "value": 135000,
+  "contract": {
+    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2022, "c": 477597, "p": 2 },
+    { "s": 2023, "c": 477597, "p": 16, "g": 2 },
+    { "s": 2024, "c": 477597, "p": 26, "g": 6 },
+    { "s": 2025, "c": 477174, "p": 15, "g": 4 }
+  ]
+}

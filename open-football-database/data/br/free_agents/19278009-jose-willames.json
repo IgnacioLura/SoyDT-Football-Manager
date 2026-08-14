@@ -1,0 +1,19 @@
+{
+  "id": 19278009,
+  "first_name": "Willames",
+  "last_name": "José",
+  "birth_date": "1990-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 55,
+    "right": 100
+  },
+  "current_ability": 88,
+  "potential_ability": 106
+}

@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1649,
+    "code": "ar",
+    "slug": "argentina",
+    "name": "Argentina",
+    "continent_id": 3,
+    "reputation": 8700,
+    "settings": {
+      "pricing": {
+        "price_level": 0.5
+      }
+    },
+    "background_color": "#75aadb",
+    "foreground_color": "#ffffff",
+    "skin_colors": {
+      "white": 75,
+      "black": 3,
+      "metis": 22
+    }
+  },
+  {
+    "id": 1651,
+    "code": "br",
+    "slug": "brazil",
+    "name": "Brazil",
+    "continent_id": 3,
+    "reputation": 9200,
+    "settings": {
+      "pricing": {
+        "price_level": 0.6
+      }
+    },
+    "background_color": "#ffdf00",
+    "foreground_color": "#0f5602",
+    "skin_colors": {
+      "white": 30,
+      "black": 25,
+      "metis": 45
+    }
+  },
+  {
+    "id": 1657,
+    "code": "uy",
+    "slug": "uruguay",
+    "name": "Uruguay",
+    "continent_id": 3,
+    "reputation": 8000,
+    "settings": {
+      "pricing": {
+        "price_level": 0.35
+      }
+    },
+    "background_color": "#5cbfeb",
+    "foreground_color": "#ffffff",
+    "skin_colors": {
+      "white": 75,
+      "black": 5,
+      "metis": 20
+    }
+  }
+]

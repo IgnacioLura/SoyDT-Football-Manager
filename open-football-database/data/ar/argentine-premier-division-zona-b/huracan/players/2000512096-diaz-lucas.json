@@ -1,0 +1,28 @@
+{
+  "id": 2000512096,
+  "first_name": "Lucas",
+  "last_name": "Díaz",
+  "birth_date": "2009-02-25",
+  "country_id": 1655,
+  "club_id": 88,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 76,
+  "potential_ability": -65,
+  "value": 322000,
+  "contract": {    "expiration": "2030-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2024, "c": 2000117813, "p": 7 }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "id": 2000218638,
+  "first_name": "Matheus",
+  "last_name": "Ferreira",
+  "birth_date": "2006-02-22",
+  "country_id": 1651,
+  "club_id": 337,
+  "positions": [
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 96,
+  "potential_ability": -7,
+  "value": 2000000,
+  "contract": {    "expiration": "2028-01-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  }
+}

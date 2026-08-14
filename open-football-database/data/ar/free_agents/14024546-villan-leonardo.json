@@ -1,0 +1,19 @@
+{
+  "id": 14024546,
+  "first_name": "Leonardo",
+  "last_name": "Villán",
+  "birth_date": "1992-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 92,
+  "potential_ability": 96
+}

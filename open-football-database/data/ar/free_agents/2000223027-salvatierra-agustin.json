@@ -1,0 +1,23 @@
+{
+  "id": 2000223027,
+  "first_name": "Agustín",
+  "last_name": "Salvatierra",
+  "birth_date": "2003-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DL",
+      "level": 20
+    },
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 45
+  },
+  "current_ability": 90,
+  "potential_ability": 116
+}

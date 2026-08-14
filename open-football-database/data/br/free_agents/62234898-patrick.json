@@ -1,0 +1,27 @@
+{
+  "id": 62234898,
+  "first_name": "Patrick",
+  "last_name": "",
+  "birth_date": "1994-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 90,
+  "potential_ability": 98
+}

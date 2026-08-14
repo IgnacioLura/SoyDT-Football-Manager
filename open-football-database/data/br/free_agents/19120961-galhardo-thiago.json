@@ -1,0 +1,23 @@
+{
+  "id": 19120961,
+  "first_name": "Thiago",
+  "last_name": "Galhardo",
+  "birth_date": "1989-01-01",
+  "country_id": 1651,
+  "positions": [
+    {
+      "code": "AMC",
+      "level": 20
+    },
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 118,
+  "potential_ability": 138
+}

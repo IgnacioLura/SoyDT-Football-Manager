@@ -1,0 +1,31 @@
+{
+  "id": 2000255953,
+  "first_name": "Tiago",
+  "last_name": "Goncalvez",
+  "birth_date": "2006-07-05",
+  "country_id": 1649,
+  "club_id": 81,
+  "positions": [
+    {
+      "code": "ST",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 35,
+    "right": 100
+  },
+  "current_ability": 76,
+  "potential_ability": -55,
+  "value": 97000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2022, "c": 278, "p": 0 },
+    { "s": 2023, "c": 278, "p": 0 },
+    { "s": 2024, "c": 278, "p": 0 },
+    { "s": 2024, "c": 2000181442, "p": 10 }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "id": 19407442,
+  "first_name": "Bruninho",
+  "last_name": "",
+  "birth_date": "2003-03-14",
+  "country_id": 1651,
+  "club_id": 317,
+  "positions": [
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 122,
+  "potential_ability": 132,
+  "value": 5000000,
+  "contract": {    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2021, "c": 317, "p": 5, "g": 1 },
+    { "s": 2022, "c": 317, "p": 2 },
+    { "s": 2023, "c": 317, "p": 16, "g": 2 },
+    { "s": 2024, "c": 184, "p": 14, "g": 1 }
+  ],
+  "ids": {
+    "transfermarkt.com": "668234"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "id": 2000360834,
+  "first_name": "Juan",
+  "last_name": "Cruz Meza",
+  "birth_date": "2008-03-14",
+  "country_id": 1649,
+  "club_id": 94,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    },
+    {
+      "code": "MR",
+      "level": 20
+    },
+    {
+      "code": "AMR",
+      "level": 20
+    },
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 96,
+  "potential_ability": -8,
+  "value": 6000000,
+  "contract": {
+    "salary": 11804,
+    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2021, "c": 94, "p": 0 },
+    { "s": 2022, "c": 94, "p": 0 },
+    { "s": 2023, "c": 94, "p": 0 },
+    { "s": 2024, "c": 94, "p": 0 },
+    { "s": 2025, "c": 94, "p": 8 }
+  ],
+  "ids": {
+    "transfermarkt.com": "1231221"
+  }
+}

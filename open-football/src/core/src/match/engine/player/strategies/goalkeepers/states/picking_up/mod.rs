@@ -1,0 +1,103 @@
+use crate::r#match::goalkeepers::states::common::{ActivityIntensity, GoalkeeperCondition};
+use crate::r#match::goalkeepers::states::state::GoalkeeperState;
+use crate::r#match::player::events::PlayerEvent;
+use crate::r#match::{
+    ConditionContext, StateChangeResult, StateProcessingContext, StateProcessingHandler,
+};
+use nalgebra::Vector3;
+
+const PICKUP_DISTANCE_THRESHOLD: f32 = 1.0; // Maximum distance to actually gather the ball
+const PICKUP_SUCCESS_PROBABILITY: f32 = 0.9; // Probability of successfully picking up the ball
+/// The state is entered from up to ~10u away (a keeper walking onto a
+/// ball rolling through their box), so it needs an approach phase. Beyond
+/// this the ball is someone else's problem.
+const PICKUP_APPROACH_RANGE: f32 = 14.0;
+/// Ticks spent closing on the ball before giving up. A keeper covering
+/// 10u at walking-to-jogging pace needs well under this.
+const PICKUP_APPROACH_TIMEOUT: u64 = 60;
+
+#[derive(Default, Clone)]
+pub struct GoalkeeperPickingUpState {}
+
+impl StateProcessingHandler for GoalkeeperPickingUpState {
+    fn process(&self, ctx: &StateProcessingContext) -> Option<StateChangeResult> {
+        // 0. CRITICAL: Goalkeeper can only pick up balls that are NOT flying away from them
+        // If the ball is flying away, they cannot pick it up (e.g., their own pass/kick)
+        // Check if ball has significant velocity (not just rolling)
+        let ball_velocity = ctx.tick_context.positions.ball.velocity;
+        let ball_speed = ball_velocity.norm();
+
+        if ball_speed > 5.0 && !ctx.ball().is_towards_player_with_angle(0.3) {
+            // Ball is flying away from goalkeeper at high speed - cannot pick up
+            return Some(StateChangeResult::with_goalkeeper_state(
+                GoalkeeperState::Standing,
+            ));
+        }
+
+        // 1. Someone beat us to it.
+        if ctx.ball().is_owned() && !ctx.player.has_ball(ctx) {
+            return Some(StateChangeResult::with_goalkeeper_state(
+                GoalkeeperState::Standing,
+            ));
+        }
+
+        // 2. Hands are only legal inside our own penalty area. If the ball
+        // has rolled out of the box while we were closing on it, break off
+        // — collecting it there would be a handball.
+        if !ctx.ball().in_own_penalty_area() {
+            return Some(StateChangeResult::with_goalkeeper_state(
+                GoalkeeperState::Standing,
+            ));
+        }
+
+        // 3. Approach phase. The state is entered from up to ~10u out, so
+        // walking onto the ball is part of the job; only abandon when it
+        // is genuinely out of range or the approach has dragged on.
+        let ball_distance = ctx.ball().distance();
+        if ball_distance > PICKUP_APPROACH_RANGE || ctx.in_state_time > PICKUP_APPROACH_TIMEOUT {
+            return Some(StateChangeResult::with_goalkeeper_state(
+                GoalkeeperState::Standing,
+            ));
+        }
+        if ball_distance > PICKUP_DISTANCE_THRESHOLD {
+            // Still closing — `velocity()` walks us onto it.
+            return None;
+        }
+
+        // 4. Attempt to pick up the ball
+        let pickup_success = ctx.context.rng.unit_f32() < PICKUP_SUCCESS_PROBABILITY;
+        if pickup_success {
+            // Pickup is successful
+            let mut state_change =
+                StateChangeResult::with_goalkeeper_state(GoalkeeperState::HoldingBall);
+
+            // Generate a pickup event
+            state_change
+                .events
+                .add_player_event(PlayerEvent::CaughtBall(ctx.player.id));
+
+            Some(state_change)
+        } else {
+            // Pickup failed, transition to appropriate state (e.g., Diving)
+            Some(StateChangeResult::with_goalkeeper_state(
+                GoalkeeperState::Diving,
+            ))
+        }
+    }
+
+    fn velocity(&self, ctx: &StateProcessingContext) -> Option<Vector3<f32>> {
+        // Move towards the ball to pick it up. Guarded normalize — the
+        // state is entered with the ball ~1u away, so "exactly on the
+        // ball" is reachable and normalize() of zero would NaN the tick.
+        let ball_position = ctx.tick_context.positions.ball.position;
+        match (ball_position - ctx.player.position).try_normalize(1e-4) {
+            Some(direction) => Some(direction * ctx.player.skills.physical.pace),
+            None => Some(Vector3::zeros()),
+        }
+    }
+
+    fn process_conditions(&self, ctx: ConditionContext) {
+        // Picking up requires moderate intensity with focused effort, includes movement
+        GoalkeeperCondition::with_velocity(ActivityIntensity::Moderate).process(ctx);
+    }
+}

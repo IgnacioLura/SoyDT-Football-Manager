@@ -1,0 +1,40 @@
+{
+  "id": 2000194828,
+  "first_name": "Alexis",
+  "last_name": "Cruz",
+  "birth_date": "1998-10-11",
+  "country_id": 1649,
+  "club_id": 108547,
+  "positions": [
+    {
+      "code": "DL",
+      "level": 20
+    },
+    {
+      "code": "WBL",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 106,
+  "potential_ability": 106,
+  "value": 0,
+  "contract": {
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2017, "c": 952753, "p": 0 },
+    { "s": 2018, "c": 3101518, "p": 0 },
+    { "s": 2019, "c": 3101518, "p": 0 },
+    { "s": 2021, "c": 2000123426, "p": 5, "g": 1 },
+    { "s": 2022, "c": 2000180420, "p": 10, "g": 2 },
+    { "s": 2023, "c": 2000218185, "p": 4 },
+    { "s": 2024, "c": 952751, "p": 38, "g": 1 },
+    { "s": 2025, "c": 952751, "p": 35, "g": 1 }
+  ]
+}

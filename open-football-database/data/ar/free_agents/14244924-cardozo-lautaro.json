@@ -1,0 +1,23 @@
+{
+  "id": 14244924,
+  "first_name": "Lautaro",
+  "last_name": "Cardozo",
+  "birth_date": "2002-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "DR",
+      "level": 20
+    },
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 100,
+  "potential_ability": 120
+}

@@ -1,0 +1,30 @@
+{
+  "id": 2000120406,
+  "first_name": "Enzo",
+  "last_name": "Cejas",
+  "birth_date": "2003-04-14",
+  "country_id": 1649,
+  "club_id": 102466,
+  "positions": [
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 25,
+    "right": 100
+  },
+  "current_ability": 80,
+  "potential_ability": -55,
+  "value": 5000,
+  "contract": {
+    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "PartTime"
+  },
+  "history": [
+    { "s": 2020, "c": 102466, "p": 0 },
+    { "s": 2025, "c": 102466, "p": 0 }
+  ]
+}

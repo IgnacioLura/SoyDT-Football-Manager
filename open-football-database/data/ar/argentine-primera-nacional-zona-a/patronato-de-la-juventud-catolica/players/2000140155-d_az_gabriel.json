@@ -1,0 +1,32 @@
+{
+  "id": 2000140155,
+  "first_name": "Gabriel",
+  "last_name": "Díaz",
+  "birth_date": "2003-05-25",
+  "country_id": 1649,
+  "club_id": 3101457,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 114,
+  "potential_ability": 128,
+  "value": 2000000,
+  "contract": {
+    "salary": 354,
+    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2023, "c": 3101457, "p": 4 },
+    { "s": 2024, "c": 3101457, "p": 19, "g": 1 },
+    { "s": 2025, "c": 3101457, "p": 33, "g": 1 }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "id": 2000280802,
+  "first_name": "Simón",
+  "last_name": "Bigot",
+  "birth_date": "2007-04-29",
+  "country_id": 1649,
+  "club_id": 102467,
+  "positions": [
+    {
+      "code": "AMC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 40,
+    "right": 100
+  },
+  "current_ability": 84,
+  "potential_ability": -7,
+  "value": 376000,
+  "contract": {    "expiration": "2028-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2025, "c": 102467, "p": 0 }
+  ]
+}

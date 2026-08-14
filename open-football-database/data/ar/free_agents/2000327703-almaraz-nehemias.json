@@ -1,0 +1,19 @@
+{
+  "id": 2000327703,
+  "first_name": "Nehemías",
+  "last_name": "Almaraz",
+  "birth_date": "2004-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 50
+  },
+  "current_ability": 88,
+  "potential_ability": 110
+}

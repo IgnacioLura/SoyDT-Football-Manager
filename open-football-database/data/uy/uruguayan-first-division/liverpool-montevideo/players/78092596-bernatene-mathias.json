@@ -1,0 +1,37 @@
+{
+  "id": 78092596,
+  "first_name": "Mathías",
+  "last_name": "Bernatene",
+  "birth_date": "2000-07-24",
+  "country_id": 1657,
+  "club_id": 1920,
+  "positions": [
+    {
+      "code": "GK",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 96,
+  "potential_ability": 110,
+  "value": 35000,
+  "contract": {    "expiration": "2026-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2016, "c": 2000091423, "p": 0 },
+    { "s": 2017, "c": 78014931, "p": 0 },
+    { "s": 2018, "c": 1921, "p": 0 },
+    { "s": 2019, "c": 1921, "p": 0 },
+    { "s": 2020, "c": 1921, "p": 0 },
+    { "s": 2021, "c": 1921, "p": 0 },
+    { "s": 2022, "c": 1921, "p": 0 },
+    { "s": 2023, "c": 115039, "p": 29 },
+    { "s": 2024, "c": 130797, "p": 17 },
+    { "s": 2025, "c": 130797, "p": 30 }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": 14187856,
+  "first_name": "Agustín",
+  "last_name": "Segundo",
+  "birth_date": "1998-01-01",
+  "country_id": 1649,
+  "positions": [
+    {
+      "code": "ML",
+      "level": 20
+    },
+    {
+      "code": "AML",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 100,
+    "right": 40
+  },
+  "current_ability": 88,
+  "potential_ability": 92
+}

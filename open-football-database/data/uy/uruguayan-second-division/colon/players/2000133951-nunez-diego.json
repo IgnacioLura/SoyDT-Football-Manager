@@ -1,0 +1,42 @@
+{
+  "id": 2000133951,
+  "first_name": "Diego",
+  "last_name": "Núñez",
+  "birth_date": "2002-02-22",
+  "country_id": 1657,
+  "club_id": 5512562,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    },
+    {
+      "code": "DM",
+      "level": 20
+    },
+    {
+      "code": "MC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 50,
+    "right": 100
+  },
+  "current_ability": 96,
+  "potential_ability": 106,
+  "value": 24000,
+  "contract": {    "expiration": "2025-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "history": [
+    { "s": 2018, "c": 5512559, "p": 0 },
+    { "s": 2019, "c": 5512559, "p": 0 },
+    { "s": 2021, "c": 5512559, "p": 0 },
+    { "s": 2022, "c": 5512559, "p": 10 },
+    { "s": 2023, "c": 5512559, "p": 29 },
+    { "s": 2024, "c": 5512559, "p": 12, "g": 1 },
+    { "s": 2025, "c": 5512559, "p": 21, "g": 1 }
+  ]
+}
