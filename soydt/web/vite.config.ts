@@ -9,7 +9,7 @@ export default defineConfig({
     // (see soydt/src/SoyDT.Api/Properties/launchSettings.json for the port)
     // so the React app never needs CORS config to talk to it locally.
     proxy: {
-      '/api': 'http://localhost:5092',
+      '/api': { target: 'http://localhost:5092', ws: true },
     },
   },
 })

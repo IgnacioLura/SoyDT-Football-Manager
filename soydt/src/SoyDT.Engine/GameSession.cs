@@ -64,6 +64,32 @@ public sealed partial class GameSession(NativeGameEngine engine)
         }
     }
 
+    /// Same simulation as <see cref="ProcessDays"/>, but ticks one day at a
+    /// time so `onProgress` can push a running total after each day instead
+    /// of the caller waiting for the whole range to finish. Runs under the
+    /// same lock as every other session method — this session only ever
+    /// serves one caller at a time, live processing included.
+    public void ProcessDaysWithProgress(uint days, Action<ProcessProgress> onProgress)
+    {
+        lock (_lock)
+        {
+            if (_current is null)
+            {
+                throw new EngineException("no_active_game", "no game has been created yet — call create first");
+            }
+
+            ulong matchesPlayed = 0;
+            string date = "";
+            for (uint day = 1; day <= days; day++)
+            {
+                var result = engine.ProcessDays(_current, 1);
+                matchesPlayed += result.MatchesPlayed;
+                date = result.Date;
+                onProgress(new ProcessProgress(date, day, days, matchesPlayed, day == days));
+            }
+        }
+    }
+
     public GameSnapshot GetSnapshot()
     {
         lock (_lock)

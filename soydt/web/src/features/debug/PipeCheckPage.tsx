@@ -1,20 +1,43 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
+import { HubConnectionBuilder, HubConnectionState, type HubConnection } from '@microsoft/signalr'
 import { callApi } from '../../shared/api'
 
 // Phase 0 skeleton page: proves the pipe React -> SoyDT.Api -> engine-ffi
 // (.so) -> JSON round-trips end to end. Kept around as a low-level debug
 // tool now that Phase 1's real feature pages (see ../countries) exist.
+//
+// The "live processing" section below is the Phase 2 ProcessHub check: it
+// replaces the original Axum app's polling of `/api/game/processing` with a
+// SignalR push per simulated day.
 
 type ContinentSummary = { id: number; name: string; countryCount: number }
 type GameSnapshot = { date: string; continents: ContinentSummary[] }
 type ProcessResult = { date: string; daysProcessed: number; matchesPlayed: number }
+type ProcessProgress = { date: string; daysProcessed: number; totalDays: number; matchesPlayed: number; done: boolean }
 
 function PipeCheckPage() {
   const [log, setLog] = useState<string[]>([])
   const [busy, setBusy] = useState(false)
   const [countries, setCountries] = useState('AR,UY,BR')
+  const [liveDays, setLiveDays] = useState('5')
+  const [connectionState, setConnectionState] = useState<'disconnected' | 'connected'>('disconnected')
+  const connectionRef = useRef<HubConnection | null>(null)
 
   const append = (line: string) => setLog((prev) => [...prev, line])
+
+  const ensureConnection = async (): Promise<HubConnection> => {
+    if (connectionRef.current && connectionRef.current.state === HubConnectionState.Connected) {
+      return connectionRef.current
+    }
+    const connection = new HubConnectionBuilder().withUrl('/api/hubs/process').withAutomaticReconnect().build()
+    connection.on('ProgressUpdate', (progress: ProcessProgress) => {
+      append(`ProgressUpdate: ${JSON.stringify(progress)}`)
+    })
+    await connection.start()
+    connectionRef.current = connection
+    setConnectionState('connected')
+    return connection
+  }
 
   const runStep = async (label: string, fn: () => Promise<unknown>) => {
     setBusy(true)
@@ -60,6 +83,26 @@ function PipeCheckPage() {
           onClick={() => runStep('process(1 day)', () => callApi<ProcessResult>('/api/game/process?days=1', { method: 'POST' }))}
         >
           3. Process 1 day
+        </button>
+      </div>
+
+      <h2>Phase 2 — ProcessHub (live processing)</h2>
+      <p>Connection: {connectionState}</p>
+      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem', alignItems: 'center' }}>
+        <button disabled={busy} onClick={() => runStep('connect', () => ensureConnection().then(() => 'connected'))}>
+          1. Connect to ProcessHub
+        </button>
+        <input value={liveDays} onChange={(e) => setLiveDays(e.target.value)} style={{ width: '4rem' }} />
+        <button
+          disabled={busy}
+          onClick={() =>
+            runStep('process/live', async () => {
+              await ensureConnection()
+              return callApi(`/api/game/process/live?days=${encodeURIComponent(liveDays)}`, { method: 'POST' })
+            })
+          }
+        >
+          2. Start live processing
         </button>
       </div>
 

@@ -5,6 +5,16 @@ namespace SoyDT.Domain;
 /// exactly — deserialization is case-insensitive but shape must line up.
 public sealed record ProcessResult(string Date, uint DaysProcessed, ulong MatchesPlayed);
 
+/// Pushed over `ProcessHub` after each simulated day of a live `/process/live`
+/// run — lets the UI show a running total instead of polling a boolean
+/// "is it done" flag like the original Axum app's `/api/game/processing`.
+public sealed record ProcessProgress(
+    string Date,
+    uint DaysProcessed,
+    uint TotalDays,
+    ulong MatchesPlayed,
+    bool Done);
+
 public sealed record ContinentSummary(uint Id, string Name, int CountryCount);
 
 /// Mirrors `engine_get_snapshot`'s `data` payload.

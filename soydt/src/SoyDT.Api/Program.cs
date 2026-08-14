@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Diagnostics;
+using SoyDT.Api.Hubs;
 using SoyDT.Domain;
 using SoyDT.Engine;
 
@@ -6,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
+builder.Services.AddSignalR();
 builder.Services.AddSingleton<NativeGameEngine>();
 builder.Services.AddSingleton<GameSession>();
 
@@ -45,5 +47,8 @@ app.UseExceptionHandler(new ExceptionHandlerOptions
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
+// Mounted under /api so the Vite dev server's existing `/api` proxy rule
+// (see soydt/web/vite.config.ts) covers it without a second proxy entry.
+app.MapHub<ProcessHub>("/api/hubs/process");
 
 app.Run();

@@ -81,10 +81,13 @@ Ver plan completo en la conversación (Fase 0-4). Este archivo se actualiza a me
 - [ ] `workers.html` — no construido: panel admin de workers de simulación distribuida, infraestructura del engine Rust, no aplica al alcance read-only de Fase 1; explícitamente Fase 3
 
 ## Fase 2 — Match replay + process en vivo
-- [ ] SignalR `ProcessHub` (reemplaza polling de `/api/game/processing`)
-- [ ] SignalR `AiProgressHub`
+
+**Decisión de arquitectura (replay de partidos)**: a diferencia del original (que genera datos de posición completos para CADA partido simulado y los guarda a disco en `match_results/*.json.gz`), acá el replay se genera **bajo demanda**: `engine_simulate_match_full_with_positions` (ya existe en `engine-ffi/src/match.rs`, sin conectar todavía) re-simula el enfrentamiento entre los planteles ACTUALES de ambos equipos cuando el usuario pide ver un partido — no reproduce el resultado histórico exacto del día simulado. Evita el crecimiento sin límite de RAM del `GameSession` singleton in-memory (sin persistencia a disco). Ver `soydt/engine-ffi/CONTRACT.md` para el shape del `position_data` downsampleado (~500ms de intervalo, ball + players como `[t, x, y]`).
+
+- [x] SignalR `ProcessHub` — reemplaza el polling de `/api/game/processing` del original (un booleano "¿está procesando?" en loop). `GameController.ProcessLive` (`POST /api/game/process/live?days=N`) corre `GameSession.ProcessDaysWithProgress` en background (loop de a 1 día, reutilizando `engine_process_days` sin cambios en Rust) y empuja un evento `ProgressUpdate` por día vía `IHubContext<ProcessHub>` (hub montado en `/api/hubs/process`, bajo el prefijo `/api` para que el proxy de Vite lo cubra sin config adicional — `vite.config.ts` con `ws: true`). El endpoint síncrono `/api/game/process` original queda intacto (útil para curl/dev-loop). Verificado end-to-end con un cliente SignalR real (Node, `@microsoft/signalr`) contra el contenedor Docker: 2 eventos de progreso recibidos en orden correcto, último con `Done: true`, snapshot confirma el día avanzado. Cableado también en `PipeCheckPage` (sección "Phase 2 — ProcessHub") como demo/verificación manual en browser.
+- [ ] SignalR `AiProgressHub` — depende del AI/LLM agent (Fase 3), no hay nada que reportar progreso todavía
 - [ ] Wrapper PixiJS `MatchReplayCanvas`
-- [ ] Endpoints `/api/match/{id}/metadata` + `/chunk/{n}`
+- [ ] Endpoints `/api/match/{id}/metadata` + `/chunk/{n}` — dado el enfoque "bajo demanda" con datos ya downsampleados (no ~77MB por partido como el original), probablemente no necesite chunking real; evaluar si alcanza con una sola respuesta HTTP al conectar `engine_simulate_match_full_with_positions`
 
 ## Fase 3 — Resto + AI reports portado a C#
 - [ ] Face SVG generator portado a C# (`SoyDT.Reports`)
