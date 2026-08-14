@@ -12,6 +12,7 @@ mod game;
 mod league;
 mod league_schedule;
 mod r#match;
+mod match_detail;
 mod national_team;
 mod player;
 mod player_awards;
@@ -85,3 +86,4 @@ pub use r#match::{
     engine_simulate_from_json, engine_simulate_match_full, engine_simulate_match_full_with_positions,
     engine_simulate_spike_match,
 };
+pub use match_detail::engine_simulate_team_match;

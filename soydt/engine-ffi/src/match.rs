@@ -290,7 +290,7 @@ struct SubstitutionJson {
 }
 
 #[derive(Serialize)]
-struct MatchResultJson {
+pub(crate) struct MatchResultJson {
     home_goals: u8,
     away_goals: u8,
     home_possession_percentage: f32,
@@ -298,6 +298,10 @@ struct MatchResultJson {
     injuries: Vec<InjuryJson>,
     cards: Vec<CardJson>,
     substitutions: Vec<SubstitutionJson>,
+    // Position samples aren't tagged home/away per player — this is the
+    // roster split `MatchReplayCanvas` needs to color dots by side.
+    home_player_ids: Vec<u32>,
+    away_player_ids: Vec<u32>,
     #[serde(skip_serializing_if = "Option::is_none")]
     position_data: Option<serde_json::Value>,
 }
@@ -350,10 +354,22 @@ fn downsample_positions(position_data: &core::r#match::result::ResultMatchPositi
 fn build_match_result(home_json: &str, away_json: &str, record_positions: bool) -> Result<MatchResultJson, String> {
     let home = make_squad_from_json(1, "Home", home_json)?;
     let away = make_squad_from_json(2, "Away", away_json)?;
+    let home_team_id = home.team_id;
 
     let result = FootballEngine::<840, 545>::play(home, away, record_positions, true, false);
+    match_result_json_from_raw(result, home_team_id, record_positions)
+}
+
+/// Shared by both the JSON-squad path above (`build_match_result`) and
+/// `match_detail.rs`'s on-demand re-simulation of two real game-state teams
+/// — every caller ends up with the same `MatchResultRaw` from
+/// `FootballEngine::play` and needs it projected into the same JSON shape.
+pub(crate) fn match_result_json_from_raw(
+    result: core::r#match::engine::flow::result::MatchResultRaw,
+    home_team_id: u32,
+    record_positions: bool,
+) -> Result<MatchResultJson, String> {
     let score = result.score.as_ref().ok_or_else(|| "no score produced".to_string())?;
-    let home_team_id = score.home_team.team_id;
 
     // `left`/`right` are pitch sides, not home/away — map by team_id instead.
     let home_field_squad = if result.left_team_players.team_id == home_team_id {
@@ -439,6 +455,24 @@ fn build_match_result(home_json: &str, away_json: &str, record_positions: bool) 
         None
     };
 
+    let away_field_squad = if result.left_team_players.team_id == home_team_id {
+        &result.right_team_players
+    } else {
+        &result.left_team_players
+    };
+    let home_player_ids: Vec<u32> = home_field_squad
+        .main
+        .iter()
+        .chain(home_field_squad.substitutes_used.iter())
+        .copied()
+        .collect();
+    let away_player_ids: Vec<u32> = away_field_squad
+        .main
+        .iter()
+        .chain(away_field_squad.substitutes_used.iter())
+        .copied()
+        .collect();
+
     Ok(MatchResultJson {
         home_goals: score.home_team.get(),
         away_goals: score.away_team.get(),
@@ -447,6 +481,8 @@ fn build_match_result(home_json: &str, away_json: &str, record_positions: bool) 
         injuries,
         cards,
         substitutions,
+        home_player_ids,
+        away_player_ids,
         position_data,
     })
 }

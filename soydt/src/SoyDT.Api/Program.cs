@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.ResponseCompression;
 using SoyDT.Api.Hubs;
 using SoyDT.Domain;
 using SoyDT.Engine;
@@ -10,6 +11,17 @@ builder.Services.AddOpenApi();
 builder.Services.AddSignalR();
 builder.Services.AddSingleton<NativeGameEngine>();
 builder.Services.AddSingleton<GameSession>();
+// The match-detail endpoint's downsampled position data is still a large,
+// highly repetitive JSON payload (~10MB+ per fixture) — the original app
+// gzips its own match recordings on disk for the same reason. Response
+// compression is opt-in per-response in ASP.NET Core (skipped by default
+// over HTTPS to avoid BREACH-style risk), so it's enabled explicitly here;
+// this API has no cookie/token-reflecting endpoints for that attack to
+// target.
+builder.Services.AddResponseCompression(options =>
+{
+    options.EnableForHttps = true;
+});
 
 var app = builder.Build();
 
@@ -44,6 +56,7 @@ app.UseExceptionHandler(new ExceptionHandlerOptions
     },
 });
 
+app.UseResponseCompression();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
