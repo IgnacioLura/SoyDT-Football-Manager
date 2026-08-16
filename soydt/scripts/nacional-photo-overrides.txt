@@ -1,0 +1,28 @@
+# Extra (engine_id, transfermarkt_id) mappings for Nacional players whose
+# source JSON (open-football-database/data/uy/uruguayan-first-division/nacional/players/*.json)
+# has no "transfermarkt.com" id, so the main loop in download-nacional-photos.sh
+# can't discover them. Each pair below was found manually by searching
+# Transfermarkt by player name and confirming the result's club matched
+# Club Nacional (Transfermarkt club id verein/866) exactly — not just a
+# name match. Read by download-nacional-photos.sh so a clean-checkout
+# re-run reproduces all 11 committed photos, not just the 6 from the
+# main id-driven loop.
+#
+# Format: engine_id tm_id
+#
+# 2000090753 891569   Baltasar Barcia
+# 2000157903 988662   Juan Cruz de los Santos
+# 78074444   365827   Maximiliano Silvera
+# 78091716   577406   Emiliano Ancheta
+# 78105612   898036   Rafael Haller
+2000090753 891569
+2000157903 988662
+78074444 365827
+78091716 577406
+78105612 898036
+
+# Checked via the same name+club search but NOT included above: Paolo
+# Calione (engine id 2000271375, tm id 997825) — his Transfermarkt profile
+# only has the generic default silhouette, not a real photo, so no photo
+# was downloaded for him. Left out intentionally; do not re-add without a
+# real photo becoming available.

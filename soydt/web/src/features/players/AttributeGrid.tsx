@@ -10,12 +10,13 @@ function AttributeGrid({ title, entries }: { title: string; entries: AttributeEn
       <div className="fm-attr-grid">
         {entries.map((entry) => {
           const Icon = ATTRIBUTE_ICONS[entry.key]
-          const color = attributeColor(entry.value)
+          const rounded = Math.round(entry.value)
+          const color = attributeColor(rounded)
           return (
             <div key={entry.key} className={`fm-attr-tile fm-attr-${color}`}>
               <span className="fm-attr-icon">{Icon ? Icon() : null}</span>
               <span className="fm-attr-label">{entry.label}</span>
-              <span className="fm-attr-value">{Math.round(entry.value)}</span>
+              <span className="fm-attr-value">{rounded}</span>
             </div>
           )
         })}
