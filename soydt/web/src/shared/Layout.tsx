@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import AiSettingsBadge from './AiSettingsBadge'
 import Flag from './Flag'
 
 // Ported 1:1 from open-football/src/web/src/layout.html — same wrapper
@@ -68,7 +69,8 @@ function Layout({ title, subTitle, children }: LayoutProps) {
                       {subTitle && <span className="fm-header-sub">{subTitle}</span>}
                     </div>
                     <div className="fm-header-actions">
-                      <a className="fm-ai-icon fm-header-search" href="#" title="Search">
+                      <AiSettingsBadge />
+                      <a className="fm-header-search" href="#" title="Search">
                         <i className="fa fa-search" />
                       </a>
                     </div>

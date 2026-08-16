@@ -6,6 +6,7 @@
 //! never touches game-state fields directly; it always round-trips through
 //! JSON snapshots this crate serializes on demand.
 
+mod ai_tools;
 mod awards;
 mod contract;
 mod game;
@@ -87,3 +88,4 @@ pub use r#match::{
     engine_simulate_spike_match,
 };
 pub use match_detail::engine_simulate_team_match;
+pub use ai_tools::{engine_ai_get_club, engine_ai_get_club_players, engine_ai_get_player};

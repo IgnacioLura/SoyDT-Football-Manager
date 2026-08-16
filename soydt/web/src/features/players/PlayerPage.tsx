@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
+import AiReportButton from '../../shared/AiReportButton'
 import Flag from '../../shared/Flag'
 import Layout from '../../shared/Layout'
 
@@ -81,24 +82,34 @@ function PlayerPage() {
         <section className="fm-panel">
           <div className="fm-panel-head">
             <h3>Overview</h3>
+            <AiReportButton title="AI scouting dossier" startUrl={`/api/players/${playerId}/ai-report`} />
           </div>
-          <div style={{ padding: '14px' }}>
-            <p>
-              Position: {player.position} — Age: {player.age}
-            </p>
-            <p>
-              Current ability: {player.currentAbility} — Value: {player.value.toLocaleString()} — Reputation:{' '}
-              {player.currentReputation}
-            </p>
-            <p>
-              Height: {player.height}cm — Weight: {player.weight}kg
-            </p>
-            <p>
-              Technical: {player.technicalAvg.toFixed(1)} — Mental: {player.mentalAvg.toFixed(1)} — Physical:{' '}
-              {player.physicalAvg.toFixed(1)}
-            </p>
-            {player.isInjured && <p style={{ color: '#e74c3c' }}>Injured</p>}
-            {player.isBanned && <p style={{ color: '#e74c3c' }}>Banned</p>}
+          <div style={{ padding: '14px', display: 'flex', gap: '16px' }}>
+            <img
+              src="/static/images/player/placeholder-face.svg"
+              alt=""
+              width={100}
+              height={125}
+              style={{ borderRadius: '4px', flexShrink: 0 }}
+            />
+            <div>
+              <p>
+                Position: {player.position} — Age: {player.age}
+              </p>
+              <p>
+                Current ability: {player.currentAbility} — Value: {player.value.toLocaleString()} — Reputation:{' '}
+                {player.currentReputation}
+              </p>
+              <p>
+                Height: {player.height}cm — Weight: {player.weight}kg
+              </p>
+              <p>
+                Technical: {player.technicalAvg.toFixed(1)} — Mental: {player.mentalAvg.toFixed(1)} — Physical:{' '}
+                {player.physicalAvg.toFixed(1)}
+              </p>
+              {player.isInjured && <p style={{ color: '#e74c3c' }}>Injured</p>}
+              {player.isBanned && <p style={{ color: '#e74c3c' }}>Banned</p>}
+            </div>
           </div>
         </section>
       </div>

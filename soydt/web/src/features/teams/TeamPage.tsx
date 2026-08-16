@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
+import AiReportButton from '../../shared/AiReportButton'
 import Layout from '../../shared/Layout'
 
 // Phase 1: team overview/squad page, mirrors the original app's
@@ -63,6 +64,7 @@ function TeamPage() {
           <div className="fm-panel-head">
             <h3>Squad</h3>
             <span className="fm-panel-count">{team.players.length}</span>
+            <AiReportButton title="AI scouting report" startUrl={`/api/teams/${teamId}/ai-report`} />
           </div>
           <table className="fm-standings">
             <thead>

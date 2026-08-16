@@ -1,0 +1,76 @@
+using System.Text.Json.Nodes;
+
+namespace SoyDT.Api.Ai;
+
+/// Drives the model-tools loop — ported from the original app's
+/// `web/src/ai/agent.rs::AiAgent`. The model decides which tools to call,
+/// we execute them against the game session and feed the JSON back, until
+/// the model returns a final written report (or the step bound is hit).
+/// Progress is reported through an `AiJobHandle` so the dialog can render
+/// tool calls in real time; the prompt is supplied by the caller
+/// (co-located with its report controller, same as the original's
+/// per-page `include_str!` prompts).
+public sealed class AiAgent(AiClient client, AiToolsDispatcher tools)
+{
+    /// Safety bound on the agent loop so a misbehaving model can't spin forever.
+    private const int MaxSteps = 30;
+
+    public async Task Run(string system, string task, AiJobHandle handle)
+    {
+        var messages = new List<JsonObject>
+        {
+            new() { ["role"] = "system", ["content"] = system },
+            new() { ["role"] = "user", ["content"] = task },
+        };
+        var schemas = AiToolsDispatcher.Schemas;
+
+        for (var step = 0; step < MaxSteps; step++)
+        {
+            ChatTurn turn;
+            try
+            {
+                turn = await client.Chat(messages, schemas);
+            }
+            catch (AiClientException e)
+            {
+                handle.Fail(e.Message);
+                return;
+            }
+
+            if (turn.ToolCalls.Count == 0)
+            {
+                handle.Finish(turn.Content ?? "");
+                return;
+            }
+
+            // Echo the assistant's tool-call message back verbatim before
+            // appending each tool result.
+            var echoed = new JsonArray(turn.ToolCalls.Select(tc => (JsonNode) new JsonObject
+            {
+                ["id"] = tc.Id,
+                ["type"] = "function",
+                ["function"] = new JsonObject { ["name"] = tc.Name, ["arguments"] = tc.Arguments },
+            }).ToArray());
+            messages.Add(new JsonObject
+            {
+                ["role"] = "assistant",
+                ["content"] = turn.Content,
+                ["tool_calls"] = echoed,
+            });
+
+            foreach (var tc in turn.ToolCalls)
+            {
+                handle.PushTool(tc.Name, tc.Arguments);
+                var result = tools.Dispatch(tc.Name, tc.Arguments);
+                messages.Add(new JsonObject
+                {
+                    ["role"] = "tool",
+                    ["tool_call_id"] = tc.Id,
+                    ["content"] = result,
+                });
+            }
+        }
+
+        handle.Fail($"the agent did not finish within {MaxSteps} steps");
+    }
+}

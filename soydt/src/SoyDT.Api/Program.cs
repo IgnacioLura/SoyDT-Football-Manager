@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.ResponseCompression;
+using SoyDT.Api.Ai;
 using SoyDT.Api.Hubs;
 using SoyDT.Domain;
 using SoyDT.Engine;
@@ -11,6 +12,12 @@ builder.Services.AddOpenApi();
 builder.Services.AddSignalR();
 builder.Services.AddSingleton<NativeGameEngine>();
 builder.Services.AddSingleton<GameSession>();
+builder.Services.AddSingleton<AiConfig>();
+builder.Services.AddSingleton<AiJobs>();
+// Named client for the AI agent's LLM calls — a long timeout since local
+// OpenAI-compatible servers (Ollama/llama.cpp) can take a while per turn,
+// matching the original's `reqwest::Client` 120s timeout.
+builder.Services.AddHttpClient("ai-agent", c => c.Timeout = TimeSpan.FromSeconds(120));
 // The match-detail endpoint's downsampled position data is still a large,
 // highly repetitive JSON payload (~10MB+ per fixture) — the original app
 // gzips its own match recordings on disk for the same reason. Response
