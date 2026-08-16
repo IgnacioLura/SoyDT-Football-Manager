@@ -68,8 +68,8 @@ pub extern "C" fn free_string(s: *mut c_char) {
 // `extern "C"` fns declared in their own files keeps this file a table of
 // contents).
 pub use game::{
-    engine_create_game, engine_create_scoped_game, engine_free_game, engine_get_countries,
-    engine_get_snapshot, engine_process_days,
+    engine_clone_game, engine_create_game, engine_create_scoped_game, engine_free_game,
+    engine_get_countries, engine_get_snapshot, engine_process_days,
 };
 pub use awards::engine_get_league_awards;
 pub use league::{engine_get_league_table, engine_get_leagues};

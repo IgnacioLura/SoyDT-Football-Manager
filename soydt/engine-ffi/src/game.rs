@@ -142,6 +142,36 @@ pub extern "C" fn engine_create_scoped_game(country_codes_json: *const c_char) -
     }
 }
 
+/// Deep-clones the world behind `handle` into a brand-new, independent
+/// handle — lets `SoyDT.Engine`'s `GameSession` mutate a private working
+/// copy (advancing days) while every concurrent read keeps serving the
+/// still-published original handle, then atomically swap the working copy
+/// in once it's done. Mirrors the original Axum app's own
+/// `Arc::unwrap_or_clone` deep-clone-then-swap pattern in
+/// `web/src/game/process.rs`, just via an explicit clone instead of an Arc.
+/// `SimulatorData` already derives `Clone` in `core`, so this is a plain
+/// struct clone — no new engine-side state machinery.
+///
+/// # Safety
+/// `handle` must be a live pointer returned by `engine_create_game` or
+/// `engine_create_scoped_game`. Returns null if `handle` is null or the
+/// clone panics.
+#[unsafe(no_mangle)]
+pub extern "C" fn engine_clone_game(handle: *mut GameHandle) -> *mut GameHandle {
+    if handle.is_null() {
+        return std::ptr::null_mut();
+    }
+    let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+        let game = unsafe { &*handle };
+        game.data().clone()
+    }));
+
+    match result {
+        Ok(data) => Box::into_raw(Box::new(GameHandle(data))),
+        Err(_) => std::ptr::null_mut(),
+    }
+}
+
 /// Releases a handle previously returned by `engine_create_game`.
 ///
 /// # Safety

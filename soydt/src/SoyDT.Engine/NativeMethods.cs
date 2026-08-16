@@ -24,6 +24,9 @@ internal static partial class NativeMethods
     internal static partial void engine_free_game(IntPtr handle);
 
     [LibraryImport(LibName)]
+    internal static partial IntPtr engine_clone_game(IntPtr handle);
+
+    [LibraryImport(LibName)]
     internal static partial IntPtr engine_get_snapshot(IntPtr handle);
 
     [LibraryImport(LibName)]

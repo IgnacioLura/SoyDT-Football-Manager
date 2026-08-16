@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import AiSettingsBadge from './AiSettingsBadge'
 import Flag from './Flag'
+import ProcessControl from './ProcessControl'
 
 // Ported 1:1 from open-football/src/web/src/layout.html — same wrapper
 // div/class structure (fm-sidebar, fm-header, container-fluid/row/col from
@@ -76,6 +77,7 @@ function Layout({ title, subTitle, children }: LayoutProps) {
                       <Link className="fm-header-search" to="/search" title="Search">
                         <i className="fa fa-search" />
                       </Link>
+                      <ProcessControl />
                     </div>
                   </div>
                   {children}

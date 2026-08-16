@@ -40,6 +40,7 @@ function MatchDetailPage() {
   const [homeTeam, setHomeTeam] = useState<TeamDetail | null>(null)
   const [awayTeam, setAwayTeam] = useState<TeamDetail | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [elapsedSec, setElapsedSec] = useState(0)
 
   const ids = matchId ? parseTeamIds(matchId) : null
 
@@ -51,6 +52,12 @@ function MatchDetailPage() {
     const [homeTeamId, awayTeamId] = ids
     setMatch(null)
     setError(null)
+    setElapsedSec(0)
+    // The simulation itself can take several seconds (full 90-minute match
+    // + position-data serialization) — this ticker is the only signal the
+    // request hasn't silently died, since a single fetch has no progress
+    // events to report (unlike ProcessHub's day-by-day pushes).
+    const ticker = setInterval(() => setElapsedSec((s) => s + 1), 1000)
     Promise.all([
       callApi<MatchDetail>(`/api/match/${homeTeamId}/${awayTeamId}`),
       callApi<TeamDetail>(`/api/teams/${homeTeamId}`),
@@ -62,6 +69,9 @@ function MatchDetailPage() {
         setAwayTeam(away)
       })
       .catch((e) => setError(e instanceof Error ? e.message : String(e)))
+      .finally(() => clearInterval(ticker))
+
+    return () => clearInterval(ticker)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [matchId])
 
@@ -79,7 +89,15 @@ function MatchDetailPage() {
     return (
       <Layout title="Match">
         <div className="fm-page">
-          <p>Simulating match…</p>
+          <section className="fm-panel">
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', padding: '3rem 1rem' }}>
+              <div className="spinner" />
+              <p>Simulating match… ({elapsedSec}s)</p>
+              <p style={{ fontSize: '0.85rem', opacity: 0.7 }}>
+                Running the full 90 minutes plus position data — usually takes a few seconds.
+              </p>
+            </div>
+          </section>
         </div>
       </Layout>
     )

@@ -55,6 +55,29 @@ public sealed partial class NativeGameEngine
         return new GameHandleSafeHandle(handle);
     }
 
+    /// Deep-clones the world behind `game` into a brand-new, independent
+    /// handle — see `engine-ffi/src/game.rs::engine_clone_game`. Used by
+    /// <see cref="GameSession"/> to mutate a private working copy while
+    /// concurrent reads keep serving the still-published original.
+    public GameHandleSafeHandle CloneGame(GameHandleSafeHandle game)
+    {
+        bool addedRef = false;
+        try
+        {
+            game.DangerousAddRef(ref addedRef);
+            var clonedPtr = NativeMethods.engine_clone_game(game.DangerousGetHandle());
+            if (clonedPtr == IntPtr.Zero)
+            {
+                throw new EngineException("clone_failed", "engine_clone_game panicked or otherwise failed to clone the world");
+            }
+            return new GameHandleSafeHandle(clonedPtr);
+        }
+        finally
+        {
+            if (addedRef) game.DangerousRelease();
+        }
+    }
+
     public ProcessResult ProcessDays(GameHandleSafeHandle game, uint days)
     {
         bool addedRef = false;
