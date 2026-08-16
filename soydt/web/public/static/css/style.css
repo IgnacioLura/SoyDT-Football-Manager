@@ -14140,8 +14140,11 @@ a.np-prose-link.np-mark:focus-visible,
     color: #fff;
 }
 
-/* Position badge — colored by line (GK/DEF/MID/FWD) so the squad table
-   reads at a glance instead of everyone being the same plain text. */
+/* Position badge — colored by line (GK/DEF/MID/FWD), shaded within the
+   line by role (exact color + background computed in DtSquadPage.tsx's
+   POSITION_CODES, since it varies per specific position, not just per
+   line) so the squad table reads at a glance instead of everyone being
+   the same plain text. */
 .fm-pos-badge {
     display: inline-block;
     padding: 2px 7px;
@@ -14149,22 +14152,6 @@ a.np-prose-link.np-mark:focus-visible,
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.3px;
-}
-.fm-pos-GK {
-    background: rgba(245, 158, 11, 0.18);
-    color: #f59e0b;
-}
-.fm-pos-DEF {
-    background: rgba(59, 130, 246, 0.18);
-    color: #3b82f6;
-}
-.fm-pos-MID {
-    background: rgba(34, 197, 94, 0.18);
-    color: #22c55e;
-}
-.fm-pos-FWD {
-    background: rgba(239, 68, 68, 0.18);
-    color: #ef4444;
 }
 
 /* Habilidad (CA) cell — same red/yellow/green read as the player attribute

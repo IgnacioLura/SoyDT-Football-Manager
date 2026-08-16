@@ -13,35 +13,51 @@ type LineupPlayer = { playerId: number; name: string; position: string; currentA
 
 // Raw position comes from the Rust enum's Debug format (e.g.
 // "DefensiveMidfielder", see engine-ffi's `format!("{pos:?}")`) — map it to
-// a short on-pitch code + line, so the table reads at a glance instead of
-// showing the raw enum name.
-const POSITION_CODES: Record<string, { code: string; line: 'GK' | 'DEF' | 'MID' | 'FWD' }> = {
-  Goalkeeper: { code: 'GK', line: 'GK' },
-  Sweeper: { code: 'SW', line: 'DEF' },
-  DefenderLeft: { code: 'DL', line: 'DEF' },
-  DefenderCenterLeft: { code: 'DCL', line: 'DEF' },
-  DefenderCenter: { code: 'DC', line: 'DEF' },
-  DefenderCenterRight: { code: 'DCR', line: 'DEF' },
-  DefenderRight: { code: 'DR', line: 'DEF' },
-  WingbackLeft: { code: 'WBL', line: 'DEF' },
-  WingbackRight: { code: 'WBR', line: 'DEF' },
-  DefensiveMidfielder: { code: 'DM', line: 'MID' },
-  MidfielderLeft: { code: 'ML', line: 'MID' },
-  MidfielderCenterLeft: { code: 'MCL', line: 'MID' },
-  MidfielderCenter: { code: 'MC', line: 'MID' },
-  MidfielderCenterRight: { code: 'MCR', line: 'MID' },
-  MidfielderRight: { code: 'MR', line: 'MID' },
-  AttackingMidfielderLeft: { code: 'AML', line: 'MID' },
-  AttackingMidfielderCenter: { code: 'AMC', line: 'MID' },
-  AttackingMidfielderRight: { code: 'AMR', line: 'MID' },
-  Striker: { code: 'ST', line: 'FWD' },
-  ForwardLeft: { code: 'FL', line: 'FWD' },
-  ForwardCenter: { code: 'FC', line: 'FWD' },
-  ForwardRight: { code: 'FR', line: 'FWD' },
+// a short on-pitch code + line + exact shade, so the table reads at a
+// glance instead of showing the raw enum name. Each line has its own base
+// hue (GK amber, DEF blue, MID green, FWD red); within a line, the shade
+// darkens for the more defensive-minded roles and lightens for the wider /
+// more advanced ones — e.g. within DEF, Sweeper is the darkest blue and the
+// Wingbacks (most attacking of the back line) are the lightest.
+const POSITION_CODES: Record<string, { code: string; line: 'GK' | 'DEF' | 'MID' | 'FWD'; color: string }> = {
+  Goalkeeper: { code: 'GK', line: 'GK', color: '#f59e0b' },
+
+  Sweeper: { code: 'SW', line: 'DEF', color: '#1e3a8a' },
+  DefenderCenterLeft: { code: 'DCL', line: 'DEF', color: '#1d4ed8' },
+  DefenderCenter: { code: 'DC', line: 'DEF', color: '#1d4ed8' },
+  DefenderCenterRight: { code: 'DCR', line: 'DEF', color: '#1d4ed8' },
+  DefenderLeft: { code: 'DL', line: 'DEF', color: '#3b82f6' },
+  DefenderRight: { code: 'DR', line: 'DEF', color: '#3b82f6' },
+  WingbackLeft: { code: 'WBL', line: 'DEF', color: '#93c5fd' },
+  WingbackRight: { code: 'WBR', line: 'DEF', color: '#93c5fd' },
+
+  DefensiveMidfielder: { code: 'DM', line: 'MID', color: '#14532d' },
+  MidfielderCenterLeft: { code: 'MCL', line: 'MID', color: '#16a34a' },
+  MidfielderCenter: { code: 'MC', line: 'MID', color: '#16a34a' },
+  MidfielderCenterRight: { code: 'MCR', line: 'MID', color: '#16a34a' },
+  MidfielderLeft: { code: 'ML', line: 'MID', color: '#4ade80' },
+  MidfielderRight: { code: 'MR', line: 'MID', color: '#4ade80' },
+  AttackingMidfielderLeft: { code: 'AML', line: 'MID', color: '#86efac' },
+  AttackingMidfielderCenter: { code: 'AMC', line: 'MID', color: '#86efac' },
+  AttackingMidfielderRight: { code: 'AMR', line: 'MID', color: '#86efac' },
+
+  Striker: { code: 'ST', line: 'FWD', color: '#991b1b' },
+  ForwardCenter: { code: 'FC', line: 'FWD', color: '#dc2626' },
+  ForwardLeft: { code: 'FL', line: 'FWD', color: '#f87171' },
+  ForwardRight: { code: 'FR', line: 'FWD', color: '#f87171' },
 }
 
 function positionInfo(position: string) {
-  return POSITION_CODES[position] ?? { code: position, line: 'MID' as const }
+  return POSITION_CODES[position] ?? { code: position, line: 'MID' as const, color: '#16a34a' }
+}
+
+// #rrggbb -> "r, g, b", so a badge's background can be the same hue as its
+// text at low opacity (see the inline style on the badge below).
+function hexToRgbTriplet(hex: string): string {
+  const r = parseInt(hex.slice(1, 3), 16)
+  const g = parseInt(hex.slice(3, 5), 16)
+  const b = parseInt(hex.slice(5, 7), 16)
+  return `${r}, ${g}, ${b}`
 }
 
 // Current ability (CA) is the engine's 1-200 overall rating for a player —
@@ -190,7 +206,11 @@ function DtSquadPage() {
                     </td>
                     <td className="st-club">{p.name}</td>
                     <td>
-                      <span className={`fm-pos-badge fm-pos-${pos.line}`} title={p.position}>
+                      <span
+                        className="fm-pos-badge"
+                        style={{ color: pos.color, background: `rgba(${hexToRgbTriplet(pos.color)}, 0.18)` }}
+                        title={p.position}
+                      >
                         {pos.code}
                       </span>
                     </td>
