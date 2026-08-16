@@ -7,7 +7,7 @@
 
 use chrono::NaiveDate;
 use log::info;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 use super::compiled::compiled;
@@ -15,7 +15,7 @@ use super::compiled::compiled;
 /// A single player record. Fields with `#[serde(default)]` are optional —
 /// the hydrator fills sensible defaults so a minimal scraper output still
 /// produces a complete `Player`.
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct OdbPlayer {
     pub id: u32,
     pub first_name: String,
@@ -99,7 +99,7 @@ pub struct OdbPlayer {
 }
 
 /// Per-foot ownership levels on a 0-100 scale.
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct OdbFoots {
     #[serde(default)]
     pub left: u8,
@@ -107,7 +107,7 @@ pub struct OdbFoots {
     pub right: u8,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct OdbPosition {
     /// Short code: GK, SW, DL, DCL, DC, DCR, DR, DM, ML, MCL, MC, MCR, MR,
     /// AML, AMC, AMR, WBL, WBR, ST, FL, FC, FR.
@@ -119,7 +119,7 @@ pub struct OdbPosition {
 /// supply all three, just one (e.g. a scraper that only captured world
 /// fame), or none. Missing fields are derived from current ability via
 /// the ability-curve fallback in `build_player_attributes`.
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct OdbReputation {
     #[serde(default)]
     pub home: Option<i16>,
@@ -129,7 +129,7 @@ pub struct OdbReputation {
     pub current: Option<i16>,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct OdbContract {
     /// Annual salary, whole currency units. Optional — when absent, the
     /// hydrator computes one via `core::WageCalculator::expected_annual_wage_raw`
@@ -149,7 +149,7 @@ pub struct OdbContract {
     pub squad_status: Option<String>,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct OdbLoan {
     /// Borrowing club — the player physically plays here.
     pub to_club_id: u32,
@@ -186,7 +186,7 @@ pub struct OdbLoan {
 /// Keys are single-letter on the wire: history arrays repeat the same keys
 /// once per season per player across ~50k players, so short names cut the
 /// uncompressed JSON size meaningfully (gzip still benefits downstream).
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct OdbHistoryItem {
     /// Season start year (e.g. 2017 for the 2017/18 season).
     #[serde(rename = "s")]

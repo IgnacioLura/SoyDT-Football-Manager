@@ -1,6 +1,6 @@
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize, Clone)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct NamesByCountryEntity {
     /// Resolved from `country_code` by the loader; zero-default in JSON.
     #[serde(default)]

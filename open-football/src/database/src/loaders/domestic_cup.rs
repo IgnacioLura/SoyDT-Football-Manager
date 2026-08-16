@@ -1,4 +1,4 @@
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 /// A configured domestic club cup (FA Cup, Copa del Rey, Coppa Italia, …).
 ///
@@ -6,7 +6,7 @@ use serde::Deserialize;
 /// to a country by `country_slug`. Countries without an entry fall back to
 /// a generated "{Country} Cup" in the runtime generator, so this only
 /// carries the *named* cups for the major footballing nations.
-#[derive(Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct DomesticCupEntity {
     /// Country `slug` (as in countries.json, e.g. "england", "czech republic").
     pub country_slug: String,

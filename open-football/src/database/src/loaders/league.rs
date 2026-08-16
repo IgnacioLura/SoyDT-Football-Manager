@@ -1,12 +1,12 @@
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize, Clone)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct ForeignPlayerEntry {
     pub country_id: u32,
     pub weight: u16,
 }
 
-#[derive(Deserialize, Clone)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct LeagueEntity {
     pub id: u32,
     /// Whether this league is active in the simulation. Set to false to skip.
@@ -40,7 +40,7 @@ pub struct LeagueEntity {
     pub league_group: Option<LeagueGroupEntity>,
 }
 
-#[derive(Debug, Deserialize, Clone)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct LeagueGroupEntity {
     /// Display name of the group (e.g. "A", "B", "C", "North", "South")
     pub name: String,
@@ -55,7 +55,7 @@ pub struct LeagueGroupEntity {
     pub playoff: Option<PlayoffConfigEntity>,
 }
 
-#[derive(Debug, Deserialize, Clone)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct PlayoffConfigEntity {
     /// Top N of each group's table that enter the knockout bracket
     /// (e.g. 9 for MLS: seven direct + the two wild-card sides).
@@ -78,7 +78,7 @@ fn default_enabled() -> bool {
     false
 }
 
-#[derive(Deserialize, Clone)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct LeagueSettingsEntity {
     pub season_starting_half: DayMonthPeriodEntity,
     pub season_ending_half: DayMonthPeriodEntity,
@@ -89,7 +89,7 @@ pub struct LeagueSettingsEntity {
     pub split_season: bool,
 }
 
-#[derive(Debug, Deserialize, Clone)]
+#[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct DayMonthPeriodEntity {
     pub from_day: u8,
     pub from_month: u8,

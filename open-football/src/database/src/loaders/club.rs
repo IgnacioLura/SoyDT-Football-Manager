@@ -1,6 +1,6 @@
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize, Clone)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct ClubEntity {
     pub id: u32,
     pub name: String,
@@ -31,13 +31,13 @@ pub struct ClubEntity {
     pub parent_club: Option<ParentClubEntity>,
 }
 
-#[derive(Deserialize, Clone)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct ParentClubEntity {
     pub id: u32,
     pub team_type: String,
 }
 
-#[derive(Deserialize, Clone)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct ClubFacilitiesEntity {
     pub training: String,
     pub youth: String,
@@ -45,30 +45,30 @@ pub struct ClubFacilitiesEntity {
     pub recruitment: String,
 }
 
-#[derive(Deserialize, Clone)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct ClubColorsEntity {
     pub background: String,
     pub foreground: String,
 }
 
-#[derive(Deserialize, Clone)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct ClubLocationEntity {
     pub city_id: u32,
 }
 
-#[derive(Deserialize, Clone)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct ClubFinanceEntity {
     pub balance: i32,
 }
 
-#[derive(Deserialize, Clone)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct ClubReputationEntity {
     pub home: u16,
     pub national: u16,
     pub world: u16,
 }
 
-#[derive(Deserialize, Clone)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct ClubTeamEntity {
     pub id: u32,
     pub name: String,

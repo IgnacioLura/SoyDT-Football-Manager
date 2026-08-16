@@ -1,9 +1,9 @@
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 use super::compiled::compiled;
 use super::domestic_cup::DomesticCupEntity;
 
-#[derive(Deserialize, Clone)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct CountryEntity {
     pub id: u32,
     pub code: String,
@@ -24,17 +24,17 @@ pub struct CountryEntity {
     pub domestic_cup: Option<DomesticCupEntity>,
 }
 
-#[derive(Deserialize, Clone)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct CountrySettingsEntity {
     pub pricing: CountryPricingEntity,
 }
 
-#[derive(Deserialize, Clone)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct CountryPricingEntity {
     pub price_level: f32,
 }
 
-#[derive(Deserialize, Clone)]
+#[derive(Serialize, Deserialize, Clone)]
 pub struct SkinColorsEntity {
     pub white: u8,
     pub black: u8,

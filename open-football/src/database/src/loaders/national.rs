@@ -1,8 +1,8 @@
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 use super::compiled::compiled;
 
-#[derive(Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct NationalCompetitionEntity {
     pub id: u32,
     pub name: String,
@@ -20,12 +20,12 @@ pub struct NationalCompetitionEntity {
     pub schedule: ScheduleEntity,
 }
 
-#[derive(Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct QualifyingEntity {
     pub zones: Vec<QualifyingZoneEntity>,
 }
 
-#[derive(Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct QualifyingZoneEntity {
     pub continent_id: u32,
     pub spots: u32,
@@ -36,7 +36,7 @@ pub struct QualifyingZoneEntity {
     pub best_third_placed: u32,
 }
 
-#[derive(Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct TournamentEntity {
     pub total_teams: u32,
     pub group_count: u32,
@@ -45,14 +45,14 @@ pub struct TournamentEntity {
     pub best_third_placed: u32,
 }
 
-#[derive(Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct ScheduleEntity {
     pub qualifying_dates: Vec<ScheduleDateEntity>,
     pub tournament_group_dates: Vec<ScheduleDateEntity>,
     pub tournament_knockout_dates: Vec<ScheduleDateEntity>,
 }
 
-#[derive(Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct ScheduleDateEntity {
     pub month: u32,
     pub day: u32,
