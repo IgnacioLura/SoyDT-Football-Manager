@@ -69,7 +69,7 @@ function FreeAgentsPage() {
                   <th className="sq-pos">Pos</th>
                   <th className="sq-age">Age</th>
                   <th className="sq-name">Name</th>
-                  <th className="sq-ability">Ability</th>
+                  <th className="sq-ability">OVR</th>
                 </tr>
               </thead>
               <tbody>

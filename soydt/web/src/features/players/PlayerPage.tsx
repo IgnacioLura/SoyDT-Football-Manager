@@ -248,7 +248,7 @@ function PlayerPage() {
                 Position: {player.position} — Age: {player.age}
               </p>
               <p>
-                Current ability: {player.currentAbility} — Value: {player.value.toLocaleString()} — Reputation:{' '}
+                OVR: {player.currentAbility} — Value: {player.value.toLocaleString()} — Reputation:{' '}
                 {player.currentReputation}
               </p>
               <p>

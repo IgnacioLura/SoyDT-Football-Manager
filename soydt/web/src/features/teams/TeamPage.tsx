@@ -73,7 +73,7 @@ function TeamPage() {
                 <th className="st-club">Name</th>
                 <th>Pos</th>
                 <th>Age</th>
-                <th className="st-pts">CA</th>
+                <th className="st-pts">OVR</th>
               </tr>
             </thead>
             <tbody>

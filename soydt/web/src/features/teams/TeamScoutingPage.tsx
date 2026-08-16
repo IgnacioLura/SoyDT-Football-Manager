@@ -90,7 +90,7 @@ function TeamScoutingPage() {
                   <th>Started</th>
                   <th>Last observed</th>
                   <th>Watched</th>
-                  <th>CA</th>
+                  <th>OVR</th>
                   <th>PA</th>
                   <th>Confidence</th>
                   <th>Value</th>

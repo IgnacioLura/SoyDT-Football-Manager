@@ -114,7 +114,7 @@ function DtTransfersPage() {
                   <th className="st-club">Nombre</th>
                   <th>Pos</th>
                   <th>Edad</th>
-                  <th className="st-pts">CA</th>
+                  <th className="st-pts">OVR</th>
                   <th>Fee</th>
                   <th></th>
                 </tr>
@@ -162,7 +162,7 @@ function DtTransfersPage() {
                   <th className="st-club">Nombre</th>
                   <th>Pos</th>
                   <th>Edad</th>
-                  <th className="st-pts">CA</th>
+                  <th className="st-pts">OVR</th>
                   <th>Fee</th>
                   <th></th>
                 </tr>

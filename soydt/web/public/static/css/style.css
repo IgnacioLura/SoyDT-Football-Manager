@@ -14331,3 +14331,17 @@ a.np-prose-link.np-mark:focus-visible,
     color: #7c8b83;
     text-align: center;
 }
+
+.fm-slot-ovr-row {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+}
+
+/* Out-of-position penalty — how much playing outside their exact EA
+   position costs a player's effective rating in this slot. */
+.fm-ovr-penalty {
+    color: #ef4444;
+    font-weight: 700;
+    font-size: 11px;
+}

@@ -73,10 +73,11 @@ function hexToRgbTriplet(hex: string): string {
   return `${r}, ${g}, ${b}`
 }
 
-// Current ability (CA) is the engine's 1-200 overall rating for a player —
-// same "how good is this player, in one number" idea as a FIFA/FM overall.
-// Bands are absolute (not relative to one squad) so they stay meaningful
-// across a whole career.
+// OVR — the engine's 1-200 overall rating for a player (same field the API
+// still calls `currentAbility`; the app now labels it "OVR" everywhere,
+// matching the EA FC nomenclature already used for position codes). Bands
+// are absolute (not relative to one squad) so they stay meaningful across
+// a whole career.
 function abilityColor(ca: number): 'red' | 'yellow' | 'green' {
   if (ca < 100) return 'red'
   if (ca < 150) return 'yellow'
@@ -86,21 +87,41 @@ function abilityColor(ca: number): 'red' | 'yellow' | 'green' {
 // Fixed default formation (4-3-3) — the engine has no user-editable tactical
 // shape yet (TeamTacticsPage is read-only), so this is the one shape the DT
 // fills in for now. Order matters: it's also the row grouping used below
-// (index 0 = GK row, 1-4 = DEF row, 5-7 = MID row, 8-10 = FWD row).
-const FORMATION: { code: string; color: string }[] = [
-  { code: 'GK', color: '#f59e0b' },
-  { code: 'LB', color: '#3b82f6' },
-  { code: 'CB', color: '#1d4ed8' },
-  { code: 'CB', color: '#1d4ed8' },
-  { code: 'RB', color: '#3b82f6' },
-  { code: 'CDM', color: '#14532d' },
-  { code: 'CM', color: '#16a34a' },
-  { code: 'CM', color: '#16a34a' },
-  { code: 'LW', color: '#86efac' },
-  { code: 'ST', color: '#991b1b' },
-  { code: 'RW', color: '#86efac' },
+// (index 0 = GK row, 1-4 = DEF row, 5-7 = MID row, 8-10 = FWD row). `line`
+// matches the same classification `POSITION_CODES` already uses for that
+// exact code (e.g. LW/RW are 'MID' there too, since the engine's Attacking
+// Midfielder Left/Right — not a separate winger position — is what maps to
+// them), so a player's out-of-position eligibility below is consistent with
+// how they're colored everywhere else in the app.
+const FORMATION: { code: string; line: 'GK' | 'DEF' | 'MID' | 'FWD'; color: string }[] = [
+  { code: 'GK', line: 'GK', color: '#f59e0b' },
+  { code: 'LB', line: 'DEF', color: '#3b82f6' },
+  { code: 'CB', line: 'DEF', color: '#1d4ed8' },
+  { code: 'CB', line: 'DEF', color: '#1d4ed8' },
+  { code: 'RB', line: 'DEF', color: '#3b82f6' },
+  { code: 'CDM', line: 'MID', color: '#14532d' },
+  { code: 'CM', line: 'MID', color: '#16a34a' },
+  { code: 'CM', line: 'MID', color: '#16a34a' },
+  { code: 'LW', line: 'MID', color: '#86efac' },
+  { code: 'ST', line: 'FWD', color: '#991b1b' },
+  { code: 'RW', line: 'MID', color: '#86efac' },
 ]
 const FORMATION_ROWS = [[0], [1, 2, 3, 4], [5, 6, 7], [8, 9, 10]]
+
+// Out-of-position eligibility: a defender/midfielder/forward can fill any
+// slot within their own line (not their exact EA code), at a flat OVR
+// penalty — same idea as FIFA/FM letting a CB deputize at RB, just worse
+// at it than a natural one. Goalkeepers are excluded on purpose: playing
+// outfield isn't a "worse version of the same job" the way it is within
+// DEF/MID/FWD, it's a different job entirely.
+const OUT_OF_POSITION_PENALTY = 15
+
+function eligibility(playerPosition: string, slot: { code: string; line: 'GK' | 'DEF' | 'MID' | 'FWD' }) {
+  const info = positionInfo(playerPosition)
+  if (info.code === slot.code) return { eligible: true, penalty: 0 }
+  if (slot.line !== 'GK' && info.line === slot.line) return { eligible: true, penalty: OUT_OF_POSITION_PENALTY }
+  return { eligible: false, penalty: 0 }
+}
 
 function DtSquadPage() {
   const myTeamId = useMyTeamId()
@@ -143,10 +164,12 @@ function DtSquadPage() {
 
   const candidatesFor = (slotIndex: number) => {
     if (!players) return []
-    const code = FORMATION[slotIndex].code
+    const slot = FORMATION[slotIndex]
     return players
-      .filter((p) => !assignedIds.has(p.playerId) && positionInfo(p.position).code === code)
-      .sort((a, b) => b.currentAbility - a.currentAbility)
+      .filter((p) => !assignedIds.has(p.playerId))
+      .map((p) => ({ ...p, ...eligibility(p.position, slot) }))
+      .filter((c) => c.eligible)
+      .sort((a, b) => b.currentAbility - a.currentAbility - (b.penalty - a.penalty))
   }
 
   const assign = (slotIndex: number, playerId: number) => {
@@ -250,14 +273,21 @@ function DtSquadPage() {
                         >
                           {slot.code}
                         </span>
-                        {player && (
-                          <>
-                            <span className="fm-slot-name">{player.name}</span>
-                            <span className={`fm-ability fm-ability-${abilityColor(player.currentAbility)}`}>
-                              {player.currentAbility}
-                            </span>
-                          </>
-                        )}
+                        {player &&
+                          (() => {
+                            const penalty = eligibility(player.position, slot).penalty
+                            return (
+                              <>
+                                <span className="fm-slot-name">{player.name}</span>
+                                <span className="fm-slot-ovr-row">
+                                  <span className={`fm-ability fm-ability-${abilityColor(player.currentAbility)}`}>
+                                    {player.currentAbility}
+                                  </span>
+                                  {penalty > 0 && <span className="fm-ovr-penalty">-{penalty}</span>}
+                                </span>
+                              </>
+                            )
+                          })()}
                       </button>
 
                       {openSlot === slotIndex && (
@@ -287,6 +317,7 @@ function DtSquadPage() {
                                 />
                                 <span className="fm-slot-dropdown-name">{c.name}</span>
                                 <span className={`fm-ability fm-ability-${abilityColor(c.currentAbility)}`}>{c.currentAbility}</span>
+                                {c.penalty > 0 && <span className="fm-ovr-penalty">-{c.penalty}</span>}
                               </button>
                             ))}
                             {candidatesFor(slotIndex).length === 0 && (

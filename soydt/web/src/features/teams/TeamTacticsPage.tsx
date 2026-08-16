@@ -119,7 +119,7 @@ function TeamTacticsPage() {
               <tr>
                 <th className="st-club">Name</th>
                 <th>Pos</th>
-                <th className="st-pts">CA</th>
+                <th className="st-pts">OVR</th>
               </tr>
             </thead>
             <tbody>

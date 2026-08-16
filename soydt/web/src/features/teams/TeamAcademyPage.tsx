@@ -119,7 +119,7 @@ function TeamAcademyPage() {
                   <th>Pos</th>
                   <th>Phase</th>
                   <th>Age</th>
-                  <th>CA</th>
+                  <th>OVR</th>
                   <th>PA</th>
                 </tr>
               </thead>
