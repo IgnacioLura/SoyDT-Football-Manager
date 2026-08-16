@@ -46,11 +46,13 @@ import DtTablePage from './features/dt/DtTablePage'
 import DtEventsPage from './features/dt/DtEventsPage'
 import { ProcessProvider } from './shared/ProcessContext'
 import ProcessOverlay from './shared/ProcessOverlay'
+import DtEventModal from './shared/DtEventModal'
 
 function App() {
   return (
     <ProcessProvider>
       <ProcessOverlay />
+      <DtEventModal />
       <BrowserRouter>
         <Routes>
         <Route path="/" element={<CountriesPage />} />

@@ -12,6 +12,16 @@ import { callApi } from './api'
 type GameSnapshot = { date: string }
 type ProcessProgress = { date: string; daysProcessed: number; totalDays: number; matchesPlayed: number; done: boolean }
 export type ProcessDayLog = { day: number; date: string; matchesToday: number }
+type DtEventLogEntry = {
+  eventId: string
+  name: string
+  storyText: string
+  success: boolean
+  matchday: number
+  scope: string
+  playerId: number | null
+  playerName: string | null
+}
 
 type ProcessState = {
   date: string | null
@@ -153,6 +163,7 @@ export function ProcessProvider({ children }: { children: ReactNode }) {
         let succeeded = false
         try {
           const before = await callApi<GameSnapshot>('/api/game/snapshot').catch(() => null)
+          const eventsBefore = await callApi<{ log: DtEventLogEntry[] }>('/api/dt/events').catch(() => ({ log: [] }))
 
           // `GameSession.ProcessDaysWithProgress` ticks one real day at a
           // time (a single clone up front, not per day), so every
@@ -182,6 +193,12 @@ export function ProcessProvider({ children }: { children: ReactNode }) {
             if (snap && (!before || snap.date !== before.date)) {
               break
             }
+          }
+
+          const eventsAfter = await callApi<{ log: DtEventLogEntry[] }>('/api/dt/events').catch(() => ({ log: [] }))
+          const newCount = eventsAfter.log.length - eventsBefore.log.length
+          if (newCount > 0) {
+            sessionStorage.setItem('dtPendingEvents', JSON.stringify(eventsAfter.log.slice(0, newCount)))
           }
 
           succeeded = true
