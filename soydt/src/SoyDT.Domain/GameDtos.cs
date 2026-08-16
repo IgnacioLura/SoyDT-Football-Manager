@@ -157,6 +157,64 @@ public sealed record SeasonAwards(
     NamedAward? TopAssists,
     NamedAward? GoldenGlove);
 
+public sealed record TechnicalAttributes(
+    float Corners,
+    float Crossing,
+    float Dribbling,
+    float Finishing,
+    float FirstTouch,
+    float FreeKicks,
+    float Heading,
+    float LongShots,
+    float LongThrows,
+    float Marking,
+    float Passing,
+    float PenaltyTaking,
+    float Tackling,
+    float Technique);
+
+public sealed record MentalAttributes(
+    float Aggression,
+    float Anticipation,
+    float Bravery,
+    float Composure,
+    float Concentration,
+    float Decisions,
+    float Determination,
+    float Flair,
+    float Leadership,
+    float OffTheBall,
+    float Positioning,
+    float Teamwork,
+    float Vision,
+    float WorkRate);
+
+public sealed record PhysicalAttributes(
+    float Acceleration,
+    float Agility,
+    float Balance,
+    float Jumping,
+    float NaturalFitness,
+    float Pace,
+    float Stamina,
+    float Strength,
+    float MatchReadiness);
+
+public sealed record GoalkeepingAttributes(
+    float AerialReach,
+    float CommandOfArea,
+    float Communication,
+    float Eccentricity,
+    float FirstTouch,
+    float Handling,
+    float Kicking,
+    float OneOnOnes,
+    float Passing,
+    float Punching,
+    float Reflexes,
+    float RushingOut,
+    float Throwing);
+
 /// Mirrors `engine_get_player`'s `data` payload.
 public sealed record PlayerDetail(
     uint Id,
@@ -177,6 +235,10 @@ public sealed record PlayerDetail(
     float TechnicalAvg,
     float MentalAvg,
     float PhysicalAvg,
+    TechnicalAttributes Technical,
+    MentalAttributes Mental,
+    PhysicalAttributes Physical,
+    GoalkeepingAttributes? Goalkeeping,
     uint? TeamId,
     string? TeamName);
 
