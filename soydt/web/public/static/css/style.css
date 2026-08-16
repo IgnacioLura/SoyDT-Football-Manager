@@ -14345,3 +14345,26 @@ a.np-prose-link.np-mark:focus-visible,
     font-weight: 700;
     font-size: 11px;
 }
+
+/* Unavailable (injured/suspended/low condition) player in the replacement
+   dropdown — still visible, greyed out and unclickable, red reason instead
+   of an ability number so the DT sees who's missing, not just a shorter
+   list. */
+.fm-slot-dropdown-item-disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+.fm-slot-dropdown-item-disabled:hover {
+    background: none;
+}
+.fm-slot-dropdown-item-disabled .fm-slot-dropdown-photo {
+    filter: grayscale(1);
+}
+
+.fm-unavailable {
+    margin-left: auto;
+    color: #ef4444;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+}

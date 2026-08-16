@@ -32,10 +32,17 @@ struct LineupPlayerJson {
     pinned: bool,
     // Mirrors `Player::is_ready_for_match` exactly (injured/banned/in
     // recovery/low condition) — the same check `engine_set_team_lineup`
-    // rejects a save on, surfaced up front so the frontend can keep an
-    // unavailable player out of the picker instead of letting the DT
+    // rejects a save on, surfaced up front so the frontend can show an
+    // unavailable player as visibly unpickable instead of letting the DT
     // build an illegal XI and only find out at save time.
     is_ready_for_match: bool,
+    // Specific reason, so the UI can say *why* — same fields
+    // `PlayerDetailJson` already exposes on the player detail page.
+    // `is_ready_for_match` can also be false purely from low condition or
+    // being "in recovery" with neither flag set; the frontend falls back
+    // to a generic label in that case.
+    is_injured: bool,
+    is_banned: bool,
 }
 
 /// Current squad for `team_id` with each player's pin state, so the
@@ -67,6 +74,8 @@ pub extern "C" fn engine_get_team_lineup(handle: *mut GameHandle, team_id: u32) 
                             shirt_number: p.contract.as_ref().and_then(|c| c.shirt_number),
                             pinned: p.is_force_match_selection,
                             is_ready_for_match: p.is_ready_for_match(),
+                            is_injured: p.player_attributes.is_injured,
+                            is_banned: p.player_attributes.is_banned,
                         })
                         .collect();
                     return Ok(players);

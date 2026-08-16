@@ -244,7 +244,7 @@ public sealed record PlayerDetail(
 
 /// Mirrors one entry of `engine_get_team_lineup`'s `data` array — the DT's
 /// squad with each player's current "pinned" (force-selection) state.
-public sealed record LineupPlayer(uint PlayerId, string Name, string Position, byte CurrentAbility, byte? ShirtNumber, bool Pinned, bool IsReadyForMatch);
+public sealed record LineupPlayer(uint PlayerId, string Name, string Position, byte CurrentAbility, byte? ShirtNumber, bool Pinned, bool IsReadyForMatch, bool IsInjured, bool IsBanned);
 
 /// Body for `PUT /api/teams/{teamId}/lineup` — exactly 11 player ids.
 public sealed record SetLineupRequest(IReadOnlyList<uint> PlayerIds);

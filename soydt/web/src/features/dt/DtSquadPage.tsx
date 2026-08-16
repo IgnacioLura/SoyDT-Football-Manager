@@ -19,6 +19,14 @@ type LineupPlayer = {
   shirtNumber: number | null
   pinned: boolean
   isReadyForMatch: boolean
+  isInjured: boolean
+  isBanned: boolean
+}
+
+function unavailableLabel(p: Pick<LineupPlayer, 'isInjured' | 'isBanned'>): string {
+  if (p.isInjured) return 'Lesionado'
+  if (p.isBanned) return 'Suspendido'
+  return 'No disponible'
 }
 
 // Raw position comes from the Rust enum's Debug format (e.g.
@@ -170,13 +178,17 @@ function DtSquadPage() {
     if (!players) return []
     const slot = FORMATION[slotIndex]
     return players
-      // Unavailable (injured/suspended/low condition) players never show up
-      // as pickable — the backend rejects saving them, so keeping them out
-      // of the picker means that error can't happen from the UI anymore.
-      .filter((p) => !assignedIds.has(p.playerId) && p.isReadyForMatch)
+      // Unavailable (injured/suspended/low condition) players still show up
+      // — greyed out and unclickable, with a red reason — instead of just
+      // disappearing, so the DT can see who they're missing, not just that
+      // a slot has fewer options than expected.
+      .filter((p) => !assignedIds.has(p.playerId))
       .map((p) => ({ ...p, ...eligibility(p.position, slot) }))
       .filter((c) => c.eligible)
-      .sort((a, b) => b.currentAbility - a.currentAbility - (b.penalty - a.penalty))
+      .sort((a, b) => {
+        if (a.isReadyForMatch !== b.isReadyForMatch) return a.isReadyForMatch ? -1 : 1
+        return b.currentAbility - a.currentAbility - (b.penalty - a.penalty)
+      })
   }
 
   const assign = (slotIndex: number, playerId: number) => {
@@ -310,7 +322,8 @@ function DtSquadPage() {
                               <button
                                 type="button"
                                 key={c.playerId}
-                                className="fm-slot-dropdown-item"
+                                className={`fm-slot-dropdown-item${!c.isReadyForMatch ? ' fm-slot-dropdown-item-disabled' : ''}`}
+                                disabled={!c.isReadyForMatch}
                                 onClick={() => assign(slotIndex, c.playerId)}
                               >
                                 <img
@@ -323,8 +336,14 @@ function DtSquadPage() {
                                   alt=""
                                 />
                                 <span className="fm-slot-dropdown-name">{c.name}</span>
-                                <span className={`fm-ability fm-ability-${abilityColor(c.currentAbility)}`}>{c.currentAbility}</span>
-                                {c.penalty > 0 && <span className="fm-ovr-penalty">-{c.penalty}</span>}
+                                {c.isReadyForMatch ? (
+                                  <>
+                                    <span className={`fm-ability fm-ability-${abilityColor(c.currentAbility)}`}>{c.currentAbility}</span>
+                                    {c.penalty > 0 && <span className="fm-ovr-penalty">-{c.penalty}</span>}
+                                  </>
+                                ) : (
+                                  <span className="fm-unavailable">{unavailableLabel(c)}</span>
+                                )}
                               </button>
                             ))}
                             {candidatesFor(slotIndex).length === 0 && (
