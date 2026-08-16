@@ -43,6 +43,7 @@ import DtSquadPage from './features/dt/DtSquadPage'
 import DtTransfersPage from './features/dt/DtTransfersPage'
 import DtFinancesPage from './features/dt/DtFinancesPage'
 import DtTablePage from './features/dt/DtTablePage'
+import DtEventsPage from './features/dt/DtEventsPage'
 import { ProcessProvider } from './shared/ProcessContext'
 import ProcessOverlay from './shared/ProcessOverlay'
 
@@ -108,6 +109,7 @@ function App() {
         <Route path="/dt/transfers" element={<DtTransfersPage />} />
         <Route path="/dt/finances" element={<DtFinancesPage />} />
         <Route path="/dt/table" element={<DtTablePage />} />
+        <Route path="/dt/events" element={<DtEventsPage />} />
         </Routes>
       </BrowserRouter>
     </ProcessProvider>
