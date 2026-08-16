@@ -513,7 +513,6 @@ version = "1.4.850"
 dependencies = [
  "chrono",
  "core",
- "flate2",
  "log",
  "rand",
  "rayon",
