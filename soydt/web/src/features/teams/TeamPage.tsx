@@ -14,6 +14,7 @@ type TeamDetail = {
   name: string
   slug: string
   clubId: number
+  countryId: number
   leagueId: number | null
   leagueName: string | null
   reputation: number
@@ -58,7 +59,7 @@ function TeamPage() {
   ) : undefined
 
   return (
-    <Layout title={team.name} subTitle={subTitle}>
+    <Layout title={team.name} subTitle={subTitle} sidebarCountryId={team.countryId}>
       <div className="fm-page">
         <section className="fm-panel">
           <div className="fm-panel-head">

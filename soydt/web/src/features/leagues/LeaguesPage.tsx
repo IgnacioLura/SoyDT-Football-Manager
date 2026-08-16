@@ -35,7 +35,7 @@ function LeaguesPage() {
 
   if (error) {
     return (
-      <Layout title="Leagues" subTitle={tabs}>
+      <Layout title="Leagues" subTitle={tabs} sidebarCountryId={Number(countryId)}>
         <div className="fm-page">
           <p style={{ color: 'crimson' }}>Error: {error}</p>
         </div>
@@ -45,7 +45,7 @@ function LeaguesPage() {
 
   if (!leagues) {
     return (
-      <Layout title="Leagues" subTitle={tabs}>
+      <Layout title="Leagues" subTitle={tabs} sidebarCountryId={Number(countryId)}>
         <div className="fm-page">
           <p>Loading…</p>
         </div>
@@ -56,7 +56,7 @@ function LeaguesPage() {
   const sorted = leagues.slice().sort((a, b) => a.tier - b.tier)
 
   return (
-    <Layout title="Leagues" subTitle={tabs}>
+    <Layout title="Leagues" subTitle={tabs} sidebarCountryId={Number(countryId)}>
       <div className="fm-page">
         <section className="fm-panel">
           <div className="fm-panel-head">

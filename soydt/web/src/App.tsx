@@ -38,11 +38,18 @@ import SearchPage from './features/misc/SearchPage'
 import CupsPage from './features/cups/CupsPage'
 import CupBracketPage from './features/cups/CupBracketPage'
 import ContinentalCompetitionPage from './features/cups/ContinentalCompetitionPage'
+import NewGamePage from './features/onboarding/NewGamePage'
+import DtSquadPage from './features/dt/DtSquadPage'
+import DtTransfersPage from './features/dt/DtTransfersPage'
+import DtFinancesPage from './features/dt/DtFinancesPage'
+import DtTablePage from './features/dt/DtTablePage'
 import { ProcessProvider } from './shared/ProcessContext'
+import ProcessOverlay from './shared/ProcessOverlay'
 
 function App() {
   return (
     <ProcessProvider>
+      <ProcessOverlay />
       <BrowserRouter>
         <Routes>
         <Route path="/" element={<CountriesPage />} />
@@ -90,6 +97,17 @@ function App() {
         {/* Not part of the original app's UI — internal tool for verifying
             the React -> .NET -> engine-ffi pipe, reachable by URL only. */}
         <Route path="/debug" element={<PipeCheckPage />} />
+        {/* DT/"Mi Equipo" onboarding — creates the Uruguay-only world and
+            lets the user pick their club. */}
+        <Route path="/new-game" element={<NewGamePage />} />
+        {/* DT/"Mi Equipo" — locked-down area scoped to the user's own club
+            (see DtLayout's own comment for why there's no ProcessControl
+            here). Each page resolves "my team id" itself via useMyTeamId. */}
+        <Route path="/dt" element={<DtSquadPage />} />
+        <Route path="/dt/squad" element={<DtSquadPage />} />
+        <Route path="/dt/transfers" element={<DtTransfersPage />} />
+        <Route path="/dt/finances" element={<DtFinancesPage />} />
+        <Route path="/dt/table" element={<DtTablePage />} />
         </Routes>
       </BrowserRouter>
     </ProcessProvider>

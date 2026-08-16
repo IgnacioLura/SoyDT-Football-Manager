@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import { useTeamCountryId } from '../../shared/useTeamCountryId'
 
 // Mirrors the original app's `teams/schedule/index.html` (extends
 // `teams/team_layout.html`) — `/{lang}/teams/{slug}/schedule` route.
@@ -23,6 +24,7 @@ type TeamScheduleItem = {
 
 function TeamSchedulePage() {
   const { teamId } = useParams<{ teamId: string }>()
+  const sidebarCountryId = useTeamCountryId(teamId)
   const [items, setItems] = useState<TeamScheduleItem[] | null>(null)
   const [error, setError] = useState<string | null>(null)
 
@@ -36,7 +38,7 @@ function TeamSchedulePage() {
 
   if (error) {
     return (
-      <Layout title="Schedule">
+      <Layout title="Schedule" sidebarCountryId={sidebarCountryId}>
         <div className="fm-page">
           <p style={{ color: 'crimson' }}>Error: {error}</p>
         </div>
@@ -46,7 +48,7 @@ function TeamSchedulePage() {
 
   if (!items) {
     return (
-      <Layout title="Schedule">
+      <Layout title="Schedule" sidebarCountryId={sidebarCountryId}>
         <div className="fm-page">
           <p>Loading…</p>
         </div>
@@ -55,7 +57,7 @@ function TeamSchedulePage() {
   }
 
   return (
-    <Layout title="Schedule">
+    <Layout title="Schedule" sidebarCountryId={sidebarCountryId}>
       <div className="fm-page">
         <section className="fm-panel">
           <div className="fm-panel-head">

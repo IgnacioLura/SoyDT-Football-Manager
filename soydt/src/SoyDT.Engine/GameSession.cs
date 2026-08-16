@@ -38,6 +38,27 @@ public sealed partial class GameSession(NativeGameEngine engine)
     private readonly Lock _writeGate = new();
     private int _processingFlag;
 
+    // The DT/"Mi Equipo" experience's one piece of session state: which club
+    // the local user picked as theirs, for this GameSession's lifetime. Not
+    // multi-tenant (matches the rest of this class — one process, one
+    // player) — just enough to let `/api/dt/*`-style endpoints know whose
+    // team to scope to, and (per this engine's data model) doubles as "my
+    // team id" directly: a club's main team shares its numeric id with the
+    // club itself (confirmed empirically — e.g. club 1917 "Cerro"'s main
+    // team is also id 1917), so no separate club→team resolution exists or
+    // is needed.
+    private uint? _myClubId;
+
+    public uint? MyClubId
+    {
+        get { lock (_writeGate) { return _myClubId; } }
+    }
+
+    public void SetMyClub(uint clubId)
+    {
+        lock (_writeGate) { _myClubId = clubId; }
+    }
+
     /// Mirrors the original app's `process_lock.try_lock_owned()` early-out
     /// ("already processing → return immediately" instead of queuing behind
     /// it). `ProcessDaysWithProgress` can legitimately run for a while
@@ -125,6 +146,7 @@ public sealed partial class GameSession(NativeGameEngine engine)
             var next = countryCodes is { Count: > 0 }
                 ? engine.CreateScopedGame(countryCodes)
                 : engine.CreateGame();
+            _myClubId = null;
             Publish(next)?.Dispose();
         }
     }
@@ -144,31 +166,37 @@ public sealed partial class GameSession(NativeGameEngine engine)
         }
     }
 
-    /// Same simulation as <see cref="ProcessDays"/>, but ticks one day at a
-    /// time, publishing the freshly-simulated world after each day so
-    /// `onProgress` observes (and every concurrent reader sees) the new
-    /// date incrementally instead of only once the whole range finishes —
-    /// mirrors the original's periodic `publish_progress` during a long
-    /// "holiday" run, just every day here instead of every simulated week
-    /// (our scoped worlds are cheap enough to clone that there's no need to
-    /// throttle it).
+    /// Same simulation as <see cref="ProcessDays"/>, but ticks one real day
+    /// at a time so `onProgress` gets an honest per-day event (date, running
+    /// match count, whether a match day just happened) instead of a guess.
+    ///
+    /// The expensive part isn't simulating a day — it's `CloneGame`, which
+    /// deep-copies the whole accumulated world (measured: doing that once
+    /// per day, as an earlier version of this method did, made a 5-day run
+    /// cost 5x a single clone for no benefit). So this clones the published
+    /// handle exactly **once** up front, ticks `engine.ProcessDays(working,
+    /// 1)` in a loop against that same handle, and only publishes the
+    /// result at the very end — the per-day `onProgress` callback doesn't
+    /// need an intermediate publish to be real, since nothing else reads
+    /// `_current` mid-run in this single-player-session app.
     public void ProcessDaysWithProgress(uint days, Action<ProcessProgress> onProgress)
     {
         lock (_writeGate)
         {
+            var previous = CaptureCurrent();
+            var working = engine.CloneGame(previous);
+
             ulong matchesPlayed = 0;
             string date = "";
             for (uint day = 1; day <= days; day++)
             {
-                var previous = CaptureCurrent();
-                var working = engine.CloneGame(previous);
                 var result = engine.ProcessDays(working, 1);
-                Publish(working)?.Dispose();
-
                 matchesPlayed += result.MatchesPlayed;
                 date = result.Date;
                 onProgress(new ProcessProgress(date, day, days, matchesPlayed, day == days));
             }
+
+            Publish(working)?.Dispose();
         }
     }
 

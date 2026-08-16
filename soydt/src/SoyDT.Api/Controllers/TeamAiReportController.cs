@@ -49,15 +49,13 @@ public sealed class TeamAiReportController(GameSession session, AiConfig config,
 
         ## What to deliver
 
-        Write a tight report on the team (roughly 250-400 words) covering:
+        Write a **short, punchy report** on the team (roughly 120-160 words total —
+        keep it brief) covering:
 
-        - **Squad overview** — the club's standing and the shape of its senior team.
-        - **Key players** — 3-5 names that define the side, with a one-line reason
-          each, described in words rather than numbers.
-        - **Prospects** — young players with clear room to grow into much better
-          players than they are today.
-        - **Weaknesses** — the thinnest positions or clearest quality gaps.
-        - **Verdict** — one short paragraph: where this squad can realistically go.
+        - **Key players** — 3 names that define the side, one line each (mix in a
+          standout prospect if there's a clear one), described in words not numbers.
+        - **Weaknesses** — the single thinnest position or clearest gap.
+        - **Verdict** — one sentence: where this squad can realistically go.
 
         Use short paragraphs and bold player names. Do not dump raw JSON, ratings or
         ids, and do not describe the lookups you made — write for a football audience.

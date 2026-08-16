@@ -34,7 +34,7 @@ function StaffPage() {
 
   if (error) {
     return (
-      <Layout title="Staff" subTitle={tabs}>
+      <Layout title="Staff" subTitle={tabs} sidebarCountryId={Number(countryId)}>
         <div className="fm-page">
           <p style={{ color: 'crimson' }}>Error: {error}</p>
         </div>
@@ -44,7 +44,7 @@ function StaffPage() {
 
   if (!staff) {
     return (
-      <Layout title="Staff" subTitle={tabs}>
+      <Layout title="Staff" subTitle={tabs} sidebarCountryId={Number(countryId)}>
         <div className="fm-page">
           <p>Loading…</p>
         </div>
@@ -53,7 +53,7 @@ function StaffPage() {
   }
 
   return (
-    <Layout title="Staff" subTitle={tabs}>
+    <Layout title="Staff" subTitle={tabs} sidebarCountryId={Number(countryId)}>
       <div className="fm-page">
         <section className="fm-panel">
           <div className="fm-panel-head">

@@ -15,9 +15,12 @@ builder.Services.AddSingleton<GameSession>();
 builder.Services.AddSingleton<AiConfig>();
 builder.Services.AddSingleton<AiJobs>();
 // Named client for the AI agent's LLM calls — a long timeout since local
-// OpenAI-compatible servers (Ollama/llama.cpp) can take a while per turn,
-// matching the original's `reqwest::Client` 120s timeout.
-builder.Services.AddHttpClient("ai-agent", c => c.Timeout = TimeSpan.FromSeconds(120));
+// OpenAI-compatible servers (Ollama/llama.cpp) can take a while per turn.
+// The original ported value was 120s (`reqwest::Client`'s own timeout);
+// bumped further here because a local, partially-CPU-offloaded model can
+// legitimately take longer than that on a single tool-calling round once
+// the conversation has grown a few turns in.
+builder.Services.AddHttpClient("ai-agent", c => c.Timeout = TimeSpan.FromSeconds(300));
 // The match-detail endpoint's downsampled position data is still a large,
 // highly repetitive JSON payload (~10MB+ per fixture) — the original app
 // gzips its own match recordings on disk for the same reason. Response

@@ -68,7 +68,7 @@ function NationalSquadPage() {
 
   if (error) {
     return (
-      <Layout title="National team" subTitle={tabs}>
+      <Layout title="National team" subTitle={tabs} sidebarCountryId={Number(countryId)}>
         <div className="fm-page">
           <p style={{ color: 'crimson' }}>Error: {error}</p>
         </div>
@@ -78,7 +78,7 @@ function NationalSquadPage() {
 
   if (!squad) {
     return (
-      <Layout title="National team" subTitle={tabs}>
+      <Layout title="National team" subTitle={tabs} sidebarCountryId={Number(countryId)}>
         <div className="fm-page">
           <p>Loading…</p>
         </div>
@@ -87,7 +87,7 @@ function NationalSquadPage() {
   }
 
   return (
-    <Layout title={u21 ? 'U21 squad' : 'Squad'} subTitle={tabs}>
+    <Layout title={u21 ? 'U21 squad' : 'Squad'} subTitle={tabs} sidebarCountryId={Number(countryId)}>
       <div className="fm-page">
         <section className="fm-panel">
           <div className="fm-panel-head">

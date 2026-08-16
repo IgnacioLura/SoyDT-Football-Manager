@@ -5246,6 +5246,43 @@ a:active {
     box-shadow: 0 0 6px rgba(74, 222, 128, 0.7);
 }
 
+/* Header placement (soydt-only — not in the original template, which never
+   put this badge in a slim icon bar): the card look above was built for a
+   home-page grid of similarly-sized tiles, not for sitting inline next to
+   plain, unboxed icon links (search/watchlist). Strip it down to match —
+   no card background/border/shadow, just an icon-sized button. */
+.fm-header-actions .fm-ai-btn {
+    padding: 0 10px;
+    background: none;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    color: #6b7580;
+}
+
+.fm-header-actions .fm-ai-btn:hover {
+    color: #fff;
+    background: none;
+    transform: none;
+    box-shadow: none;
+}
+
+.fm-header-actions .fm-ai-btn-ic {
+    font-size: 15px;
+}
+
+.fm-header-actions .fm-ai-btn-dot {
+    top: 8px;
+    right: 6px;
+    width: 6px;
+    height: 6px;
+    box-shadow: 0 0 0 2px var(--header-bg, #1a2228);
+}
+
+.fm-header-actions .fm-ai-btn.fm-ai-btn-on {
+    color: #7c9cff;
+}
+
 /* Groups the workers chip + AI badge. `display: contents` makes the
    wrapper invisible to layout, so on wide screens both pills stay direct
    flex items of the machine tile (chip keeps its margin-left:auto and the

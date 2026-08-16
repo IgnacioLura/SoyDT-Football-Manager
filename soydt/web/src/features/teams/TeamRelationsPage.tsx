@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import { useTeamCountryId } from '../../shared/useTeamCountryId'
 
 // SIMPLIFIED reinterpretation of open-football/src/web/src/teams/relations/
 // index.html — the `/{lang}/teams/{slug}/relations` route. The original
@@ -68,6 +69,7 @@ function SummaryTile({ label, count, color }: { label: string; count: number; co
 
 function TeamRelationsPage() {
   const { teamId } = useParams<{ teamId: string }>()
+  const sidebarCountryId = useTeamCountryId(teamId)
   const [relations, setRelations] = useState<TeamRelations | null>(null)
   const [error, setError] = useState<string | null>(null)
 
@@ -81,7 +83,7 @@ function TeamRelationsPage() {
 
   if (error) {
     return (
-      <Layout title="Relations">
+      <Layout title="Relations" sidebarCountryId={sidebarCountryId}>
         <div className="fm-page">
           <p style={{ color: 'crimson' }}>Error: {error}</p>
         </div>
@@ -91,7 +93,7 @@ function TeamRelationsPage() {
 
   if (!relations) {
     return (
-      <Layout title="Relations">
+      <Layout title="Relations" sidebarCountryId={sidebarCountryId}>
         <div className="fm-page">
           <p>Loading…</p>
         </div>
@@ -100,7 +102,7 @@ function TeamRelationsPage() {
   }
 
   return (
-    <Layout title="Relations">
+    <Layout title="Relations" sidebarCountryId={sidebarCountryId}>
       <div className="fm-page">
         <section style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
           <SummaryTile label="Bond" count={relations.bondCount} color={TIER_COLOR.bond} />

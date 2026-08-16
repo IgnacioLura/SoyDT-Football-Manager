@@ -15,6 +15,7 @@ struct PlayerCardJson {
     position: String,
     age: u8,
     current_ability: u8,
+    value: u32,
 }
 
 #[derive(Serialize)]
@@ -23,6 +24,7 @@ struct TeamDetailJson {
     name: String,
     slug: String,
     club_id: u32,
+    country_id: u32,
     league_id: Option<u32>,
     league_name: Option<String>,
     reputation: u16,
@@ -65,6 +67,7 @@ pub extern "C" fn engine_get_team(handle: *mut GameHandle, team_id: u32) -> *mut
                             position: p.positions.primary().map(|pos| format!("{pos:?}")).unwrap_or_else(|| "Unknown".to_string()),
                             age: DateUtils::age(p.birth_date, now),
                             current_ability: p.player_attributes.current_ability,
+                            value: p.player_attributes.value,
                         })
                         .collect();
 
@@ -73,6 +76,7 @@ pub extern "C" fn engine_get_team(handle: *mut GameHandle, team_id: u32) -> *mut
                         name: team.name.clone(),
                         slug: team.slug.clone(),
                         club_id: team.club_id,
+                        country_id: country.id,
                         league_id: team.league_id,
                         league_name,
                         reputation: team.league_reputation,

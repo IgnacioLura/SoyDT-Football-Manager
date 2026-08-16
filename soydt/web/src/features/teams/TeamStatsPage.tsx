@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import { useTeamCountryId } from '../../shared/useTeamCountryId'
 
 // Team season statistics page — mirrors the original app's team stats tab.
 // One row per squad player; rows arrive from the engine pre-sorted by
@@ -25,6 +26,7 @@ type TeamPlayerStatsRow = {
 
 function TeamStatsPage() {
   const { teamId } = useParams<{ teamId: string }>()
+  const sidebarCountryId = useTeamCountryId(teamId)
   const [rows, setRows] = useState<TeamPlayerStatsRow[] | null>(null)
   const [error, setError] = useState<string | null>(null)
 
@@ -38,7 +40,7 @@ function TeamStatsPage() {
 
   if (error) {
     return (
-      <Layout title="Team Stats">
+      <Layout title="Team Stats" sidebarCountryId={sidebarCountryId}>
         <div className="fm-page">
           <p style={{ color: 'crimson' }}>Error: {error}</p>
         </div>
@@ -48,7 +50,7 @@ function TeamStatsPage() {
 
   if (!rows) {
     return (
-      <Layout title="Team Stats">
+      <Layout title="Team Stats" sidebarCountryId={sidebarCountryId}>
         <div className="fm-page">
           <p>Loading…</p>
         </div>
@@ -57,7 +59,7 @@ function TeamStatsPage() {
   }
 
   return (
-    <Layout title="Team Stats">
+    <Layout title="Team Stats" sidebarCountryId={sidebarCountryId}>
       <div className="fm-page">
         <section className="fm-panel">
           <div className="fm-panel-head">

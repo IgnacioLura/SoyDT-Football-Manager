@@ -22,6 +22,20 @@ function renderText(md: string) {
   return escaped.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
 }
 
+// The report only exists as one finished string (no token streaming from
+// the LLM here) — reveal it one paragraph at a time instead of dumping the
+// whole thing at once, so it reads like something arriving rather than a
+// wall of text appearing mid-spinner.
+function splitSections(md: string): string[] {
+  return md.split(/\n{2,}/).filter((s) => s.trim().length > 0)
+}
+
+const SECTION_REVEAL_MS = 900
+
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
 type Props = {
   title: string
   startUrl: string
@@ -33,6 +47,7 @@ function AiReportButton({ title, startUrl }: Props) {
   const [error, setError] = useState<string | null>(null)
   const [toolCalls, setToolCalls] = useState<ToolTrace[]>([])
   const [text, setText] = useState<string | null>(null)
+  const [revealedSections, setRevealedSections] = useState<string[]>([])
 
   const openDialog = () => dialogRef.current?.showModal()
   const closeDialog = () => dialogRef.current?.close()
@@ -44,6 +59,11 @@ function AiReportButton({ title, startUrl }: Props) {
       if (data.status === 'done') {
         setRunning(false)
         setText(data.text)
+        const sections = splitSections(data.text)
+        for (const section of sections) {
+          setRevealedSections((prev) => [...prev, section])
+          await sleep(SECTION_REVEAL_MS)
+        }
       } else if (data.status === 'error') {
         setRunning(false)
         setError(data.detail)
@@ -65,6 +85,7 @@ function AiReportButton({ title, startUrl }: Props) {
     setError(null)
     setToolCalls([])
     setText(null)
+    setRevealedSections([])
     openDialog()
 
     try {
@@ -86,6 +107,12 @@ function AiReportButton({ title, startUrl }: Props) {
       <button type="button" className="fm-ai-analyze-btn" onClick={start}>
         <i className="fa fa-robot" aria-hidden="true" /> AI report
       </button>
+      <style>{`
+        @keyframes fm-ai-section-in {
+          from { opacity: 0; transform: translateY(4px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
       <dialog className="fm-worker-dialog fm-ai-report-dialog" ref={dialogRef}>
         <div className="fm-worker-dialog-head">
           <h3>{title}</h3>
@@ -110,7 +137,15 @@ function AiReportButton({ title, startUrl }: Props) {
             </ol>
           )}
           {text !== null && (
-            <div className="fm-ai-report-text" dangerouslySetInnerHTML={{ __html: renderText(text) }} />
+            <div className="fm-ai-report-text">
+              {revealedSections.map((section, i) => (
+                <p
+                  key={i}
+                  style={{ animation: 'fm-ai-section-in 0.3s ease' }}
+                  dangerouslySetInnerHTML={{ __html: renderText(section) }}
+                />
+              ))}
+            </div>
           )}
         </div>
       </dialog>

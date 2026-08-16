@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Flag from '../../shared/Flag'
 import Layout from '../../shared/Layout'
+import { useTeamCountryId } from '../../shared/useTeamCountryId'
 
 // Club team staff roster — mirrors the original app's team staff tab, but
 // as a single flat list sorted by last name rather than the original's
@@ -25,6 +26,7 @@ const wageFormatter = new Intl.NumberFormat(undefined, { maximumFractionDigits: 
 
 function TeamStaffPage() {
   const { teamId } = useParams<{ teamId: string }>()
+  const sidebarCountryId = useTeamCountryId(teamId)
   const [staff, setStaff] = useState<TeamStaffMember[] | null>(null)
   const [error, setError] = useState<string | null>(null)
 
@@ -38,7 +40,7 @@ function TeamStaffPage() {
 
   if (error) {
     return (
-      <Layout title="Staff">
+      <Layout title="Staff" sidebarCountryId={sidebarCountryId}>
         <div className="fm-page">
           <p style={{ color: 'crimson' }}>Error: {error}</p>
         </div>
@@ -48,7 +50,7 @@ function TeamStaffPage() {
 
   if (!staff) {
     return (
-      <Layout title="Staff">
+      <Layout title="Staff" sidebarCountryId={sidebarCountryId}>
         <div className="fm-page">
           <p>Loading…</p>
         </div>
@@ -57,7 +59,7 @@ function TeamStaffPage() {
   }
 
   return (
-    <Layout title="Staff">
+    <Layout title="Staff" sidebarCountryId={sidebarCountryId}>
       <div className="fm-page">
         <section className="fm-panel">
           <div className="fm-panel-head">

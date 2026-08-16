@@ -150,6 +150,8 @@ crate) — map to real i18n text once a catalog exists (Phase 3).
 Full player detail (searches every club/team's squad — O(clubs × players),
 a single detail-page lookup, not for use in a loop). `data`:
 
+`goalkeeping` is `null` for outfield players — only populated when the player's primary position is `Goalkeeper`.
+
 ```json
 {
   "id": 123, "first_name": "...", "last_name": "...", "age": 27, "position": "GK",
@@ -157,6 +159,10 @@ a single detail-page lookup, not for use in a loop). `data`:
   "current_ability": 140, "value": 5000000, "current_reputation": 4000,
   "height": 183, "weight": 78, "is_injured": false, "is_banned": false,
   "technical_avg": 12.3, "mental_avg": 13.1, "physical_avg": 14.0,
+  "technical": { "corners": 8.0, "crossing": 7.5, "dribbling": 11.0, "finishing": 6.0, "first_touch": 12.0, "free_kicks": 5.0, "heading": 9.0, "long_shots": 6.5, "long_throws": 4.0, "marking": 8.0, "passing": 13.0, "penalty_taking": 7.0, "tackling": 8.5, "technique": 10.0 },
+  "mental": { "aggression": 10.0, "anticipation": 12.0, "bravery": 13.0, "composure": 11.0, "concentration": 12.0, "decisions": 11.5, "determination": 14.0, "flair": 6.0, "leadership": 9.0, "off_the_ball": 8.0, "positioning": 15.0, "teamwork": 12.0, "vision": 10.0, "work_rate": 13.0 },
+  "physical": { "acceleration": 9.0, "agility": 10.0, "balance": 11.0, "jumping": 14.0, "natural_fitness": 15.0, "pace": 9.5, "stamina": 13.0, "strength": 12.0, "match_readiness": 20.0 },
+  "goalkeeping": { "aerial_reach": 15.0, "command_of_area": 14.0, "communication": 13.0, "eccentricity": 6.0, "first_touch": 10.0, "handling": 15.0, "kicking": 11.0, "one_on_ones": 14.0, "passing": 10.0, "punching": 12.0, "reflexes": 16.0, "rushing_out": 10.0, "throwing": 12.0 },
   "team_id": 82, "team_name": "Boca Juniors"
 }
 ```

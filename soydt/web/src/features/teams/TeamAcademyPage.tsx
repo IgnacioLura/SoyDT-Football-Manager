@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import { useTeamCountryId } from '../../shared/useTeamCountryId'
 
 // Ported from open-football/src/web/src/teams/academy/index.html — the
 // `/{lang}/teams/{slug}/academy` route. Deliberately simplified: no
@@ -34,6 +35,7 @@ type TeamAcademy = {
 
 function TeamAcademyPage() {
   const { teamId } = useParams<{ teamId: string }>()
+  const sidebarCountryId = useTeamCountryId(teamId)
   const [academy, setAcademy] = useState<TeamAcademy | null>(null)
   const [error, setError] = useState<string | null>(null)
 
@@ -47,7 +49,7 @@ function TeamAcademyPage() {
 
   if (error) {
     return (
-      <Layout title="Academy">
+      <Layout title="Academy" sidebarCountryId={sidebarCountryId}>
         <div className="fm-page">
           <p style={{ color: 'crimson' }}>Error: {error}</p>
         </div>
@@ -57,7 +59,7 @@ function TeamAcademyPage() {
 
   if (!academy) {
     return (
-      <Layout title="Academy">
+      <Layout title="Academy" sidebarCountryId={sidebarCountryId}>
         <div className="fm-page">
           <p>Loading…</p>
         </div>
@@ -66,7 +68,7 @@ function TeamAcademyPage() {
   }
 
   return (
-    <Layout title="Academy">
+    <Layout title="Academy" sidebarCountryId={sidebarCountryId}>
       <div className="fm-page">
         <section className="fm-panel">
           <div className="fm-panel-head">

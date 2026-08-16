@@ -9,14 +9,18 @@ namespace SoyDT.Api.Ai;
 public sealed class AiConfig
 {
     private readonly Lock _lock = new();
-    private LlmSettings? _settings;
 
-    /// Values pre-filled into the settings dialog before anything's been
-    /// saved — a local OpenAI-compatible endpoint, matching the original's
-    /// own placeholder default.
+    // Defaults to this deployment's local Ollama out of the box — no
+    // "AI settings" dialog step needed before the AI report/badge work.
+    // `host.docker.internal` is how a container reaches the host machine's
+    // Ollama (Docker Desktop resolves it on Windows/Mac without any extra
+    // compose config); `llama3.1:8b` is the model this dev box has pulled
+    // with tool-calling support.
+    private LlmSettings? _settings = Defaults();
+
     public static LlmSettings Defaults() => new(
-        BaseUrl: "http://192.168.1.71:8080/v1",
-        Model: "unsloth/Qwen3.6-27B-MTP-GGUF:UD-Q8_K_X",
+        BaseUrl: "http://host.docker.internal:11434/v1",
+        Model: "llama3.2:3b",
         ApiKey: "");
 
     public LlmSettings? Get()

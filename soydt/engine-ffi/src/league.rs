@@ -100,6 +100,7 @@ struct LeagueTableJson {
     league_id: u32,
     league_name: String,
     league_slug: String,
+    country_id: u32,
     rows: Vec<LeagueTableRowJson>,
 }
 
@@ -154,6 +155,7 @@ pub extern "C" fn engine_get_league_table(handle: *mut GameHandle, league_id: u3
             league_id,
             league_name: league.name.clone(),
             league_slug: league.slug.clone(),
+            country_id: country.id,
             rows,
         })
     });

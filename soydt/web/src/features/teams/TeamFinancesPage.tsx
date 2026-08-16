@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import { useTeamCountryId } from '../../shared/useTeamCountryId'
 
 // Team finances page — deliberately simplified vs. the original app's
 // finance tab: a current-snapshot view only. No 12-month history table, no
@@ -31,6 +32,7 @@ function money(value: number | null) {
 
 function TeamFinancesPage() {
   const { teamId } = useParams<{ teamId: string }>()
+  const sidebarCountryId = useTeamCountryId(teamId)
   const [finances, setFinances] = useState<TeamFinances | null>(null)
   const [loaded, setLoaded] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -49,7 +51,7 @@ function TeamFinancesPage() {
 
   if (error) {
     return (
-      <Layout title="Finances">
+      <Layout title="Finances" sidebarCountryId={sidebarCountryId}>
         <div className="fm-page">
           <p style={{ color: 'crimson' }}>Error: {error}</p>
         </div>
@@ -59,7 +61,7 @@ function TeamFinancesPage() {
 
   if (!loaded || !finances) {
     return (
-      <Layout title="Finances">
+      <Layout title="Finances" sidebarCountryId={sidebarCountryId}>
         <div className="fm-page">
           <p>Loading…</p>
         </div>
@@ -68,7 +70,7 @@ function TeamFinancesPage() {
   }
 
   return (
-    <Layout title="Finances">
+    <Layout title="Finances" sidebarCountryId={sidebarCountryId}>
       <div className="fm-page">
         <section className="fm-panel">
           <div className="fm-panel-head">

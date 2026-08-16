@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import { useTeamCountryId } from '../../shared/useTeamCountryId'
 
 // Ported from open-football/src/web/src/teams/scouting/index.html — the
 // `/{lang}/teams/{slug}/scouting` route. Heavily simplified: the original
@@ -34,6 +35,7 @@ type ScoutMonitoringItem = {
 
 function TeamScoutingPage() {
   const { teamId } = useParams<{ teamId: string }>()
+  const sidebarCountryId = useTeamCountryId(teamId)
   const [monitoring, setMonitoring] = useState<ScoutMonitoringItem[] | null>(null)
   const [error, setError] = useState<string | null>(null)
 
@@ -47,7 +49,7 @@ function TeamScoutingPage() {
 
   if (error) {
     return (
-      <Layout title="Scouting">
+      <Layout title="Scouting" sidebarCountryId={sidebarCountryId}>
         <div className="fm-page">
           <p style={{ color: 'crimson' }}>Error: {error}</p>
         </div>
@@ -57,7 +59,7 @@ function TeamScoutingPage() {
 
   if (!monitoring) {
     return (
-      <Layout title="Scouting">
+      <Layout title="Scouting" sidebarCountryId={sidebarCountryId}>
         <div className="fm-page">
           <p>Loading…</p>
         </div>
@@ -66,7 +68,7 @@ function TeamScoutingPage() {
   }
 
   return (
-    <Layout title="Scouting">
+    <Layout title="Scouting" sidebarCountryId={sidebarCountryId}>
       <div className="fm-page">
         <section className="fm-panel">
           <div className="fm-panel-head">

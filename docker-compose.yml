@@ -1,0 +1,19 @@
+# Two independently releasable images: soydt-api (Rust engine-ffi + .NET)
+# and soydt-web (static build + nginx). Build context for `api` must stay
+# the repo root — engine-ffi path-depends on ../../open-football/src.
+services:
+  api:
+    build:
+      context: .
+      dockerfile: soydt/Dockerfile
+    ports:
+      - "8080:8080"
+
+  web:
+    build:
+      context: soydt/web
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"
+    depends_on:
+      - api

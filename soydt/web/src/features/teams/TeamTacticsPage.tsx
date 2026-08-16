@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import { useTeamCountryId } from '../../shared/useTeamCountryId'
 
 // Team tactics page — deliberately simplified vs. the original app's
 // tactics tab: a text/table view only. No pitch graphic and no last-match/
@@ -34,6 +35,7 @@ function percent(value: number) {
 
 function TeamTacticsPage() {
   const { teamId } = useParams<{ teamId: string }>()
+  const sidebarCountryId = useTeamCountryId(teamId)
   const [tactics, setTactics] = useState<TeamTactics | null>(null)
   const [error, setError] = useState<string | null>(null)
 
@@ -47,7 +49,7 @@ function TeamTacticsPage() {
 
   if (error) {
     return (
-      <Layout title="Tactics">
+      <Layout title="Tactics" sidebarCountryId={sidebarCountryId}>
         <div className="fm-page">
           <p style={{ color: 'crimson' }}>Error: {error}</p>
         </div>
@@ -57,7 +59,7 @@ function TeamTacticsPage() {
 
   if (!tactics) {
     return (
-      <Layout title="Tactics">
+      <Layout title="Tactics" sidebarCountryId={sidebarCountryId}>
         <div className="fm-page">
           <p>Loading…</p>
         </div>
@@ -66,7 +68,7 @@ function TeamTacticsPage() {
   }
 
   return (
-    <Layout title="Tactics">
+    <Layout title="Tactics" sidebarCountryId={sidebarCountryId}>
       <div className="fm-page">
         <section className="fm-panel">
           <div className="fm-panel-head">

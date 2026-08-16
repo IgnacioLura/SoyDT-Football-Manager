@@ -52,17 +52,13 @@ public sealed class PlayerAiReportController(GameSession session, AiConfig confi
 
         ## What to deliver
 
-        An engaging dossier (roughly 250-400 words) with real personality, covering:
+        A **short, punchy dossier** (roughly 120-160 words total — keep it brief)
+        with real personality, covering:
 
         - **The hook** — one punchy opening line that captures who he is (name, age,
-          position, club).
-        - **How he plays** — his style and signature strengths, in plain football terms.
-        - **Standout traits** — the technical, mental and physical qualities that
-          define him (described, never numbered).
-        - **Weaknesses** — where he's exposed or still raw.
-        - **Character** — what he's like: mentality, professionalism, ambition,
-          temperament, leadership.
-        - **Ceiling & path** — how far he can realistically go, and what it takes.
+          position, club) and his style in plain football terms.
+        - **Standout trait & weakness** — the one quality that defines him, and the
+          one gap that's most exposed — described, never numbered.
         - **Verdict** — one memorable closing line: star, project, bargain or squad man?
 
         Write with flair but stay grounded in the data. Short paragraphs, bold the

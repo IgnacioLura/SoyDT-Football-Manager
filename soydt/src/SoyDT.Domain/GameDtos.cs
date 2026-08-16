@@ -17,6 +17,17 @@ public sealed record ProcessProgress(
 
 public sealed record ContinentSummary(uint Id, string Name, int CountryCount);
 
+/// `GET /api/game/status` — whether a world exists and whether the DT has
+/// already picked a club, so the frontend's onboarding flow knows whether
+/// to redirect there.
+public sealed record GameStatus(bool HasGame, uint? MyClubId);
+
+/// `GET /api/game/my-team` — the DT's own team id, or null before one's
+/// been picked. A club's main team shares its numeric id with the club
+/// (see `GameSession.MyClubId`'s doc comment), so this is just `MyClubId`
+/// under the name the DT-area frontend actually calls it.
+public sealed record MyTeamResult(uint? TeamId);
+
 /// Mirrors `engine_get_snapshot`'s `data` payload.
 public sealed record GameSnapshot(string Date, IReadOnlyList<ContinentSummary> Continents);
 
@@ -60,10 +71,14 @@ public sealed record LeagueTable(
     uint LeagueId,
     string LeagueName,
     string LeagueSlug,
+    uint CountryId,
     IReadOnlyList<LeagueTableRow> Rows);
 
-/// Mirrors one entry of `engine_get_team`'s `data.players` array.
-public sealed record PlayerCard(uint Id, string Name, string Position, byte Age, byte CurrentAbility);
+/// Mirrors one entry of `engine_get_team`'s `data.players` array. `Value` is
+/// the engine's own market-value figure (`player_attributes.value`, the
+/// same field `engine_get_player`'s `PlayerDetail.Value` already exposes) —
+/// the DT transfer page uses it as a suggested (editable) fee.
+public sealed record PlayerCard(uint Id, string Name, string Position, byte Age, byte CurrentAbility, uint Value);
 
 /// Mirrors `engine_get_team`'s `data` payload.
 public sealed record TeamDetail(
@@ -71,6 +86,7 @@ public sealed record TeamDetail(
     string Name,
     string Slug,
     uint ClubId,
+    uint CountryId,
     uint? LeagueId,
     string? LeagueName,
     ushort Reputation,
@@ -163,3 +179,16 @@ public sealed record PlayerDetail(
     float PhysicalAvg,
     uint? TeamId,
     string? TeamName);
+
+/// Mirrors one entry of `engine_get_team_lineup`'s `data` array — the DT's
+/// squad with each player's current "pinned" (force-selection) state.
+public sealed record LineupPlayer(uint PlayerId, string Name, string Position, byte CurrentAbility, bool Pinned);
+
+/// Body for `PUT /api/teams/{teamId}/lineup` — exactly 11 player ids.
+public sealed record SetLineupRequest(IReadOnlyList<uint> PlayerIds);
+
+/// Mirrors `engine_transfer_player`'s `data` payload.
+public sealed record TransferActionResult(uint PlayerId, uint FromTeamId, uint ToTeamId, double Fee);
+
+/// Body for `POST /api/transfers`.
+public sealed record TransferActionRequest(uint PlayerId, uint FromTeamId, uint ToTeamId, double Fee);

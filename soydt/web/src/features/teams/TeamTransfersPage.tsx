@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import { useTeamCountryId } from '../../shared/useTeamCountryId'
 
 // Ported from open-football/src/web/src/teams/transfers/index.html —
 // the `/{lang}/teams/{slug}/transfers` route. Simplified: the original
@@ -66,6 +67,7 @@ function TransferTable({ items, otherLabel }: { items: TeamTransferItem[]; other
 
 function TeamTransfersPage() {
   const { teamId } = useParams<{ teamId: string }>()
+  const sidebarCountryId = useTeamCountryId(teamId)
   const [transfers, setTransfers] = useState<TeamTransfers | null>(null)
   const [error, setError] = useState<string | null>(null)
 
@@ -79,7 +81,7 @@ function TeamTransfersPage() {
 
   if (error) {
     return (
-      <Layout title="Transfers">
+      <Layout title="Transfers" sidebarCountryId={sidebarCountryId}>
         <div className="fm-page">
           <p style={{ color: 'crimson' }}>Error: {error}</p>
         </div>
@@ -89,7 +91,7 @@ function TeamTransfersPage() {
 
   if (!transfers) {
     return (
-      <Layout title="Transfers">
+      <Layout title="Transfers" sidebarCountryId={sidebarCountryId}>
         <div className="fm-page">
           <p>Loading…</p>
         </div>
@@ -98,7 +100,7 @@ function TeamTransfersPage() {
   }
 
   return (
-    <Layout title="Transfers">
+    <Layout title="Transfers" sidebarCountryId={sidebarCountryId}>
       <div className="fm-page">
         <section className="fm-panel">
           <div className="fm-panel-head">

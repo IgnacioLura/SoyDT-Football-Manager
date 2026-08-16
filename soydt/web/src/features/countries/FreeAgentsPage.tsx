@@ -34,7 +34,7 @@ function FreeAgentsPage() {
 
   if (error) {
     return (
-      <Layout title="Free agents" subTitle={tabs}>
+      <Layout title="Free agents" subTitle={tabs} sidebarCountryId={Number(countryId)}>
         <div className="fm-page">
           <p style={{ color: 'crimson' }}>Error: {error}</p>
         </div>
@@ -44,7 +44,7 @@ function FreeAgentsPage() {
 
   if (!players) {
     return (
-      <Layout title="Free agents" subTitle={tabs}>
+      <Layout title="Free agents" subTitle={tabs} sidebarCountryId={Number(countryId)}>
         <div className="fm-page">
           <p>Loading…</p>
         </div>
@@ -53,7 +53,7 @@ function FreeAgentsPage() {
   }
 
   return (
-    <Layout title="Free agents" subTitle={tabs}>
+    <Layout title="Free agents" subTitle={tabs} sidebarCountryId={Number(countryId)}>
       <div className="fm-page">
         <section className="fm-panel">
           <div className="fm-panel-head">

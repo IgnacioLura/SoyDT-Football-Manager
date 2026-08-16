@@ -27,6 +27,7 @@ type LeagueTable = {
   leagueId: number
   leagueName: string
   leagueSlug: string
+  countryId: number
   rows: LeagueTableRow[]
 }
 
@@ -73,7 +74,7 @@ function LeagueTablePage() {
   }
 
   return (
-    <Layout title={table.leagueName} subTitle={tabs}>
+    <Layout title={table.leagueName} subTitle={tabs} sidebarCountryId={table.countryId}>
       <div className="fm-page">
         <section className="fm-panel">
           <table className="fm-standings">

@@ -35,7 +35,7 @@ function SchedulePage() {
 
   if (error) {
     return (
-      <Layout title="Schedule" subTitle={tabs}>
+      <Layout title="Schedule" subTitle={tabs} sidebarCountryId={Number(countryId)}>
         <div className="fm-page">
           <p style={{ color: 'crimson' }}>Error: {error}</p>
         </div>
@@ -45,7 +45,7 @@ function SchedulePage() {
 
   if (!items) {
     return (
-      <Layout title="Schedule" subTitle={tabs}>
+      <Layout title="Schedule" subTitle={tabs} sidebarCountryId={Number(countryId)}>
         <div className="fm-page">
           <p>Loading…</p>
         </div>
@@ -54,7 +54,7 @@ function SchedulePage() {
   }
 
   return (
-    <Layout title="Schedule" subTitle={tabs}>
+    <Layout title="Schedule" subTitle={tabs} sidebarCountryId={Number(countryId)}>
       <div className="fm-page">
         <section className="fm-panel">
           <div className="fm-panel-head">
