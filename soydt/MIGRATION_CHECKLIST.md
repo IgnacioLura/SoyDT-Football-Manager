@@ -33,7 +33,7 @@ Ver plan completo en la conversación (Fase 0-4). Este archivo se actualiza a me
 ### Leagues
 - [x] `leagues/get/index.html` (solo tabla de posiciones, tab "overview") — verificado end-to-end
 - [x] `leagues/get/index.html` fixtures list — construido por agente en paralelo como página/ruta separada (`/leagues/{id}/schedule`, tab agregado a `leagues/tabs.tsx`), no como tab embebido en la misma página como el original; solo calendario doméstico de la liga (sin continental/cup); verificado con datos reales (Estudiantes vs Central Córdoba SdE, etc., liga 2000060001)
-- [ ] `leagues/newspaper.html` — **diferido**: el original usa un sistema de "prose"/story generation (`PressDesk`/`IssueView`, ver `teams/newspaper/_sheet.html`) que es un subsistema de texto generado aparte, no un simple listado de datos. Requiere su propio esfuerzo de port, no vale la pena mezclarlo con el resto de Fase 1.
+- [x] `leagues/newspaper.html` — **fuera de scope (decisión del usuario)**: el original usa un sistema de "prose"/story generation (`club/news/desk/*` + `editor.rs`, ~13.000 líneas — desks temáticos como pitch/squad/dugout/market/rumour/loan/fans/board que archivan notas candidatas, un editor que decide qué se publica) 100% determinístico, sin LLM. Subsistema propio y grande, no vale la pena portarlo para este proyecto.
 - [x] `leagues/transfers.html` — verificado con datos reales (fichajes de agentes libres: Romero Silvio, Adriano Luiz, etc.)
 - [x] `leagues/awards.html` (simplificado a honores de temporada, sin TOTW/TOTM/pitch graphics — ver nota en engine-ffi) — pipe responde `204 No Content` correctamente (no hay temporada completa aún tras solo unos días); `callApi` arreglado para tratar 204 como `null` en vez de romper en `res.json()`.
 
@@ -48,7 +48,7 @@ Ver plan completo en la conversación (Fase 0-4). Este archivo se actualiza a me
 - [x] `teams/stats.html` — construido por agente en paralelo; verificado con datos reales (Agustín Marchesín, stats de partidos jugados/pases/rating)
 - [x] `teams/finances.html` — construido por agente en paralelo; verificado con datos reales (Boca Juniors, balance ~60M, ingresos por TV/sponsorship/etc.)
 - [x] `teams/staff.html` (equipo, no país) — construido por agente en paralelo; verificado con datos reales (Juan Carlos Aguirre, Coach, Boca Juniors)
-- [ ] `teams/newspaper.html`
+- [x] `teams/newspaper.html` — **fuera de scope (decisión del usuario)**, mismo motivo que `leagues/newspaper.html`
 
 ### Players
 - [x] `players/get.html` → overview/ficha — verificado end-to-end (Leandro Paredes, etc.)
@@ -60,7 +60,7 @@ Ver plan completo en la conversación (Fase 0-4). Este archivo se actualiza a me
 - [x] `players/matches.html` — construido por agente en paralelo; verificado con datos reales (Leandro Paredes, calendario de partidos vs Central Córdoba SdE, etc.)
 - [x] `players/personal.html` — construido por agente en paralelo; verificado con datos reales (Leandro Paredes, pie preferido, reputación, moral, etc.)
 - [x] `players/awards.html` — construido por agente en paralelo; verificado con datos reales (Leandro Paredes, contadores de premios en 0 — plausible, sin temporada completa aún)
-- [ ] `players/newspaper.html`
+- [x] `players/newspaper.html` — **fuera de scope (decisión del usuario)**, mismo motivo que `leagues/newspaper.html`
 
 ### Staff
 - [x] `staff/get.html` — perfil de un staff individual (coach/DT), nueva entidad distinta de `countries/staff.html` (lista de staff de selección) y `teams/staff.html` (lista de staff de club); reutiliza el mismo struct `core::club::staff::model::staff::Staff` que `team_staff.rs`; verificado con datos reales (Juan Carlos Aguirre, atributos de coaching/mental/knowledge/goalkeeping/medical)
