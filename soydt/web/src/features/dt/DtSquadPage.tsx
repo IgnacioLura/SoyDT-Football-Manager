@@ -3,19 +3,28 @@ import { callApi } from '../../shared/api'
 import DtLayout from './DtLayout'
 import { useMyTeamId } from './useMyTeamId'
 
-// DT's squad + lineup editor — picks the starting XI that actually gets
-// pinned via `PUT /api/teams/{id}/lineup` (see engine-ffi/src/team_lineup.rs).
-// No pitch/formation graphic (consistent with the repo's existing "no SVG
-// pitch graphics" simplification precedent) — a flat checkbox list capped
-// at 11 is enough for the DT MVP.
+// DT's squad + lineup editor — a fixed 4-3-3 formation of round player
+// tokens (photo + shirt number + position + ability), tap a token to open
+// a dropdown of eligible bench replacements for that exact slot. Not a
+// drag-and-drop pitch graphic (still no SVG field drawing, consistent with
+// the repo's "no SVG pitch graphics" precedent) — just a schematic grid of
+// rows by formation line. Saves via the same `PUT /api/teams/{id}/lineup`
+// (see engine-ffi/src/team_lineup.rs) the old checkbox-table version used.
 
-type LineupPlayer = { playerId: number; name: string; position: string; currentAbility: number; pinned: boolean }
+type LineupPlayer = {
+  playerId: number
+  name: string
+  position: string
+  currentAbility: number
+  shirtNumber: number | null
+  pinned: boolean
+}
 
 // Raw position comes from the Rust enum's Debug format (e.g.
 // "DefensiveMidfielder", see engine-ffi's `format!("{pos:?}")`) — map it to
 // the equivalent EA Sports FC position code (GK/CB/LB/RB/LWB/RWB/CDM/CM/
 // LM/RM/CAM/LW/RW/LF/CF/RF/ST — the same 17-code vocabulary FIFA/EA FC
-// uses) so the table reads using nomenclature players already know, instead
+// uses) so the page reads using nomenclature players already know, instead
 // of the engine's own internal position names. Several engine positions
 // collapse onto the same EA code (e.g. all three central-defender slots
 // are just "CB" in FIFA too — it doesn't distinguish them either), so line
@@ -56,7 +65,7 @@ function positionInfo(position: string) {
 }
 
 // #rrggbb -> "r, g, b", so a badge's background can be the same hue as its
-// text at low opacity (see the inline style on the badge below).
+// text at low opacity.
 function hexToRgbTriplet(hex: string): string {
   const r = parseInt(hex.slice(1, 3), 16)
   const g = parseInt(hex.slice(3, 5), 16)
@@ -66,80 +75,108 @@ function hexToRgbTriplet(hex: string): string {
 
 // Current ability (CA) is the engine's 1-200 overall rating for a player —
 // same "how good is this player, in one number" idea as a FIFA/FM overall.
-// Bands are absolute (not relative to this one squad) so they stay
-// meaningful across a whole career, not just this snapshot's range.
+// Bands are absolute (not relative to one squad) so they stay meaningful
+// across a whole career.
 function abilityColor(ca: number): 'red' | 'yellow' | 'green' {
   if (ca < 100) return 'red'
   if (ca < 150) return 'yellow'
   return 'green'
 }
 
-type SortKey = 'name' | 'position' | 'currentAbility'
-type SortState = { key: SortKey; dir: 'asc' | 'desc' } | null
+// Fixed default formation (4-3-3) — the engine has no user-editable tactical
+// shape yet (TeamTacticsPage is read-only), so this is the one shape the DT
+// fills in for now. Order matters: it's also the row grouping used below
+// (index 0 = GK row, 1-4 = DEF row, 5-7 = MID row, 8-10 = FWD row).
+const FORMATION: { code: string; color: string }[] = [
+  { code: 'GK', color: '#f59e0b' },
+  { code: 'LB', color: '#3b82f6' },
+  { code: 'CB', color: '#1d4ed8' },
+  { code: 'CB', color: '#1d4ed8' },
+  { code: 'RB', color: '#3b82f6' },
+  { code: 'CDM', color: '#14532d' },
+  { code: 'CM', color: '#16a34a' },
+  { code: 'CM', color: '#16a34a' },
+  { code: 'LW', color: '#86efac' },
+  { code: 'ST', color: '#991b1b' },
+  { code: 'RW', color: '#86efac' },
+]
+const FORMATION_ROWS = [[0], [1, 2, 3, 4], [5, 6, 7], [8, 9, 10]]
 
 function DtSquadPage() {
   const myTeamId = useMyTeamId()
   const [players, setPlayers] = useState<LineupPlayer[] | null>(null)
-  const [selected, setSelected] = useState<Set<number>>(new Set())
+  // slots[i] = playerId filling FORMATION[i], or null if empty.
+  const [slots, setSlots] = useState<(number | null)[]>(Array(11).fill(null))
+  const [openSlot, setOpenSlot] = useState<number | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [saved, setSaved] = useState(false)
-  const [sort, setSort] = useState<SortState>(null)
-
-  const toggleSort = (key: SortKey) => {
-    setSort((prev) => {
-      if (!prev || prev.key !== key) return { key, dir: key === 'currentAbility' ? 'desc' : 'asc' }
-      if (prev.dir === 'asc') return { key, dir: 'desc' }
-      return null
-    })
-  }
-
-  const sortedPlayers = useMemo(() => {
-    if (!players) return players
-    if (!sort) return players
-    const factor = sort.dir === 'asc' ? 1 : -1
-    const rows = [...players]
-    rows.sort((a, b) => {
-      if (sort.key === 'currentAbility') return (a.currentAbility - b.currentAbility) * factor
-      const av = sort.key === 'name' ? a.name : a.position
-      const bv = sort.key === 'name' ? b.name : b.position
-      return av.localeCompare(bv) * factor
-    })
-    return rows
-  }, [players, sort])
-
-  const sortIndicator = (key: SortKey) => (sort?.key === key ? (sort.dir === 'asc' ? ' ▲' : ' ▼') : '')
 
   useEffect(() => {
     if (myTeamId == null) return
     callApi<LineupPlayer[]>(`/api/teams/${myTeamId}/lineup`)
       .then((rows) => {
         setPlayers(rows)
-        setSelected(new Set(rows.filter((p) => p.pinned).map((p) => p.playerId)))
+        // Auto-place already-pinned players into the first empty slot whose
+        // EA code matches theirs. A previously-saved lineup that doesn't
+        // fit this fixed 4-3-3 (e.g. it had a back three) leaves the
+        // leftover pinned players unplaced — they're still on the bench,
+        // just not pre-filled into a slot.
+        const next: (number | null)[] = Array(11).fill(null)
+        for (const p of rows.filter((r) => r.pinned)) {
+          const code = positionInfo(p.position).code
+          const slotIndex = FORMATION.findIndex((slot, i) => slot.code === code && next[i] == null)
+          if (slotIndex !== -1) next[slotIndex] = p.playerId
+        }
+        setSlots(next)
       })
       .catch((e) => setError(e instanceof Error ? e.message : String(e)))
   }, [myTeamId])
 
-  const toggle = (playerId: number) => {
-    setSelected((prev) => {
-      const next = new Set(prev)
-      if (next.has(playerId)) {
-        next.delete(playerId)
-      } else if (next.size < 11) {
-        next.add(playerId)
-      }
+  const playerById = useMemo(() => {
+    const map = new Map<number, LineupPlayer>()
+    players?.forEach((p) => map.set(p.playerId, p))
+    return map
+  }, [players])
+
+  const assignedIds = useMemo(() => new Set(slots.filter((id): id is number => id != null)), [slots])
+  const filledCount = assignedIds.size
+
+  const candidatesFor = (slotIndex: number) => {
+    if (!players) return []
+    const code = FORMATION[slotIndex].code
+    return players
+      .filter((p) => !assignedIds.has(p.playerId) && positionInfo(p.position).code === code)
+      .sort((a, b) => b.currentAbility - a.currentAbility)
+  }
+
+  const assign = (slotIndex: number, playerId: number) => {
+    setSlots((prev) => {
+      const next = [...prev]
+      next[slotIndex] = playerId
       return next
     })
+    setOpenSlot(null)
+    setSaved(false)
+  }
+
+  const clearSlot = (slotIndex: number) => {
+    setSlots((prev) => {
+      const next = [...prev]
+      next[slotIndex] = null
+      return next
+    })
+    setOpenSlot(null)
     setSaved(false)
   }
 
   const save = async () => {
-    if (!myTeamId || selected.size !== 11) return
+    if (!myTeamId || filledCount !== 11) return
     setError(null)
     try {
       await callApi(`/api/teams/${myTeamId}/lineup`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ playerIds: Array.from(selected) }),
+        body: JSON.stringify({ playerIds: slots.filter((id): id is number => id != null) }),
       })
       setSaved(true)
     } catch (e) {
@@ -168,69 +205,108 @@ function DtSquadPage() {
   }
 
   return (
-    <DtLayout title="Plantel" subTitle={`${selected.size}/11 titulares`}>
+    <DtLayout title="Plantel" subTitle={`${filledCount}/11 titulares`}>
       <div className="fm-page">
         <section className="fm-panel">
           <div className="fm-panel-head">
             <h3>Alineación titular</h3>
-            <span className="fm-panel-count">{selected.size}/11</span>
+            <span className="fm-panel-count">{filledCount}/11</span>
           </div>
           {error && <p style={{ color: 'crimson' }}>Error: {error}</p>}
-          <table className="fm-standings">
-            <thead>
-              <tr>
-                <th></th>
-                <th className="st-club fm-sortable" onClick={() => toggleSort('name')}>
-                  Nombre{sortIndicator('name')}
-                </th>
-                <th className="fm-sortable" onClick={() => toggleSort('position')}>
-                  Pos{sortIndicator('position')}
-                </th>
-                <th
-                  className="st-pts fm-sortable"
-                  onClick={() => toggleSort('currentAbility')}
-                  title="Habilidad (CA = Current Ability): valoración general del jugador de 1 a 200. Rojo = por debajo del nivel de Primera, amarillo = nivel profesional, verde = figura."
-                >
-                  Habilidad{sortIndicator('currentAbility')}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {sortedPlayers!.map((p) => {
-                const pos = positionInfo(p.position)
-                return (
-                  <tr key={p.playerId}>
-                    <td>
-                      <input
-                        type="checkbox"
-                        checked={selected.has(p.playerId)}
-                        onChange={() => toggle(p.playerId)}
-                        disabled={!selected.has(p.playerId) && selected.size >= 11}
-                      />
-                    </td>
-                    <td className="st-club">{p.name}</td>
-                    <td>
-                      <span
-                        className="fm-pos-badge"
-                        style={{ color: pos.color, background: `rgba(${hexToRgbTriplet(pos.color)}, 0.18)` }}
-                        title={p.position}
+
+          <div className="fm-formation">
+            {FORMATION_ROWS.map((row, rowIdx) => (
+              <div className="fm-formation-row" key={rowIdx}>
+                {row.map((slotIndex) => {
+                  const slot = FORMATION[slotIndex]
+                  const player = slots[slotIndex] != null ? playerById.get(slots[slotIndex]!) : undefined
+                  return (
+                    <div className="fm-slot-wrap" key={slotIndex}>
+                      <button
+                        type="button"
+                        className="fm-slot"
+                        onClick={() => setOpenSlot(openSlot === slotIndex ? null : slotIndex)}
+                        title={player ? player.name : `Vacío — ${slot.code}`}
                       >
-                        {pos.code}
-                      </span>
-                    </td>
-                    <td className={`st-pts fm-ability fm-ability-${abilityColor(p.currentAbility)}`}>
-                      {p.currentAbility}
-                    </td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
+                        <span className="fm-slot-photo-ring" style={{ borderColor: slot.color }}>
+                          {player ? (
+                            <img
+                              className="fm-slot-photo"
+                              src={`/static/images/players/${player.playerId}.jpg`}
+                              onError={(e) => {
+                                e.currentTarget.onerror = null
+                                e.currentTarget.src = '/static/images/player/placeholder-face.svg'
+                              }}
+                              alt=""
+                            />
+                          ) : (
+                            <span className="fm-slot-empty">+</span>
+                          )}
+                          {player?.shirtNumber != null && <span className="fm-slot-number">{player.shirtNumber}</span>}
+                        </span>
+                        <span
+                          className="fm-pos-badge fm-slot-code"
+                          style={{ color: slot.color, background: `rgba(${hexToRgbTriplet(slot.color)}, 0.18)` }}
+                        >
+                          {slot.code}
+                        </span>
+                        {player && (
+                          <>
+                            <span className="fm-slot-name">{player.name}</span>
+                            <span className={`fm-ability fm-ability-${abilityColor(player.currentAbility)}`}>
+                              {player.currentAbility}
+                            </span>
+                          </>
+                        )}
+                      </button>
+
+                      {openSlot === slotIndex && (
+                        <>
+                          <div className="fm-slot-dropdown-backdrop" onClick={() => setOpenSlot(null)} />
+                          <div className="fm-slot-dropdown">
+                            {player && (
+                              <button type="button" className="fm-slot-dropdown-item fm-slot-dropdown-clear" onClick={() => clearSlot(slotIndex)}>
+                                Dejar vacío
+                              </button>
+                            )}
+                            {candidatesFor(slotIndex).map((c) => (
+                              <button
+                                type="button"
+                                key={c.playerId}
+                                className="fm-slot-dropdown-item"
+                                onClick={() => assign(slotIndex, c.playerId)}
+                              >
+                                <img
+                                  className="fm-slot-dropdown-photo"
+                                  src={`/static/images/players/${c.playerId}.jpg`}
+                                  onError={(e) => {
+                                    e.currentTarget.onerror = null
+                                    e.currentTarget.src = '/static/images/player/placeholder-face.svg'
+                                  }}
+                                  alt=""
+                                />
+                                <span className="fm-slot-dropdown-name">{c.name}</span>
+                                <span className={`fm-ability fm-ability-${abilityColor(c.currentAbility)}`}>{c.currentAbility}</span>
+                              </button>
+                            ))}
+                            {candidatesFor(slotIndex).length === 0 && (
+                              <span className="fm-slot-dropdown-empty">No hay más {slot.code} disponibles en el banco</span>
+                            )}
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
+            ))}
+          </div>
+
           <div style={{ marginTop: '1rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
             <button
               type="button"
               className="fm-worker-dialog-btn fm-worker-dialog-btn-add"
-              disabled={selected.size !== 11}
+              disabled={filledCount !== 11}
               onClick={save}
             >
               Guardar alineación

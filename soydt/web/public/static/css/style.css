@@ -14168,3 +14168,166 @@ a.np-prose-link.np-mark:focus-visible,
 .fm-ability-green {
     color: #2ecc71;
 }
+
+/* DT squad lineup — schematic formation grid (no SVG pitch drawing, just
+   rows by line) of round player tokens. Tapping a token opens a dropdown
+   of eligible bench replacements for that exact slot. */
+.fm-formation {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding: 20px 8px;
+    background: #16211c;
+    border-radius: 8px;
+}
+
+.fm-formation-row {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.fm-slot-wrap {
+    position: relative;
+}
+
+.fm-slot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    width: 92px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.fm-slot-photo-ring {
+    position: relative;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 3px solid;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0d1512;
+}
+
+.fm-slot-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.fm-slot-empty {
+    font-size: 22px;
+    color: #4b5b53;
+    line-height: 1;
+}
+
+.fm-slot-number {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    min-width: 16px;
+    padding: 0 3px;
+    border-radius: 8px;
+    background: #0d1512;
+    border: 1px solid #2c3c34;
+    color: #e6efe9;
+    font-size: 10px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 15px;
+}
+
+.fm-slot-code {
+    font-size: 10px;
+}
+
+.fm-slot-name {
+    font-size: 11px;
+    color: #cdd9d2;
+    text-align: center;
+    max-width: 92px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.fm-slot-dropdown-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+}
+
+.fm-slot-dropdown {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 41;
+    width: 220px;
+    max-height: 280px;
+    overflow-y: auto;
+    background: #1e2b25;
+    border: 1px solid #33453c;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.fm-slot-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    background: none;
+    border: none;
+    border-radius: 6px;
+    color: #e6efe9;
+    text-align: left;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.fm-slot-dropdown-item:hover {
+    background: #2a3a32;
+}
+
+.fm-slot-dropdown-clear {
+    color: #f87171;
+    border-bottom: 1px solid #33453c;
+    border-radius: 0;
+    margin-bottom: 4px;
+    padding-bottom: 8px;
+}
+
+.fm-slot-dropdown-photo {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.fm-slot-dropdown-name {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.fm-slot-dropdown-empty {
+    padding: 8px;
+    font-size: 12px;
+    color: #7c8b83;
+    text-align: center;
+}
