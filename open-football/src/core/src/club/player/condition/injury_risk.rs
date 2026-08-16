@@ -40,9 +40,12 @@ use chrono::NaiveDate;
 pub struct InjuryRateCalibration;
 
 impl InjuryRateCalibration {
-    /// July 2026: 0.75 — squads read as too injury-crowded, so the
-    /// whole envelope is trimmed ~25% rather than any single path.
-    pub const SCALE: f32 = 0.75;
+    /// August 2026 (soydt): 0.0 — injuries disabled by default. Every
+    /// factor above still computes (age/condition/jadedness/etc. keep
+    /// tracking normally, `is_in_recovery`/`last_injury_body_part` stay
+    /// meaningful if an injury is ever forced some other way), this just
+    /// zeroes the roll that would actually apply one.
+    pub const SCALE: f32 = 0.0;
 }
 
 /// Path-specific inputs. Other modifiers are read off the player.
