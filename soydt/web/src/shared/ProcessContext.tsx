@@ -29,6 +29,10 @@ export function useProcessContext(): ProcessState {
   return ctx
 }
 
+function sleep(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
 export function ProcessProvider({ children }: { children: ReactNode }) {
   const [date, setDate] = useState<string | null>(null)
   const [processing, setProcessing] = useState(false)
@@ -60,23 +64,45 @@ export function ProcessProvider({ children }: { children: ReactNode }) {
       setTotalDays(days)
       ;(async () => {
         try {
-          const connection = await ensureConnection()
-          await new Promise<void>((resolve, reject) => {
-            connection.on('ProgressUpdate', (progress: ProcessProgress) => {
-              setDate(progress.date)
-              setDaysProcessed(progress.daysProcessed)
-              setTotalDays(progress.totalDays)
-              if (progress.done) {
-                connection.off('ProgressUpdate')
-                resolve()
-              }
+          const before = await callApi<GameSnapshot>('/api/game/snapshot').catch(() => null)
+
+          // ProcessHub gives live per-day progress for the banner, but it's
+          // best-effort only — completion is always confirmed independently
+          // by polling the snapshot below, so a hub connection that fails
+          // (or a WebSocket the dev proxy doesn't relay) can't leave the
+          // button stuck on "Processing…" forever with the date never
+          // actually updating.
+          ensureConnection()
+            .then((connection) => {
+              connection.on('ProgressUpdate', (progress: ProcessProgress) => {
+                setDate(progress.date)
+                setDaysProcessed(progress.daysProcessed)
+                setTotalDays(progress.totalDays)
+              })
             })
-            callApi(`/api/game/process/live?days=${days}`, { method: 'POST' }).catch(reject)
-          })
+            .catch((e) => console.error('ProcessHub connection failed (progress bar only — processing continues regardless):', e))
+
+          await callApi(`/api/game/process/live?days=${days}`, { method: 'POST' })
+
+          // Poll until the world has actually moved. `process/live` returns
+          // 202 immediately (the real work happens in the background), so
+          // this is the only reliable "are we done" signal regardless of
+          // whether any ProgressUpdate arrived.
+          for (let attempt = 0; attempt < 600; attempt++) {
+            await sleep(1000)
+            const snap = await callApi<GameSnapshot>('/api/game/snapshot').catch(() => null)
+            if (snap && (!before || snap.date !== before.date)) {
+              setDate(snap.date)
+              break
+            }
+          }
+
           // Every page fetches its own data on mount with no shared
           // cache/store to invalidate — a full reload is the simplest way
           // to get every panel back in sync with the new date.
           window.location.reload()
+        } catch (e) {
+          console.error('process failed:', e)
         } finally {
           setProcessing(false)
         }
