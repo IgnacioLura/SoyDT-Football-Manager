@@ -9,6 +9,8 @@
 mod ai_tools;
 mod awards;
 mod contract;
+mod continental;
+mod cups;
 mod game;
 mod league;
 mod league_schedule;
@@ -93,3 +95,5 @@ pub use match_detail::engine_simulate_team_match;
 pub use ai_tools::{engine_ai_get_club, engine_ai_get_club_players, engine_ai_get_player};
 pub use watchlist::{engine_get_watchlist, engine_watchlist_add, engine_watchlist_remove};
 pub use search::engine_search;
+pub use cups::{engine_get_cup_bracket, engine_get_cups};
+pub use continental::engine_get_continental_competition;

@@ -35,6 +35,9 @@ import AboutPage from './features/misc/AboutPage'
 import MatchDetailPage from './features/match/MatchDetailPage'
 import WatchlistPage from './features/misc/WatchlistPage'
 import SearchPage from './features/misc/SearchPage'
+import CupsPage from './features/cups/CupsPage'
+import CupBracketPage from './features/cups/CupBracketPage'
+import ContinentalCompetitionPage from './features/cups/ContinentalCompetitionPage'
 
 function App() {
   return (
@@ -76,6 +79,12 @@ function App() {
         <Route path="/match/:matchId" element={<MatchDetailPage />} />
         <Route path="/watchlist" element={<WatchlistPage />} />
         <Route path="/search" element={<SearchPage />} />
+        <Route path="/cups" element={<CupsPage />} />
+        <Route path="/cups/:cupId" element={<CupBracketPage />} />
+        <Route path="/champions-league" element={<ContinentalCompetitionPage />} />
+        <Route path="/europa-league" element={<ContinentalCompetitionPage />} />
+        <Route path="/conference-league" element={<ContinentalCompetitionPage />} />
+        <Route path="/copa-libertadores" element={<ContinentalCompetitionPage />} />
         {/* Not part of the original app's UI — internal tool for verifying
             the React -> .NET -> engine-ffi pipe, reachable by URL only. */}
         <Route path="/debug" element={<PipeCheckPage />} />
