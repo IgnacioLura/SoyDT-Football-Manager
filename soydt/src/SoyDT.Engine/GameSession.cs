@@ -147,6 +147,7 @@ public sealed partial class GameSession(NativeGameEngine engine)
                 ? engine.CreateScopedGame(countryCodes)
                 : engine.CreateGame();
             _myClubId = null;
+            ResetDtEvents();
             Publish(next)?.Dispose();
         }
     }
@@ -161,6 +162,7 @@ public sealed partial class GameSession(NativeGameEngine engine)
             var previous = CaptureCurrent();
             var working = engine.CloneGame(previous);
             var result = engine.ProcessDays(working, days);
+            AdvanceDtEvents(engine, working);
             Publish(working)?.Dispose();
             return result;
         }
@@ -191,6 +193,7 @@ public sealed partial class GameSession(NativeGameEngine engine)
             for (uint day = 1; day <= days; day++)
             {
                 var result = engine.ProcessDays(working, 1);
+                AdvanceDtEvents(engine, working);
                 matchesPlayed += result.MatchesPlayed;
                 date = result.Date;
                 onProgress(new ProcessProgress(date, day, days, matchesPlayed, day == days));
