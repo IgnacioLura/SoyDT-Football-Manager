@@ -13,38 +13,42 @@ type LineupPlayer = { playerId: number; name: string; position: string; currentA
 
 // Raw position comes from the Rust enum's Debug format (e.g.
 // "DefensiveMidfielder", see engine-ffi's `format!("{pos:?}")`) — map it to
-// a short on-pitch code + line + exact shade, so the table reads at a
-// glance instead of showing the raw enum name. Each line has its own base
-// hue (GK amber, DEF blue, MID green, FWD red); within a line, the shade
-// darkens for the more defensive-minded roles and lightens for the wider /
-// more advanced ones — e.g. within DEF, Sweeper is the darkest blue and the
+// the equivalent EA Sports FC position code (GK/CB/LB/RB/LWB/RWB/CDM/CM/
+// LM/RM/CAM/LW/RW/LF/CF/RF/ST — the same 17-code vocabulary FIFA/EA FC
+// uses) so the table reads using nomenclature players already know, instead
+// of the engine's own internal position names. Several engine positions
+// collapse onto the same EA code (e.g. all three central-defender slots
+// are just "CB" in FIFA too — it doesn't distinguish them either), so line
+// + exact shade still comes from the *engine's* more granular position:
+// darker for the more defensive-minded slot, lighter for the wider / more
+// advanced one — e.g. within DEF, Sweeper is the darkest blue and the
 // Wingbacks (most attacking of the back line) are the lightest.
 const POSITION_CODES: Record<string, { code: string; line: 'GK' | 'DEF' | 'MID' | 'FWD'; color: string }> = {
   Goalkeeper: { code: 'GK', line: 'GK', color: '#f59e0b' },
 
-  Sweeper: { code: 'SW', line: 'DEF', color: '#1e3a8a' },
-  DefenderCenterLeft: { code: 'DCL', line: 'DEF', color: '#1d4ed8' },
-  DefenderCenter: { code: 'DC', line: 'DEF', color: '#1d4ed8' },
-  DefenderCenterRight: { code: 'DCR', line: 'DEF', color: '#1d4ed8' },
-  DefenderLeft: { code: 'DL', line: 'DEF', color: '#3b82f6' },
-  DefenderRight: { code: 'DR', line: 'DEF', color: '#3b82f6' },
-  WingbackLeft: { code: 'WBL', line: 'DEF', color: '#93c5fd' },
-  WingbackRight: { code: 'WBR', line: 'DEF', color: '#93c5fd' },
+  Sweeper: { code: 'CB', line: 'DEF', color: '#1e3a8a' },
+  DefenderCenterLeft: { code: 'CB', line: 'DEF', color: '#1d4ed8' },
+  DefenderCenter: { code: 'CB', line: 'DEF', color: '#1d4ed8' },
+  DefenderCenterRight: { code: 'CB', line: 'DEF', color: '#1d4ed8' },
+  DefenderLeft: { code: 'LB', line: 'DEF', color: '#3b82f6' },
+  DefenderRight: { code: 'RB', line: 'DEF', color: '#3b82f6' },
+  WingbackLeft: { code: 'LWB', line: 'DEF', color: '#93c5fd' },
+  WingbackRight: { code: 'RWB', line: 'DEF', color: '#93c5fd' },
 
-  DefensiveMidfielder: { code: 'DM', line: 'MID', color: '#14532d' },
-  MidfielderCenterLeft: { code: 'MCL', line: 'MID', color: '#16a34a' },
-  MidfielderCenter: { code: 'MC', line: 'MID', color: '#16a34a' },
-  MidfielderCenterRight: { code: 'MCR', line: 'MID', color: '#16a34a' },
-  MidfielderLeft: { code: 'ML', line: 'MID', color: '#4ade80' },
-  MidfielderRight: { code: 'MR', line: 'MID', color: '#4ade80' },
-  AttackingMidfielderLeft: { code: 'AML', line: 'MID', color: '#86efac' },
-  AttackingMidfielderCenter: { code: 'AMC', line: 'MID', color: '#86efac' },
-  AttackingMidfielderRight: { code: 'AMR', line: 'MID', color: '#86efac' },
+  DefensiveMidfielder: { code: 'CDM', line: 'MID', color: '#14532d' },
+  MidfielderCenterLeft: { code: 'CM', line: 'MID', color: '#16a34a' },
+  MidfielderCenter: { code: 'CM', line: 'MID', color: '#16a34a' },
+  MidfielderCenterRight: { code: 'CM', line: 'MID', color: '#16a34a' },
+  MidfielderLeft: { code: 'LM', line: 'MID', color: '#4ade80' },
+  MidfielderRight: { code: 'RM', line: 'MID', color: '#4ade80' },
+  AttackingMidfielderCenter: { code: 'CAM', line: 'MID', color: '#86efac' },
+  AttackingMidfielderLeft: { code: 'LW', line: 'MID', color: '#86efac' },
+  AttackingMidfielderRight: { code: 'RW', line: 'MID', color: '#86efac' },
 
   Striker: { code: 'ST', line: 'FWD', color: '#991b1b' },
-  ForwardCenter: { code: 'FC', line: 'FWD', color: '#dc2626' },
-  ForwardLeft: { code: 'FL', line: 'FWD', color: '#f87171' },
-  ForwardRight: { code: 'FR', line: 'FWD', color: '#f87171' },
+  ForwardCenter: { code: 'CF', line: 'FWD', color: '#dc2626' },
+  ForwardLeft: { code: 'LF', line: 'FWD', color: '#f87171' },
+  ForwardRight: { code: 'RF', line: 'FWD', color: '#f87171' },
 }
 
 function positionInfo(position: string) {
