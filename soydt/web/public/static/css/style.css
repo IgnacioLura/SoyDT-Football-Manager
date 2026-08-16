@@ -14346,6 +14346,20 @@ a.np-prose-link.np-mark:focus-visible,
     font-size: 11px;
 }
 
+/* Active DT-event OVR buff/debuff (see GameSession.DtEvents.cs) — same
+   sizing as .fm-ovr-penalty, colored green/red for buff vs debuff. */
+.fm-ovr-buff-positive {
+    color: #4ade80;
+    font-weight: 700;
+    font-size: 11px;
+}
+
+.fm-ovr-buff-negative {
+    color: #ef4444;
+    font-weight: 700;
+    font-size: 11px;
+}
+
 /* Unavailable (injured/suspended/low condition) player in the replacement
    dropdown — still visible, greyed out and unclickable, red reason instead
    of an ability number so the DT sees who's missing, not just a shorter
