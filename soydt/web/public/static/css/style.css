@@ -5283,6 +5283,29 @@ a:active {
     color: #7c9cff;
 }
 
+/* Watchlist star + search icon links — plain, unboxed icon buttons that
+   match the AI badge's stripped-down header treatment right next to them
+   (same size, color, hover, and vertical centering) instead of falling
+   back to unstyled default <a> rendering (blue link color, no centering). */
+.fm-header-actions .fm-header-search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    color: #6b7580;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.fm-header-actions .fm-header-search:hover {
+    color: #fff;
+}
+
+.fm-header-actions .fm-header-search i {
+    font-size: 15px;
+    line-height: 1;
+}
+
 /* Groups the workers chip + AI badge. `display: contents` makes the
    wrapper invisible to layout, so on wide screens both pills stay direct
    flex items of the machine tile (chip keeps its margin-left:auto and the
