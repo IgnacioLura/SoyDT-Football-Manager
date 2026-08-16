@@ -42,10 +42,10 @@ Bump `CONTRACT_VERSION` in `soydt/engine-ffi/src/contract.rs` per the project's 
 
 ### 3. Photos — build-time asset step, no engine/backend involvement
 
-Every player record in `open-football-database/data/uy/uruguayan-first-division/nacional/players/*.json` carries `"ids": {"transfermarkt.com": "<id>"}` alongside its own `"id": <engine player id>` (confirmed by inspecting `14018037-zuculini-bruno.json`). A one-off script (same shape as the crest-download step already done for team logos):
+Some player records in `open-football-database/data/uy/uruguayan-first-division/nacional/players/*.json` carry `"ids": {"transfermarkt.com": "<id>"}` alongside their own `"id": <engine player id>`. **Verified by scanning the full directory: only 6 of Nacional's 90 players have a `transfermarkt.com` id** (Bruno Zuculini/115507, Sebastián Coates/102427, Nicolás Lodeiro/72653, Agustín Rogel/456535, Luciano Boggio/577259, Francisco Calvo/188470) — most squad entries (younger/lower-profile players) simply don't have one in this dataset. This is fine: the design already falls back to the placeholder silhouette for any player without a downloaded photo, so the other 84 Nacional players and every non-Nacional player behave identically to today. A one-off script (same shape as the crest-download step already done for team logos):
 
-1. Walks that directory, extracting `(engine_id, transfermarkt_id)` pairs for Nacional's ~25-30 players.
-2. Fetches each player's photo from Transfermarkt using the `transfermarkt_id`.
+1. Walks that directory, extracting `(engine_id, transfermarkt_id)` pairs for the 6 Nacional players that have one.
+2. Fetches each player's photo from Transfermarkt using the `transfermarkt_id` (via the profile page's `og:image` meta tag — Transfermarkt's photo CDN URL includes a non-predictable cache-busting suffix per player, so it must be scraped from the page rather than constructed).
 3. Saves as `soydt/web/public/static/images/players/{engine_id}.jpg`.
 
 **Assumption to verify before/during implementation:** the `id` field in the source JSON passes through unchanged into the runtime `Player.id` that `engine_get_player` returns (i.e., no re-numbering happens in the compiler/SQLite pipeline). `engine-ffi/src/player.rs` already does `id: p.id` directly from the JSON-sourced struct, which supports this, but confirm with one spot-check (e.g. request Nacional's squad, verify a returned `id` matches a filename in the source JSON directory) before trusting the mapping at scale.
