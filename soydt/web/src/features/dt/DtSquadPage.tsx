@@ -18,6 +18,7 @@ type LineupPlayer = {
   currentAbility: number
   shirtNumber: number | null
   pinned: boolean
+  isReadyForMatch: boolean
 }
 
 // Raw position comes from the Rust enum's Debug format (e.g.
@@ -141,9 +142,12 @@ function DtSquadPage() {
         // EA code matches theirs. A previously-saved lineup that doesn't
         // fit this fixed 4-3-3 (e.g. it had a back three) leaves the
         // leftover pinned players unplaced — they're still on the bench,
-        // just not pre-filled into a slot.
+        // just not pre-filled into a slot. Skips anyone who became
+        // unavailable (injured/suspended/low condition) since the lineup
+        // was last saved — the backend would reject saving them again
+        // anyway, so re-placing them here would just reproduce the error.
         const next: (number | null)[] = Array(11).fill(null)
-        for (const p of rows.filter((r) => r.pinned)) {
+        for (const p of rows.filter((r) => r.pinned && r.isReadyForMatch)) {
           const code = positionInfo(p.position).code
           const slotIndex = FORMATION.findIndex((slot, i) => slot.code === code && next[i] == null)
           if (slotIndex !== -1) next[slotIndex] = p.playerId
@@ -166,7 +170,10 @@ function DtSquadPage() {
     if (!players) return []
     const slot = FORMATION[slotIndex]
     return players
-      .filter((p) => !assignedIds.has(p.playerId))
+      // Unavailable (injured/suspended/low condition) players never show up
+      // as pickable — the backend rejects saving them, so keeping them out
+      // of the picker means that error can't happen from the UI anymore.
+      .filter((p) => !assignedIds.has(p.playerId) && p.isReadyForMatch)
       .map((p) => ({ ...p, ...eligibility(p.position, slot) }))
       .filter((c) => c.eligible)
       .sort((a, b) => b.currentAbility - a.currentAbility - (b.penalty - a.penalty))
