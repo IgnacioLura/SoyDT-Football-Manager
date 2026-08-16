@@ -14128,3 +14128,56 @@ a.np-prose-link.np-mark:focus-visible,
 .fm-attr-green .fm-attr-value {
     color: #219150;
 }
+
+/* Sortable table headers (DT squad/lineup table) — click to sort, arrow
+   indicator appended inline by the component. */
+.fm-sortable {
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+}
+.fm-sortable:hover {
+    color: #fff;
+}
+
+/* Position badge — colored by line (GK/DEF/MID/FWD) so the squad table
+   reads at a glance instead of everyone being the same plain text. */
+.fm-pos-badge {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+.fm-pos-GK {
+    background: rgba(245, 158, 11, 0.18);
+    color: #f59e0b;
+}
+.fm-pos-DEF {
+    background: rgba(59, 130, 246, 0.18);
+    color: #3b82f6;
+}
+.fm-pos-MID {
+    background: rgba(34, 197, 94, 0.18);
+    color: #22c55e;
+}
+.fm-pos-FWD {
+    background: rgba(239, 68, 68, 0.18);
+    color: #ef4444;
+}
+
+/* Habilidad (CA) cell — same red/yellow/green read as the player attribute
+   grid, banded on the engine's 1-200 overall scale rather than 1-20. */
+.fm-ability {
+    font-weight: 700;
+}
+.fm-ability-red {
+    color: #e74c3c;
+}
+.fm-ability-yellow {
+    color: #d4a017;
+}
+.fm-ability-green {
+    color: #2ecc71;
+}
