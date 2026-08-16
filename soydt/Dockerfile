@@ -6,10 +6,9 @@
 FROM rust:1-bookworm AS engine-build
 WORKDIR /src
 # `core`/`database`'s Cargo.toml inherit `edition`/`version` from
-# `open-football`'s workspace root manifest, and that manifest's
-# `[workspace] members` lists `src/web` too — so the whole `open-football`
-# tree (minus `target/`, stripped by .dockerignore) has to come along, not
-# just the two crates engine-ffi path-depends on.
+# `open-football`'s workspace root manifest (a virtual workspace — just
+# `core`+`database`, no root package/binary), so that manifest has to come
+# along too, not just the two crates engine-ffi path-depends on.
 COPY open-football open-football
 COPY soydt/engine-ffi soydt/engine-ffi
 WORKDIR /src/soydt/engine-ffi

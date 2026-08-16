@@ -7,9 +7,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 This monorepo holds a migration project plus the two upstream projects it migrates from:
 
 - **`soydt/`** — the active work: a React + .NET port of `open-football`'s web UI, talking to the original Rust simulation engine through a hand-written FFI boundary. This is where almost all work happens.
-- **`open-football/`** — vendored upstream source (Rust: `src/core` simulation engine, `src/database` data loading/generation, `src/web` original Askama-templated server). `soydt/engine-ffi` path-depends directly on `open-football/src/{core,database}` — do not move or rename these without updating `soydt/engine-ffi/Cargo.toml`.
+- **`open-football/`** — vendored upstream source, trimmed to just `src/core` (simulation engine) and `src/database` (data loading/generation) — a virtual Cargo workspace, no root binary. `soydt/engine-ffi` path-depends directly on these two crates; do not move or rename them without updating `soydt/engine-ffi/Cargo.toml`.
 - **`open-football-database/`** — the separate repo providing the structured football database (club/player/league data) that `open-football/src/database` loads.
-- **`ffi-spike/`** — an early throwaway proof-of-concept for the .NET↔Rust FFI approach, superseded by `soydt/engine-ffi`. Not part of the active build.
+
+The original `open-football/src/web` (Askama-templated Axum server) and its `src/main.rs` root binary were deleted once `soydt` had ported everything portable from it (`MIGRATION_CHECKLIST.md`'s Fase 4 cutover — see that file's history for the exact commit). It's fully recoverable from git history if ever needed again (e.g. to check the original implementation of something not yet ported, like the playoffs pages):
+
+```
+git log --all --diff-filter=D -- open-football/src/web   # find the deleting commit
+git show <commit>^ -- open-football/src/web/src/playoffs/get/mod.rs   # read a file as it was right before deletion
+git checkout <commit>^ -- open-football/src/web           # restore the whole tree at that path, if needed
+```
+
+(There is no `ffi-spike/` anymore either — it was an early throwaway FFI proof-of-concept, already deleted before this doc was last updated; same recovery approach applies via `git log --all --diff-filter=D -- ffi-spike` if its history is ever needed.)
 
 Read `soydt/MIGRATION_CHECKLIST.md` before starting new page-porting work — it tracks which of the original app's ~56 templates have been ported, verified, or deliberately simplified/deferred, and documents known bugs (e.g. empty national-team squad/schedule data). Update it as pages move between not-started/built/verified.
 

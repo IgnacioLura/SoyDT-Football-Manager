@@ -104,4 +104,4 @@ Ver plan completo en la conversación (Fase 0-4). Este archivo se actualiza a me
 - [x] Watchlist, search reales — ver detalle en la sección Utilitarias arriba. Workers admin descartado (no aplica, sin infraestructura distribuida en esta arquitectura).
 
 ## Fase 4 — Cutover
-- [ ] Retirar servidor Axum Rust
+- [x] Retirar servidor Axum Rust — `open-football/src/web` + su `src/main.rs` (binario raíz) borrados; `open-football/Cargo.toml` quedó como workspace virtual de 2 miembros (`core`+`database`), sin package/binario propio. Único ítem sin portar (`playoffs/get.html`/`playoffs/history.html`, sin datos de test para verificar) recuperable de la historia de git — ver `CLAUDE.md`.
