@@ -38,6 +38,8 @@ mod team_staff;
 mod team_tactics;
 mod team_transfers;
 mod transfers;
+mod watchlist;
+mod search;
 
 pub use contract::CONTRACT_VERSION;
 
@@ -89,3 +91,5 @@ pub use r#match::{
 };
 pub use match_detail::engine_simulate_team_match;
 pub use ai_tools::{engine_ai_get_club, engine_ai_get_club_players, engine_ai_get_player};
+pub use watchlist::{engine_get_watchlist, engine_watchlist_add, engine_watchlist_remove};
+pub use search::engine_search;

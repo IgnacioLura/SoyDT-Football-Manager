@@ -70,9 +70,12 @@ function Layout({ title, subTitle, children }: LayoutProps) {
                     </div>
                     <div className="fm-header-actions">
                       <AiSettingsBadge />
-                      <a className="fm-header-search" href="#" title="Search">
+                      <Link className="fm-header-search" to="/watchlist" title="Watch list">
+                        <i className="fa fa-star" />
+                      </Link>
+                      <Link className="fm-header-search" to="/search" title="Search">
                         <i className="fa fa-search" />
-                      </a>
+                      </Link>
                     </div>
                   </div>
                   {children}

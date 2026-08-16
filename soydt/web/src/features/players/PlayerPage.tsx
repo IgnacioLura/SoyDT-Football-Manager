@@ -35,6 +35,7 @@ function PlayerPage() {
   const { playerId } = useParams<{ playerId: string }>()
   const [player, setPlayer] = useState<PlayerDetail | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [inWatchlist, setInWatchlist] = useState(false)
 
   useEffect(() => {
     setPlayer(null)
@@ -42,7 +43,19 @@ function PlayerPage() {
     callApi<PlayerDetail>(`/api/players/${playerId}`)
       .then(setPlayer)
       .catch((e) => setError(e instanceof Error ? e.message : String(e)))
+    callApi<{ id: number }[]>('/api/watchlist').then((list) =>
+      setInWatchlist(list.some((p) => p.id === Number(playerId))),
+    )
   }, [playerId])
+
+  const toggleWatchlist = async () => {
+    if (inWatchlist) {
+      await callApi(`/api/watchlist/${playerId}`, { method: 'DELETE' })
+    } else {
+      await callApi(`/api/watchlist/${playerId}`, { method: 'POST' })
+    }
+    setInWatchlist(!inWatchlist)
+  }
 
   if (error) {
     return (
@@ -82,6 +95,7 @@ function PlayerPage() {
         <section className="fm-panel">
           <div className="fm-panel-head">
             <h3>Overview</h3>
+            <button onClick={toggleWatchlist}>{inWatchlist ? '★ On watch list' : '☆ Add to watch list'}</button>
             <AiReportButton title="AI scouting dossier" startUrl={`/api/players/${playerId}/ai-report`} />
           </div>
           <div style={{ padding: '14px', display: 'flex', gap: '16px' }}>

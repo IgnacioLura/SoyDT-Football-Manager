@@ -76,9 +76,9 @@ Ver plan completo en la conversación (Fase 0-4). Este archivo se actualiza a me
 
 ### Utilitarias
 - [x] `about.html` — construido por agente en paralelo, página estática sin llamadas a backend (`/about`)
-- [ ] `search.html` — no construido: el original pega a `/api/search?q=...` (países+clubes+jugadores simultáneo), no existe endpoint ni capacidad de búsqueda por nombre en engine-ffi; explícitamente Fase 3 ("search reales") según este mismo checklist
-- [ ] `watchlist.html` — no construido: requiere estado mutable persistido (`/api/watchlist/remove/:id`) que no existe en la API; explícitamente Fase 3
-- [ ] `workers.html` — no construido: panel admin de workers de simulación distribuida, infraestructura del engine Rust, no aplica al alcance read-only de Fase 1; explícitamente Fase 3
+- [x] `search.html` — construido: nuevo `engine_search` en engine-ffi (`search.rs`, port 1:1 de `web/src/search/mod.rs`: substring case-insensitive sobre países/clubes/jugadores, mínimo 4 caracteres, tope 15 resultados por categoría, ranking por reputación/CA), `SearchController` (`GET /api/search?q=`), `SearchPage.tsx` (`/search`, input en vivo). Verificado con datos reales (`q=boca` → club "Boca Juniors" + jugador libre "Daniel Bocanegra").
+- [x] `watchlist.html` — construido: `SimulatorData.watchlist: Vec<u32>` ya existía en `core`, se agregó mutación directa vía `engine_watchlist_add`/`_remove`/`engine_get_watchlist` (primeros exports de engine-ffi que mutan estado del mundo en vez de solo leerlo — nuevo `GameHandle::data_mut()`), simplificado vs. original (CA/PA como números crudos en vez del `PotentialStarsView` con estrellas, que requiere estimación basada en staff). `WatchlistController` (`GET/POST/DELETE /api/watchlist/{id}`), `WatchlistPage.tsx` (`/watchlist`), botón toggle "★ On watch list" agregado en `PlayerPage.tsx` (el original no tiene este toggle en la página de jugador — se agregó ahí por ser el lugar natural). Verificado con datos reales end-to-end: add/list/remove con Leandro Paredes.
+- [ ] `workers.html` — **no aplica**: panel admin de workers de simulación DISTRIBUIDA (nodos remotos registrándose, threads, batches enviados/completados — `crate::worker::WorkerSnapshot`). `SoyDT.Api` es un único proceso/contenedor sin infraestructura de cómputo distribuido; portar esto significaría fabricar una UI para workers que no existen. Correctamente fuera de alcance, no es honesto simularlo.
 
 ## Fase 2 — Match replay + process en vivo
 
@@ -98,7 +98,7 @@ Ver plan completo en la conversación (Fase 0-4). Este archivo se actualiza a me
   - **Controllers**: `AiConfigController` (`/api/ai/config` GET/POST/DELETE), `AiProgressController` (`/api/ai/progress`), `PlayerAiReportController` (`POST /api/players/{id}/ai-report`, prompt de scouting dossier embebido igual al original), `TeamAiReportController` (`POST /api/teams/{id}/ai-report` — resuelve `teamId→clubId` internamente vía `TeamDetail.ClubId` ya que el original clave por club, no por team, pero acá se mantiene consistencia de rutas `{teamId}`).
   - **React**: `AiSettingsBadge.tsx` (badge+dialog en `Layout.tsx`, mismas clases CSS `fm-ai-btn`/`fm-ai-dialog` ya presentes en `style.css`), `AiReportButton.tsx` (botón+dialog reusable con long-poll y render de tool-calls en vivo, cableado en `PlayerPage.tsx`/`TeamPage.tsx`, mismas clases `fm-ai-report-*`).
   - **Verificado end-to-end** con un mock server OpenAI-compatible (Node, sin acceso a un LLM real en este entorno): config save/get/clear, arranque de reporte, loop completo modelo→tool_call→`player_get_by_id` real (datos reales de Leandro Paredes confirmados en el tool result) →respuesta final, polling hasta `status:"done"`. Bloqueo correcto cuando AI no está configurada. **Pendiente**: probar contra un LLM real (el usuario puede apuntar `base_url` a su propio endpoint Ollama/llama.cpp — la calidad del reporte generado no se puede evaluar sin eso).
-- [ ] Watchlist, workers admin, search reales
+- [x] Watchlist, search reales — ver detalle en la sección Utilitarias arriba. Workers admin descartado (no aplica, sin infraestructura distribuida en esta arquitectura).
 
 ## Fase 4 — Cutover
 - [ ] Retirar servidor Axum Rust

@@ -27,6 +27,13 @@ impl GameHandle {
     pub(crate) fn data(&self) -> &SimulatorData {
         &self.0
     }
+
+    /// Mutable access for exports that write world state directly rather
+    /// than advancing the simulation (e.g. `watchlist.rs`'s add/remove —
+    /// mirrors the original's `Arc::make_mut(&mut arc_data).watchlist.push(...)`).
+    pub(crate) fn data_mut(&mut self) -> &mut SimulatorData {
+        &mut self.0
+    }
 }
 
 /// `FootballSimulator::simulate` is declared `async` but never awaits an I/O
