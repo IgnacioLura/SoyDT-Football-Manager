@@ -20,7 +20,7 @@ Ver plan completo en la conversación (Fase 0-4). Este archivo se actualiza a me
 ### CSS/assets (una vez, cubre todas las páginas)
 - [x] Copiar bootstrap.min.css / style.css / images.css / flags.css / fonts a `soydt/web/public/static`
 - [x] Layout.tsx (fm-sidebar / fm-header) — aproximación estática, falta nav real por feature area
-- [ ] Verificación visual real en navegador (sin herramienta de screenshot en este entorno — pendiente que el usuario confirme)
+- [x] Verificación visual real en navegador — usuario confirmó viendo el dev server (Vite) contra un contenedor Docker con datos reales (AR/UY/BR, 26 días procesados)
 
 ### Countries
 - [x] `countries/get/index.html` → índice continentes/países (`/countries`) — verificado end-to-end
