@@ -38,11 +38,13 @@ import SearchPage from './features/misc/SearchPage'
 import CupsPage from './features/cups/CupsPage'
 import CupBracketPage from './features/cups/CupBracketPage'
 import ContinentalCompetitionPage from './features/cups/ContinentalCompetitionPage'
+import { ProcessProvider } from './shared/ProcessContext'
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
+    <ProcessProvider>
+      <BrowserRouter>
+        <Routes>
         <Route path="/" element={<CountriesPage />} />
         <Route path="/countries" element={<CountriesPage />} />
         <Route path="/countries/:countryId" element={<NationalSquadPage />} />
@@ -88,8 +90,9 @@ function App() {
         {/* Not part of the original app's UI — internal tool for verifying
             the React -> .NET -> engine-ffi pipe, reachable by URL only. */}
         <Route path="/debug" element={<PipeCheckPage />} />
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+    </ProcessProvider>
   )
 }
 

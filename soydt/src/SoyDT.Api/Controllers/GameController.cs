@@ -41,6 +41,13 @@ public sealed class GameController(GameSession session, IHubContext<ProcessHub> 
     [HttpPost("process/live")]
     public ActionResult ProcessLive([FromQuery] uint days = 1)
     {
+        // Mirrors the original's "already processing → just return" early
+        // exit rather than queuing a second run behind the first.
+        if (!session.TryStartProcessing())
+        {
+            return Accepted();
+        }
+
         _ = Task.Run(() =>
         {
             try
@@ -62,6 +69,10 @@ public sealed class GameController(GameSession session, IHubContext<ProcessHub> 
             catch (Exception ex)
             {
                 logger.LogError(ex, "process/live background task failed");
+            }
+            finally
+            {
+                session.FinishProcessing();
             }
         });
         return Accepted();

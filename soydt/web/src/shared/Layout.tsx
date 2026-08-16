@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import AiSettingsBadge from './AiSettingsBadge'
 import Flag from './Flag'
+import ProcessBanner from './ProcessBanner'
 import ProcessControl from './ProcessControl'
 
 // Ported 1:1 from open-football/src/web/src/layout.html — same wrapper
@@ -57,6 +58,7 @@ function Layout({ title, subTitle, children }: LayoutProps) {
             <div className="container-fluid">
               <div className="row">
                 <div className="col m-0 p-0">
+                  <ProcessBanner />
                   <div className="fm-header">
                     <button
                       className="fm-menu-toggle d-xl-none"

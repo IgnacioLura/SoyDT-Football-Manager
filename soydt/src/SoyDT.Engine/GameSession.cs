@@ -23,6 +23,32 @@ public sealed partial class GameSession(NativeGameEngine engine)
     private readonly Lock _swapLock = new();
     private GameHandleSafeHandle? _current;
 
+    // Serializes writes against EACH OTHER — held for a write's entire
+    // duration (unlike `_swapLock`), so reads never wait on it. Without
+    // this, two concurrent writes (e.g. a stale in-flight `ProcessDays`
+    // loop from a game that's since been replaced, plus a fresh
+    // `CreateNewGame`) can each capture the same `_current`, clone it, and
+    // publish independently — the loser's publish silently overwrites the
+    // winner's, which is exactly how a create-new-game-while-processing
+    // race could resurrect the OLD world on top of a freshly created one.
+    // Wrapping every write's whole body in this lock makes "one write
+    // completes before the next one can even start" strictly true, so that
+    // can't happen — a `CreateNewGame` called mid-process simply waits for
+    // the in-flight write to finish first.
+    private readonly Lock _writeGate = new();
+    private int _processingFlag;
+
+    /// Mirrors the original app's `process_lock.try_lock_owned()` early-out
+    /// ("already processing → return immediately" instead of queuing behind
+    /// it). `ProcessDaysWithProgress` can legitimately run for a while
+    /// (many simulated days); without this, a second `process/live` click
+    /// would just block on `_writeGate` until the first finishes and then
+    /// run anyway — technically correct now (no more resurrection race) but
+    /// still pointless queued work the operator didn't ask for.
+    public bool TryStartProcessing() => Interlocked.CompareExchange(ref _processingFlag, 1, 0) == 0;
+
+    public void FinishProcessing() => Interlocked.Exchange(ref _processingFlag, 0);
+
     /// Snapshots the currently-published handle. Safe to call from any
     /// number of concurrent threads — each caller gets its own ref-counted
     /// hold via `DangerousAddRef` inside the `NativeGameEngine` method it
@@ -74,10 +100,13 @@ public sealed partial class GameSession(NativeGameEngine engine)
     /// behavior across the FFI boundary, not just a logical bug).
     private void MutateGame(Action<NativeGameEngine, GameHandleSafeHandle> mutation)
     {
-        var previous = CaptureCurrent();
-        var working = engine.CloneGame(previous);
-        mutation(engine, working);
-        Publish(working)?.Dispose();
+        lock (_writeGate)
+        {
+            var previous = CaptureCurrent();
+            var working = engine.CloneGame(previous);
+            mutation(engine, working);
+            Publish(working)?.Dispose();
+        }
     }
 
     public bool HasGame
@@ -91,10 +120,13 @@ public sealed partial class GameSession(NativeGameEngine engine)
     /// much faster for dev/test iteration; null/empty means the full world.
     public void CreateNewGame(IReadOnlyList<string>? countryCodes = null)
     {
-        var next = countryCodes is { Count: > 0 }
-            ? engine.CreateScopedGame(countryCodes)
-            : engine.CreateGame();
-        Publish(next)?.Dispose();
+        lock (_writeGate)
+        {
+            var next = countryCodes is { Count: > 0 }
+                ? engine.CreateScopedGame(countryCodes)
+                : engine.CreateGame();
+            Publish(next)?.Dispose();
+        }
     }
 
     /// Advances the published world by `days` in one shot. Clones the
@@ -102,11 +134,14 @@ public sealed partial class GameSession(NativeGameEngine engine)
     /// against the previous handle are unaffected for the whole duration.
     public ProcessResult ProcessDays(uint days)
     {
-        var previous = CaptureCurrent();
-        var working = engine.CloneGame(previous);
-        var result = engine.ProcessDays(working, days);
-        Publish(working)?.Dispose();
-        return result;
+        lock (_writeGate)
+        {
+            var previous = CaptureCurrent();
+            var working = engine.CloneGame(previous);
+            var result = engine.ProcessDays(working, days);
+            Publish(working)?.Dispose();
+            return result;
+        }
     }
 
     /// Same simulation as <see cref="ProcessDays"/>, but ticks one day at a
@@ -119,18 +154,21 @@ public sealed partial class GameSession(NativeGameEngine engine)
     /// throttle it).
     public void ProcessDaysWithProgress(uint days, Action<ProcessProgress> onProgress)
     {
-        ulong matchesPlayed = 0;
-        string date = "";
-        for (uint day = 1; day <= days; day++)
+        lock (_writeGate)
         {
-            var previous = CaptureCurrent();
-            var working = engine.CloneGame(previous);
-            var result = engine.ProcessDays(working, 1);
-            Publish(working)?.Dispose();
+            ulong matchesPlayed = 0;
+            string date = "";
+            for (uint day = 1; day <= days; day++)
+            {
+                var previous = CaptureCurrent();
+                var working = engine.CloneGame(previous);
+                var result = engine.ProcessDays(working, 1);
+                Publish(working)?.Dispose();
 
-            matchesPlayed += result.MatchesPlayed;
-            date = result.Date;
-            onProgress(new ProcessProgress(date, day, days, matchesPlayed, day == days));
+                matchesPlayed += result.MatchesPlayed;
+                date = result.Date;
+                onProgress(new ProcessProgress(date, day, days, matchesPlayed, day == days));
+            }
         }
     }
 
