@@ -1,0 +1,36 @@
+/* soydt/web/src/shared/ui/SortToggle.css
+   Used on both the new theme.css-token pages (TeamPage) and the older
+   fm- / style.css pages (DtSquadPage, WatchlistPage, etc.) — every color
+   below falls back to the old palette's literal value so it looks right
+   in both without needing theme.css imported. */
+.sort-toggle {
+  display: inline-flex;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid var(--surface-3, #33453c);
+  background: var(--surface-1, #1e2b25);
+}
+
+.sort-toggle-btn {
+  border: none;
+  background: none;
+  color: var(--text-muted, #9fb3a8);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: background var(--transition-fast, 0.15s) ease, color var(--transition-fast, 0.15s) ease;
+}
+
+.sort-toggle-btn:hover {
+  color: var(--text-primary, #e6efe9);
+}
+
+.sort-toggle-btn-active {
+  background: var(--accent-primary, #2ee6a6);
+  color: var(--surface-0, #0b0e14);
+}
+
+.sort-toggle-btn-active:hover {
+  color: var(--surface-0, #0b0e14);
+}

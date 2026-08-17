@@ -1,0 +1,53 @@
+/* soydt/web/src/shared/ButtonKit.css
+   App-wide button restyle — extends the same "card language" pass that
+   `ProcessControl.css` gave `.fm-process-btn` (dark surface + accent
+   border + radius-card corners + FUT-style specular sweep on hover) to
+   every plain <button> in the kit, so CTAs read as one consistent system
+   instead of each vendored button having its own bespoke shape/hover.
+   Each button keeps its own background/border color (semantic meaning —
+   AI blue, holiday accent, danger red, etc.) — only the shared shape +
+   interaction language is unified here.
+
+   Bare `button` selectors have the lowest possible specificity (0,0,0,1),
+   so any component's classed button rule (`.fm-ai-btn`, `.fm-dlg-btn`, …)
+   always wins on color/background regardless of import order — this file
+   only fills in radius/sweep/press where a component doesn't already
+   override them more specifically. Icon-only chrome (menu toggle) opts
+   out because the pill-card shape doesn't suit a tiny square glyph. */
+
+/* .fm-slot opts out too — its OVR/position badges are deliberately
+   positioned outside its own box (top: -8px) so they can overflow past
+   the shield card's clip-path corners; this rule's overflow:hidden would
+   clip them right back off since .fm-slot is itself a <button>. It has
+   its own bespoke hover treatment (DtSquadPage.tsx's fm-slot-shape shine)
+   so it doesn't need this generic one either. */
+button:not(.fm-menu-toggle):not(.fm-slot) {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-card, 10px);
+  transition: box-shadow var(--transition-fast, 0.15s) ease,
+    transform var(--transition-fast, 0.15s) var(--ease-out, ease-out);
+}
+
+button:not(.fm-menu-toggle):not(.fm-slot)::after {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  background: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, 0.22) 50%, transparent 60%);
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+
+button:not(.fm-menu-toggle):not(.fm-slot):hover:not(:disabled)::after {
+  animation: fm-btn-kit-shine 0.85s ease forwards;
+}
+
+@keyframes fm-btn-kit-shine {
+  to {
+    transform: translateX(120%);
+  }
+}
+
+button:not(.fm-menu-toggle):not(.fm-slot):active:not(:disabled) {
+  transform: scale(0.96);
+}
