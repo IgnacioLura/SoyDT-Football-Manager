@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { callApi } from '../../shared/api'
+import SectionPanel from '../../shared/ui/SectionPanel'
 import TeamCrest from '../onboarding/TeamCrest'
 import DtLayout from './DtLayout'
 import { useMyTeamId } from './useMyTeamId'
@@ -46,7 +47,7 @@ function DtTablePage() {
   return (
     <DtLayout title={table.leagueName}>
       <div className="fm-page">
-        <section className="fm-panel">
+        <SectionPanel title={table.leagueName}>
           <table className="fm-standings">
             <thead>
               <tr>
@@ -83,7 +84,7 @@ function DtTablePage() {
               ))}
             </tbody>
           </table>
-        </section>
+        </SectionPanel>
       </div>
     </DtLayout>
   )

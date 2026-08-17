@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { callApi } from '../../shared/api'
 import { outOfPositionPenalty, positionInfo } from '../../shared/positions'
+import SectionPanel from '../../shared/ui/SectionPanel'
 import TeamCrest from '../onboarding/TeamCrest'
 import DtLayout from './DtLayout'
 import { useMyTeamId } from './useMyTeamId'
@@ -278,12 +279,15 @@ function DtSquadPage() {
   return (
     <DtLayout title="Plantel" subTitle={`${filledCount}/11 titulares`}>
       <div className="fm-page">
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            {teamInfo && <TeamCrest slug={teamInfo.slug} name={teamInfo.name} size={32} />}
-            <h3>Alineación titular</h3>
-            <span className="fm-panel-count">{filledCount}/11</span>
-          </div>
+        <SectionPanel
+          title="Alineación titular"
+          actions={
+            <>
+              {teamInfo && <TeamCrest slug={teamInfo.slug} name={teamInfo.name} size={32} />}
+              <span className="fm-panel-count">{filledCount}/11</span>
+            </>
+          }
+        >
           {error && <p style={{ color: 'crimson' }}>Error: {error}</p>}
 
           <div className="fm-formation">
@@ -421,7 +425,7 @@ function DtSquadPage() {
             </button>
             {saved && <span style={{ color: '#4ade80' }}>Guardada ✓</span>}
           </div>
-        </section>
+        </SectionPanel>
       </div>
     </DtLayout>
   )

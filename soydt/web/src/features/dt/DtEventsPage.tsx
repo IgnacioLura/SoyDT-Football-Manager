@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { callApi } from '../../shared/api'
+import SectionPanel from '../../shared/ui/SectionPanel'
 import DtLayout from './DtLayout'
 import { useMyTeamId } from './useMyTeamId'
 
@@ -75,11 +76,7 @@ function DtEventsPage() {
   return (
     <DtLayout title="Eventos">
       <div className="fm-page">
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Efectos activos</h3>
-            <span className="fm-panel-count">{data.activeBuffs.length}</span>
-          </div>
+        <SectionPanel title="Efectos activos" actions={<span className="fm-panel-count">{data.activeBuffs.length}</span>}>
           {data.activeBuffs.length === 0 && <p style={{ padding: '0 1rem 1rem' }}>Ninguno por ahora.</p>}
           {data.activeBuffs.map((b, i) => (
             <div className="fm-detail-row" key={i}>
@@ -94,13 +91,9 @@ function DtEventsPage() {
               </span>
             </div>
           ))}
-        </section>
+        </SectionPanel>
 
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Historial</h3>
-            <span className="fm-panel-count">{data.log.length}</span>
-          </div>
+        <SectionPanel title="Historial" actions={<span className="fm-panel-count">{data.log.length}</span>}>
           {data.log.length === 0 && (
             <p style={{ padding: '0 1rem 1rem' }}>Todavía no pasó nada — pueden aparecer eventos después de cada partido.</p>
           )}
@@ -114,7 +107,7 @@ function DtEventsPage() {
               </span>
             </div>
           ))}
-        </section>
+        </SectionPanel>
       </div>
     </DtLayout>
   )

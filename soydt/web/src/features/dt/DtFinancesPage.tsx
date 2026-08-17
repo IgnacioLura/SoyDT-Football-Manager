@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { callApi } from '../../shared/api'
+import SectionPanel from '../../shared/ui/SectionPanel'
 import DtLayout from './DtLayout'
 import { useMyTeamId } from './useMyTeamId'
 
@@ -74,10 +75,7 @@ function DtFinancesPage() {
   return (
     <DtLayout title="Finanzas">
       <div className="fm-page">
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Resumen</h3>
-          </div>
+        <SectionPanel title="Resumen">
           <div className="fm-personal-detail">
             <div className="fm-detail-row">
               <span className="fm-detail-label">Balance</span>
@@ -92,13 +90,9 @@ function DtFinancesPage() {
               <span className="fm-detail-value">{money(finances.wageBudget)}</span>
             </div>
           </div>
-        </section>
+        </SectionPanel>
 
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Ingresos</h3>
-            <span className="fm-panel-count">{money(finances.incomeTotal)}</span>
-          </div>
+        <SectionPanel title="Ingresos" actions={<span className="fm-panel-count">{money(finances.incomeTotal)}</span>}>
           <div className="fm-personal-detail">
             <div className="fm-detail-row">
               <span className="fm-detail-label">TV</span>
@@ -121,13 +115,9 @@ function DtFinancesPage() {
               <span className="fm-detail-value">{money(finances.incomePrizeMoney)}</span>
             </div>
           </div>
-        </section>
+        </SectionPanel>
 
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Gastos</h3>
-            <span className="fm-panel-count">{money(finances.expenseTotal)}</span>
-          </div>
+        <SectionPanel title="Gastos" actions={<span className="fm-panel-count">{money(finances.expenseTotal)}</span>}>
           <div className="fm-personal-detail">
             <div className="fm-detail-row">
               <span className="fm-detail-label">Sueldos jugadores</span>
@@ -142,7 +132,7 @@ function DtFinancesPage() {
               <span className="fm-detail-value">{money(finances.expenseFacilities)}</span>
             </div>
           </div>
-        </section>
+        </SectionPanel>
       </div>
     </DtLayout>
   )

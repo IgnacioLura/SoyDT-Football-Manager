@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { callApi } from '../../shared/api'
 import { PositionBadge } from '../../shared/positions'
+import SectionPanel from '../../shared/ui/SectionPanel'
 import DtLayout from './DtLayout'
 import { useMyTeamId } from './useMyTeamId'
 
@@ -92,10 +93,7 @@ function DtTransfersPage() {
         {error && <p style={{ color: 'crimson' }}>Error: {error}</p>}
         {message && <p style={{ color: '#4ade80' }}>{message}</p>}
 
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Vender jugador (a otro club)</h3>
-          </div>
+        <SectionPanel title="Vender jugador (a otro club)">
           <select
             value={browseTeamId ?? ''}
             onChange={(e) => setBrowseTeamId(e.target.value ? Number(e.target.value) : null)}
@@ -152,13 +150,10 @@ function DtTransfersPage() {
               </tbody>
             </table>
           )}
-        </section>
+        </SectionPanel>
 
         {browseTeam && (
-          <section className="fm-panel" style={{ marginTop: '1.5rem' }}>
-            <div className="fm-panel-head">
-              <h3>Fichar de {browseTeam.name}</h3>
-            </div>
+          <SectionPanel title={`Fichar de ${browseTeam.name}`}>
             <table className="fm-standings">
               <thead>
                 <tr>
@@ -197,7 +192,7 @@ function DtTransfersPage() {
                 ))}
               </tbody>
             </table>
-          </section>
+          </SectionPanel>
         )}
       </div>
     </DtLayout>
