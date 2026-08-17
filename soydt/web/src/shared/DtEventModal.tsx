@@ -15,6 +15,8 @@ type DtEventLogEntry = {
   scope: string
   playerId: number | null
   playerName: string | null
+  ovrDelta: number
+  moraleDelta: number
 }
 
 function readPending(): DtEventLogEntry[] {
@@ -73,6 +75,22 @@ function DtEventModal() {
           {current.name}
         </div>
         <p style={{ marginTop: '0.75rem', fontSize: '0.9rem', opacity: 0.9 }}>{current.storyText}</p>
+        {(current.ovrDelta !== 0 || current.moraleDelta !== 0) && (
+          <div style={{ marginTop: '0.75rem', display: 'flex', justifyContent: 'center', gap: '0.75rem', fontWeight: 700, fontSize: '0.9rem' }}>
+            {current.ovrDelta !== 0 && (
+              <span style={{ color: current.ovrDelta > 0 ? '#4ade80' : '#ef4444' }}>
+                {current.ovrDelta > 0 ? '+' : ''}
+                {current.ovrDelta} OVR
+              </span>
+            )}
+            {current.moraleDelta !== 0 && (
+              <span style={{ color: current.moraleDelta > 0 ? '#4ade80' : '#ef4444' }}>
+                {current.moraleDelta > 0 ? '+' : ''}
+                {current.moraleDelta} moral
+              </span>
+            )}
+          </div>
+        )}
         <button
           onClick={dismiss}
           style={{

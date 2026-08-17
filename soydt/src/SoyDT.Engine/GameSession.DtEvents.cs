@@ -169,7 +169,7 @@ public sealed partial class GameSession
         var moraleDelta = success ? definition.SuccessMoraleDelta : definition.FailureMoraleDelta;
 
         _dtEventLog.Insert(0, new DtEventLogEntryDto(
-            definition.Id, definition.Name, storyText, success, matchday, definition.Scope, playerId, playerName));
+            definition.Id, definition.Name, storyText, success, matchday, definition.Scope, playerId, playerName, ovrDelta, moraleDelta));
 
         _dtActiveBuffs.Add(new DtActiveBuffState
         {
@@ -201,7 +201,7 @@ public sealed partial class GameSession
         lock (_dtEventsLock)
         {
             _dtEventLog.Insert(0, new DtEventLogEntryDto(
-                "daily_ai", "Evento del día", storyText, moraleDelta >= 0, day, "Player", playerId, playerName));
+                "daily_ai", "Evento del día", storyText, moraleDelta >= 0, day, "Player", playerId, playerName, OvrDelta: 0, moraleDelta));
         }
     }
 

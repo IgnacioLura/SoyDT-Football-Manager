@@ -21,6 +21,8 @@ type DtEventLogEntry = {
   scope: string
   playerId: number | null
   playerName: string | null
+  ovrDelta: number
+  moraleDelta: number
 }
 
 type ProcessState = {

@@ -13,7 +13,9 @@ public sealed record DtEventLogEntryDto(
     int Matchday,
     string Scope,
     uint? PlayerId,
-    string? PlayerName);
+    string? PlayerName,
+    int OvrDelta,
+    int MoraleDelta);
 
 /// A currently-active OVR/morale modifier from a resolved event, still
 /// counting down. `Scope`/`PlayerId`/`PlayerName` mirror

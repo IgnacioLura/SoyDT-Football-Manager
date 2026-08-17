@@ -484,6 +484,7 @@ function DtSquadPage() {
                                 src={playerPhotoSrc(player.playerId)}
                                 onError={playerPhotoOnError}
                                 alt=""
+                                draggable={false}
                               />
                             ) : (
                               <span className="fm-slot-empty">+</span>
@@ -593,37 +594,59 @@ function DtSquadPage() {
           title="Plantel completo"
           actions={
             <>
+              {openSlot != null && (
+                <span className="fm-panel-filter-tag">
+                  Elegibles para {FORMATION[openSlot].code}
+                  <button type="button" className="fm-panel-filter-clear" onClick={() => setOpenSlot(null)}>
+                    ×
+                  </button>
+                </span>
+              )}
               <SortToggle value={sortMode} onChange={setSortMode} />
               <span className="fm-panel-count">{players?.length ?? 0}</span>
             </>
           }
         >
           <div className="dt-squad-grid">
-            {sortByMode(players ?? [], sortMode, (p) => p.position, (p) => p.currentAbility).map((p, i) => (
-              <div
-                className="dt-squad-card"
-                key={p.playerId}
-                draggable
-                onDragStart={() => setDraggedPlayerId(p.playerId)}
-                onDragEnd={() => {
-                  setDraggedPlayerId(null)
-                  setDragOverSlot(null)
-                }}
-              >
-                <PlayerCard
-                  id={p.playerId}
-                  name={p.name}
-                  position={p.position}
-                  age={p.age}
-                  currentAbility={p.currentAbility}
-                  index={i}
-                />
-                {assignedIds.has(p.playerId) && <span className="dt-squad-badge dt-squad-badge-starter">Titular</span>}
-                {!p.isReadyForMatch && (
-                  <span className="dt-squad-badge dt-squad-badge-unavailable">{unavailableLabel(p)}</span>
-                )}
-              </div>
-            ))}
+            {sortByMode(players ?? [], sortMode, (p) => p.position, (p) => p.currentAbility)
+              // A slot selected up top (click-to-open or mid-drag) filters this
+              // grid down to just its eligible candidates — same `eligibility()`
+              // rule the dropdown already used, now also driving what's visibly
+              // pickable here instead of only inside that dropdown.
+              .filter((p) => openSlot == null || eligibility(p.position, FORMATION[openSlot]).eligible)
+              .map((p, i) => (
+                <div
+                  className={`dt-squad-card${openSlot != null ? ' dt-squad-card-pickable' : ''}`}
+                  key={p.playerId}
+                  draggable
+                  onDragStart={() => setDraggedPlayerId(p.playerId)}
+                  onDragEnd={() => {
+                    setDraggedPlayerId(null)
+                    setDragOverSlot(null)
+                  }}
+                  onClickCapture={(e) => {
+                    // While a slot is selected, clicking a card here assigns it
+                    // to that slot instead of the PlayerCard's normal navigation
+                    // to /players/:id — drag-and-drop still works either way.
+                    if (openSlot == null || !p.isReadyForMatch) return
+                    e.preventDefault()
+                    assign(openSlot, p.playerId)
+                  }}
+                >
+                  <PlayerCard
+                    id={p.playerId}
+                    name={p.name}
+                    position={p.position}
+                    age={p.age}
+                    currentAbility={p.currentAbility}
+                    index={i}
+                  />
+                  {assignedIds.has(p.playerId) && <span className="dt-squad-badge dt-squad-badge-starter">Titular</span>}
+                  {!p.isReadyForMatch && (
+                    <span className="dt-squad-badge dt-squad-badge-unavailable">{unavailableLabel(p)}</span>
+                  )}
+                </div>
+              ))}
           </div>
         </SectionPanel>
       </div>

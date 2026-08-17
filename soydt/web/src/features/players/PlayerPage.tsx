@@ -5,7 +5,9 @@ import { callApi } from '../../shared/api'
 import AiReportButton from '../../shared/AiReportButton'
 import Flag from '../../shared/Flag'
 import Layout from '../../shared/Layout'
+import { playerPhotoOnError, playerPhotoSrc } from '../../shared/playerPhoto'
 import { PositionBadge } from '../../shared/positions'
+import { useOvrGrowth } from '../../shared/useOvrGrowth'
 import RatingBadge from '../../shared/ui/RatingBadge'
 import SectionPanel from '../../shared/ui/SectionPanel'
 import AttributeGrid, { type AttributeEntry } from './AttributeGrid'
@@ -199,6 +201,11 @@ function PlayerPage() {
     setInWatchlist(!inWatchlist)
   }
 
+  // Called unconditionally (hooks can't follow the early returns below) —
+  // harmless no-op key `soydt:ovr-snapshot:0` while `player` hasn't loaded
+  // yet, replaced by the real id once it has.
+  const ovrGrowth = useOvrGrowth(player?.id ?? 0, player?.currentAbility ?? 0)
+
   if (error) {
     return (
       <Layout title="Player">
@@ -244,14 +251,14 @@ function PlayerPage() {
           }
         >
           <div className="pp-hero">
-            <RatingBadge value={player.currentAbility} size="lg" />
+            <div className="pp-rating-wrap">
+              <RatingBadge value={player.currentAbility} size="lg" />
+              {ovrGrowth > 0 && <span className="pp-growth-badge">▲ +{ovrGrowth}</span>}
+            </div>
             <img
               className="pp-photo"
-              src={`/static/images/players/${player.id}.jpg`}
-              onError={(e) => {
-                e.currentTarget.onerror = null
-                e.currentTarget.src = '/static/images/player/placeholder-face.svg'
-              }}
+              src={playerPhotoSrc(player.id)}
+              onError={playerPhotoOnError}
               alt=""
               width={100}
               height={125}

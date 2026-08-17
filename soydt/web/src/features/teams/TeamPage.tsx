@@ -4,8 +4,11 @@ import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import AiReportButton from '../../shared/AiReportButton'
 import Layout from '../../shared/Layout'
+import type { SortMode } from '../../shared/sortPlayers'
+import { sortByMode } from '../../shared/sortPlayers'
 import PlayerCard from '../../shared/ui/PlayerCard'
 import SectionPanel from '../../shared/ui/SectionPanel'
+import SortToggle from '../../shared/ui/SortToggle'
 import './TeamPage.css'
 
 // Phase 1: team overview/squad page, mirrors the original app's
@@ -32,6 +35,7 @@ function TeamPage() {
   const { teamId } = useParams<{ teamId: string }>()
   const [team, setTeam] = useState<TeamDetail | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [sortMode, setSortMode] = useState<SortMode>('position')
 
   useEffect(() => {
     setTeam(null)
@@ -72,13 +76,14 @@ function TeamPage() {
           title="Squad"
           actions={
             <>
+              <SortToggle value={sortMode} onChange={setSortMode} />
               <span className="tp-count">{team.players.length}</span>
               <AiReportButton title="AI scouting report" startUrl={`/api/teams/${teamId}/ai-report`} />
             </>
           }
         >
           <div className="tp-grid">
-            {team.players.map((p, i) => (
+            {sortByMode(team.players, sortMode, (p) => p.position, (p) => p.currentAbility).map((p, i) => (
               <PlayerCard
                 key={p.id}
                 id={p.id}
