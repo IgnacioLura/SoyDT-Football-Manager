@@ -185,11 +185,13 @@ public sealed partial class GameSession
     /// Appends a "daily AI event" entry to the same ledger as the matchday
     /// catalog above — see `docs/superpowers/specs/2026-08-16-dt-random-events-design.md`'s
     /// addendum. Unlike the catalog events, this fires once per calendar day
-    /// (from `GameController.ProcessLive`'s per-day progress callback, fully
-    /// outside `_writeGate` — the LLM call that produces `storyText`/
-    /// `moraleDelta` never runs under the day-processing lock) rather than
-    /// per completed matchday, and never creates a `DtActiveBuff` — v1 has
-    /// no consumer for this delta beyond the log itself, same as the
+    /// (from `GameController.ProcessLive`'s per-day progress callback —
+    /// called synchronously, so the LLM call that produces `storyText`/
+    /// `moraleDelta` runs and completes under `_writeGate` before that
+    /// day's processing is considered done; see `TriggerDailyAiEvent`'s doc
+    /// comment for why blocking here is intentional) rather than per
+    /// completed matchday, and never creates a `DtActiveBuff` — v1 has no
+    /// consumer for this delta beyond the log itself, same as the
     /// catalog's `MoraleDelta` today. `day` is this run's cumulative
     /// days-processed count, not a real matchday number — the field is
     /// reused loosely since `DtEventLogEntryDto` has no day-count field of

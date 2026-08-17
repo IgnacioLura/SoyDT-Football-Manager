@@ -95,40 +95,49 @@ public sealed class GameController(
     }
 
     /// Fires the "daily unexpected event" side effect for one day of a
-    /// `process/live` run — fully outside `GameSession`'s `_writeGate`
-    /// (fire-and-forget on the thread pool), so a slow or unreachable LLM
-    /// never slows down day-processing. Silently a no-op if no DT club is
-    /// picked yet or AI isn't configured (`AiConfig.Get()` returns the
-    /// built-in local-Ollama default unless explicitly cleared, so in
-    /// practice this only skips if someone has explicitly turned AI off).
+    /// `process/live` run. Blocks the day-processing thread until the LLM
+    /// call resolves (or fails) — deliberately, even though this adds the
+    /// LLM's latency to every processed day: `process/live`'s progress
+    /// updates and the frontend's "done" detection both key off
+    /// `GameSession.Publish`, which only happens after this whole loop
+    /// returns, so a fire-and-forget call here raced the frontend's
+    /// before/after `/api/dt/events` comparison (`ProcessContext.tsx`) —
+    /// snapshot/date already looked "done" before the ledger write landed,
+    /// so `DtEventModal` silently never saw the new entry. Blocking here
+    /// (same "call .GetAwaiter().GetResult() from this dedicated
+    /// LongRunning thread, no sync context to deadlock against" pattern
+    /// already used for the `hub.Clients.All.SendAsync` call above) makes
+    /// the ledger write happen-before Publish, which is what the frontend
+    /// actually needs. Silently a no-op if no DT club is picked yet or AI
+    /// isn't configured (`AiConfig.Get()` returns the built-in local-Ollama
+    /// default unless explicitly cleared, so in practice this only skips
+    /// if someone has explicitly turned AI off).
     private void TriggerDailyAiEvent(ProcessProgress progress)
     {
         if (session.MyClubId is not { } clubId) return;
         var settings = aiConfig.Get();
         if (settings is null) return;
 
-        _ = Task.Run(async () =>
+        try
         {
-            try
-            {
-                var team = session.GetTeam(clubId);
-                if (team.Players.Count == 0) return;
-                var picked = team.Players[Random.Shared.Next(team.Players.Count)];
+            var team = session.GetTeam(clubId);
+            if (team.Players.Count == 0) return;
+            var picked = team.Players[Random.Shared.Next(team.Players.Count)];
 
-                var seasonSummary = BuildSeasonSummary(session.GetTeamStats(clubId), picked.Id);
-                var recentMatchesSummary = BuildRecentMatchesSummary(session.GetPlayerMatches(picked.Id));
+            var seasonSummary = BuildSeasonSummary(session.GetTeamStats(clubId), picked.Id);
+            var recentMatchesSummary = BuildRecentMatchesSummary(session.GetPlayerMatches(picked.Id));
 
-                var generator = new DailyAiEventGenerator(httpClientFactory.CreateClient("ai-agent"), settings);
-                var result = await generator.Generate(picked.Name, picked.Position, team.Name, seasonSummary, recentMatchesSummary);
-                if (result is null) return;
+            var generator = new DailyAiEventGenerator(httpClientFactory.CreateClient("ai-agent"), settings);
+            var result = generator.Generate(picked.Name, picked.Position, team.Name, seasonSummary, recentMatchesSummary)
+                .GetAwaiter().GetResult();
+            if (result is null) return;
 
-                session.RecordDailyAiEvent(picked.Id, picked.Name, result.Text, result.MoraleDelta, (int)progress.DaysProcessed);
-            }
-            catch (Exception ex)
-            {
-                logger.LogWarning(ex, "daily AI event generation failed");
-            }
-        });
+            session.RecordDailyAiEvent(picked.Id, picked.Name, result.Text, result.MoraleDelta, (int)progress.DaysProcessed);
+        }
+        catch (Exception ex)
+        {
+            logger.LogWarning(ex, "daily AI event generation failed");
+        }
     }
 
     /// Plain-text season line the prompt drops in verbatim — falls back to
