@@ -1,8 +1,14 @@
+import type { CSSProperties } from 'react'
 import { useEffect, useMemo, useState } from 'react'
 import { callApi } from '../../shared/api'
 import { outOfPositionPenalty, positionInfo } from '../../shared/positions'
+import type { SortMode } from '../../shared/sortPlayers'
+import { sortByMode } from '../../shared/sortPlayers'
+import { playerPhotoOnError, playerPhotoSrc } from '../../shared/playerPhoto'
 import PlayerCard from '../../shared/ui/PlayerCard'
+import { ratingTier } from '../../shared/ui/RatingBadge'
 import SectionPanel from '../../shared/ui/SectionPanel'
+import SortToggle from '../../shared/ui/SortToggle'
 import TeamCrest from '../onboarding/TeamCrest'
 import DtLayout from './DtLayout'
 import './DtSquadPage.css'
@@ -42,15 +48,6 @@ function unavailableLabel(p: Pick<LineupPlayer, 'isInjured' | 'isBanned'>): stri
   if (p.isInjured) return 'Lesionado'
   if (p.isBanned) return 'Suspendido'
   return 'No disponible'
-}
-
-// #rrggbb -> "r, g, b", so a badge's background can be the same hue as its
-// text at low opacity.
-function hexToRgbTriplet(hex: string): string {
-  const r = parseInt(hex.slice(1, 3), 16)
-  const g = parseInt(hex.slice(3, 5), 16)
-  const b = parseInt(hex.slice(5, 7), 16)
-  return `${r}, ${g}, ${b}`
 }
 
 // OVR — the engine's 1-200 overall rating for a player (same field the API
@@ -107,6 +104,70 @@ function eligibility(playerPosition: string, slot: { code: string; line: 'GK' | 
   return { eligible: false, penalty: 0 }
 }
 
+// Linear assignment problem (Hungarian / Kuhn-Munkres algorithm), O(n^2*m)
+// for an n x m cost matrix with n <= m — finds the row-to-distinct-column
+// assignment that minimizes total cost. `cost` must have `cost[i].length`
+// equal (a rectangular matrix), and every entry finite. Returns
+// `assignment[i]` = the column index given to row `i` (never -1 for a
+// well-formed n <= m input, but guarded anyway). Standard competitive-
+// programming implementation (potentials + shortest augmenting path);
+// used here because a greedy "highest score first" fill can strand a
+// slot with a worse player than the optimal arrangement would give it —
+// see `fillBestAvailable`'s doc comment for a concrete example.
+function hungarianAssignment(cost: number[][]): number[] {
+  const n = cost.length
+  const m = cost[0]?.length ?? 0
+  if (n === 0 || m === 0) return new Array(n).fill(-1)
+  const INF = Number.POSITIVE_INFINITY
+  const u = new Array(n + 1).fill(0)
+  const v = new Array(m + 1).fill(0)
+  const p = new Array(m + 1).fill(0) // p[j] = 1-indexed row currently assigned to column j
+  const way = new Array(m + 1).fill(0)
+  for (let i = 1; i <= n; i++) {
+    p[0] = i
+    let j0 = 0
+    const minv = new Array(m + 1).fill(INF)
+    const used = new Array(m + 1).fill(false)
+    do {
+      used[j0] = true
+      const i0 = p[j0]
+      let delta = INF
+      let j1 = -1
+      for (let j = 1; j <= m; j++) {
+        if (used[j]) continue
+        const cur = cost[i0 - 1][j - 1] - u[i0] - v[j]
+        if (cur < minv[j]) {
+          minv[j] = cur
+          way[j] = j0
+        }
+        if (minv[j] < delta) {
+          delta = minv[j]
+          j1 = j
+        }
+      }
+      for (let j = 0; j <= m; j++) {
+        if (used[j]) {
+          u[p[j]] += delta
+          v[j] -= delta
+        } else {
+          minv[j] -= delta
+        }
+      }
+      j0 = j1
+    } while (p[j0] !== 0)
+    do {
+      const j1 = way[j0]
+      p[j0] = p[j1]
+      j0 = j1
+    } while (j0 !== 0)
+  }
+  const assignment = new Array(n).fill(-1)
+  for (let j = 1; j <= m; j++) {
+    if (p[j] > 0) assignment[p[j] - 1] = j - 1
+  }
+  return assignment
+}
+
 function DtSquadPage() {
   const myTeamId = useMyTeamId()
   const [players, setPlayers] = useState<LineupPlayer[] | null>(null)
@@ -125,6 +186,13 @@ function DtSquadPage() {
   const [saved, setSaved] = useState(false)
   const [teamInfo, setTeamInfo] = useState<{ name: string; slug: string } | null>(null)
   const [activeBuffs, setActiveBuffs] = useState<DtActiveBuff[]>([])
+  const [sortMode, setSortMode] = useState<SortMode>('position')
+  // Drag-and-drop is additive on top of the click-a-slot-to-open-a-dropdown
+  // flow above — same `assign` swap logic underneath, just a second way to
+  // trigger it. `draggedPlayerId` tracks who's mid-drag so slots can light
+  // up (or not) as valid drop targets while hovering.
+  const [draggedPlayerId, setDraggedPlayerId] = useState<number | null>(null)
+  const [dragOverSlot, setDragOverSlot] = useState<number | null>(null)
 
   useEffect(() => {
     if (myTeamId == null) return
@@ -205,31 +273,93 @@ function DtSquadPage() {
   const buffDeltaFor = (playerId: number) =>
     activeBuffs.filter((b) => b.scope === 'Team' || b.playerId === playerId).reduce((sum, b) => sum + b.ovrDelta, 0)
 
+  // Candidates for a slot include bench players *and* other starters — a
+  // starter shown here isn't a duplicate, picking one swaps them into this
+  // slot and sends whoever (if anyone) was here to the picked player's old
+  // spot (see `assign`). Previously this list only showed the bench, so
+  // swapping two starters required clearing one first and losing track of
+  // who was where.
+  //
+  // Always ranked by effective OVR (buffs + out-of-position penalty
+  // applied), ready-for-match players first — this list is a
+  // recommendation ("who's the best fit for this slot"), not a browsing
+  // view, so it ignores the Position/OVR display toggle further down the
+  // page (that one only reorders the full-squad grid, where "best pick
+  // first" isn't the point).
   const candidatesFor = (slotIndex: number) => {
     if (!players) return []
     const slot = FORMATION[slotIndex]
-    return players
-      // Unavailable (injured/suspended/low condition) players still show up
-      // — greyed out and unclickable, with a red reason — instead of just
-      // disappearing, so the DT can see who they're missing, not just that
-      // a slot has fewer options than expected.
-      .filter((p) => !assignedIds.has(p.playerId))
-      .map((p) => ({ ...p, ...eligibility(p.position, slot) }))
-      .filter((c) => c.eligible)
-      .sort((a, b) => {
-        if (a.isReadyForMatch !== b.isReadyForMatch) return a.isReadyForMatch ? -1 : 1
-        const effA = a.currentAbility + buffDeltaFor(a.playerId) - a.penalty
-        const effB = b.currentAbility + buffDeltaFor(b.playerId) - b.penalty
-        return effB - effA
+    const currentOccupantId = slots[slotIndex]
+    const eligible = players
+      .filter((p) => p.playerId !== currentOccupantId)
+      .map((p) => {
+        const { eligible: isEligible, penalty } = eligibility(p.position, slot)
+        return {
+          ...p,
+          eligible: isEligible,
+          penalty,
+          fromSlotIndex: slots.findIndex((id) => id === p.playerId),
+          effOvr: p.currentAbility + buffDeltaFor(p.playerId) - penalty,
+        }
       })
+      .filter((c) => c.eligible)
+    const ready = eligible.filter((c) => c.isReadyForMatch).sort((a, b) => b.effOvr - a.effOvr)
+    const unready = eligible.filter((c) => !c.isReadyForMatch).sort((a, b) => b.effOvr - a.effOvr)
+    return [...ready, ...unready]
   }
 
+  // Places `playerId` in `slotIndex`. If they were already starting
+  // somewhere else, that slot gets whoever (if anyone) is displaced from
+  // `slotIndex` — a real two-way swap instead of silently duplicating the
+  // player or leaving their old slot empty.
   const assign = (slotIndex: number, playerId: number) => {
     setSlots((prev) => {
       const next = [...prev]
+      const displaced = next[slotIndex]
+      const fromSlotIndex = next.findIndex((id) => id === playerId)
       next[slotIndex] = playerId
+      if (fromSlotIndex !== -1 && fromSlotIndex !== slotIndex) {
+        next[fromSlotIndex] = displaced ?? null
+      }
       return next
     })
+    setOpenSlot(null)
+    setSaved(false)
+  }
+
+  // Best-XI auto-fill: an actual maximum-weight assignment (Hungarian
+  // algorithm — see `hungarianAssignment` below), not a greedy pick. A
+  // greedy "take the highest-OVR pair first" fill can lock a merely-good
+  // player into a slot because their pairing happened to sort first, even
+  // when a different arrangement of the same players nets a higher total
+  // (e.g. a world-class CB who's also a decent LB should slot in at CB and
+  // let a real LB take the other spot, not grab CB just because that pair
+  // had the single highest score). The Hungarian algorithm finds the
+  // arrangement that maximizes the *sum* across all 11 slots at once,
+  // which is what "best team" actually means.
+  const fillBestAvailable = () => {
+    if (!players) return
+    const ready = players.filter((p) => p.isReadyForMatch)
+    if (ready.length === 0) return
+    // Cost = -effOvr (Hungarian minimizes); INELIGIBLE is a large finite
+    // penalty rather than Infinity so the algorithm's arithmetic stays
+    // well-defined — it's only ever picked when a slot has no real
+    // candidate at all, and that's filtered back out below.
+    const INELIGIBLE = 1_000_000
+    const costMatrix = FORMATION.map((slot) =>
+      ready.map((p) => {
+        const { eligible, penalty } = eligibility(p.position, slot)
+        if (!eligible) return INELIGIBLE
+        return -(p.currentAbility + buffDeltaFor(p.playerId) - penalty)
+      }),
+    )
+    const slotToPlayerCol = hungarianAssignment(costMatrix)
+    const next: (number | null)[] = Array(11).fill(null)
+    slotToPlayerCol.forEach((col, slotIndex) => {
+      if (col === -1 || costMatrix[slotIndex][col] >= INELIGIBLE) return
+      next[slotIndex] = ready[col].playerId
+    })
+    setSlots(next)
     setOpenSlot(null)
     setSaved(false)
   }
@@ -303,7 +433,7 @@ function DtSquadPage() {
                     <div className="fm-slot-wrap" key={slotIndex}>
                       <button
                         type="button"
-                        className={`fm-slot${openSlot === slotIndex ? ' fm-slot-open' : ''}`}
+                        className={`fm-slot${openSlot === slotIndex ? ' fm-slot-open' : ''}${player ? ` fm-slot-tier-${ratingTier(player.currentAbility)}` : ' fm-slot-empty-tier'}${dragOverSlot === slotIndex ? ' fm-slot-drag-over' : ''}`}
                         onClick={(e) => {
                           if (openSlot === slotIndex) {
                             setOpenSlot(null)
@@ -313,52 +443,76 @@ function DtSquadPage() {
                           setOpenUp(window.innerHeight - rect.bottom < 300 && rect.top > 300)
                           setOpenSlot(slotIndex)
                         }}
+                        draggable={player != null}
+                        onDragStart={() => player && setDraggedPlayerId(player.playerId)}
+                        onDragEnd={() => {
+                          setDraggedPlayerId(null)
+                          setDragOverSlot(null)
+                        }}
+                        onDragOver={(e) => {
+                          if (draggedPlayerId == null) return
+                          const dragged = playerById.get(draggedPlayerId)
+                          if (!dragged || !eligibility(dragged.position, slot).eligible) return
+                          e.preventDefault()
+                          setDragOverSlot(slotIndex)
+                        }}
+                        onDragLeave={() => setDragOverSlot((s) => (s === slotIndex ? null : s))}
+                        onDrop={(e) => {
+                          e.preventDefault()
+                          setDragOverSlot(null)
+                          if (draggedPlayerId == null) return
+                          const dragged = playerById.get(draggedPlayerId)
+                          if (!dragged || !eligibility(dragged.position, slot).eligible) return
+                          assign(slotIndex, draggedPlayerId)
+                        }}
                         title={player ? player.name : `Vacío — ${slot.code}`}
                       >
-                        <span className="fm-slot-photo-ring" style={{ borderColor: slot.color }}>
-                          {player ? (
-                            <img
-                              className="fm-slot-photo"
-                              src={`/static/images/players/${player.playerId}.jpg`}
-                              onError={(e) => {
-                                e.currentTarget.onerror = null
-                                e.currentTarget.src = '/static/images/player/placeholder-face.svg'
-                              }}
-                              alt=""
-                            />
-                          ) : (
-                            <span className="fm-slot-empty">+</span>
-                          )}
-                          {player?.shirtNumber != null && <span className="fm-slot-number">{player.shirtNumber}</span>}
-                        </span>
-                        <span
-                          className="fm-pos-badge fm-slot-code"
-                          style={{ color: slot.color, background: `rgba(${hexToRgbTriplet(slot.color)}, 0.18)` }}
-                        >
+                        {/* Badges sit outside `.fm-slot-shape` so they can overflow past
+                            its clip-path corners instead of being sliced by it — same
+                            trick as the roster PlayerCard. */}
+                        {player && (
+                          <span className="fm-slot-ovr-badge">{Math.round(player.currentAbility)}</span>
+                        )}
+                        <span className="fm-slot-pos-badge" style={{ '--pos-color': slot.color } as CSSProperties}>
                           {slot.code}
                         </span>
-                        {player &&
-                          (() => {
-                            const penalty = eligibility(player.position, slot).penalty
-                            const buff = buffDeltaFor(player.playerId)
-                            return (
-                              <>
-                                <span className="fm-slot-name">{player.name}</span>
-                                <span className="fm-slot-ovr-row">
-                                  <span className={`fm-ability fm-ability-${abilityColor(player.currentAbility)}`}>
-                                    {player.currentAbility}
-                                  </span>
-                                  {buff !== 0 && (
-                                    <span className={buff > 0 ? 'fm-ovr-buff-positive' : 'fm-ovr-buff-negative'}>
-                                      {buff > 0 ? '+' : ''}
-                                      {buff}
+                        <span className="fm-slot-shape">
+                          <span className="fm-slot-photo-wrap">
+                            {player ? (
+                              <img
+                                className="fm-slot-photo"
+                                src={playerPhotoSrc(player.playerId)}
+                                onError={playerPhotoOnError}
+                                alt=""
+                              />
+                            ) : (
+                              <span className="fm-slot-empty">+</span>
+                            )}
+                            {player?.shirtNumber != null && <span className="fm-slot-number">{player.shirtNumber}</span>}
+                          </span>
+                          {player && (
+                            <span className="fm-slot-nameplate">
+                              <span className="fm-slot-name">{player.name}</span>
+                              {(() => {
+                                const penalty = eligibility(player.position, slot).penalty
+                                const buff = buffDeltaFor(player.playerId)
+                                return (
+                                  (buff !== 0 || penalty > 0) && (
+                                    <span className="fm-slot-ovr-row">
+                                      {buff !== 0 && (
+                                        <span className={buff > 0 ? 'fm-ovr-buff-positive' : 'fm-ovr-buff-negative'}>
+                                          {buff > 0 ? '+' : ''}
+                                          {buff}
+                                        </span>
+                                      )}
+                                      {penalty > 0 && <span className="fm-ovr-penalty">-{penalty}</span>}
                                     </span>
-                                  )}
-                                  {penalty > 0 && <span className="fm-ovr-penalty">-{penalty}</span>}
-                                </span>
-                              </>
-                            )
-                          })()}
+                                  )
+                                )
+                              })()}
+                            </span>
+                          )}
+                        </span>
                       </button>
 
                       {openSlot === slotIndex && (
@@ -380,14 +534,16 @@ function DtSquadPage() {
                               >
                                 <img
                                   className="fm-slot-dropdown-photo"
-                                  src={`/static/images/players/${c.playerId}.jpg`}
-                                  onError={(e) => {
-                                    e.currentTarget.onerror = null
-                                    e.currentTarget.src = '/static/images/player/placeholder-face.svg'
-                                  }}
+                                  src={playerPhotoSrc(c.playerId)}
+                                  onError={playerPhotoOnError}
                                   alt=""
                                 />
-                                <span className="fm-slot-dropdown-name">{c.name}</span>
+                                <span className="fm-slot-dropdown-name">
+                                  {c.name}
+                                  {c.fromSlotIndex !== -1 && (
+                                    <span className="fm-slot-dropdown-swap-tag"> (titular en {FORMATION[c.fromSlotIndex].code})</span>
+                                  )}
+                                </span>
                                 {c.isReadyForMatch ? (
                                   <>
                                     <span className={`fm-ability fm-ability-${abilityColor(c.currentAbility)}`}>{c.currentAbility}</span>
@@ -418,6 +574,9 @@ function DtSquadPage() {
           </div>
 
           <div style={{ marginTop: '1rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <button type="button" className="fm-worker-dialog-btn" onClick={fillBestAvailable}>
+              Poner lo mejor disponible
+            </button>
             <button
               type="button"
               className="fm-worker-dialog-btn fm-worker-dialog-btn-add"
@@ -430,10 +589,27 @@ function DtSquadPage() {
           </div>
         </SectionPanel>
 
-        <SectionPanel title="Plantel completo" actions={<span className="fm-panel-count">{players?.length ?? 0}</span>}>
+        <SectionPanel
+          title="Plantel completo"
+          actions={
+            <>
+              <SortToggle value={sortMode} onChange={setSortMode} />
+              <span className="fm-panel-count">{players?.length ?? 0}</span>
+            </>
+          }
+        >
           <div className="dt-squad-grid">
-            {players?.map((p, i) => (
-              <div className="dt-squad-card" key={p.playerId}>
+            {sortByMode(players ?? [], sortMode, (p) => p.position, (p) => p.currentAbility).map((p, i) => (
+              <div
+                className="dt-squad-card"
+                key={p.playerId}
+                draggable
+                onDragStart={() => setDraggedPlayerId(p.playerId)}
+                onDragEnd={() => {
+                  setDraggedPlayerId(null)
+                  setDragOverSlot(null)
+                }}
+              >
                 <PlayerCard
                   id={p.playerId}
                   name={p.name}

@@ -12,6 +12,16 @@
 
 .dt-squad-card {
   position: relative;
+  cursor: grab;
+}
+
+/* Highlights a formation slot while a dragged player hovers over it as a
+   valid drop target — `eligibility()` gates whether this class is ever
+   applied (see DtSquadPage.tsx's onDragOver), so it only lights up slots
+   the drop would actually succeed on. */
+.fm-slot-drag-over {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
 }
 
 /* Overlaid on top of PlayerCard so the DT sees real match-day status
@@ -30,7 +40,16 @@
   pointer-events: none;
 }
 
+/* Sits below the photo and above the name/age nameplate — the one strip of
+   the shield-shaped PlayerCard that's just background, not the OVR/position
+   badges (which overflow the top corners) or the name/age text. */
 .dt-squad-badge-starter {
+  top: auto;
+  bottom: 54px;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  width: max-content;
   background: rgba(var(--accent-primary-rgb), 0.85);
   color: #04140f;
 }
