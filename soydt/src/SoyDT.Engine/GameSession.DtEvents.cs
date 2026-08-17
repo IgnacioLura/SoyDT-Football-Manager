@@ -13,7 +13,7 @@ namespace SoyDT.Engine;
 /// touch the immutable published native handle.
 public sealed partial class GameSession
 {
-    private const double DtEventTriggerChance = 0.35;
+    private const double DtEventTriggerChance = 1.0;
     private const int DtEventMinMatchday = 2;
     private const int DtBuffDurationMatches = 2;
 
