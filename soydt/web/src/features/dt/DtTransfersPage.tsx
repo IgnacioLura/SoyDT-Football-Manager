@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { callApi } from '../../shared/api'
+import { PositionBadge } from '../../shared/positions'
 import DtLayout from './DtLayout'
 import { useMyTeamId } from './useMyTeamId'
 
@@ -123,7 +124,9 @@ function DtTransfersPage() {
                 {myTeam.players.map((p) => (
                   <tr key={p.id}>
                     <td className="st-club">{p.name}</td>
-                    <td>{p.position}</td>
+                    <td>
+                      <PositionBadge position={p.position} />
+                    </td>
                     <td>{p.age}</td>
                     <td className="st-pts">{p.currentAbility}</td>
                     <td>
@@ -171,7 +174,9 @@ function DtTransfersPage() {
                 {browseTeam.players.map((p) => (
                   <tr key={p.id}>
                     <td className="st-club">{p.name}</td>
-                    <td>{p.position}</td>
+                    <td>
+                      <PositionBadge position={p.position} />
+                    </td>
                     <td>{p.age}</td>
                     <td className="st-pts">{p.currentAbility}</td>
                     <td>

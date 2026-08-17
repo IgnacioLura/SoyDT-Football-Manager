@@ -90,6 +90,8 @@ public sealed record TeamDetail(
     uint? LeagueId,
     string? LeagueName,
     ushort Reputation,
+    string BackgroundColor,
+    string ForegroundColor,
     IReadOnlyList<PlayerCard> Players);
 
 /// Mirrors one entry of `engine_get_national_squad`'s `data` array.
@@ -137,8 +139,10 @@ public sealed record CompletedTransfer(
     string PlayerName,
     uint FromTeamId,
     string FromTeamName,
+    string FromTeamSlug,
     uint ToTeamId,
     string ToTeamName,
+    string ToTeamSlug,
     double Fee,
     bool IsLoan,
     bool IsFree,
@@ -242,9 +246,16 @@ public sealed record PlayerDetail(
     uint? TeamId,
     string? TeamName);
 
-/// Mirrors one entry of `engine_get_team_lineup`'s `data` array — the DT's
-/// squad with each player's current "pinned" (force-selection) state.
+/// Mirrors one entry of `engine_get_team_lineup`'s `data.players` array —
+/// the DT's squad with each player's current "pinned" (force-selection) state.
 public sealed record LineupPlayer(uint PlayerId, string Name, string Position, byte CurrentAbility, byte? ShirtNumber, bool Pinned, bool IsReadyForMatch, bool IsInjured, bool IsBanned);
+
+/// Mirrors `engine_get_team_lineup`'s `data` payload. `SlotOrder` is the
+/// exact formation-slot layout from the last save, in slot order (null
+/// where that slot's player left the roster or became unavailable since) —
+/// lets the frontend restore an out-of-position pick to the exact slot it
+/// was saved in instead of re-deriving placement from position codes.
+public sealed record TeamLineup(IReadOnlyList<LineupPlayer> Players, IReadOnlyList<uint?> SlotOrder);
 
 /// Body for `PUT /api/teams/{teamId}/lineup` — exactly 11 player ids.
 public sealed record SetLineupRequest(IReadOnlyList<uint> PlayerIds);

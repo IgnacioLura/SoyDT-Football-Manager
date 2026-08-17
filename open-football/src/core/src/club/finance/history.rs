@@ -3,6 +3,7 @@ use chrono::NaiveDate;
 use std::collections::LinkedList;
 
 #[derive(Debug, Clone)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct ClubFinancialBalanceHistory {
     history: LinkedList<(NaiveDate, ClubFinancialBalance)>,
 }

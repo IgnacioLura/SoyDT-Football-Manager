@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import AiReportButton from '../../shared/AiReportButton'
 import Layout from '../../shared/Layout'
+import { PositionBadge } from '../../shared/positions'
 
 // Phase 1: team overview/squad page, mirrors the original app's
 // `/{lang}/teams/{slug}` route (overview tab only so far — tactics/staff/
@@ -82,7 +83,9 @@ function TeamPage() {
                   <td className="st-club">
                     <Link to={`/players/${p.id}`}>{p.name}</Link>
                   </td>
-                  <td>{p.position}</td>
+                  <td>
+                    <PositionBadge position={p.position} />
+                  </td>
                   <td>{p.age}</td>
                   <td className="st-pts">{p.currentAbility}</td>
                 </tr>

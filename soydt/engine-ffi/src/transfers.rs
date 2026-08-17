@@ -15,8 +15,10 @@ struct CompletedTransferJson {
     player_name: String,
     from_team_id: u32,
     from_team_name: String,
+    from_team_slug: String,
     to_team_id: u32,
     to_team_name: String,
+    to_team_slug: String,
     fee: f64,
     is_loan: bool,
     is_free: bool,
@@ -67,22 +69,37 @@ pub extern "C" fn engine_get_league_transfers(handle: *mut GameHandle, league_id
                 .map(|t| t.id)
         };
 
+        let find_team_slug = |team_id: u32| -> String {
+            country
+                .clubs
+                .iter()
+                .flat_map(|c| c.teams.teams.iter())
+                .find(|t| t.id == team_id)
+                .map(|t| t.slug.clone())
+                .unwrap_or_default()
+        };
+
         let transfers = country
             .transfer_market
             .transfer_history
             .iter()
             .filter(|t| league_team_ids.contains(&t.from_team_id) || club_team_in_league(t.to_club_id).is_some())
-            .map(|t| CompletedTransferJson {
-                player_id: t.player_id,
-                player_name: t.player_name.clone(),
-                from_team_id: t.from_team_id,
-                from_team_name: t.from_team_name.clone(),
-                to_team_id: club_team_in_league(t.to_club_id).unwrap_or(t.to_club_id),
-                to_team_name: t.to_team_name.clone(),
-                fee: t.fee.amount,
-                is_loan: matches!(t.transfer_type, core::transfers::TransferType::Loan(_)),
-                is_free: matches!(t.transfer_type, core::transfers::TransferType::Free),
-                date: t.transfer_date.format("%d.%m.%Y").to_string(),
+            .map(|t| {
+                let to_team_id = club_team_in_league(t.to_club_id).unwrap_or(t.to_club_id);
+                CompletedTransferJson {
+                    player_id: t.player_id,
+                    player_name: t.player_name.clone(),
+                    from_team_id: t.from_team_id,
+                    from_team_name: t.from_team_name.clone(),
+                    from_team_slug: find_team_slug(t.from_team_id),
+                    to_team_id,
+                    to_team_name: t.to_team_name.clone(),
+                    to_team_slug: find_team_slug(to_team_id),
+                    fee: t.fee.amount,
+                    is_loan: matches!(t.transfer_type, core::transfers::TransferType::Loan(_)),
+                    is_free: matches!(t.transfer_type, core::transfers::TransferType::Free),
+                    date: t.transfer_date.format("%d.%m.%Y").to_string(),
+                }
             })
             .collect();
 

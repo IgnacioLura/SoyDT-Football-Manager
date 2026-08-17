@@ -34,6 +34,7 @@ use crate::{Player, PlayerCollection, PlayerFieldPositionGroup};
 /// Ordered loosely from most to least central so a consumer can compare
 /// standing without a lookup table.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub enum PlannedRole {
     /// The team is built around him.
     Cornerstone,
@@ -96,6 +97,7 @@ impl PlannedRole {
 
 /// One player's place in the plan.
 #[derive(Debug, Clone, Copy)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct PlayerPlanEntry {
     pub role: PlannedRole,
     /// When the coach last committed to this role — so a consumer can
@@ -109,6 +111,7 @@ pub struct PlayerPlanEntry {
 
 /// Every player the coach currently holds an opinion about.
 #[derive(Debug, Clone, Default)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct CoachSquadPlan {
     entries: HashMap<u32, PlayerPlanEntry>,
     last_revised: Option<NaiveDate>,

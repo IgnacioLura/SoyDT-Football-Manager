@@ -1,4 +1,5 @@
 #[derive(Debug, Clone)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct Location {
     pub city_id: u32,
 }

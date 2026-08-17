@@ -25,7 +25,7 @@ use rayon::prelude::*;
 use std::collections::HashMap;
 use std::collections::HashSet;
 
-#[derive(Clone)]
+#[derive(Clone, serde::Serialize, serde::Deserialize)]
 pub struct SimulatorData {
     pub continents: Vec<Continent>,
 
@@ -33,6 +33,11 @@ pub struct SimulatorData {
 
     pub transfer_pool: TransferPool<Player>,
 
+    /// Derived/cache index, rebuildable via `SimulatorDataIndexes::new()` +
+    /// `.refresh(&data)` (see `SimulatorData::new`). Not serialized — the
+    /// save/load path (`engine_save_game`/`engine_load_game`) rebuilds it
+    /// explicitly after deserializing.
+    #[serde(skip)]
     pub indexes: Option<SimulatorDataIndexes>,
 
     /// Set to true whenever a transfer moves a player between clubs. Checked
@@ -96,7 +101,7 @@ pub struct SimulatorData {
 /// player leaves or enters the pool by, so a long run's diagnostics log
 /// can tell apart "saved by a pre-contract" from "signed off the open
 /// pool" from "still leaking into long-term free agency".
-#[derive(Debug, Default, Clone, Copy)]
+#[derive(Debug, Default, Clone, Copy, serde::Serialize, serde::Deserialize)]
 pub struct FreeAgentFlowCounters {
     /// Signed out of the cross-country global pool (`data.free_agents`).
     pub signed_from_global_pool: u32,

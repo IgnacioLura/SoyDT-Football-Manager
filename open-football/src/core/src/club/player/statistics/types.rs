@@ -11,6 +11,7 @@ pub struct TeamInfo {
 }
 
 #[derive(Debug, Clone, Default)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct PlayerStatistics {
     pub played: u16,
     pub played_subs: u16,
@@ -73,6 +74,7 @@ pub struct PlayerStatistics {
 /// hardcoded row. The rolled-up [`Player::cup_statistics`] aggregate is
 /// recomputed from these, so existing aggregate readers are unaffected.
 #[derive(Debug, Clone, Default)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct CompetitionStatistics {
     /// Stable competition identifier — the match's `league_slug`
     /// (e.g. `"copa-libertadores"`, `"champions-league"`). The display
@@ -93,6 +95,7 @@ pub struct CompetitionStatistics {
 /// the season-end snapshot freezes it into the canonical `season_ledger`
 /// like every other completed-season record.
 #[derive(Debug, Clone, Default)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct SecondaryTeamStatistics {
     /// Season this slice belongs to (`Season::from_date(match_date)`),
     /// so a missed season-end can still freeze each slice under the right

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import { PositionBadge } from '../../shared/positions'
 import { countryTabs } from './tabs'
 
 // Ported from open-football/src/web/src/countries/squad/index.html — the
@@ -115,7 +116,9 @@ function NationalSquadPage() {
               <tbody>
                 {squad.map((p) => (
                   <tr key={p.playerId}>
-                    <td className="sq-pos">{p.position}</td>
+                    <td className="sq-pos">
+                      <PositionBadge position={p.position} />
+                    </td>
                     <td className="sq-name">
                       <Link to={`/players/${p.playerId}`}>
                         {p.firstName} {p.lastName}

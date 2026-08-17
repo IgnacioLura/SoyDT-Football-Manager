@@ -28,6 +28,12 @@ struct TeamDetailJson {
     league_id: Option<u32>,
     league_name: Option<String>,
     reputation: u16,
+    // Club's own kit colors (see `core::Club::colors`) — lets a DT-facing
+    // page (dashboard header, etc.) theme itself around the chosen club
+    // instead of a generic fixed color, same idea `TeamCrest` already uses
+    // for the crest itself.
+    background_color: String,
+    foreground_color: String,
     players: Vec<PlayerCardJson>,
 }
 
@@ -80,6 +86,8 @@ pub extern "C" fn engine_get_team(handle: *mut GameHandle, team_id: u32) -> *mut
                         league_id: team.league_id,
                         league_name,
                         reputation: team.league_reputation,
+                        background_color: club.colors.background.clone(),
+                        foreground_color: club.colors.foreground.clone(),
                         players,
                     });
                     break;

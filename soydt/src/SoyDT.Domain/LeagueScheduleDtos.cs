@@ -8,8 +8,10 @@ public sealed record LeagueScheduleItem(
     string Time,
     uint HomeTeamId,
     string HomeTeamName,
+    string HomeTeamSlug,
     uint AwayTeamId,
     string AwayTeamName,
+    string AwayTeamSlug,
     string MatchId,
     byte? HomeGoals,
     byte? AwayGoals);

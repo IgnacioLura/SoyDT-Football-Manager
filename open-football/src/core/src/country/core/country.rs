@@ -85,6 +85,7 @@ fn standing_rows(rows: &[LeagueTableRow]) -> Vec<StandingRow> {
 }
 
 #[derive(Clone)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct Country {
     pub id: u32,
     pub code: String,

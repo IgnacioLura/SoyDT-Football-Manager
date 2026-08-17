@@ -44,6 +44,7 @@ mod team_transfers;
 mod transfers;
 mod watchlist;
 mod search;
+mod save;
 
 pub use contract::CONTRACT_VERSION;
 
@@ -99,3 +100,4 @@ pub use watchlist::{engine_get_watchlist, engine_watchlist_add, engine_watchlist
 pub use search::engine_search;
 pub use cups::{engine_get_cup_bracket, engine_get_cups};
 pub use continental::engine_get_continental_competition;
+pub use save::{engine_load_game, engine_save_game};

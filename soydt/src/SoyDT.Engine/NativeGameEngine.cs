@@ -16,7 +16,7 @@ public sealed partial class NativeGameEngine
     /// engine-ffi/CONTRACT.md. Call <see cref="AssertContractVersion"/> once
     /// at startup so a drift between the compiled `.so`/`.dll` and this
     /// wrapper's assumed JSON shapes fails loudly instead of misparsing.
-    public const uint ExpectedContractVersion = 1;
+    public const uint ExpectedContractVersion = 2;
 
     public uint AssertContractVersion()
     {

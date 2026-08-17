@@ -32,6 +32,7 @@ use crate::transfers::pipeline::ReportRiskFlag;
 /// Distinct from the candidate-on-shortlist `ShortlistCandidateStatus`
 /// because monitoring tracks scout interest, not pursuit progress.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub enum ScoutMonitoringStatus {
     /// Scout is actively observing — confidence still building.
     Active,
@@ -55,6 +56,7 @@ pub enum ScoutMonitoringStatus {
 
 /// What surfaced this player to the scouting department.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub enum ScoutMonitoringSource {
     /// Player observed in service of an explicit `TransferRequest`.
     TransferRequest,
@@ -89,6 +91,7 @@ pub enum ScoutMonitoringSource {
 /// the shared dossier. A scout leaving the club doesn't erase what
 /// they saw — successor scouts can pick the file back up.
 #[derive(Debug, Clone)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct ScoutPlayerMonitoring {
     pub id: u32,
     pub scout_staff_id: u32,
@@ -222,6 +225,7 @@ impl ScoutPlayerMonitoring {
 // ============================================================
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub enum ScoutVoteChoice {
     StrongApprove,
     Approve,
@@ -231,6 +235,7 @@ pub enum ScoutVoteChoice {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub enum ScoutVoteReason {
     /// Player is ready to slot in immediately.
     ReadyNow,
@@ -257,6 +262,7 @@ pub enum ScoutVoteReason {
 }
 
 #[derive(Debug, Clone)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct ScoutVote {
     pub scout_staff_id: u32,
     pub player_id: u32,
@@ -371,6 +377,7 @@ impl RecruitmentDecisionType {
 // ============================================================
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub enum RecruitmentDecisionType {
     PromoteToShortlist,
     KeepMonitoring,
@@ -402,10 +409,73 @@ pub struct RecruitmentDecision {
     pub budget_fit: f32,
     /// i18n key describing the reason. Resolved by the UI / event log
     /// against the active locale; never a raw display string.
+    ///
+    /// Serialized manually (see the `Serialize`/`Deserialize` impls below)
+    /// rather than via `#[derive]`: a literal `&'static str` field makes
+    /// serde-derive's generated `Deserialize<'de>` impl require `'de:
+    /// 'static` (it treats the field's baked-in lifetime like a borrow
+    /// lifetime needing derivation), which no real deserializer satisfies.
+    /// The manual impls round-trip through a plain owned `String` on the
+    /// wire and leak it back into a `&'static str` on load — a small,
+    /// bounded leak (one per historical decision loaded once at process
+    /// startup via `engine_load_game`), not a per-tick cost.
     pub reason_key: &'static str,
 }
 
+impl serde::Serialize for RecruitmentDecision {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        use serde::ser::SerializeStruct;
+        let mut s = serializer.serialize_struct("RecruitmentDecision", 9)?;
+        s.serialize_field("player_id", &self.player_id)?;
+        s.serialize_field("transfer_request_id", &self.transfer_request_id)?;
+        s.serialize_field("decision", &self.decision)?;
+        s.serialize_field("consensus_score", &self.consensus_score)?;
+        s.serialize_field("chief_scout_support", &self.chief_scout_support)?;
+        s.serialize_field("data_support", &self.data_support)?;
+        s.serialize_field("board_risk_score", &self.board_risk_score)?;
+        s.serialize_field("budget_fit", &self.budget_fit)?;
+        s.serialize_field("reason_key", self.reason_key)?;
+        s.end()
+    }
+}
+
+impl<'de> serde::Deserialize<'de> for RecruitmentDecision {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        #[derive(serde::Deserialize)]
+        struct Wire {
+            player_id: u32,
+            transfer_request_id: Option<u32>,
+            decision: RecruitmentDecisionType,
+            consensus_score: f32,
+            chief_scout_support: bool,
+            data_support: bool,
+            board_risk_score: f32,
+            budget_fit: f32,
+            reason_key: String,
+        }
+        let w = Wire::deserialize(deserializer)?;
+        Ok(RecruitmentDecision {
+            player_id: w.player_id,
+            transfer_request_id: w.transfer_request_id,
+            decision: w.decision,
+            consensus_score: w.consensus_score,
+            chief_scout_support: w.chief_scout_support,
+            data_support: w.data_support,
+            board_risk_score: w.board_risk_score,
+            budget_fit: w.budget_fit,
+            reason_key: Box::leak(w.reason_key.into_boxed_str()),
+        })
+    }
+}
+
 #[derive(Debug, Clone)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct RecruitmentMeeting {
     pub id: u32,
     pub date: NaiveDate,

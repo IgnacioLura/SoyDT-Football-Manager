@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import TeamCrest from '../onboarding/TeamCrest'
 import { leagueTabs } from './tabs'
 
 // Ported 1:1 from open-football/src/web/src/leagues/get/index.html — the
@@ -95,7 +96,10 @@ function LeagueTablePage() {
                 <tr key={row.teamId} className={zoneClass(row.position, table.rows.length)}>
                   <td className="st-pos">{row.position}</td>
                   <td className="st-club">
-                    <Link to={`/teams/${row.teamId}`}>{row.teamName}</Link>
+                    <Link to={`/teams/${row.teamId}`} className="st-club-link">
+                      <TeamCrest slug={row.teamSlug} name={row.teamName} size={20} />
+                      <span>{row.teamName}</span>
+                    </Link>
                   </td>
                   <td>{row.played}</td>
                   <td>{row.won}</td>

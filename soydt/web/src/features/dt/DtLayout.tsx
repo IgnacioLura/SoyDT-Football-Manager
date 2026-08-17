@@ -1,14 +1,18 @@
-import type { ReactNode } from 'react'
+import type { CSSProperties, ReactNode } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { callApi } from '../../shared/api'
 import Flag from '../../shared/Flag'
+import ProcessControl from '../../shared/ProcessControl'
+import TeamCrest from '../onboarding/TeamCrest'
+import { useMyTeamId } from './useMyTeamId'
 
 // Stripped-down sibling of `shared/Layout.tsx` for the DT/"Mi Equipo"
 // experience: same header/sidebar chrome so style.css's rules still apply,
 // but the nav is hard-coded to only the DT's own pages (no free country/
-// league/team browsing) and there is deliberately NO `ProcessControl` in
-// the header — that's the actual mechanism enforcing "the DT never sees or
-// triggers day-advancement," not a permission check (this app has no auth
-// model to enforce one).
+// league/team browsing). `ProcessControl` (day-advancement) IS shown here —
+// the DT drives their own career now, same button as the admin/free-browse
+// Layout uses, backed by the same app-wide ProcessContext.
 
 type NavItem = { title: string; icon: string; url: string }
 
@@ -27,6 +31,39 @@ type DtLayoutProps = {
 
 function DtLayout({ title, subTitle, children }: DtLayoutProps) {
   const location = useLocation()
+  const myTeamId = useMyTeamId()
+  // Themes the header around the DT's own club — same `--header-bg`/
+  // `--header-border`/`--tab-fg`/`--tab-fg-active` custom properties (and
+  // `.fm-header-colored` class) the original Askama template already
+  // defined per-club colors for; this is the first place in the port to
+  // actually wire them up. Loaded once per team id (colors don't change
+  // mid-session) rather than duplicated in every DT page's own fetch.
+  const [colors, setColors] = useState<{ background: string; foreground: string } | null>(null)
+  const [crest, setCrest] = useState<{ name: string; slug: string } | null>(null)
+
+  useEffect(() => {
+    setColors(null)
+    setCrest(null)
+    if (myTeamId == null) return
+    callApi<{ name: string; slug: string; backgroundColor: string; foregroundColor: string }>(`/api/teams/${myTeamId}`)
+      .then((t) => {
+        setColors({ background: t.backgroundColor, foreground: t.foregroundColor })
+        setCrest({ name: t.name, slug: t.slug })
+      })
+      .catch(() => {
+        setColors(null)
+        setCrest(null)
+      })
+  }, [myTeamId])
+
+  const headerStyle: CSSProperties | undefined = colors
+    ? {
+        '--header-bg': colors.background,
+        '--header-border': `${colors.foreground}66`,
+        '--tab-fg': `${colors.foreground}99`,
+        '--tab-fg-active': colors.foreground,
+      } as CSSProperties
+    : undefined
 
   return (
     <div id="page-content">
@@ -59,7 +96,7 @@ function DtLayout({ title, subTitle, children }: DtLayoutProps) {
             <div className="container-fluid">
               <div className="row">
                 <div className="col m-0 p-0">
-                  <div className="fm-header">
+                  <div className={`fm-header${colors ? ' fm-header-colored' : ''}`} style={headerStyle}>
                     <button
                       className="fm-menu-toggle d-xl-none"
                       onClick={() => document.body.classList.toggle('fm-sidebar-open')}
@@ -67,13 +104,22 @@ function DtLayout({ title, subTitle, children }: DtLayoutProps) {
                     >
                       <span />
                     </button>
+                    {crest && (
+                      <div className="fm-dt-crest" style={{ marginRight: '0.75rem' }}>
+                        <TeamCrest slug={crest.slug} name={crest.name} size={48} />
+                      </div>
+                    )}
                     <div className="fm-header-title">
                       <h1>{title}</h1>
                       {subTitle && <span className="fm-header-sub">{subTitle}</span>}
                     </div>
-                    {/* Deliberately no header-actions here: no search/watchlist
-                        (both lead into Admin's free-browsing area) and no
-                        ProcessControl (day-advancement is Admin-only). */}
+                    {/* No search/watchlist here — both lead into the
+                        free-browse Admin area, out of scope for the DT's
+                        own club. ProcessControl IS shown: the DT drives
+                        their own career now. */}
+                    <div className="fm-header-actions">
+                      <ProcessControl />
+                    </div>
                   </div>
                   {children}
                 </div>

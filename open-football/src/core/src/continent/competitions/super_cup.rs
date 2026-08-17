@@ -1,4 +1,5 @@
 #[derive(Debug, Clone)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct SuperCup {
     pub prize_pool: f64,
 }

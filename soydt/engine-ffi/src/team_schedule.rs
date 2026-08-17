@@ -19,6 +19,7 @@ struct TeamScheduleItemJson {
     time: String,
     opponent_team_id: u32,
     opponent_name: String,
+    opponent_slug: String,
     is_home: bool,
     competition_name: String,
     match_id: String,
@@ -69,6 +70,17 @@ pub extern "C" fn engine_get_team_schedule(handle: *mut GameHandle, team_id: u32
             .ok_or_else(|| format!("no league with id {league_id}"))?;
 
         let mut raw_items = league.schedule.get_matches_for_team(team_id);
+        // Drop dead fixtures: matchdays scheduled before this career's start
+        // (`DatabaseGenerator::generate` anchors the world's clock at Aug 1,
+        // regardless of a split-season country's own Feb-start schedule —
+        // see `core::database::generators::generator::mod::generate`) never
+        // got simulated and never will, since simulation only ever moves
+        // forward from creation. Left in, they'd show as permanently
+        // unplayed "-" rows for a season half that's already over rather
+        // than upcoming — a result-less item dated before "now" is exactly
+        // that, vs. a genuine upcoming fixture (result-less, dated on/after
+        // "now") or a played one (has a result regardless of date).
+        raw_items.retain(|item| item.result.is_some() || item.date >= game.data().date);
         raw_items.sort_by_key(|item| item.date);
 
         let items: Vec<TeamScheduleItemJson> = raw_items
@@ -77,13 +89,13 @@ pub extern "C" fn engine_get_team_schedule(handle: *mut GameHandle, team_id: u32
                 let is_home = item.home_team_id == team_id;
                 let opponent_team_id = if is_home { item.away_team_id } else { item.home_team_id };
 
-                let opponent_name = country
+                let opponent_team = country
                     .clubs
                     .iter()
                     .flat_map(|c| c.teams.teams.iter())
-                    .find(|t| t.id == opponent_team_id)
-                    .map(|t| t.name.clone())
-                    .unwrap_or_default();
+                    .find(|t| t.id == opponent_team_id);
+                let opponent_name = opponent_team.map(|t| t.name.clone()).unwrap_or_default();
+                let opponent_slug = opponent_team.map(|t| t.slug.clone()).unwrap_or_default();
 
                 let (home_goals, away_goals) = match &item.result {
                     Some(score) => (Some(score.home_team.get()), Some(score.away_team.get())),
@@ -95,6 +107,7 @@ pub extern "C" fn engine_get_team_schedule(handle: *mut GameHandle, team_id: u32
                     time: item.date.format("%H:%M").to_string(),
                     opponent_team_id,
                     opponent_name,
+                    opponent_slug,
                     is_home,
                     competition_name: league.name.clone(),
                     match_id: item.id.clone(),

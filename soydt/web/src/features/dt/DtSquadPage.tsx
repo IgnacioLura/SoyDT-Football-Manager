@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { callApi } from '../../shared/api'
+import { outOfPositionPenalty, positionInfo } from '../../shared/positions'
+import TeamCrest from '../onboarding/TeamCrest'
 import DtLayout from './DtLayout'
 import { useMyTeamId } from './useMyTeamId'
 
@@ -27,50 +29,6 @@ function unavailableLabel(p: Pick<LineupPlayer, 'isInjured' | 'isBanned'>): stri
   if (p.isInjured) return 'Lesionado'
   if (p.isBanned) return 'Suspendido'
   return 'No disponible'
-}
-
-// Raw position comes from the Rust enum's Debug format (e.g.
-// "DefensiveMidfielder", see engine-ffi's `format!("{pos:?}")`) — map it to
-// the equivalent EA Sports FC position code (GK/CB/LB/RB/LWB/RWB/CDM/CM/
-// LM/RM/CAM/LW/RW/LF/CF/RF/ST — the same 17-code vocabulary FIFA/EA FC
-// uses) so the page reads using nomenclature players already know, instead
-// of the engine's own internal position names. Several engine positions
-// collapse onto the same EA code (e.g. all three central-defender slots
-// are just "CB" in FIFA too — it doesn't distinguish them either), so line
-// + exact shade still comes from the *engine's* more granular position:
-// darker for the more defensive-minded slot, lighter for the wider / more
-// advanced one — e.g. within DEF, Sweeper is the darkest blue and the
-// Wingbacks (most attacking of the back line) are the lightest.
-const POSITION_CODES: Record<string, { code: string; line: 'GK' | 'DEF' | 'MID' | 'FWD'; color: string }> = {
-  Goalkeeper: { code: 'GK', line: 'GK', color: '#f59e0b' },
-
-  Sweeper: { code: 'CB', line: 'DEF', color: '#1e3a8a' },
-  DefenderCenterLeft: { code: 'CB', line: 'DEF', color: '#1d4ed8' },
-  DefenderCenter: { code: 'CB', line: 'DEF', color: '#1d4ed8' },
-  DefenderCenterRight: { code: 'CB', line: 'DEF', color: '#1d4ed8' },
-  DefenderLeft: { code: 'LB', line: 'DEF', color: '#3b82f6' },
-  DefenderRight: { code: 'RB', line: 'DEF', color: '#3b82f6' },
-  WingbackLeft: { code: 'LWB', line: 'DEF', color: '#93c5fd' },
-  WingbackRight: { code: 'RWB', line: 'DEF', color: '#93c5fd' },
-
-  DefensiveMidfielder: { code: 'CDM', line: 'MID', color: '#14532d' },
-  MidfielderCenterLeft: { code: 'CM', line: 'MID', color: '#16a34a' },
-  MidfielderCenter: { code: 'CM', line: 'MID', color: '#16a34a' },
-  MidfielderCenterRight: { code: 'CM', line: 'MID', color: '#16a34a' },
-  MidfielderLeft: { code: 'LM', line: 'MID', color: '#4ade80' },
-  MidfielderRight: { code: 'RM', line: 'MID', color: '#4ade80' },
-  AttackingMidfielderCenter: { code: 'CAM', line: 'MID', color: '#86efac' },
-  AttackingMidfielderLeft: { code: 'LW', line: 'MID', color: '#86efac' },
-  AttackingMidfielderRight: { code: 'RW', line: 'MID', color: '#86efac' },
-
-  Striker: { code: 'ST', line: 'FWD', color: '#991b1b' },
-  ForwardCenter: { code: 'CF', line: 'FWD', color: '#dc2626' },
-  ForwardLeft: { code: 'LF', line: 'FWD', color: '#f87171' },
-  ForwardRight: { code: 'RF', line: 'FWD', color: '#f87171' },
-}
-
-function positionInfo(position: string) {
-  return POSITION_CODES[position] ?? { code: position, line: 'MID' as const, color: '#16a34a' }
 }
 
 // #rrggbb -> "r, g, b", so a badge's background can be the same hue as its
@@ -118,17 +76,21 @@ const FORMATION: { code: string; line: 'GK' | 'DEF' | 'MID' | 'FWD'; color: stri
 const FORMATION_ROWS = [[0], [1, 2, 3, 4], [5, 6, 7], [8, 9, 10]]
 
 // Out-of-position eligibility: a defender/midfielder/forward can fill any
-// slot within their own line (not their exact EA code), at a flat OVR
-// penalty — same idea as FIFA/FM letting a CB deputize at RB, just worse
-// at it than a natural one. Goalkeepers are excluded on purpose: playing
-// outfield isn't a "worse version of the same job" the way it is within
-// DEF/MID/FWD, it's a different job entirely.
-const OUT_OF_POSITION_PENALTY = 15
-
+// slot within their own line (not their exact EA code) — same idea as
+// FIFA/FM letting a CB deputize at RB, just worse at it than a natural
+// one. How much worse now scales with how far the two positions actually
+// are (`outOfPositionPenalty`, EA FC's own positional-familiarity model)
+// instead of one flat number for every same-line move — a CB filling in
+// at LB barely costs anything, while an LM asked to play RW (crosses the
+// pitch and changes role) costs a lot more. Goalkeepers are excluded on
+// purpose: playing outfield isn't a "worse version of the same job" the
+// way it is within DEF/MID/FWD, it's a different job entirely.
 function eligibility(playerPosition: string, slot: { code: string; line: 'GK' | 'DEF' | 'MID' | 'FWD' }) {
   const info = positionInfo(playerPosition)
   if (info.code === slot.code) return { eligible: true, penalty: 0 }
-  if (slot.line !== 'GK' && info.line === slot.line) return { eligible: true, penalty: OUT_OF_POSITION_PENALTY }
+  if (slot.line !== 'GK' && info.line === slot.line) {
+    return { eligible: true, penalty: outOfPositionPenalty(info.code, slot.code) }
+  }
   return { eligible: false, penalty: 0 }
 }
 
@@ -138,26 +100,66 @@ function DtSquadPage() {
   // slots[i] = playerId filling FORMATION[i], or null if empty.
   const [slots, setSlots] = useState<(number | null)[]>(Array(11).fill(null))
   const [openSlot, setOpenSlot] = useState<number | null>(null)
+  // Whether the open dropdown should render above its token instead of
+  // below — the FWD row sits near the bottom of the formation panel, so a
+  // ~280px dropdown opening downward there routinely ran off the bottom of
+  // the viewport with no way to see (or click) the rest of it. Measured
+  // fresh on every open against the *current* viewport height rather than
+  // baked in per-row, since how much room a row has left depends on scroll
+  // position and window size, not just which row it is.
+  const [openUp, setOpenUp] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [saved, setSaved] = useState(false)
+  const [teamInfo, setTeamInfo] = useState<{ name: string; slug: string } | null>(null)
 
   useEffect(() => {
     if (myTeamId == null) return
-    callApi<LineupPlayer[]>(`/api/teams/${myTeamId}/lineup`)
-      .then((rows) => {
+    callApi<{ name: string; slug: string }>(`/api/teams/${myTeamId}`)
+      .then(setTeamInfo)
+      .catch(() => setTeamInfo(null))
+  }, [myTeamId])
+
+  useEffect(() => {
+    if (myTeamId == null) return
+    callApi<{ players: LineupPlayer[]; slotOrder: (number | null)[] }>(`/api/teams/${myTeamId}/lineup`)
+      .then(({ players: rows, slotOrder }) => {
         setPlayers(rows)
-        // Auto-place already-pinned players into the first empty slot whose
-        // EA code matches theirs. A previously-saved lineup that doesn't
-        // fit this fixed 4-3-3 (e.g. it had a back three) leaves the
-        // leftover pinned players unplaced — they're still on the bench,
-        // just not pre-filled into a slot. Skips anyone who became
-        // unavailable (injured/suspended/low condition) since the lineup
-        // was last saved — the backend would reject saving them again
-        // anyway, so re-placing them here would just reproduce the error.
+        if (slotOrder.length === 11) {
+          // Exact slot layout from the last save (see engine-ffi's
+          // `GameHandle::lineup_order`) — restores out-of-position picks
+          // to the precise slot they were placed in, unlike deriving
+          // placement from position codes below (which can't tell "CM
+          // deputizing at LW" apart from "CM in a CM slot").
+          setSlots(slotOrder)
+          return
+        }
+        // No saved slot layout yet (first time this team's lineup loads) —
+        // fall back to auto-placing already-pinned players into the first
+        // empty slot whose EA code matches theirs. A previously-saved
+        // lineup that doesn't fit this fixed 4-3-3 (e.g. it had a back
+        // three) leaves the leftover pinned players unplaced — they're
+        // still on the bench, just not pre-filled into a slot. Skips
+        // anyone who became unavailable (injured/suspended/low condition)
+        // since the lineup was last saved — the backend would reject
+        // saving them again anyway, so re-placing them here would just
+        // reproduce the error.
         const next: (number | null)[] = Array(11).fill(null)
-        for (const p of rows.filter((r) => r.pinned && r.isReadyForMatch)) {
+        const pinned = rows.filter((r) => r.pinned && r.isReadyForMatch)
+        const leftover: LineupPlayer[] = []
+        for (const p of pinned) {
           const code = positionInfo(p.position).code
           const slotIndex = FORMATION.findIndex((slot, i) => slot.code === code && next[i] == null)
+          if (slotIndex !== -1) next[slotIndex] = p.playerId
+          else leftover.push(p)
+        }
+        // Second pass: a pinned out-of-position player (saved with a
+        // penalty into a slot outside their exact code, e.g. an LW pinned
+        // at ST) has no slot with their own code left — fall back to any
+        // empty slot within their line, same rule `eligibility()` uses,
+        // so the save round-trips instead of bouncing them to the bench.
+        for (const p of leftover) {
+          const line = positionInfo(p.position).line
+          const slotIndex = FORMATION.findIndex((slot, i) => slot.line !== 'GK' && slot.line === line && next[i] == null)
           if (slotIndex !== -1) next[slotIndex] = p.playerId
         }
         setSlots(next)
@@ -251,6 +253,7 @@ function DtSquadPage() {
       <div className="fm-page">
         <section className="fm-panel">
           <div className="fm-panel-head">
+            {teamInfo && <TeamCrest slug={teamInfo.slug} name={teamInfo.name} size={32} />}
             <h3>Alineación titular</h3>
             <span className="fm-panel-count">{filledCount}/11</span>
           </div>
@@ -266,8 +269,16 @@ function DtSquadPage() {
                     <div className="fm-slot-wrap" key={slotIndex}>
                       <button
                         type="button"
-                        className="fm-slot"
-                        onClick={() => setOpenSlot(openSlot === slotIndex ? null : slotIndex)}
+                        className={`fm-slot${openSlot === slotIndex ? ' fm-slot-open' : ''}`}
+                        onClick={(e) => {
+                          if (openSlot === slotIndex) {
+                            setOpenSlot(null)
+                            return
+                          }
+                          const rect = e.currentTarget.getBoundingClientRect()
+                          setOpenUp(window.innerHeight - rect.bottom < 300 && rect.top > 300)
+                          setOpenSlot(slotIndex)
+                        }}
                         title={player ? player.name : `Vacío — ${slot.code}`}
                       >
                         <span className="fm-slot-photo-ring" style={{ borderColor: slot.color }}>
@@ -312,7 +323,7 @@ function DtSquadPage() {
                       {openSlot === slotIndex && (
                         <>
                           <div className="fm-slot-dropdown-backdrop" onClick={() => setOpenSlot(null)} />
-                          <div className="fm-slot-dropdown">
+                          <div className={`fm-slot-dropdown${openUp ? ' fm-slot-dropdown-up' : ''}`}>
                             {player && (
                               <button type="button" className="fm-slot-dropdown-item fm-slot-dropdown-clear" onClick={() => clearSlot(slotIndex)}>
                                 Dejar vacío

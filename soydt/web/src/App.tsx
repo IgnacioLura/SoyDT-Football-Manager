@@ -39,6 +39,7 @@ import CupsPage from './features/cups/CupsPage'
 import CupBracketPage from './features/cups/CupBracketPage'
 import ContinentalCompetitionPage from './features/cups/ContinentalCompetitionPage'
 import NewGamePage from './features/onboarding/NewGamePage'
+import StartPage from './features/onboarding/StartPage'
 import DtSquadPage from './features/dt/DtSquadPage'
 import DtTransfersPage from './features/dt/DtTransfersPage'
 import DtFinancesPage from './features/dt/DtFinancesPage'
@@ -52,7 +53,10 @@ function App() {
       <ProcessOverlay />
       <BrowserRouter>
         <Routes>
-        <Route path="/" element={<CountriesPage />} />
+        {/* Landing: continue the saved career (now that saves survive a
+            redeploy) or start over — falls through to /new-game when
+            there's no save yet. Free-browse admin area lives at /countries. */}
+        <Route path="/" element={<StartPage />} />
         <Route path="/countries" element={<CountriesPage />} />
         <Route path="/countries/:countryId" element={<NationalSquadPage />} />
         <Route path="/countries/:countryId/schedule" element={<SchedulePage />} />

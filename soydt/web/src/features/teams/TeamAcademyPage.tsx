@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import { PositionBadge } from '../../shared/positions'
 import { useTeamCountryId } from '../../shared/useTeamCountryId'
 
 // Ported from open-football/src/web/src/teams/academy/index.html — the
@@ -129,7 +130,9 @@ function TeamAcademyPage() {
                     <td className="sq-name">
                       <Link to={`/players/${p.playerId}`}>{p.name}</Link>
                     </td>
-                    <td>{p.position}</td>
+                    <td>
+                      <PositionBadge position={p.position} />
+                    </td>
                     <td>{p.phase}</td>
                     <td>{p.age}</td>
                     <td>{p.currentAbility}</td>

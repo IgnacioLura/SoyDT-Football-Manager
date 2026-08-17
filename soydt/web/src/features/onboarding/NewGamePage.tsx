@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import TeamCrest from './TeamCrest'
 
@@ -19,6 +19,10 @@ type Step = 'creating' | 'loading-clubs' | 'picking' | 'confirming' | 'error'
 
 function NewGamePage() {
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  // Set by StartPage's "empezar de nuevo" flow — forces a fresh world even
+  // though a save already exists (normally we only create if none does).
+  const forceReset = searchParams.get('reset') === '1'
   const [step, setStep] = useState<Step>('creating')
   const [error, setError] = useState<string | null>(null)
   const [clubs, setClubs] = useState<LeagueTableRow[]>([])
@@ -30,7 +34,7 @@ function NewGamePage() {
         // A world may already exist (e.g. an Admin created one via curl) —
         // `create` always resets it, so only create if we truly need to.
         const status = await callApi<{ hasGame: boolean; myClubId: number | null }>('/api/game/status')
-        if (!status.hasGame) {
+        if (!status.hasGame || forceReset) {
           await callApi('/api/game/create?countries=UY', { method: 'POST' })
         }
 

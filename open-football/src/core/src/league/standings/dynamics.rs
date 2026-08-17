@@ -5,6 +5,7 @@ use log::debug;
 use std::collections::HashMap;
 
 #[derive(Debug, Clone)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct LeagueDynamics {
     pub team_momentum: HashMap<u32, f32>,
     pub team_streaks: HashMap<u32, TeamStreak>,
@@ -198,6 +199,7 @@ impl LeagueDynamics {
 }
 
 #[derive(Debug, Clone, Default)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct TeamStreak {
     pub winning_streak: u8,
     pub losing_streak: u8,
@@ -205,6 +207,7 @@ pub struct TeamStreak {
 }
 
 #[derive(Debug, Clone, Default)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct TitleRace {
     pub leader_id: u32,
     pub gap_to_second: i8,
@@ -212,11 +215,13 @@ pub struct TitleRace {
 }
 
 #[derive(Debug, Clone, Default)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct RelegationBattle {
     pub teams_in_danger: Vec<u32>,
 }
 
 #[derive(Debug, Clone, Default)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct EuropeanRace {
     pub teams_in_contention: Vec<u32>,
 }

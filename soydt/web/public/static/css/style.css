@@ -492,6 +492,7 @@ a:active {
 }
 
 .fm-header-colored {
+    background: var(--header-bg, #fff);
     border-bottom-color: var(--header-border, rgba(0, 0, 0, 0.2));
 }
 
@@ -1545,6 +1546,12 @@ a:active {
     text-decoration: underline !important;
 }
 
+.st-club-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
 .fm-standings .st-gd {
     color: #7a868e;
 }
@@ -1650,6 +1657,16 @@ a:active {
     color: #d8dee4;
     font-size: 16px;
     font-weight: 400;
+}
+
+.fx-club {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.fx-home .fx-club {
+    flex-direction: row-reverse;
 }
 
 .fx-home a:hover,
@@ -14202,6 +14219,16 @@ a.np-prose-link.np-mark:focus-visible,
     border: none;
     cursor: pointer;
     padding: 4px;
+    border-radius: 10px;
+    transition: transform 0.18s ease;
+}
+
+.fm-slot:hover {
+    transform: translateY(-3px);
+}
+
+.fm-slot:active {
+    transform: translateY(-1px) scale(0.97);
 }
 
 .fm-slot-photo-ring {
@@ -14215,6 +14242,52 @@ a.np-prose-link.np-mark:focus-visible,
     align-items: center;
     justify-content: center;
     background: #0d1512;
+    transition: box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+/* FUT-style specular sweep — a soft diagonal highlight glides across the
+   token's photo on hover, like light catching a foil card. Pure CSS: an
+   oversized gradient bar, translated off-screen at rest, animated across
+   only while `:hover` is active so it never runs idle. */
+.fm-slot-photo-ring::after {
+    content: '';
+    position: absolute;
+    inset: -50%;
+    background: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, 0.35) 50%, transparent 60%);
+    transform: translateX(-120%);
+    pointer-events: none;
+}
+
+.fm-slot:hover .fm-slot-photo-ring::after {
+    animation: fm-slot-shine 0.85s ease forwards;
+}
+
+@keyframes fm-slot-shine {
+    to {
+        transform: translateX(120%);
+    }
+}
+
+.fm-slot:hover .fm-slot-photo-ring {
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.08), 0 6px 16px rgba(0, 0, 0, 0.45);
+}
+
+/* Open slot — the token currently driving a dropdown gets a slow golden
+   pulse ring, the same "actively selected" language FUT squad builders use
+   for the card you're editing, so it stays legible which token the open
+   list belongs to at a glance. */
+.fm-slot-open .fm-slot-photo-ring {
+    animation: fm-slot-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes fm-slot-pulse {
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(250, 204, 21, 0.55);
+    }
+    50% {
+        box-shadow: 0 0 0 6px rgba(250, 204, 21, 0.18);
+    }
 }
 
 .fm-slot-photo {
@@ -14227,6 +14300,11 @@ a.np-prose-link.np-mark:focus-visible,
     font-size: 22px;
     color: #4b5b53;
     line-height: 1;
+    transition: color 0.2s ease;
+}
+
+.fm-slot:hover .fm-slot-empty {
+    color: #9fb3a8;
 }
 
 .fm-slot-number {
@@ -14270,6 +14348,7 @@ a.np-prose-link.np-mark:focus-visible,
     top: calc(100% + 6px);
     left: 50%;
     transform: translateX(-50%);
+    transform-origin: top center;
     z-index: 41;
     width: 220px;
     max-height: 280px;
@@ -14282,6 +14361,28 @@ a.np-prose-link.np-mark:focus-visible,
     display: flex;
     flex-direction: column;
     gap: 2px;
+    animation: fm-dropdown-in 0.15s ease;
+}
+
+/* Flips the dropdown to open upward instead of downward — set by
+   DtSquadPage whenever there isn't enough room left below the token (e.g.
+   the FWD row, near the bottom of the formation panel) so the list never
+   runs off the bottom of the viewport with no way to reach the rest of it. */
+.fm-slot-dropdown-up {
+    top: auto;
+    bottom: calc(100% + 6px);
+    transform-origin: bottom center;
+}
+
+@keyframes fm-dropdown-in {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.92);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+    }
 }
 
 .fm-slot-dropdown-item {
@@ -14296,10 +14397,16 @@ a.np-prose-link.np-mark:focus-visible,
     text-align: left;
     cursor: pointer;
     font-size: 12px;
+    transition: background 0.12s ease, transform 0.12s ease;
 }
 
 .fm-slot-dropdown-item:hover {
     background: #2a3a32;
+    transform: translateX(2px);
+}
+
+.fm-slot-dropdown-item:active {
+    transform: translateX(2px) scale(0.98);
 }
 
 .fm-slot-dropdown-clear {
@@ -14338,12 +14445,38 @@ a.np-prose-link.np-mark:focus-visible,
     gap: 4px;
 }
 
+/* Extra glow on the lineup grid's OVR readout specifically (not the
+   `.fm-ability` class everywhere else — a dense stats table doesn't want
+   every number glowing) — same red/yellow/green banding, just with a soft
+   matching halo, FUT-card-stat style. */
+.fm-slot-ovr-row .fm-ability-green {
+    text-shadow: 0 0 6px rgba(46, 204, 113, 0.5);
+}
+.fm-slot-ovr-row .fm-ability-yellow {
+    text-shadow: 0 0 6px rgba(212, 160, 23, 0.5);
+}
+.fm-slot-ovr-row .fm-ability-red {
+    text-shadow: 0 0 6px rgba(231, 76, 60, 0.5);
+}
+
 /* Out-of-position penalty — how much playing outside their exact EA
    position costs a player's effective rating in this slot. */
 .fm-ovr-penalty {
     color: #ef4444;
     font-weight: 700;
     font-size: 11px;
+    animation: fm-penalty-in 0.2s ease;
+}
+
+@keyframes fm-penalty-in {
+    from {
+        opacity: 0;
+        transform: translateX(-3px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 /* Unavailable (injured/suspended/low condition) player in the replacement

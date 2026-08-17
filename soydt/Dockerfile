@@ -41,5 +41,11 @@ COPY --from=api-build /app/publish .
 # `[LibraryImport("engine_ffi")]` to resolve it — no runtimes/<rid>/native
 # layout needed for a single-RID container image.
 COPY --from=engine-build /tmp/libengine_ffi.so .
+# Save data (SQLite) lives here so it survives redeploys — mount a host
+# path or named volume at /data when running, e.g.:
+#   docker run -p 8080:8080 -v soydt-data:/data soydt-api
+# Without a mount, /data is still ephemeral container storage and the
+# save is lost like everything else on the next `docker run`.
+VOLUME ["/data"]
 EXPOSE 8080
 ENTRYPOINT ["dotnet", "SoyDT.Api.dll"]

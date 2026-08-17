@@ -12,7 +12,7 @@ namespace SoyDT.Api.Controllers;
 public sealed class TeamLineupController(GameSession session) : ControllerBase
 {
     [HttpGet("{teamId}/lineup")]
-    public ActionResult<IReadOnlyList<LineupPlayer>> Get(uint teamId)
+    public ActionResult<TeamLineup> Get(uint teamId)
     {
         return Ok(session.GetTeamLineup(teamId));
     }

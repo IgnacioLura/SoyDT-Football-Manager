@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import TeamCrest from '../onboarding/TeamCrest'
 import { useTeamCountryId } from '../../shared/useTeamCountryId'
 
 // Ported from open-football/src/web/src/teams/transfers/index.html —
@@ -15,6 +16,7 @@ type TeamTransferItem = {
   playerId: number
   playerName: string
   otherTeamName: string
+  otherTeamSlug: string
   fee: number
   isLoan: boolean
   isFree: boolean
@@ -47,7 +49,12 @@ function TransferTable({ items, otherLabel }: { items: TeamTransferItem[]; other
             <td className="sq-name">
               <Link to={`/players/${t.playerId}`}>{t.playerName}</Link>
             </td>
-            <td>{t.otherTeamName}</td>
+            <td>
+              <span className="st-club-link">
+                <TeamCrest slug={t.otherTeamSlug} name={t.otherTeamName} size={20} />
+                <span>{t.otherTeamName}</span>
+              </span>
+            </td>
             <td>
               {t.isFree ? (
                 <span className="fm-loan-badge">Free</span>

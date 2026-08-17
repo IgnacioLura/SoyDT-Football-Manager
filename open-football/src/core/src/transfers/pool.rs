@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 
 #[derive(Clone)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct TransferPool<T> {
     pool: HashMap<u32, Vec<T>>,
 }

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import { PositionBadge } from '../../shared/positions'
 import { useTeamCountryId } from '../../shared/useTeamCountryId'
 
 // Team tactics page — deliberately simplified vs. the original app's
@@ -128,7 +129,9 @@ function TeamTacticsPage() {
                   <td className="st-club">
                     <Link to={`/players/${p.playerId}`}>{p.name}</Link>
                   </td>
-                  <td>{p.position}</td>
+                  <td>
+                    <PositionBadge position={p.position} />
+                  </td>
                   <td className="st-pts">{p.currentAbility}</td>
                 </tr>
               ))}

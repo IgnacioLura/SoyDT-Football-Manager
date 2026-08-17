@@ -92,6 +92,7 @@ mod processor {
     /// reputation/importance gate because the seller club lookup failed and
     /// the assessment returned "unknown" — read by the pipeline as "allowed".
     #[derive(Clone)]
+    #[derive(serde::Serialize, serde::Deserialize)]
     pub struct SellerPlausibilityContext {
         /// Selling club main-team reputation, 0.0..1.0 (`overall_score`).
         pub club_reputation_score: f32,
@@ -148,6 +149,7 @@ mod processor {
 
     #[allow(dead_code)]
     #[derive(Clone)]
+    #[derive(serde::Serialize, serde::Deserialize)]
     pub struct PlayerSummary {
         pub player_id: u32,
         pub club_id: u32,
@@ -216,6 +218,7 @@ mod processor {
 // ============================================================
 
 #[derive(Debug, Clone, PartialEq)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub enum TransferNeedPriority {
     Critical,
     Important,
@@ -242,6 +245,7 @@ impl TransferNeedPriority {
 
 /// Why the coach is requesting this position - derived from tactical analysis.
 #[derive(Debug, Clone, PartialEq)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub enum TransferNeedReason {
     /// Formation requires this position and we have no one (e.g. 4-2-3-1 needs AMC, we have none)
     FormationGap,
@@ -313,6 +317,7 @@ impl TransferNeedReason {
 }
 
 #[derive(Debug, Clone, PartialEq)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub enum TransferRequestStatus {
     Pending,
     ScoutingActive,
@@ -358,6 +363,7 @@ impl TransferRequestStatus {
 /// must only ever be serviced by the free-agent matcher — the scouting,
 /// market-shortlist, and loan paths skip them.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub enum TransferRequestSource {
     /// Weekly evaluation / staff recommendation — full paid pipeline.
     Evaluation,
@@ -366,6 +372,7 @@ pub enum TransferRequestSource {
 }
 
 #[derive(Debug, Clone)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct TransferRequest {
     pub id: u32,
     pub position: PlayerPositionType,
@@ -466,6 +473,7 @@ impl TransferRequest {
 // ============================================================
 
 #[derive(Debug, Clone)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct PlayerObservation {
     pub player_id: u32,
     pub observation_count: u32,
@@ -541,6 +549,7 @@ impl PlayerObservation {
 // ============================================================
 
 #[derive(Debug, Clone)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct ScoutingAssignment {
     pub id: u32,
     pub transfer_request_id: u32,
@@ -562,6 +571,7 @@ pub struct ScoutingAssignment {
 /// the ability bar but fails the role profile scores below a slightly
 /// lower-ability candidate who matches the profile.
 #[derive(Debug, Clone)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct RoleProfile {
     pub min_technical_avg: f32,
     pub min_mental_avg: f32,
@@ -642,6 +652,7 @@ impl ScoutingAssignment {
 // ============================================================
 
 #[derive(Debug, Clone)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct DetailedScoutingReport {
     pub player_id: u32,
     pub assignment_id: u32,
@@ -660,6 +671,7 @@ pub struct DetailedScoutingReport {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub enum ReportRiskFlag {
     /// Currently injured — bid timing risk
     CurrentlyInjured,
@@ -674,6 +686,7 @@ pub enum ReportRiskFlag {
 }
 
 #[derive(Debug, Clone, PartialEq)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub enum ScoutingRecommendation {
     StrongBuy,
     Buy,
@@ -719,6 +732,7 @@ impl ReportRiskFlag {
 // ============================================================
 
 #[derive(Debug, Clone, PartialEq)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub enum ShortlistCandidateStatus {
     Available,
     CurrentlyPursuing,
@@ -739,6 +753,7 @@ pub enum TransferApproach {
 }
 
 #[derive(Debug, Clone)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct ShortlistCandidate {
     pub player_id: u32,
     pub score: f32,
@@ -747,6 +762,7 @@ pub struct ShortlistCandidate {
 }
 
 #[derive(Debug, Clone)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct TransferShortlist {
     pub transfer_request_id: u32,
     pub candidates: Vec<ShortlistCandidate>,
@@ -793,6 +809,7 @@ impl TransferShortlist {
 // ============================================================
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub enum LoanOutReason {
     /// Young player needs regular first-team football to develop (elite/continental clubs)
     NeedsGameTime,
@@ -851,6 +868,7 @@ impl LoanOutReason {
 }
 
 #[derive(Debug, Clone, PartialEq)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub enum LoanOutStatus {
     Identified,
     Listed,
@@ -859,6 +877,7 @@ pub enum LoanOutStatus {
 }
 
 #[derive(Debug, Clone)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct LoanOutCandidate {
     pub player_id: u32,
     pub reason: LoanOutReason,
@@ -876,6 +895,7 @@ pub struct LoanOutCandidate {
 /// listings gone stale); lives only while the listing is live and the
 /// player isn't already in a negotiation.
 #[derive(Debug, Clone)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct AvailabilityBroadcast {
     /// Reputation tier the player is currently being offered to. Starts at
     /// the parent club's own tier and steps down via
@@ -891,6 +911,7 @@ pub struct AvailabilityBroadcast {
 // ============================================================
 
 #[derive(Debug, Clone, PartialEq)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub enum RecommendationSource {
     ScoutNetwork,
     ChiefScoutReport,
@@ -900,6 +921,7 @@ pub enum RecommendationSource {
 }
 
 #[derive(Debug, Clone, PartialEq)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub enum RecommendationType {
     /// Contract <= 6 months
     ExpiringContract,
@@ -932,6 +954,7 @@ pub enum RecommendationType {
 }
 
 #[derive(Debug, Clone)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct StaffRecommendation {
     pub player_id: u32,
     pub recommender_staff_id: u32,
@@ -948,6 +971,7 @@ pub struct StaffRecommendation {
 /// assignments, this survives transfers and loan returns, so a club can
 /// remember a foreign player who spent a few months in its league.
 #[derive(Debug, Clone)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct KnownPlayerMemory {
     pub player_id: u32,
     pub last_known_club_id: u32,
@@ -968,6 +992,7 @@ pub struct KnownPlayerMemory {
 // ============================================================
 
 #[derive(Debug, Clone)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct ScoutMatchAssignment {
     pub scout_staff_id: u32,
     pub target_team_id: u32,
@@ -981,6 +1006,7 @@ pub struct ScoutMatchAssignment {
 // ============================================================
 
 #[derive(Debug, Clone)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct ClubTransferPlan {
     pub total_budget: f64,
     pub spent: f64,
@@ -1073,6 +1099,7 @@ pub struct ClubTransferPlan {
 /// A scouting report preserved past its originating assignment, used to
 /// bootstrap future shortlists without discarding long-tracked targets.
 #[derive(Debug, Clone)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct ShadowReport {
     pub report: DetailedScoutingReport,
     pub position_group: PlayerFieldPositionGroup,

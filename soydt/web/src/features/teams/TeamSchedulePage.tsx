@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import TeamCrest from '../onboarding/TeamCrest'
 import { useTeamCountryId } from '../../shared/useTeamCountryId'
 
 // Mirrors the original app's `teams/schedule/index.html` (extends
@@ -15,6 +16,7 @@ type TeamScheduleItem = {
   time: string
   opponentTeamId: number
   opponentName: string
+  opponentSlug: string
   isHome: boolean
   competitionName: string
   matchId: string
@@ -80,7 +82,10 @@ function TeamSchedulePage() {
                   <td className="sch-date">{item.date}</td>
                   <td className="sch-time">{item.time}</td>
                   <td className="sch-opponent">
-                    <Link to={`/teams/${item.opponentTeamId}`}>{item.opponentName}</Link>
+                    <Link to={`/teams/${item.opponentTeamId}`} className="st-club-link">
+                      <TeamCrest slug={item.opponentSlug} name={item.opponentName} size={20} />
+                      <span>{item.opponentName}</span>
+                    </Link>
                   </td>
                   <td className="sch-venue">
                     <span className={`fm-venue ${item.isHome ? 'venue-h' : 'venue-a'}`}>{item.isHome ? 'H' : 'A'}</span>

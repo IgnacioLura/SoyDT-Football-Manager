@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import TeamCrest from '../onboarding/TeamCrest'
 import { leagueTabs } from './tabs'
 
 // Ported from open-football/src/web/src/leagues/transfers/index.html —
@@ -14,8 +15,10 @@ type CompletedTransfer = {
   playerName: string
   fromTeamId: number
   fromTeamName: string
+  fromTeamSlug: string
   toTeamId: number
   toTeamName: string
+  toTeamSlug: string
   fee: number
   isLoan: boolean
   isFree: boolean
@@ -95,10 +98,16 @@ function LeagueTransfersPage() {
                       <Link to={`/players/${t.playerId}`}>{t.playerName}</Link>
                     </td>
                     <td className="sq-from">
-                      <Link to={`/teams/${t.fromTeamId}`}>{t.fromTeamName}</Link>
+                      <Link to={`/teams/${t.fromTeamId}`} className="st-club-link">
+                        <TeamCrest slug={t.fromTeamSlug} name={t.fromTeamName} size={20} />
+                        <span>{t.fromTeamName}</span>
+                      </Link>
                     </td>
                     <td className="sq-to">
-                      <Link to={`/teams/${t.toTeamId}`}>{t.toTeamName}</Link>
+                      <Link to={`/teams/${t.toTeamId}`} className="st-club-link">
+                        <TeamCrest slug={t.toTeamSlug} name={t.toTeamName} size={20} />
+                        <span>{t.toTeamName}</span>
+                      </Link>
                     </td>
                     <td className="sq-fee">
                       {t.isFree ? (

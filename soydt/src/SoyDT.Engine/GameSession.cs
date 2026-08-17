@@ -57,7 +57,15 @@ public sealed partial class GameSession(NativeGameEngine engine)
     public void SetMyClub(uint clubId)
     {
         lock (_writeGate) { _myClubId = clubId; }
+        Mutated?.Invoke();
     }
+
+    /// Fired after every world/`MyClubId` mutation, outside any lock —
+    /// autosave (see `SoyDT.Api`'s startup wiring) subscribes to persist
+    /// `Save()` to SQLite. Deliberately not invoked from inside
+    /// `_writeGate`: a subscriber doing disk I/O shouldn't block the next
+    /// write from starting.
+    public event Action? Mutated;
 
     /// Mirrors the original app's `process_lock.try_lock_owned()` early-out
     /// ("already processing → return immediately" instead of queuing behind
@@ -128,6 +136,7 @@ public sealed partial class GameSession(NativeGameEngine engine)
             mutation(engine, working);
             Publish(working)?.Dispose();
         }
+        Mutated?.Invoke();
     }
 
     public bool HasGame
@@ -149,6 +158,7 @@ public sealed partial class GameSession(NativeGameEngine engine)
             _myClubId = null;
             Publish(next)?.Dispose();
         }
+        Mutated?.Invoke();
     }
 
     /// Advances the published world by `days` in one shot. Clones the
@@ -156,15 +166,18 @@ public sealed partial class GameSession(NativeGameEngine engine)
     /// against the previous handle are unaffected for the whole duration.
     public ProcessResult ProcessDays(uint days)
     {
+        ProcessResult result;
         lock (_writeGate)
         {
             var previous = CaptureCurrent();
             var working = engine.CloneGame(previous);
-            var result = engine.ProcessDays(working, days);
+            result = engine.ProcessDays(working, days);
             Publish(working)?.Dispose();
-            return result;
         }
+        Mutated?.Invoke();
+        return result;
     }
+
 
     /// Same simulation as <see cref="ProcessDays"/>, but ticks one real day
     /// at a time so `onProgress` gets an honest per-day event (date, running
@@ -198,6 +211,7 @@ public sealed partial class GameSession(NativeGameEngine engine)
 
             Publish(working)?.Dispose();
         }
+        Mutated?.Invoke();
     }
 
     public GameSnapshot GetSnapshot() => WithGame((e, h) => e.GetSnapshot(h));

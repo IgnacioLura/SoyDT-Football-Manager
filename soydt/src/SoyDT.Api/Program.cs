@@ -12,6 +12,11 @@ builder.Services.AddOpenApi();
 builder.Services.AddSignalR();
 builder.Services.AddSingleton<NativeGameEngine>();
 builder.Services.AddSingleton<GameSession>();
+// Path lives on a Docker volume in production (see soydt/Dockerfile's
+// `VOLUME ["/data"]`) so the save survives a redeploy; defaults to a local
+// file for `dotnet run`/dev-loop use outside a container.
+builder.Services.AddSingleton(_ => new SaveGameStore(
+    Environment.GetEnvironmentVariable("SOYDT_DB_PATH") ?? "/data/soydt.db"));
 builder.Services.AddSingleton<AiConfig>();
 builder.Services.AddSingleton<AiJobs>();
 // Named client for the AI agent's LLM calls — a long timeout since local
@@ -39,6 +44,40 @@ var app = builder.Build();
 // match what SoyDT.Engine was written against (engine-ffi/CONTRACT.md) —
 // a silent mismatch would misparse JSON instead of erroring clearly.
 app.Services.GetRequiredService<NativeGameEngine>().AssertContractVersion();
+
+// Autoload: restore whatever was last saved (if anything) before the API
+// starts serving. A missing or unreadable save (fresh volume, or a blob
+// written under an older CONTRACT_VERSION) just leaves the session empty —
+// same "no game yet" state a first run has — rather than failing startup.
+var gameSession = app.Services.GetRequiredService<GameSession>();
+var saveGameStore = app.Services.GetRequiredService<SaveGameStore>();
+try
+{
+    var saved = saveGameStore.TryLoad();
+    if (saved is not null)
+    {
+        gameSession.LoadFromSnapshot(saved);
+    }
+}
+catch (Exception ex)
+{
+    app.Logger.LogWarning(ex, "Failed to load saved game; starting with no active game");
+}
+
+// Autosave: every mutation (day processed, lineup/transfer/my-club change)
+// persists the whole session immediately after it publishes — single-user
+// scope, so no debounce/queueing is needed.
+gameSession.Mutated += () =>
+{
+    try
+    {
+        saveGameStore.Save(gameSession.Save());
+    }
+    catch (Exception ex)
+    {
+        app.Logger.LogError(ex, "Autosave failed");
+    }
+};
 
 if (app.Environment.IsDevelopment())
 {

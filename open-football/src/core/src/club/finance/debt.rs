@@ -27,6 +27,7 @@ use super::balance::DistressLevel;
 
 /// Where a club sits on the debt ladder.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub enum DebtStanding {
     /// Positive balance, or borrowing comfortably inside the facility.
     #[default]
@@ -72,6 +73,7 @@ impl DebtStanding {
 
 /// An active administration: what it costs and how long it lasts.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct AdministrationState {
     /// League points deducted this season as a result of entering.
     pub points_deduction: u8,
@@ -104,6 +106,7 @@ impl AdministrationState {
 
 /// A club's debt position, evaluated fresh each month.
 #[derive(Debug, Clone, Copy, Default)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct DebtProfile {
     pub standing: DebtStanding,
     pub administration: Option<AdministrationState>,

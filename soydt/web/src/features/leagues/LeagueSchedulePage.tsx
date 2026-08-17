@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import TeamCrest from '../onboarding/TeamCrest'
 import { leagueTabs } from './tabs'
 
 // Ported from open-football/src/web/src/leagues/get/index.html's
@@ -18,8 +19,10 @@ type LeagueScheduleItem = {
   time: string
   homeTeamId: number
   homeTeamName: string
+  homeTeamSlug: string
   awayTeamId: number
   awayTeamName: string
+  awayTeamSlug: string
   matchId: string
   homeGoals: number | null
   awayGoals: number | null
@@ -92,7 +95,10 @@ function LeagueSchedulePage() {
                   {matches.map((item) => (
                     <div className="fm-fixture" key={item.matchId}>
                       <div className="fx-home">
-                        <Link to={`/teams/${item.homeTeamId}`}>{item.homeTeamName}</Link>
+                        <Link to={`/teams/${item.homeTeamId}`} className="fx-club">
+                          <span>{item.homeTeamName}</span>
+                          <TeamCrest slug={item.homeTeamSlug} name={item.homeTeamName} size={20} />
+                        </Link>
                       </div>
                       <Link to={`/match/${item.matchId}`} className="fx-score">
                         {item.homeGoals !== null && item.awayGoals !== null ? (
@@ -104,7 +110,10 @@ function LeagueSchedulePage() {
                         )}
                       </Link>
                       <div className="fx-away">
-                        <Link to={`/teams/${item.awayTeamId}`}>{item.awayTeamName}</Link>
+                        <Link to={`/teams/${item.awayTeamId}`} className="fx-club">
+                          <TeamCrest slug={item.awayTeamSlug} name={item.awayTeamName} size={20} />
+                          <span>{item.awayTeamName}</span>
+                        </Link>
                       </div>
                     </div>
                   ))}

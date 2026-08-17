@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { callApi } from '../../shared/api'
+import TeamCrest from '../onboarding/TeamCrest'
 import DtLayout from './DtLayout'
 import { useMyTeamId } from './useMyTeamId'
 
@@ -11,6 +12,7 @@ import { useMyTeamId } from './useMyTeamId'
 type LeagueTableRow = {
   teamId: number
   teamName: string
+  teamSlug: string
   position: number
   played: number
   won: number
@@ -62,7 +64,12 @@ function DtTablePage() {
               {table.rows.map((row) => (
                 <tr key={row.teamId} style={row.teamId === myTeamId ? { fontWeight: 700, background: 'rgba(74, 222, 128, 0.08)' } : undefined}>
                   <td className="st-pos">{row.position}</td>
-                  <td className="st-club">{row.teamName}</td>
+                  <td className="st-club">
+                    <span className="st-club-link">
+                      <TeamCrest slug={row.teamSlug} name={row.teamName} size={20} />
+                      <span>{row.teamName}</span>
+                    </span>
+                  </td>
                   <td>{row.played}</td>
                   <td>{row.won}</td>
                   <td>{row.drawn}</td>

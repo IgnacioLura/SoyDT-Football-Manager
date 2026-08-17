@@ -21,6 +21,8 @@ use crate::contract::run_guarded;
 use crate::game::GameHandle;
 use crate::strings::to_owned_ptr;
 use core::club::player::events::TransferCompletion;
+use core::shared::currency::{Currency, CurrencyValue};
+use core::transfers::{CompletedTransfer, TransferType};
 use core::TeamInfo;
 use serde::Serialize;
 use std::os::raw::c_char;
@@ -99,6 +101,14 @@ pub extern "C" fn engine_transfer_player(
             return Err("insufficient_budget".to_string());
         }
 
+        // Country ids for the transfer-history push below — resolved now,
+        // before any mutation, since `country_by_club` needs an immutable
+        // borrow that a later mutable one would conflict with.
+        let from_country_id = game.data().country_by_club(from_club_id).map(|c| c.id)
+            .ok_or_else(|| format!("no country found for club {from_club_id}"))?;
+        let to_country_id = game.data().country_by_club(to_club_id).map(|c| c.id)
+            .ok_or_else(|| format!("no country found for club {to_club_id}"))?;
+
         let date = game.data().date.date();
 
         // Mutation phase 1 (selling side) — extract the player, credit the
@@ -115,6 +125,10 @@ pub extern "C" fn engine_transfer_player(
             from_club_mut.finance.add_transfer_income(fee);
             player
         };
+
+        // Captured before `player` moves into the buying roster below —
+        // needed for the `CompletedTransfer` record pushed in phase 3.
+        let player_name = format!("{} {}", player.full_name.first_name, player.full_name.last_name);
 
         // Mutation phase 2 (buying side) — separate borrow, `player` is an
         // owned local carried across the gap.
@@ -151,6 +165,38 @@ pub extern "C" fn engine_transfer_player(
             let to_team_mut = to_club_mut.teams.find_mut(to_team_id)
                 .ok_or_else(|| format!("no team with id {to_team_id}"))?;
             to_team_mut.players.add(player);
+        }
+
+        // Mutation phase 3 — log the deal into each involved country's own
+        // `transfer_market.transfer_history`, the Vec `engine_get_league_transfers`/
+        // `engine_get_team_transfers` actually read from. `player.complete_transfer`
+        // above only updates the *player's* own career record (decision
+        // history, contract) — it never touches this country-level log,
+        // which is otherwise only ever appended to by the AI negotiation
+        // pipeline's `TransferMarket::complete_transfer` (a different
+        // method, keyed by negotiation id — this manual DT flow has no
+        // negotiation to key off, so the record is built directly here).
+        // Without this, a DT-initiated buy/sell would move the player and
+        // the money correctly but never show up on the transfers page.
+        let completed = CompletedTransfer::new(
+            player_id,
+            player_name,
+            from_club_id,
+            from_team_id,
+            from_info.name.clone(),
+            to_club_id,
+            to_info.name.clone(),
+            date,
+            CurrencyValue { amount: fee, currency: Currency::Usd },
+            TransferType::Permanent,
+        );
+        if let Some(country) = game.data_mut().country_mut(to_country_id) {
+            country.transfer_market.transfer_history.push(completed.clone());
+        }
+        if from_country_id != to_country_id {
+            if let Some(country) = game.data_mut().country_mut(from_country_id) {
+                country.transfer_market.transfer_history.push(completed);
+            }
         }
 
         Ok(TransferActionResultJson { player_id, from_team_id, to_team_id, fee })

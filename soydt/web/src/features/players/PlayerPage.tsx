@@ -4,6 +4,7 @@ import { callApi } from '../../shared/api'
 import AiReportButton from '../../shared/AiReportButton'
 import Flag from '../../shared/Flag'
 import Layout from '../../shared/Layout'
+import { PositionBadge } from '../../shared/positions'
 import AttributeGrid, { type AttributeEntry } from './AttributeGrid'
 
 // Phase 1: player overview page, mirrors the original app's
@@ -245,7 +246,7 @@ function PlayerPage() {
             />
             <div>
               <p>
-                Position: {player.position} — Age: {player.age}
+                Position: <PositionBadge position={player.position} /> — Age: {player.age}
               </p>
               <p>
                 OVR: {player.currentAbility} — Value: {player.value.toLocaleString()} — Reputation:{' '}

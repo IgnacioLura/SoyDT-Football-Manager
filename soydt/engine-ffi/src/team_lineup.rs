@@ -45,6 +45,22 @@ struct LineupPlayerJson {
     is_banned: bool,
 }
 
+#[derive(Serialize)]
+struct TeamLineupJson {
+    players: Vec<LineupPlayerJson>,
+    // The exact formation slot each pinned player was placed into, in slot
+    // order (index 0 = FORMATION[0], etc. — the frontend's own fixed 4-3-3
+    // order), as last saved via `engine_set_team_lineup`. Empty if this team
+    // has never saved a lineup this session. Entries for a player who's
+    // since left the roster or become unavailable are dropped rather than
+    // shifting the rest — the frontend just leaves that slot unfilled.
+    // Exists because `is_force_match_selection` alone only says *who's*
+    // pinned, not *where* — without this, the DT's out-of-position picks
+    // (e.g. a CM covering LW) get silently reshuffled back onto their
+    // natural-code slot on the next load.
+    slot_order: Vec<Option<u32>>,
+}
+
 /// Current squad for `team_id` with each player's pin state, so the
 /// frontend can pre-populate a previously-saved lineup (or show none set).
 ///
@@ -53,7 +69,7 @@ struct LineupPlayerJson {
 /// `engine_create_scoped_game`.
 #[unsafe(no_mangle)]
 pub extern "C" fn engine_get_team_lineup(handle: *mut GameHandle, team_id: u32) -> *mut c_char {
-    let json = run_guarded("engine_get_team_lineup", || -> Result<Vec<LineupPlayerJson>, String> {
+    let json = run_guarded("engine_get_team_lineup", || -> Result<TeamLineupJson, String> {
         if handle.is_null() {
             return Err("null game handle".to_string());
         }
@@ -62,7 +78,7 @@ pub extern "C" fn engine_get_team_lineup(handle: *mut GameHandle, team_id: u32) 
         for country in game.data().continents.iter().flat_map(|c| c.countries.iter()) {
             for club in &country.clubs {
                 if let Some(team) = club.teams.teams.iter().find(|t| t.id == team_id) {
-                    let players = team
+                    let players: Vec<LineupPlayerJson> = team
                         .players
                         .players
                         .iter()
@@ -78,7 +94,22 @@ pub extern "C" fn engine_get_team_lineup(handle: *mut GameHandle, team_id: u32) 
                             is_banned: p.player_attributes.is_banned,
                         })
                         .collect();
-                    return Ok(players);
+
+                    let roster: std::collections::HashSet<u32> = players.iter().map(|p| p.player_id).collect();
+                    let ready: std::collections::HashSet<u32> =
+                        players.iter().filter(|p| p.is_ready_for_match).map(|p| p.player_id).collect();
+                    let slot_order = game
+                        .lineup_order
+                        .get(&team_id)
+                        .map(|order| {
+                            order
+                                .iter()
+                                .map(|&id| (roster.contains(&id) && ready.contains(&id)).then_some(id))
+                                .collect()
+                        })
+                        .unwrap_or_default();
+
+                    return Ok(TeamLineupJson { players, slot_order });
                 }
             }
         }
@@ -100,7 +131,10 @@ struct SetLineupArgs {
 /// (reuses `Player::is_ready_for_match`, the same fitness/suspension check
 /// `team_tactics.rs`'s `pick_best` already applies) — an unready pick is
 /// rejected with a clear error rather than silently pinning a player who
-/// can't play anyway.
+/// can't play anyway. `player_ids` is also remembered verbatim, in the
+/// order given (the frontend's fixed formation-slot order), so a later
+/// `engine_get_team_lineup` can hand the exact slot layout back instead of
+/// re-deriving it from position codes — see `GameHandle::lineup_order`.
 ///
 /// # Safety
 /// `handle` must be a live pointer returned by `engine_create_game` or
@@ -121,6 +155,7 @@ pub extern "C" fn engine_set_team_lineup(handle: *mut GameHandle, team_id: u32, 
         }
 
         let game = unsafe { &mut *handle };
+        let mut found = false;
 
         for country in game.data_mut().continents.iter_mut().flat_map(|c| c.countries.iter_mut()) {
             for club in country.clubs.iter_mut() {
@@ -140,11 +175,20 @@ pub extern "C" fn engine_set_team_lineup(handle: *mut GameHandle, team_id: u32, 
                     player.is_force_match_selection = args.player_ids.contains(&player.id);
                 }
 
-                return Ok(());
+                found = true;
+                break;
+            }
+            if found {
+                break;
             }
         }
 
-        Err(format!("no team with id {team_id}"))
+        if !found {
+            return Err(format!("no team with id {team_id}"));
+        }
+
+        game.lineup_order.insert(team_id, args.player_ids);
+        Ok(())
     });
 
     to_owned_ptr(json)

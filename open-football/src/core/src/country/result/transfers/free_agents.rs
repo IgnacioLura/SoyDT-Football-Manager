@@ -62,6 +62,7 @@ static UNKNOWN_NATIONALITY_WARNED: LazyLock<Mutex<HashSet<u32>>> =
 /// nationality reputation and a Russian free agent would stay "too good
 /// for Malta" forever, even after a year of unemployment.
 #[derive(Clone)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct GlobalFreeAgentSummary {
     pub player_id: u32,
     pub player_name: String,

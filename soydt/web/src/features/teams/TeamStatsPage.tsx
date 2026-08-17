@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import { PositionBadge } from '../../shared/positions'
 import { useTeamCountryId } from '../../shared/useTeamCountryId'
 
 // Team season statistics page — mirrors the original app's team stats tab.
@@ -85,7 +86,9 @@ function TeamStatsPage() {
             <tbody>
               {rows.map((p) => (
                 <tr key={p.playerId}>
-                  <td>{p.position}</td>
+                  <td>
+                    <PositionBadge position={p.position} />
+                  </td>
                   <td className="st-club">
                     <Link to={`/players/${p.playerId}`}>{p.name}</Link>
                   </td>

@@ -20,8 +20,10 @@ struct LeagueScheduleItemJson {
     time: String,
     home_team_id: u32,
     home_team_name: String,
+    home_team_slug: String,
     away_team_id: u32,
     away_team_name: String,
+    away_team_slug: String,
     match_id: String,
     home_goals: Option<u8>,
     away_goals: Option<u8>,
@@ -60,6 +62,11 @@ pub extern "C" fn engine_get_league_schedule(handle: *mut GameHandle, league_id:
         };
 
         let mut raw_items: Vec<_> = league.schedule.tours.iter().flat_map(|t| t.items.iter()).collect();
+        // Drop dead fixtures — see `team_schedule.rs`'s matching filter for
+        // why: a split-season country's schedule starts months before the
+        // world's Aug-1-anchored clock does, so its early rounds are
+        // result-less and dated before "now" forever, not just not-yet-played.
+        raw_items.retain(|item| item.result.is_some() || item.date >= game.data().date);
         raw_items.sort_by_key(|item| item.date);
 
         let items: Vec<LeagueScheduleItemJson> = raw_items
@@ -75,8 +82,10 @@ pub extern "C" fn engine_get_league_schedule(handle: *mut GameHandle, league_id:
                     time: item.date.format("%H:%M").to_string(),
                     home_team_id: item.home_team_id,
                     home_team_name: find_team(item.home_team_id).map(|t| t.name.clone()).unwrap_or_default(),
+                    home_team_slug: find_team(item.home_team_id).map(|t| t.slug.clone()).unwrap_or_default(),
                     away_team_id: item.away_team_id,
                     away_team_name: find_team(item.away_team_id).map(|t| t.name.clone()).unwrap_or_default(),
+                    away_team_slug: find_team(item.away_team_id).map(|t| t.slug.clone()).unwrap_or_default(),
                     match_id: item.id.clone(),
                     home_goals,
                     away_goals,

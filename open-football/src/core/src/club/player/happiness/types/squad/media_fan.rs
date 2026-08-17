@@ -1,4 +1,5 @@
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub enum MediaFanEventKind {
     InterviewCalmsSpeculation,
     InterviewFuelsSpeculation,
@@ -30,6 +31,7 @@ impl MediaFanEventKind {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub enum MediaFanSource {
     LocalPress,
     NationalPress,
@@ -55,6 +57,7 @@ impl MediaFanSource {
 }
 
 #[derive(Debug, Clone)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct MediaFanEventContext {
     pub kind: MediaFanEventKind,
     pub source: MediaFanSource,

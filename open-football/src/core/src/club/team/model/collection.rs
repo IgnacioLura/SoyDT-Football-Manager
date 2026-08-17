@@ -12,6 +12,7 @@ use std::slice::Iter;
 use std::slice::IterMut;
 
 #[derive(Debug, Clone)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct TeamCollection {
     pub teams: Vec<Team>,
     pub coach_state: Option<CoachDecisionState>,

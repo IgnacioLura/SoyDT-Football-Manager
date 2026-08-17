@@ -10,7 +10,7 @@ use std::panic::{self, AssertUnwindSafe};
 /// Bump whenever a JSON shape returned by any `engine_*` export changes in a
 /// way that isn't purely additive (field removed/renamed/retyped). `SoyDT.Engine`
 /// checks this against its own compiled-in expectation at startup.
-pub const CONTRACT_VERSION: u32 = 1;
+pub const CONTRACT_VERSION: u32 = 2;
 
 #[derive(Serialize)]
 struct ErrorBody {

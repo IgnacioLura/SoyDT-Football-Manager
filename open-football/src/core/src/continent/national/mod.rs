@@ -25,6 +25,7 @@ impl NationalCompetitionPhase {
 
 /// Manages all national team competitions at the continent level
 #[derive(Debug, Clone)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct NationalTeamCompetitions {
     pub competition_configs: Vec<NationalCompetitionConfig>,
     pub competitions: Vec<NationalTeamCompetition>,

@@ -9,6 +9,7 @@
 
 /// Languages in the football world.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub enum Language {
     English,
     Spanish,
@@ -282,6 +283,7 @@ impl Language {
 
 /// A player's proficiency in a specific language.
 #[derive(Debug, Clone)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct PlayerLanguage {
     pub language: Language,
     /// 0 = no knowledge, 100 = fully fluent (native).
@@ -365,6 +367,7 @@ impl Language {
 /// club country's own language first, the football bridge languages
 /// (English, Spanish) as a partial substitute.
 #[derive(Debug, Clone, Copy, Default)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct LanguageProfile {
     pub fluent_mask: u64,
     pub conversational_mask: u64,

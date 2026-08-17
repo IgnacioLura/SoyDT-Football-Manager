@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import { PositionBadge } from '../../shared/positions'
 import { useTeamCountryId } from '../../shared/useTeamCountryId'
 
 // Ported from open-football/src/web/src/teams/scouting/index.html — the
@@ -102,7 +103,9 @@ function TeamScoutingPage() {
                     <td className="sq-name">
                       <Link to={`/players/${m.playerId}`}>{m.playerName}</Link>
                     </td>
-                    <td>{m.position}</td>
+                    <td>
+                      <PositionBadge position={m.position} />
+                    </td>
                     <td>{m.age}</td>
                     <td>{m.currentClubName || '—'}</td>
                     <td>{m.scoutName || '—'}</td>

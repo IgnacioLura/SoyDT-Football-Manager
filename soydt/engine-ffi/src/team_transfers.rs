@@ -18,6 +18,7 @@ struct TeamTransferItemJson {
     player_id: u32,
     player_name: String,
     other_team_name: String,
+    other_team_slug: String,
     fee: f64,
     is_loan: bool,
     is_free: bool,
@@ -71,6 +72,26 @@ pub extern "C" fn engine_get_team_transfers(handle: *mut GameHandle, team_id: u3
         let (ci, ki) = found_country_idx.expect("club_id set implies country index set");
         let country = &game.data().continents[ci].countries[ki];
 
+        let find_team_slug_by_id = |team_id: u32| -> String {
+            country
+                .clubs
+                .iter()
+                .flat_map(|c| c.teams.teams.iter())
+                .find(|t| t.id == team_id)
+                .map(|t| t.slug.clone())
+                .unwrap_or_default()
+        };
+
+        let find_main_team_slug_by_club = |club_id: u32| -> String {
+            country
+                .clubs
+                .iter()
+                .find(|c| c.id == club_id)
+                .and_then(|c| c.teams.main())
+                .map(|t| t.slug.clone())
+                .unwrap_or_default()
+        };
+
         let mut incoming = Vec::new();
         let mut outgoing = Vec::new();
 
@@ -83,6 +104,7 @@ pub extern "C" fn engine_get_team_transfers(handle: *mut GameHandle, team_id: u3
                     player_id: t.player_id,
                     player_name: t.player_name.clone(),
                     other_team_name: t.from_team_name.clone(),
+                    other_team_slug: find_team_slug_by_id(t.from_team_id),
                     fee: t.fee.amount,
                     is_loan,
                     is_free,
@@ -93,6 +115,7 @@ pub extern "C" fn engine_get_team_transfers(handle: *mut GameHandle, team_id: u3
                     player_id: t.player_id,
                     player_name: t.player_name.clone(),
                     other_team_name: t.to_team_name.clone(),
+                    other_team_slug: find_main_team_slug_by_club(t.to_club_id),
                     fee: t.fee.amount,
                     is_loan,
                     is_free,

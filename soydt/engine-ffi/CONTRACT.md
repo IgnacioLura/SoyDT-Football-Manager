@@ -5,7 +5,7 @@ version it was built against before trusting any JSON shape below. Bump
 `CONTRACT_VERSION` in `src/contract.rs` on any non-additive change (field
 removed/renamed/retyped) to any of these shapes.
 
-Current version: **1**
+Current version: **2**
 
 ## Memory ownership
 
@@ -73,9 +73,12 @@ Minimal read-only snapshot of current world state. `data`:
 
 This is intentionally small (Phase 0 proves the pipe, not full feature
 coverage) — it grows per-feature-area fields as React pages come online.
-Never a wholesale dump of `SimulatorData` (no serde derive on it, and it's
-too large/internal to expose directly — always a hand-projected DTO, same
-pattern as the match squad JSON below).
+Never a wholesale dump of `SimulatorData` as JSON — `SimulatorData` does
+derive `Serialize`/`Deserialize` (as of contract version 2, for
+`engine_save_game`/`engine_load_game` below), but reads still always go
+through a hand-projected DTO, same pattern as the match squad JSON below;
+the derive exists purely for the opaque bincode save-game blob, never for
+a JSON response shape.
 
 ### `engine_get_countries(handle) -> *mut c_char`
 Flat list of every country in the current world (or scoped subset). `data`:
@@ -111,7 +114,7 @@ league's own domestic schedule — continental/cup fixtures not merged, same
 simplification as `engine_get_team_schedule`.
 
 ```json
-{"date":"14.08.2026","time":"18:00","home_team_id":82,"home_team_name":"Boca Juniors","away_team_id":42,"away_team_name":"River Plate","match_id":"2026-08-14_82_42","home_goals":null,"away_goals":null}
+{"date":"14.08.2026","time":"18:00","home_team_id":82,"home_team_name":"Boca Juniors","home_team_slug":"boca-juniors","away_team_id":42,"away_team_name":"River Plate","away_team_slug":"river-plate","match_id":"2026-08-14_82_42","home_goals":null,"away_goals":null}
 ```
 
 ### `engine_get_team(handle, team_id) -> *mut c_char`
@@ -236,8 +239,34 @@ League fixture list for one team, sorted by date ascending. Only domestic
 league fixtures — continental/cup fixtures not merged.
 
 ```json
-{"date":"14.08.2026","time":"18:00","opponent_team_id":42,"opponent_name":"River Plate","is_home":true,"competition_name":"Primera División","match_id":"2026-08-14_7_42","home_goals":2,"away_goals":1}
+{"date":"14.08.2026","time":"18:00","opponent_team_id":42,"opponent_name":"River Plate","opponent_slug":"river-plate","is_home":true,"competition_name":"Primera División","match_id":"2026-08-14_7_42","home_goals":2,"away_goals":1}
 ```
+
+### `engine_get_team_lineup(handle, team_id) -> *mut c_char`
+DT squad + last-saved formation-slot layout — see `team_lineup.rs`. `data`:
+
+```json
+{
+  "players": [
+    {"player_id": 501, "name": "Nico López", "position": "AttackingMidfielderLeft", "current_ability": 126, "shirt_number": 11, "pinned": true, "is_ready_for_match": true, "is_injured": false, "is_banned": false}
+  ],
+  "slot_order": [301, 302, null, 304, 305, 306, 307, 308, 501, 310, 311]
+}
+```
+
+`slot_order` is the exact 11-entry formation-slot layout from the last
+`engine_set_team_lineup` call, in slot order (the frontend's fixed 4-3-3
+order) — `null` where that slot's player has since left the roster or
+become unavailable. Empty array if this team has never saved a lineup this
+session (`GameHandle::lineup_order` isn't seeded from anywhere else).
+
+### `engine_set_team_lineup(handle, team_id, args_json) -> *mut c_char`
+Body: `{"player_ids": [11 ids, in formation-slot order]}`. Pins exactly
+those 11 players (clears the pin on everyone else on the roster) and
+remembers the given order verbatim for the next `engine_get_team_lineup`'s
+`slot_order`. Rejects (without pinning anyone) if any id isn't on this
+team's roster or isn't ready for a match — see `Player::is_ready_for_match`.
+`data` is `null` on success.
 
 ### `engine_get_team_transfers(handle, team_id) -> *mut c_char`
 Incoming and outgoing completed transfers for one team, resolved via the
@@ -246,8 +275,8 @@ team's `club_id` (incoming matches `to_club_id`, outgoing matches
 
 ```json
 {
-  "incoming": [{ "player_id": 123, "player_name": "...", "other_team_name": "River Plate", "fee": 5000000.0, "is_loan": false, "is_free": false, "date": "14.08.2026" }],
-  "outgoing": [{ "player_id": 456, "player_name": "...", "other_team_name": "Boca Juniors", "fee": 0.0, "is_loan": true, "is_free": false, "date": "01.07.2026" }]
+  "incoming": [{ "player_id": 123, "player_name": "...", "other_team_name": "River Plate", "other_team_slug": "river-plate", "fee": 5000000.0, "is_loan": false, "is_free": false, "date": "14.08.2026" }],
+  "outgoing": [{ "player_id": 456, "player_name": "...", "other_team_name": "Boca Juniors", "other_team_slug": "boca-juniors", "fee": 0.0, "is_loan": true, "is_free": false, "date": "01.07.2026" }]
 }
 ```
 
@@ -297,6 +326,32 @@ else dropped as neutral. `data`:
   ]
 }
 ```
+
+### `engine_save_game(handle) -> *mut c_char`
+Serializes the entire `SimulatorData` game world (bincode) and base64-encodes
+it. `data` is a single opaque string — not meant to be parsed or inspected,
+only round-tripped back into `engine_load_game`. Persistence/scheduling
+(when to call this) lives entirely on the .NET side; this export is a pure
+serialize-on-demand primitive. `data`:
+
+```json
+"<base64 bincode blob>"
+```
+
+Note: unlike every other JSON-returning export, `data` here is a bare string,
+not an object — same convention as `engine_ffi_contract_version` being a bare
+integer would be if it were envelope-wrapped.
+
+### `engine_load_game(bytes_base64: *const c_char) -> *mut GameHandle` (opaque, nullable)
+Inverse of `engine_save_game`: base64-decodes and bincode-deserializes
+`bytes_base64` into a `SimulatorData`, rebuilds the `indexes` derived-cache
+field (skipped by serde — see `open-football`'s `simulator::data::SimulatorData`
+doc comment), and returns a fresh `GameHandle`, same as `engine_create_game`.
+**Not** JSON-enveloped — returns null on a decode/deserialize failure or panic
+(e.g. a blob saved under an incompatible `CONTRACT_VERSION`), matching
+`engine_create_game`'s null-on-failure convention. Pass the non-null result to
+every other `engine_*` game function, and eventually to `engine_free_game`
+exactly once.
 
 ## Round-trip test fixtures
 

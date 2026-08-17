@@ -8,6 +8,7 @@ public sealed record TeamScheduleItem(
     string Time,
     uint OpponentTeamId,
     string OpponentName,
+    string OpponentSlug,
     bool IsHome,
     string CompetitionName,
     string MatchId,

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import { PositionBadge } from '../../shared/positions'
 
 // Mirrors the original app's `watchlist/index.html` (`/{lang}/watchlist`) —
 // a plain list of player ids on `SimulatorData.watchlist`, resolved against
@@ -94,7 +95,9 @@ function WatchlistPage() {
                     <td className="st-club">
                       <Link to={`/players/${p.id}`}>{p.name}</Link>
                     </td>
-                    <td>{p.position}</td>
+                    <td>
+                      <PositionBadge position={p.position} />
+                    </td>
                     <td>{p.age}</td>
                     <td className="st-pts">{p.currentAbility}</td>
                     <td className="st-pts">{p.potentialAbility}</td>

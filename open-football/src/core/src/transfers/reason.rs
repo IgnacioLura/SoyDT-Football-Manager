@@ -10,6 +10,7 @@ use crate::transfers::pipeline::ScoutingRecommendation;
 /// rather than a rendered phrase for the same reason: the view bands and
 /// phrases it at render time, in the reader's language.
 #[derive(Debug, Clone, Default, PartialEq)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct TransferReason {
     /// i18n key for the motive line ("signing_reason_depth_cover",
     /// "dec_reason_contract_expired", ...). Empty = no reason recorded.
@@ -51,6 +52,7 @@ impl TransferReason {
 /// numbers directly; the transfers page bands them (see [`AbilityBand`])
 /// because a completed move is read as a story, not a table.
 #[derive(Debug, Clone, PartialEq)]
+#[derive(serde::Serialize, serde::Deserialize)]
 pub struct ScoutVerdict {
     pub recommendation: ScoutingRecommendation,
     pub assessed_ability: u8,

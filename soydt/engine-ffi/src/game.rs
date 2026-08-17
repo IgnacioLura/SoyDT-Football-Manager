@@ -10,7 +10,7 @@ use crate::strings::{read, to_owned_ptr};
 use core::{FootballSimulator, SimulatorData};
 use database::{DatabaseEntity, DatabaseGenerator, DatabaseLoader};
 use serde::Serialize;
-use std::collections::HashSet;
+use std::collections::{HashMap, HashSet};
 use std::future::Future;
 use std::os::raw::c_char;
 use std::pin::pin;
@@ -21,18 +21,35 @@ use std::task::{Context, Poll, Waker};
 /// calls without external synchronization (mirrors the single-instance,
 /// no-multi-tenant nature of the original app — `SoyDT.Engine` should guard
 /// access with its own lock if it exposes concurrent request handling).
-pub struct GameHandle(SimulatorData);
+pub struct GameHandle {
+    data: SimulatorData,
+    /// DT lineup formation slots, keyed by team id — see `team_lineup.rs`.
+    /// `SimulatorData`/`Player` have no notion of "formation slot" (only the
+    /// sticky `is_force_match_selection` pin, which doesn't say *where* a
+    /// pinned player was placed), so the ordered slot assignment the DT
+    /// actually chose is tracked here instead, alongside the data it
+    /// describes — travels with `engine_clone_game` and vanishes with
+    /// `engine_free_game`, same lifetime as everything else on the handle.
+    pub(crate) lineup_order: HashMap<u32, Vec<u32>>,
+}
 
 impl GameHandle {
+    /// Wraps an already-built `SimulatorData` in a handle — used by
+    /// `save.rs`'s `engine_load_game`, which constructs `SimulatorData` via
+    /// bincode deserialization rather than `DatabaseGenerator::generate`.
+    pub(crate) fn from_data(data: SimulatorData) -> Self {
+        GameHandle { data, lineup_order: HashMap::new() }
+    }
+
     pub(crate) fn data(&self) -> &SimulatorData {
-        &self.0
+        &self.data
     }
 
     /// Mutable access for exports that write world state directly rather
     /// than advancing the simulation (e.g. `watchlist.rs`'s add/remove —
     /// mirrors the original's `Arc::make_mut(&mut arc_data).watchlist.push(...)`).
     pub(crate) fn data_mut(&mut self) -> &mut SimulatorData {
-        &mut self.0
+        &mut self.data
     }
 }
 
@@ -73,23 +90,30 @@ pub extern "C" fn engine_create_game() -> *mut GameHandle {
     });
 
     match result {
-        Ok(data) => Box::into_raw(Box::new(GameHandle(data))),
+        Ok(data) => Box::into_raw(Box::new(GameHandle { data, lineup_order: HashMap::new() })),
         Err(_) => std::ptr::null_mut(),
     }
 }
 
 /// Prunes a loaded `DatabaseEntity` down to only the given countries (by
-/// ISO country code, case-insensitive) before generation, so dev/test runs
-/// don't pay for procedurally generating and simulating the entire world
-/// (all continents) just to exercise a handful of leagues. Keeps referential
-/// integrity: continents/leagues/clubs are retained only if they belong to
-/// a kept country's continent/country id — see `database`'s `CountryEntity`/
-/// `LeagueEntity`/`ClubEntity`, whose `country_id`/`continent_id` fields
-/// this filters on. `national_competitions`/`names_by_country` are left
-/// unfiltered — both already no-op safely against a pruned country/continent
-/// set inside `DatabaseGenerator::generate` (matched against the same ids
-/// there), so pruning them here would be redundant, not required for
-/// correctness.
+/// ISO country code, case-insensitive), and within them to only tier-1
+/// leagues, before generation — so dev/test runs don't pay for procedurally
+/// generating and simulating the entire world (all continents, every
+/// division) just to exercise the MVP's one flight per country. Keeps
+/// referential integrity: continents/leagues/clubs are retained only if
+/// they belong to a kept country's continent/country id (and, for
+/// leagues/clubs, a kept tier-1 league) — see `database`'s `CountryEntity`/
+/// `LeagueEntity`/`ClubEntity`, whose `country_id`/`continent_id`/`league_id`
+/// fields this filters on. `national_competitions`/`names_by_country` are
+/// left unfiltered — both already no-op safely against a pruned
+/// country/continent set inside `DatabaseGenerator::generate` (matched
+/// against the same ids there), so pruning them here would be redundant,
+/// not required for correctness. Dropping tier 2+ entirely is safe against
+/// promotion/relegation: `CountryResult::paired_promotion_league` already
+/// falls back to `None`/skip when a tier's paired lower league doesn't
+/// exist (the common case for any country that only has one tier to begin
+/// with), so a missing tier 2 just means tier 1 never relegates anyone —
+/// no panic, no orphaned reference.
 fn scope_to_countries(data: &mut DatabaseEntity, country_codes: &[String]) {
     let wanted: HashSet<String> = country_codes.iter().map(|c| c.to_uppercase()).collect();
 
@@ -109,8 +133,13 @@ fn scope_to_countries(data: &mut DatabaseEntity, country_codes: &[String]) {
 
     data.continents.retain(|c| continent_ids.contains(&c.id));
     data.countries.retain(|c| country_ids.contains(&c.id));
-    data.leagues.retain(|l| country_ids.contains(&l.country_id));
-    data.clubs.retain(|c| country_ids.contains(&c.country_id));
+    data.leagues.retain(|l| country_ids.contains(&l.country_id) && l.tier == 1);
+
+    let league_ids: HashSet<u32> = data.leagues.iter().map(|l| l.id).collect();
+    data.clubs.retain(|c| {
+        country_ids.contains(&c.country_id)
+            && c.teams.iter().any(|t| t.league_id.is_some_and(|id| league_ids.contains(&id)))
+    });
 }
 
 /// Same as `engine_create_game`, but scopes world generation to the given
@@ -137,7 +166,7 @@ pub extern "C" fn engine_create_scoped_game(country_codes_json: *const c_char) -
     });
 
     match result {
-        Ok(data) => Box::into_raw(Box::new(GameHandle(data))),
+        Ok(data) => Box::into_raw(Box::new(GameHandle { data, lineup_order: HashMap::new() })),
         Err(_) => std::ptr::null_mut(),
     }
 }
@@ -163,11 +192,11 @@ pub extern "C" fn engine_clone_game(handle: *mut GameHandle) -> *mut GameHandle 
     }
     let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
         let game = unsafe { &*handle };
-        game.data().clone()
+        (game.data().clone(), game.lineup_order.clone())
     }));
 
     match result {
-        Ok(data) => Box::into_raw(Box::new(GameHandle(data))),
+        Ok((data, lineup_order)) => Box::into_raw(Box::new(GameHandle { data, lineup_order })),
         Err(_) => std::ptr::null_mut(),
     }
 }
@@ -211,12 +240,12 @@ pub extern "C" fn engine_process_days(handle: *mut GameHandle, days: u32) -> *mu
 
         let mut matches_played: u64 = 0;
         for _ in 0..days {
-            let result = block_on(FootballSimulator::simulate(&mut game.0));
+            let result = block_on(FootballSimulator::simulate(&mut game.data));
             matches_played += result.match_results.len() as u64;
         }
 
         Ok(ProcessResult {
-            date: game.0.date.date().to_string(),
+            date: game.data.date.date().to_string(),
             days_processed: days,
             matches_played,
         })
@@ -268,7 +297,7 @@ pub extern "C" fn engine_get_countries(handle: *mut GameHandle) -> *mut c_char {
         let game = unsafe { &*handle };
 
         let mut countries: Vec<CountryListItem> = game
-            .0
+            .data
             .continents
             .iter()
             .flat_map(|continent| {
@@ -310,7 +339,7 @@ pub extern "C" fn engine_get_snapshot(handle: *mut GameHandle) -> *mut c_char {
         let game = unsafe { &*handle };
 
         let continents = game
-            .0
+            .data
             .continents
             .iter()
             .map(|c| ContinentSummary {
@@ -321,7 +350,7 @@ pub extern "C" fn engine_get_snapshot(handle: *mut GameHandle) -> *mut c_char {
             .collect();
 
         Ok(SnapshotResult {
-            date: game.0.date.date().to_string(),
+            date: game.data.date.date().to_string(),
             continents,
         })
     });
