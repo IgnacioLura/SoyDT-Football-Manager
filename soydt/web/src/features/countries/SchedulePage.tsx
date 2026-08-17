@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import SectionPanel from '../../shared/ui/SectionPanel'
 import { countryTabs } from './tabs'
 
 // Ported from open-football/src/web/src/countries/schedule/index.html —
@@ -56,10 +57,7 @@ function SchedulePage() {
   return (
     <Layout title="Schedule" subTitle={tabs} sidebarCountryId={Number(countryId)}>
       <div className="fm-page">
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Schedule</h3>
-          </div>
+        <SectionPanel title="Schedule">
           {items.length === 0 ? (
             <div className="fm-empty">No schedule</div>
           ) : (
@@ -98,7 +96,7 @@ function SchedulePage() {
               </tbody>
             </table>
           )}
-        </section>
+        </SectionPanel>
       </div>
     </Layout>
   )

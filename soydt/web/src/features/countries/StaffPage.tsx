@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Flag from '../../shared/Flag'
 import Layout from '../../shared/Layout'
+import SectionPanel from '../../shared/ui/SectionPanel'
 import { countryTabs } from './tabs'
 
 // Ported from open-football/src/web/src/countries/staff/index.html — the
@@ -55,11 +56,7 @@ function StaffPage() {
   return (
     <Layout title="Staff" subTitle={tabs} sidebarCountryId={Number(countryId)}>
       <div className="fm-page">
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Staff</h3>
-            <span className="fm-panel-count">{staff.length}</span>
-          </div>
+        <SectionPanel title="Staff" actions={<span className="fm-panel-count">{staff.length}</span>}>
           {staff.length === 0 ? (
             <div className="fm-empty">No staff</div>
           ) : (
@@ -88,7 +85,7 @@ function StaffPage() {
               </tbody>
             </table>
           )}
-        </section>
+        </SectionPanel>
       </div>
     </Layout>
   )

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Flag from '../../shared/Flag'
 import Layout from '../../shared/Layout'
+import SectionPanel from '../../shared/ui/SectionPanel'
 
 // Ported 1:1 from open-football/src/web/src/countries/get/index.html — the
 // `/{lang}/countries` continents/countries index page. Same section/grid
@@ -92,12 +93,8 @@ function CountriesPage() {
   return (
     <Layout title="Countries">
       <div className="fm-page">
-        {[...groups.entries()].map(([continent, list], i) => (
-          <section key={continent} className={`fm-panel${i > 0 ? ' mt-3' : ''}`}>
-            <div className="fm-panel-head">
-              <h3>{continent}</h3>
-              <span className="fm-panel-count">{list.length}</span>
-            </div>
+        {[...groups.entries()].map(([continent, list]) => (
+          <SectionPanel key={continent} title={continent} actions={<span className="fm-panel-count">{list.length}</span>}>
             <div className="fm-country-grid">
               {list.map((c) => (
                 <Link key={c.id} to={`/countries/${c.id}/leagues`} className="fm-country-item">
@@ -106,7 +103,7 @@ function CountriesPage() {
                 </Link>
               ))}
             </div>
-          </section>
+          </SectionPanel>
         ))}
       </div>
     </Layout>

@@ -3,6 +3,7 @@ import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
 import { PositionBadge } from '../../shared/positions'
+import SectionPanel from '../../shared/ui/SectionPanel'
 import { countryTabs } from './tabs'
 
 // Ported from open-football/src/web/src/countries/squad/index.html — the
@@ -90,11 +91,10 @@ function NationalSquadPage() {
   return (
     <Layout title={u21 ? 'U21 squad' : 'Squad'} subTitle={tabs} sidebarCountryId={Number(countryId)}>
       <div className="fm-page">
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>{u21 ? 'U21 squad' : 'Squad'}</h3>
-            <span className="fm-panel-count">{squad.length}</span>
-          </div>
+        <SectionPanel
+          title={u21 ? 'U21 squad' : 'Squad'}
+          actions={<span className="fm-panel-count">{squad.length}</span>}
+        >
           {squad.length === 0 ? (
             <div className="fm-empty">No squad</div>
           ) : (
@@ -148,7 +148,7 @@ function NationalSquadPage() {
               </tbody>
             </table>
           )}
-        </section>
+        </SectionPanel>
       </div>
     </Layout>
   )

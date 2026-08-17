@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
 import { PositionBadge } from '../../shared/positions'
+import SectionPanel from '../../shared/ui/SectionPanel'
 import { countryTabs } from './tabs'
 
 // Ported from open-football/src/web/src/countries/free_agents/index.html —
@@ -56,11 +57,7 @@ function FreeAgentsPage() {
   return (
     <Layout title="Free agents" subTitle={tabs} sidebarCountryId={Number(countryId)}>
       <div className="fm-page">
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Free agents</h3>
-            <span className="fm-panel-count">{players.length}</span>
-          </div>
+        <SectionPanel title="Free agents" actions={<span className="fm-panel-count">{players.length}</span>}>
           {players.length === 0 ? (
             <div className="fm-empty">No free agents</div>
           ) : (
@@ -91,7 +88,7 @@ function FreeAgentsPage() {
               </tbody>
             </table>
           )}
-        </section>
+        </SectionPanel>
       </div>
     </Layout>
   )
