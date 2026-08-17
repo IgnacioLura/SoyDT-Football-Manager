@@ -1,0 +1,42 @@
+/* soydt/web/src/shared/theme.css
+   EA Sports FC-style design tokens. :root custom properties ONLY — no
+   element/class selectors here, so importing this globally cannot affect
+   pages that don't opt into the new component kit (Fase A: Layout,
+   TeamPage, PlayerPage only). */
+:root {
+  /* Surfaces — dark navy/charcoal scale, darkest to lightest */
+  --surface-0: #0b0e14;
+  --surface-1: #12161f;
+  --surface-2: #1a1f2b;
+  --surface-3: #242a38;
+
+  /* Accents — pitch-green + broadcast-cyan */
+  --accent-primary: #2ee6a6;
+  --accent-secondary: #3fc7ff;
+
+  /* Rating tiers, low to high CA */
+  --tier-bronze: #b06a3a;
+  --tier-silver: #b8c0cc;
+  --tier-gold: #f2c94c;
+  --tier-elite: #2ee6a6;
+
+  /* Text */
+  --text-primary: #f4f6fa;
+  --text-muted: #8b93a7;
+
+  /* Typography */
+  --font-display: 'Arial Narrow', 'Oswald', 'Helvetica Neue', sans-serif;
+  --font-body: -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+
+  /* Shape */
+  --radius-card: 10px;
+  --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.45);
+}
