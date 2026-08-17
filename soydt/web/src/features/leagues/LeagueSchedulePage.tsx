@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import SectionPanel from '../../shared/ui/SectionPanel'
 import TeamCrest from '../onboarding/TeamCrest'
 import { leagueTabs } from './tabs'
 
@@ -81,10 +82,7 @@ function LeagueSchedulePage() {
   return (
     <Layout title="Schedule" subTitle={tabs}>
       <div className="fm-page">
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Fixtures &amp; results</h3>
-          </div>
+        <SectionPanel title="Fixtures & results">
           <div className="fm-fixtures">
             {matchdays.length === 0 ? (
               <div className="fm-empty">No fixtures</div>
@@ -121,7 +119,7 @@ function LeagueSchedulePage() {
               ))
             )}
           </div>
-        </section>
+        </SectionPanel>
       </div>
     </Layout>
   )

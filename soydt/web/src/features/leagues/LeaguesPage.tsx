@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import { countryTabs } from '../countries/tabs'
 import Layout from '../../shared/Layout'
+import SectionPanel from '../../shared/ui/SectionPanel'
 
 // Ported 1:1 from open-football/src/web/src/countries/list/index.html
 // (extends countries_layout.html's tab bar) — the
@@ -58,10 +59,7 @@ function LeaguesPage() {
   return (
     <Layout title="Leagues" subTitle={tabs} sidebarCountryId={Number(countryId)}>
       <div className="fm-page">
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Leagues</h3>
-          </div>
+        <SectionPanel title="Leagues">
           <div className="fm-league-list">
             {sorted.map((l) => (
               <Link key={l.id} to={`/leagues/${l.id}`} className="fm-league-item">
@@ -70,7 +68,7 @@ function LeaguesPage() {
               </Link>
             ))}
           </div>
-        </section>
+        </SectionPanel>
       </div>
     </Layout>
   )

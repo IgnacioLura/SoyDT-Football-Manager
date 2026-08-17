@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import SectionPanel from '../../shared/ui/SectionPanel'
 import { leagueTabs } from './tabs'
 
 // Ported from open-football/src/web/src/leagues/awards/index.html, scoped
@@ -73,10 +74,7 @@ function LeagueAwardsPage() {
   return (
     <Layout title="Awards" subTitle={tabs}>
       <div className="fm-page">
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Season honours</h3>
-          </div>
+        <SectionPanel title="Season honours">
           {awards === null ? (
             <div className="fm-empty">No season has completed yet</div>
           ) : (
@@ -90,7 +88,7 @@ function LeagueAwardsPage() {
               </tbody>
             </table>
           )}
-        </section>
+        </SectionPanel>
       </div>
     </Layout>
   )

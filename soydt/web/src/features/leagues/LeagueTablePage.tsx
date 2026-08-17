@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import SectionPanel from '../../shared/ui/SectionPanel'
 import TeamCrest from '../onboarding/TeamCrest'
 import { leagueTabs } from './tabs'
 
@@ -77,7 +78,7 @@ function LeagueTablePage() {
   return (
     <Layout title={table.leagueName} subTitle={tabs} sidebarCountryId={table.countryId}>
       <div className="fm-page">
-        <section className="fm-panel">
+        <SectionPanel title="Standings">
           <table className="fm-standings">
             <thead>
               <tr>
@@ -125,7 +126,7 @@ function LeagueTablePage() {
               <i className="legend-dot rel" /> Relegation
             </span>
           </div>
-        </section>
+        </SectionPanel>
       </div>
     </Layout>
   )

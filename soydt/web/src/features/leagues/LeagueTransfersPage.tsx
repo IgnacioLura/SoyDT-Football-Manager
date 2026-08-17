@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import SectionPanel from '../../shared/ui/SectionPanel'
 import TeamCrest from '../onboarding/TeamCrest'
 import { leagueTabs } from './tabs'
 
@@ -66,10 +67,7 @@ function LeagueTransfersPage() {
   return (
     <Layout title="Transfers" subTitle={tabs}>
       <div className="fm-page">
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Completed transfers</h3>
-          </div>
+        <SectionPanel title="Completed transfers">
           <div className="fm-transfer-tabs">
             <button className={`fm-ttab${!showLoans ? ' active' : ''}`} onClick={() => setShowLoans(false)}>
               Permanent
@@ -124,7 +122,7 @@ function LeagueTransfersPage() {
               </tbody>
             </table>
           )}
-        </section>
+        </SectionPanel>
       </div>
     </Layout>
   )
