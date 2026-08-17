@@ -31,6 +31,20 @@ type TeamDetail = {
   players: TeamPlayer[]
 }
 
+type TeamSquadNeeds = {
+  mainTeamSize: number
+  totalMissing: number
+  urgent: boolean
+  gkCount: number
+  gkMissing: number
+  defCount: number
+  defMissing: number
+  midCount: number
+  midMissing: number
+  fwdCount: number
+  fwdMissing: number
+}
+
 function TeamPage() {
   const { teamId } = useParams<{ teamId: string }>()
   const [team, setTeam] = useState<TeamDetail | null>(null)
@@ -43,6 +57,13 @@ function TeamPage() {
     callApi<TeamDetail>(`/api/teams/${teamId}`)
       .then(setTeam)
       .catch((e) => setError(e instanceof Error ? e.message : String(e)))
+  }, [teamId])
+
+  const [squadNeeds, setSquadNeeds] = useState<TeamSquadNeeds | null>(null)
+
+  useEffect(() => {
+    setSquadNeeds(null)
+    callApi<TeamSquadNeeds>(`/api/teams/${teamId}/squad-needs`).then(setSquadNeeds).catch(() => setSquadNeeds(null))
   }, [teamId])
 
   if (error) {
@@ -96,6 +117,58 @@ function TeamPage() {
             ))}
           </div>
         </SectionPanel>
+
+        {squadNeeds && (
+          <SectionPanel title="Squad Needs">
+            <div className="fm-personal-detail">
+              {squadNeeds.urgent && (
+                <div className="fm-detail-row">
+                  <span className="fm-detail-label">Status</span>
+                  <span className="fm-detail-value" style={{ color: 'crimson' }}>
+                    Urgent — squad below minimum
+                  </span>
+                </div>
+              )}
+              <div className="fm-detail-row">
+                <span className="fm-detail-label">Goalkeepers</span>
+                <span className="fm-detail-value" style={squadNeeds.gkMissing > 0 ? { color: 'crimson' } : undefined}>
+                  {squadNeeds.gkCount}
+                  {squadNeeds.gkMissing > 0 ? ` (${squadNeeds.gkMissing} short)` : ''}
+                </span>
+              </div>
+              <div className="fm-detail-row">
+                <span className="fm-detail-label">Defenders</span>
+                <span className="fm-detail-value" style={squadNeeds.defMissing > 0 ? { color: 'crimson' } : undefined}>
+                  {squadNeeds.defCount}
+                  {squadNeeds.defMissing > 0 ? ` (${squadNeeds.defMissing} short)` : ''}
+                </span>
+              </div>
+              <div className="fm-detail-row">
+                <span className="fm-detail-label">Midfielders</span>
+                <span className="fm-detail-value" style={squadNeeds.midMissing > 0 ? { color: 'crimson' } : undefined}>
+                  {squadNeeds.midCount}
+                  {squadNeeds.midMissing > 0 ? ` (${squadNeeds.midMissing} short)` : ''}
+                </span>
+              </div>
+              <div className="fm-detail-row">
+                <span className="fm-detail-label">Forwards</span>
+                <span className="fm-detail-value" style={squadNeeds.fwdMissing > 0 ? { color: 'crimson' } : undefined}>
+                  {squadNeeds.fwdCount}
+                  {squadNeeds.fwdMissing > 0 ? ` (${squadNeeds.fwdMissing} short)` : ''}
+                </span>
+              </div>
+              <div className="fm-detail-row">
+                <span className="fm-detail-label">Total missing</span>
+                <span
+                  className="fm-detail-value"
+                  style={squadNeeds.totalMissing > 0 ? { color: 'crimson' } : undefined}
+                >
+                  {squadNeeds.totalMissing}
+                </span>
+              </div>
+            </div>
+          </SectionPanel>
+        )}
       </div>
     </Layout>
   )
