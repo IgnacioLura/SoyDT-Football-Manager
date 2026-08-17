@@ -73,13 +73,27 @@ public sealed partial class GameSession
     private readonly List<DtActiveBuffState> _dtActiveBuffs = [];
     private uint _dtLastCompletedMatchCount;
 
+    // Guards only the DT-events ledger (`_dtEventLog`/`_dtActiveBuffs`/
+    // `_dtLastCompletedMatchCount`) — deliberately separate from
+    // `_writeGate`, which is held for a whole `ProcessDays`/
+    // `ProcessDaysWithProgress` call (potentially minutes). `AdvanceDtEvents`
+    // and `ResetDtEvents` are always called from inside `_writeGate` already,
+    // so this is a strictly-nested lock (never taken in a different order
+    // elsewhere) — no deadlock risk. `GetDtEvents()` only needs this cheap
+    // lock, held for microseconds, instead of blocking on `_writeGate` for
+    // the duration of an in-flight multi-day process.
+    private readonly Lock _dtEventsLock = new();
+
     /// Called from `CreateNewGame` — a fresh world has no matches played
     /// yet, so any carried-over event state would be stale.
     private void ResetDtEvents()
     {
-        _dtEventLog.Clear();
-        _dtActiveBuffs.Clear();
-        _dtLastCompletedMatchCount = 0;
+        lock (_dtEventsLock)
+        {
+            _dtEventLog.Clear();
+            _dtActiveBuffs.Clear();
+            _dtLastCompletedMatchCount = 0;
+        }
     }
 
     /// Called after each engine day-advance, with the still-unpublished
@@ -87,25 +101,43 @@ public sealed partial class GameSession
     /// only ever sees the published `_current`) so
     /// `ProcessDaysWithProgress`'s per-day loop, which publishes once at
     /// the very end, still sees each day's real match completions as they
-    /// happen rather than only the final state.
-    private void AdvanceDtEvents(NativeGameEngine engine, GameHandleSafeHandle working)
+    /// happen rather than only the final state. `matchesThisCall` is the
+    /// world-wide match count from this same `ProcessDays` tick — a cheap
+    /// pre-filter to skip the schedule fetch entirely on days with
+    /// provably zero matches anywhere; the completed-count comparison
+    /// below remains the source of truth for whether THIS team advanced.
+    private void AdvanceDtEvents(NativeGameEngine engine, GameHandleSafeHandle working, ulong matchesThisCall)
     {
+        if (matchesThisCall == 0) return;
         if (_myClubId is not { } clubId) return;
 
         var schedule = engine.GetTeamSchedule(working, clubId);
         var completedCount = (uint)schedule.Count(m => m.HomeGoals.HasValue && m.AwayGoals.HasValue);
-        if (completedCount <= _dtLastCompletedMatchCount) return;
 
-        for (var matchday = _dtLastCompletedMatchCount + 1; matchday <= completedCount; matchday++)
+        lock (_dtEventsLock)
         {
-            DecayDtBuffs();
-            if (matchday >= DtEventMinMatchday)
+            // Season rollover: the league schedule gets replaced wholesale
+            // at season end, so `completedCount` can drop back to 0 (or a
+            // small number) even though matches keep being played. Without
+            // this reset, the stale (larger) `_dtLastCompletedMatchCount`
+            // would permanently block the early-return guard below.
+            if (completedCount < _dtLastCompletedMatchCount)
             {
-                MaybeTriggerDtEvent(engine, working, clubId, (int)matchday);
+                _dtLastCompletedMatchCount = 0;
             }
-        }
+            if (completedCount <= _dtLastCompletedMatchCount) return;
 
-        _dtLastCompletedMatchCount = completedCount;
+            for (var matchday = _dtLastCompletedMatchCount + 1; matchday <= completedCount; matchday++)
+            {
+                DecayDtBuffs();
+                if (matchday >= DtEventMinMatchday)
+                {
+                    MaybeTriggerDtEvent(engine, working, clubId, (int)matchday);
+                }
+            }
+
+            _dtLastCompletedMatchCount = completedCount;
+        }
     }
 
     private void DecayDtBuffs()
@@ -154,13 +186,15 @@ public sealed partial class GameSession
         });
     }
 
-    /// Reads under `_writeGate` — `_dtEventLog`/`_dtActiveBuffs` are plain
-    /// mutable lists mutated inside that same lock by `AdvanceDtEvents`
-    /// (see `ProcessDays`/`ProcessDaysWithProgress`), so a concurrent GET
-    /// needs the same lock to avoid a torn read.
+    /// Reads under `_dtEventsLock` — `_dtEventLog`/`_dtActiveBuffs` are
+    /// plain mutable lists mutated under that same dedicated lock by
+    /// `AdvanceDtEvents`/`ResetDtEvents`, so a concurrent GET needs it too
+    /// to avoid a torn read. Deliberately NOT `_writeGate`: that lock is
+    /// held for a whole `ProcessDays`/`ProcessDaysWithProgress` call, and
+    /// this read should never block on that.
     public DtEventsResponseDto GetDtEvents()
     {
-        lock (_writeGate)
+        lock (_dtEventsLock)
         {
             return new DtEventsResponseDto(
                 _dtEventLog.ToList(),

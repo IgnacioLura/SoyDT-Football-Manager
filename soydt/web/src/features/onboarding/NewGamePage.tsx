@@ -32,6 +32,10 @@ function NewGamePage() {
         const status = await callApi<{ hasGame: boolean; myClubId: number | null }>('/api/game/status')
         if (!status.hasGame) {
           await callApi('/api/game/create?countries=UY', { method: 'POST' })
+          // A queued-but-undismissed DT event from a previous game must not
+          // pop up in the fresh one — the log/buff state it refers to no
+          // longer exists once the world's been re-created.
+          sessionStorage.removeItem('dtPendingEvents')
         }
 
         setStep('loading-clubs')

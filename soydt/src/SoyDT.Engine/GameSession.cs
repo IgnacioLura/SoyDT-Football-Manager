@@ -54,9 +54,22 @@ public sealed partial class GameSession(NativeGameEngine engine)
         get { lock (_writeGate) { return _myClubId; } }
     }
 
+    /// Resets DT-events state to a clean slate whenever the "my club"
+    /// selection changes — matches `CreateNewGame`'s behavior. Without
+    /// this, days processed before a club was picked (or picking a
+    /// different club) would leave `_dtLastCompletedMatchCount` stale
+    /// against the new club's completed-match count, causing a burst of
+    /// back-dated rolls/decays on the very next process call. This is a
+    /// single-player-DT-team feature (no multi-tenancy), so restarting the
+    /// event history on club switch is the intended, simplest-correct
+    /// behavior.
     public void SetMyClub(uint clubId)
     {
-        lock (_writeGate) { _myClubId = clubId; }
+        lock (_writeGate)
+        {
+            _myClubId = clubId;
+            ResetDtEvents();
+        }
     }
 
     /// Mirrors the original app's `process_lock.try_lock_owned()` early-out
@@ -162,7 +175,7 @@ public sealed partial class GameSession(NativeGameEngine engine)
             var previous = CaptureCurrent();
             var working = engine.CloneGame(previous);
             var result = engine.ProcessDays(working, days);
-            AdvanceDtEvents(engine, working);
+            AdvanceDtEvents(engine, working, result.MatchesPlayed);
             Publish(working)?.Dispose();
             return result;
         }
@@ -193,7 +206,7 @@ public sealed partial class GameSession(NativeGameEngine engine)
             for (uint day = 1; day <= days; day++)
             {
                 var result = engine.ProcessDays(working, 1);
-                AdvanceDtEvents(engine, working);
+                AdvanceDtEvents(engine, working, result.MatchesPlayed);
                 matchesPlayed += result.MatchesPlayed;
                 date = result.Date;
                 onProgress(new ProcessProgress(date, day, days, matchesPlayed, day == days));

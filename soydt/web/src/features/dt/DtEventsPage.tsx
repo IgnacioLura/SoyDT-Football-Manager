@@ -84,7 +84,10 @@ function DtEventsPage() {
           {data.activeBuffs.map((b, i) => (
             <div className="fm-detail-row" key={i}>
               <span className="fm-detail-label">{b.scope === 'Player' ? b.playerName : 'Todo el plantel'}</span>
-              <span className="fm-detail-value" style={{ color: b.ovrDelta >= 0 ? '#4ade80' : '#ef4444' }}>
+              <span
+                className="fm-detail-value"
+                style={{ color: b.ovrDelta > 0 || (b.ovrDelta === 0 && b.moraleDelta >= 0) ? '#4ade80' : '#ef4444' }}
+              >
                 {b.ovrDelta >= 0 ? '+' : ''}
                 {b.ovrDelta} OVR · {b.matchesRemaining} partido{b.matchesRemaining === 1 ? '' : 's'} restante
                 {b.matchesRemaining === 1 ? '' : 's'}
