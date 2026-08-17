@@ -20,6 +20,7 @@ import TeamPage from './features/teams/TeamPage'
 import TeamSchedulePage from './features/teams/TeamSchedulePage'
 import TeamTransfersPage from './features/teams/TeamTransfersPage'
 import TeamFinancesPage from './features/teams/TeamFinancesPage'
+import TeamBoardPage from './features/teams/TeamBoardPage'
 import TeamStaffPage from './features/teams/TeamStaffPage'
 import TeamStatsPage from './features/teams/TeamStatsPage'
 import TeamRelationsPage from './features/teams/TeamRelationsPage'
@@ -75,6 +76,7 @@ function App() {
         <Route path="/teams/:teamId/schedule" element={<TeamSchedulePage />} />
         <Route path="/teams/:teamId/transfers" element={<TeamTransfersPage />} />
         <Route path="/teams/:teamId/finances" element={<TeamFinancesPage />} />
+        <Route path="/teams/:teamId/board" element={<TeamBoardPage />} />
         <Route path="/teams/:teamId/staff" element={<TeamStaffPage />} />
         <Route path="/teams/:teamId/stats" element={<TeamStatsPage />} />
         <Route path="/teams/:teamId/relations" element={<TeamRelationsPage />} />
