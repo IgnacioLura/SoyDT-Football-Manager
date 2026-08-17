@@ -3,7 +3,11 @@ import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
 import { PositionBadge } from '../../shared/positions'
+import type { SortMode } from '../../shared/sortPlayers'
+import { sortByMode } from '../../shared/sortPlayers'
+import DataTable from '../../shared/ui/DataTable'
 import SectionPanel from '../../shared/ui/SectionPanel'
+import SortToggle from '../../shared/ui/SortToggle'
 import { useTeamCountryId } from '../../shared/useTeamCountryId'
 
 // Ported from open-football/src/web/src/teams/academy/index.html — the
@@ -40,6 +44,7 @@ function TeamAcademyPage() {
   const sidebarCountryId = useTeamCountryId(teamId)
   const [academy, setAcademy] = useState<TeamAcademy | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [sortMode, setSortMode] = useState<SortMode>('position')
 
   useEffect(() => {
     setAcademy(null)
@@ -105,40 +110,31 @@ function TeamAcademyPage() {
 
         <SectionPanel
           title="Academy players"
-          actions={<span className="fm-panel-count">{academy.players.length}</span>}
+          actions={
+            <>
+              <SortToggle value={sortMode} onChange={setSortMode} />
+              <span className="fm-panel-count">{academy.players.length}</span>
+            </>
+          }
         >
-          {academy.players.length === 0 ? (
-            <div className="fm-empty">No academy players</div>
-          ) : (
-            <table className="fm-squad">
-              <thead>
-                <tr>
-                  <th className="sq-name">Name</th>
-                  <th>Pos</th>
-                  <th>Phase</th>
-                  <th>Age</th>
-                  <th>OVR</th>
-                  <th>PA</th>
-                </tr>
-              </thead>
-              <tbody>
-                {academy.players.map((p) => (
-                  <tr key={p.playerId}>
-                    <td className="sq-name">
-                      <Link to={`/players/${p.playerId}`}>{p.name}</Link>
-                    </td>
-                    <td>
-                      <PositionBadge position={p.position} />
-                    </td>
-                    <td>{p.phase}</td>
-                    <td>{p.age}</td>
-                    <td>{p.currentAbility}</td>
-                    <td>{p.potentialAbility}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+          <DataTable
+            rows={sortByMode(academy.players, sortMode, (p) => p.position, (p) => p.currentAbility)}
+            rowKey={(p) => p.playerId}
+            emptyMessage="No academy players"
+            columns={[
+              {
+                key: 'name',
+                header: 'Name',
+                className: 'sq-name',
+                render: (p) => <Link to={`/players/${p.playerId}`}>{p.name}</Link>,
+              },
+              { key: 'pos', header: 'Pos', render: (p) => <PositionBadge position={p.position} /> },
+              { key: 'phase', header: 'Phase', render: (p) => p.phase },
+              { key: 'age', header: 'Age', render: (p) => p.age },
+              { key: 'ovr', header: 'OVR', render: (p) => p.currentAbility },
+              { key: 'pa', header: 'PA', render: (p) => p.potentialAbility },
+            ]}
+          />
         </SectionPanel>
       </div>
     </Layout>

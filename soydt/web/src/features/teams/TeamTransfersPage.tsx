@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
 import TeamCrest from '../onboarding/TeamCrest'
+import DataTable from '../../shared/ui/DataTable'
 import SectionPanel from '../../shared/ui/SectionPanel'
 import { useTeamCountryId } from '../../shared/useTeamCountryId'
 
@@ -30,46 +31,43 @@ type TeamTransfers = {
 }
 
 function TransferTable({ items, otherLabel }: { items: TeamTransferItem[]; otherLabel: string }) {
-  if (items.length === 0) {
-    return <div className="fm-empty">No transfers</div>
-  }
-
   return (
-    <table className="fm-squad">
-      <thead>
-        <tr>
-          <th className="sq-name">Player</th>
-          <th>{otherLabel}</th>
-          <th>Fee</th>
-          <th>Date</th>
-        </tr>
-      </thead>
-      <tbody>
-        {items.map((t, i) => (
-          <tr key={i}>
-            <td className="sq-name">
-              <Link to={`/players/${t.playerId}`}>{t.playerName}</Link>
-            </td>
-            <td>
-              <span className="st-club-link">
-                <TeamCrest slug={t.otherTeamSlug} name={t.otherTeamName} size={20} />
-                <span>{t.otherTeamName}</span>
-              </span>
-            </td>
-            <td>
-              {t.isFree ? (
-                <span className="fm-loan-badge">Free</span>
-              ) : t.isLoan ? (
-                <span className="fm-loan-badge">Loan</span>
-              ) : (
-                <span className="fm-transfer-fee">{t.fee.toLocaleString()}</span>
-              )}
-            </td>
-            <td>{t.date}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <DataTable
+      rows={items}
+      rowKey={(_, i) => i}
+      emptyMessage="No transfers"
+      columns={[
+        {
+          key: 'player',
+          header: 'Player',
+          className: 'sq-name',
+          render: (t) => <Link to={`/players/${t.playerId}`}>{t.playerName}</Link>,
+        },
+        {
+          key: 'other',
+          header: otherLabel,
+          render: (t) => (
+            <span className="st-club-link">
+              <TeamCrest slug={t.otherTeamSlug} name={t.otherTeamName} size={20} />
+              <span>{t.otherTeamName}</span>
+            </span>
+          ),
+        },
+        {
+          key: 'fee',
+          header: 'Fee',
+          render: (t) =>
+            t.isFree ? (
+              <span className="fm-loan-badge">Free</span>
+            ) : t.isLoan ? (
+              <span className="fm-loan-badge">Loan</span>
+            ) : (
+              <span className="fm-transfer-fee">{t.fee.toLocaleString()}</span>
+            ),
+        },
+        { key: 'date', header: 'Date', render: (t) => t.date },
+      ]}
+    />
   )
 }
 

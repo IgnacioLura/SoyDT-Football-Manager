@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import DataTable from '../../shared/ui/DataTable'
 import SectionPanel from '../../shared/ui/SectionPanel'
 
 // Player "matches" sub-tab, mirrors the original app's player fixture list.
@@ -57,38 +58,36 @@ function PlayerMatchesPage() {
     <Layout title="Matches">
       <div className="fm-page">
         <SectionPanel title="Matches">
-          <table className="fm-schedule">
-            <thead>
-              <tr>
-                <th className="sch-date">Date</th>
-                <th className="sch-venue">Venue</th>
-                <th>Opponent</th>
-                <th>Competition</th>
-                <th className="sch-result">Result</th>
-              </tr>
-            </thead>
-            <tbody>
-              {items.map((item, i) => (
-                <tr key={`${item.date}-${item.opponentName}-${i}`}>
-                  <td className="sch-date">{item.date}</td>
-                  <td className="sch-venue">
-                    <span className={`fm-venue ${item.isHome ? 'venue-h' : 'venue-a'}`}>{item.isHome ? 'H' : 'A'}</span>
-                  </td>
-                  <td className="sch-opponent">{item.opponentName}</td>
-                  <td className="sch-comp">{item.competitionName}</td>
-                  <td className="sch-result">
-                    {item.homeGoals !== null && item.awayGoals !== null ? (
-                      <span className="fm-result">
-                        {item.homeGoals} – {item.awayGoals}
-                      </span>
-                    ) : (
-                      <span className="fm-pending">–</span>
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <DataTable
+            rows={items}
+            rowKey={(item, i) => `${item.date}-${item.opponentName}-${i}`}
+            columns={[
+              { key: 'date', header: 'Date', render: (item) => item.date },
+              {
+                key: 'venue',
+                header: 'Venue',
+                align: 'center',
+                render: (item) => (
+                  <span className={`fm-venue ${item.isHome ? 'venue-h' : 'venue-a'}`}>{item.isHome ? 'H' : 'A'}</span>
+                ),
+              },
+              { key: 'opponent', header: 'Opponent', render: (item) => item.opponentName },
+              { key: 'competition', header: 'Competition', render: (item) => item.competitionName },
+              {
+                key: 'result',
+                header: 'Result',
+                align: 'center',
+                render: (item) =>
+                  item.homeGoals !== null && item.awayGoals !== null ? (
+                    <span className="fm-result">
+                      {item.homeGoals} – {item.awayGoals}
+                    </span>
+                  ) : (
+                    <span className="fm-pending">–</span>
+                  ),
+              },
+            ]}
+          />
         </SectionPanel>
       </div>
     </Layout>

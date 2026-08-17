@@ -1,0 +1,14 @@
+/* soydt/web/src/shared/patterns.css
+   Background textures borrowed from the BUCK EA Sports FC reel (see
+   DESIGN_SYSTEM.md Sources — soydt/design-reference/triangle-grid-dark.png).
+   CSS-only tessellation (three repeating-linear-gradient line layers at
+   0/60/-60deg) rather than shipping the reference PNG itself, so it scales
+   to any panel size and tints with the surrounding surface color. Imported
+   once globally (main.tsx) alongside theme.css/motion.css. */
+
+.bg-triangle-grid {
+  background-image:
+    repeating-linear-gradient(60deg, rgba(255, 255, 255, 0.05) 0, rgba(255, 255, 255, 0.05) 1px, transparent 1px, transparent 40px),
+    repeating-linear-gradient(-60deg, rgba(255, 255, 255, 0.05) 0, rgba(255, 255, 255, 0.05) 1px, transparent 1px, transparent 40px),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.05) 0, rgba(255, 255, 255, 0.05) 1px, transparent 1px, transparent 40px);
+}

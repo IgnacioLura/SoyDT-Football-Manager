@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import DataTable from '../../shared/ui/DataTable'
 import SectionPanel from '../../shared/ui/SectionPanel'
 
 // SIMPLIFIED port of open-football/src/web/src/player/history — the
@@ -56,34 +57,19 @@ function PlayerHistoryPage() {
     <Layout title="Player History">
       <div className="fm-page">
         <SectionPanel title="Season history" actions={<span className="fm-panel-count">{rows.length}</span>}>
-          {rows.length === 0 ? (
-            <div className="fm-empty">No completed seasons</div>
-          ) : (
-            <table className="fm-squad">
-              <thead>
-                <tr>
-                  <th>Season</th>
-                  <th className="sq-name">Team</th>
-                  <th>Played</th>
-                  <th>Goals</th>
-                  <th>Assists</th>
-                  <th>Avg Rating</th>
-                </tr>
-              </thead>
-              <tbody>
-                {rows.map((r, i) => (
-                  <tr key={i}>
-                    <td>{r.season}</td>
-                    <td className="sq-name">{r.teamName}</td>
-                    <td>{r.played}</td>
-                    <td>{r.goals}</td>
-                    <td>{r.assists}</td>
-                    <td>{r.averageRating.toFixed(2)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+          <DataTable
+            rows={rows}
+            rowKey={(_, i) => i}
+            emptyMessage="No completed seasons"
+            columns={[
+              { key: 'season', header: 'Season', render: (r) => r.season },
+              { key: 'team', header: 'Team', render: (r) => r.teamName },
+              { key: 'played', header: 'Played', render: (r) => r.played },
+              { key: 'goals', header: 'Goals', render: (r) => r.goals },
+              { key: 'assists', header: 'Assists', render: (r) => r.assists },
+              { key: 'rating', header: 'Avg Rating', render: (r) => r.averageRating.toFixed(2) },
+            ]}
+          />
         </SectionPanel>
       </div>
     </Layout>

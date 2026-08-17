@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import DataTable from '../../shared/ui/DataTable'
 import SectionPanel from '../../shared/ui/SectionPanel'
 import { leagueTabs } from './tabs'
 
@@ -19,22 +20,7 @@ type SeasonAwards = {
   goldenGlove: NamedAward | null
 }
 
-function AwardRow({ label, award }: { label: string; award: NamedAward | null }) {
-  return (
-    <tr>
-      <td>{label}</td>
-      <td>
-        {award ? (
-          <>
-            <Link to={`/players/${award.playerId}`}>{award.playerName}</Link> — {award.clubName}
-          </>
-        ) : (
-          '—'
-        )}
-      </td>
-    </tr>
-  )
-}
+type AwardEntry = { label: string; award: NamedAward | null }
 
 function LeagueAwardsPage() {
   const { leagueId } = useParams<{ leagueId: string }>()
@@ -78,15 +64,31 @@ function LeagueAwardsPage() {
           {awards === null ? (
             <div className="fm-empty">No season has completed yet</div>
           ) : (
-            <table className="fm-aw-season-table">
-              <tbody>
-                <AwardRow label="Player of the Season" award={awards.playerOfSeason} />
-                <AwardRow label="Young Player of the Season" award={awards.youngPlayerOfSeason} />
-                <AwardRow label="Top Scorer" award={awards.topScorer} />
-                <AwardRow label="Top Assists" award={awards.topAssists} />
-                <AwardRow label="Golden Glove" award={awards.goldenGlove} />
-              </tbody>
-            </table>
+            <DataTable<AwardEntry>
+              rows={[
+                { label: 'Player of the Season', award: awards.playerOfSeason },
+                { label: 'Young Player of the Season', award: awards.youngPlayerOfSeason },
+                { label: 'Top Scorer', award: awards.topScorer },
+                { label: 'Top Assists', award: awards.topAssists },
+                { label: 'Golden Glove', award: awards.goldenGlove },
+              ]}
+              rowKey={(r) => r.label}
+              columns={[
+                { key: 'label', header: '', render: (r) => r.label },
+                {
+                  key: 'award',
+                  header: '',
+                  render: (r) =>
+                    r.award ? (
+                      <>
+                        <Link to={`/players/${r.award.playerId}`}>{r.award.playerName}</Link> — {r.award.clubName}
+                      </>
+                    ) : (
+                      '—'
+                    ),
+                },
+              ]}
+            />
           )}
         </SectionPanel>
       </div>

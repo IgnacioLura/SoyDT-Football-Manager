@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import DataTable from '../../shared/ui/DataTable'
 import SectionPanel from '../../shared/ui/SectionPanel'
 
 // Player's own career transfer history — SIMPLIFIED sub-page of the
@@ -55,38 +56,28 @@ function PlayerTransfersPage() {
     <Layout title="Transfers">
       <div className="fm-page">
         <SectionPanel title="Transfer history">
-          {transfers.length === 0 ? (
-            <div className="fm-empty">No transfers on record</div>
-          ) : (
-            <table className="fm-squad fm-transfer-history-table">
-              <thead>
-                <tr>
-                  <th className="sq-from">From</th>
-                  <th className="sq-to">To</th>
-                  <th className="sq-fee">Fee</th>
-                  <th className="sq-date">Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                {transfers.map((t, i) => (
-                  <tr key={i}>
-                    <td className="sq-from">{t.fromTeamName}</td>
-                    <td className="sq-to">{t.toTeamName}</td>
-                    <td className="sq-fee">
-                      {t.isFree ? (
-                        <span className="fm-loan-badge">Free</span>
-                      ) : t.isLoan ? (
-                        <span className="fm-loan-badge">Loan</span>
-                      ) : (
-                        <span className="fm-transfer-fee">{t.fee.toLocaleString()}</span>
-                      )}
-                    </td>
-                    <td className="sq-date">{t.date}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+          <DataTable
+            rows={transfers}
+            rowKey={(_, i) => i}
+            emptyMessage="No transfers on record"
+            columns={[
+              { key: 'from', header: 'From', render: (t) => t.fromTeamName },
+              { key: 'to', header: 'To', render: (t) => t.toTeamName },
+              {
+                key: 'fee',
+                header: 'Fee',
+                render: (t) =>
+                  t.isFree ? (
+                    <span className="fm-loan-badge">Free</span>
+                  ) : t.isLoan ? (
+                    <span className="fm-loan-badge">Loan</span>
+                  ) : (
+                    <span className="fm-transfer-fee">{t.fee.toLocaleString()}</span>
+                  ),
+              },
+              { key: 'date', header: 'Date', render: (t) => t.date },
+            ]}
+          />
         </SectionPanel>
       </div>
     </Layout>

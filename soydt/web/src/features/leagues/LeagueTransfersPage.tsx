@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import DataTable from '../../shared/ui/DataTable'
 import SectionPanel from '../../shared/ui/SectionPanel'
 import TeamCrest from '../onboarding/TeamCrest'
 import { leagueTabs } from './tabs'
@@ -76,52 +77,51 @@ function LeagueTransfersPage() {
               Loans
             </button>
           </div>
-          {filtered.length === 0 ? (
-            <div className="fm-empty">No completed transfers</div>
-          ) : (
-            <table className="fm-squad fm-transfer-history-table">
-              <thead>
-                <tr>
-                  <th className="sq-name">Player</th>
-                  <th className="sq-from">From</th>
-                  <th className="sq-to">To</th>
-                  <th className="sq-fee">Fee</th>
-                  <th className="sq-date">Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filtered.map((t, i) => (
-                  <tr key={i}>
-                    <td className="sq-name">
-                      <Link to={`/players/${t.playerId}`}>{t.playerName}</Link>
-                    </td>
-                    <td className="sq-from">
-                      <Link to={`/teams/${t.fromTeamId}`} className="st-club-link">
-                        <TeamCrest slug={t.fromTeamSlug} name={t.fromTeamName} size={20} />
-                        <span>{t.fromTeamName}</span>
-                      </Link>
-                    </td>
-                    <td className="sq-to">
-                      <Link to={`/teams/${t.toTeamId}`} className="st-club-link">
-                        <TeamCrest slug={t.toTeamSlug} name={t.toTeamName} size={20} />
-                        <span>{t.toTeamName}</span>
-                      </Link>
-                    </td>
-                    <td className="sq-fee">
-                      {t.isFree ? (
-                        <span className="fm-loan-badge">Free</span>
-                      ) : t.isLoan ? (
-                        <span className="fm-loan-badge">Loan</span>
-                      ) : (
-                        <span className="fm-transfer-fee">{t.fee.toLocaleString()}</span>
-                      )}
-                    </td>
-                    <td className="sq-date">{t.date}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+          <DataTable
+            rows={filtered}
+            rowKey={(_, i) => i}
+            emptyMessage="No completed transfers"
+            columns={[
+              {
+                key: 'player',
+                header: 'Player',
+                render: (t) => <Link to={`/players/${t.playerId}`}>{t.playerName}</Link>,
+              },
+              {
+                key: 'from',
+                header: 'From',
+                render: (t) => (
+                  <Link to={`/teams/${t.fromTeamId}`} className="st-club-link">
+                    <TeamCrest slug={t.fromTeamSlug} name={t.fromTeamName} size={20} />
+                    <span>{t.fromTeamName}</span>
+                  </Link>
+                ),
+              },
+              {
+                key: 'to',
+                header: 'To',
+                render: (t) => (
+                  <Link to={`/teams/${t.toTeamId}`} className="st-club-link">
+                    <TeamCrest slug={t.toTeamSlug} name={t.toTeamName} size={20} />
+                    <span>{t.toTeamName}</span>
+                  </Link>
+                ),
+              },
+              {
+                key: 'fee',
+                header: 'Fee',
+                render: (t) =>
+                  t.isFree ? (
+                    <span className="fm-loan-badge">Free</span>
+                  ) : t.isLoan ? (
+                    <span className="fm-loan-badge">Loan</span>
+                  ) : (
+                    <span className="fm-transfer-fee">{t.fee.toLocaleString()}</span>
+                  ),
+              },
+              { key: 'date', header: 'Date', render: (t) => t.date },
+            ]}
+          />
         </SectionPanel>
       </div>
     </Layout>

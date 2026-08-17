@@ -18,6 +18,8 @@ type DtEventLogEntry = {
   scope: string
   playerId: number | null
   playerName: string | null
+  ovrDelta: number
+  moraleDelta: number
 }
 
 type DtActiveBuff = {
@@ -104,6 +106,13 @@ function DtEventsPage() {
               </span>
               <span className="fm-detail-value" style={{ color: e.success ? '#4ade80' : '#ef4444' }}>
                 {e.storyText}
+                {(e.ovrDelta !== 0 || e.moraleDelta !== 0) && (
+                  <>
+                    {' — '}
+                    {e.ovrDelta !== 0 && `${e.ovrDelta > 0 ? '+' : ''}${e.ovrDelta} OVR `}
+                    {e.moraleDelta !== 0 && `${e.moraleDelta > 0 ? '+' : ''}${e.moraleDelta} moral`}
+                  </>
+                )}
               </span>
             </div>
           ))}

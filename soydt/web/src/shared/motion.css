@@ -34,3 +34,15 @@
   animation: fadeInUp var(--transition-slow) var(--ease-out) both;
   animation-delay: calc(var(--i, 0) * 40ms);
 }
+
+/* Match Cuts (4th BUCK motion principle, see DESIGN_SYSTEM.md) — a hard
+   snap between states instead of a soft crossfade. Apply to an element
+   whose own CSS gives it a `transition` for state changes (sort-order
+   flips, filter toggles, active-tab swaps) that should read as instant
+   rather than eased; overrides that transition's duration/easing without
+   needing to touch the component's own stylesheet. */
+.snap,
+.snap * {
+  transition-duration: var(--transition-snap) !important;
+  transition-timing-function: linear !important;
+}

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import DataTable from '../../shared/ui/DataTable'
 import SectionPanel from '../../shared/ui/SectionPanel'
 
 // One component backs all four continental index pages
@@ -88,71 +89,61 @@ function ContinentalCompetitionPage() {
           <>
             {data.groups.map((group) => (
               <SectionPanel title={group.name} key={group.name}>
-                <table className="fm-standings">
-                  <thead>
-                    <tr>
-                      <th className="st-club">Club</th>
-                      <th>P</th>
-                      <th>W</th>
-                      <th>D</th>
-                      <th>L</th>
-                      <th>GF</th>
-                      <th>GA</th>
-                      <th className="st-pts">Pts</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {group.rows.map((row) => (
-                      <tr key={row.teamId}>
-                        <td className="st-club">
-                          <Link to={`/teams/${row.teamId}`}>{row.teamName}</Link>
-                        </td>
-                        <td>{row.played}</td>
-                        <td>{row.won}</td>
-                        <td>{row.drawn}</td>
-                        <td>{row.lost}</td>
-                        <td>{row.gf}</td>
-                        <td>{row.ga}</td>
-                        <td className="st-pts">{row.points}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                <DataTable
+                  rows={group.rows}
+                  rowKey={(row) => row.teamId}
+                  columns={[
+                    {
+                      key: 'club',
+                      header: 'Club',
+                      align: 'left',
+                      render: (row) => <Link to={`/teams/${row.teamId}`}>{row.teamName}</Link>,
+                    },
+                    { key: 'p', header: 'P', align: 'center', render: (row) => row.played },
+                    { key: 'w', header: 'W', align: 'center', render: (row) => row.won },
+                    { key: 'd', header: 'D', align: 'center', render: (row) => row.drawn },
+                    { key: 'l', header: 'L', align: 'center', render: (row) => row.lost },
+                    { key: 'gf', header: 'GF', align: 'center', render: (row) => row.gf },
+                    { key: 'ga', header: 'GA', align: 'center', render: (row) => row.ga },
+                    { key: 'pts', header: 'Pts', align: 'center', render: (row) => row.points },
+                  ]}
+                />
               </SectionPanel>
             ))}
 
             {data.knockoutTies.length > 0 && (
               <SectionPanel title="Knockout">
-                <table className="fm-standings">
-                  <thead>
-                    <tr>
-                      <th>Home</th>
-                      <th>Away</th>
-                      <th className="st-pts">Leg 1</th>
-                      <th className="st-pts">Leg 2</th>
-                      <th>Winner</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {data.knockoutTies.map((tie, i) => (
-                      <tr key={i}>
-                        <td>
-                          <Link to={`/teams/${tie.homeTeamId}`}>{tie.homeTeamName}</Link>
-                        </td>
-                        <td>
-                          <Link to={`/teams/${tie.awayTeamId}`}>{tie.awayTeamName}</Link>
-                        </td>
-                        <td className="st-pts">
-                          {tie.leg1HomeGoals !== null ? `${tie.leg1HomeGoals} – ${tie.leg1AwayGoals}` : '–'}
-                        </td>
-                        <td className="st-pts">
-                          {tie.leg2HomeGoals !== null ? `${tie.leg2HomeGoals} – ${tie.leg2AwayGoals}` : '–'}
-                        </td>
-                        <td>{tie.winnerTeamName ?? '–'}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                <DataTable
+                  rows={data.knockoutTies}
+                  rowKey={(_, i) => i}
+                  columns={[
+                    {
+                      key: 'home',
+                      header: 'Home',
+                      align: 'center',
+                      render: (tie) => <Link to={`/teams/${tie.homeTeamId}`}>{tie.homeTeamName}</Link>,
+                    },
+                    {
+                      key: 'away',
+                      header: 'Away',
+                      align: 'center',
+                      render: (tie) => <Link to={`/teams/${tie.awayTeamId}`}>{tie.awayTeamName}</Link>,
+                    },
+                    {
+                      key: 'leg1',
+                      header: 'Leg 1',
+                      align: 'center',
+                      render: (tie) => (tie.leg1HomeGoals !== null ? `${tie.leg1HomeGoals} – ${tie.leg1AwayGoals}` : '–'),
+                    },
+                    {
+                      key: 'leg2',
+                      header: 'Leg 2',
+                      align: 'center',
+                      render: (tie) => (tie.leg2HomeGoals !== null ? `${tie.leg2HomeGoals} – ${tie.leg2AwayGoals}` : '–'),
+                    },
+                    { key: 'winner', header: 'Winner', align: 'center', render: (tie) => tie.winnerTeamName ?? '–' },
+                  ]}
+                />
               </SectionPanel>
             )}
           </>

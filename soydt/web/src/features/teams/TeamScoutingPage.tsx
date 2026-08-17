@@ -3,7 +3,11 @@ import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
 import { PositionBadge } from '../../shared/positions'
+import type { SortMode } from '../../shared/sortPlayers'
+import { sortByMode } from '../../shared/sortPlayers'
+import DataTable from '../../shared/ui/DataTable'
 import SectionPanel from '../../shared/ui/SectionPanel'
+import SortToggle from '../../shared/ui/SortToggle'
 import { useTeamCountryId } from '../../shared/useTeamCountryId'
 
 // Ported from open-football/src/web/src/teams/scouting/index.html — the
@@ -40,6 +44,7 @@ function TeamScoutingPage() {
   const sidebarCountryId = useTeamCountryId(teamId)
   const [monitoring, setMonitoring] = useState<ScoutMonitoringItem[] | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [sortMode, setSortMode] = useState<SortMode>('position')
 
   useEffect(() => {
     setMonitoring(null)
@@ -74,54 +79,39 @@ function TeamScoutingPage() {
       <div className="fm-page">
         <SectionPanel
           title="Active monitoring"
-          actions={<span className="fm-panel-count">{monitoring.length}</span>}
+          accent="gold"
+          actions={
+            <>
+              <SortToggle value={sortMode} onChange={setSortMode} />
+              <span className="fm-panel-count">{monitoring.length}</span>
+            </>
+          }
         >
-          {monitoring.length === 0 ? (
-            <div className="fm-empty">No players currently being scouted</div>
-          ) : (
-            <table className="fm-squad">
-              <thead>
-                <tr>
-                  <th className="sq-name">Player</th>
-                  <th>Position</th>
-                  <th>Age</th>
-                  <th>Club</th>
-                  <th>Scout</th>
-                  <th>Status</th>
-                  <th>Started</th>
-                  <th>Last observed</th>
-                  <th>Watched</th>
-                  <th>OVR</th>
-                  <th>PA</th>
-                  <th>Confidence</th>
-                  <th>Value</th>
-                </tr>
-              </thead>
-              <tbody>
-                {monitoring.map((m) => (
-                  <tr key={`${m.scoutId}-${m.playerId}`}>
-                    <td className="sq-name">
-                      <Link to={`/players/${m.playerId}`}>{m.playerName}</Link>
-                    </td>
-                    <td>
-                      <PositionBadge position={m.position} />
-                    </td>
-                    <td>{m.age}</td>
-                    <td>{m.currentClubName || '—'}</td>
-                    <td>{m.scoutName || '—'}</td>
-                    <td>{m.status}</td>
-                    <td>{m.startedOn}</td>
-                    <td>{m.lastObserved}</td>
-                    <td>{m.timesWatched}</td>
-                    <td>{m.assessedAbility}</td>
-                    <td>{m.assessedPotential}</td>
-                    <td>{m.confidencePct}%</td>
-                    <td>{m.estimatedValue.toLocaleString()}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+          <DataTable
+            rows={sortByMode(monitoring, sortMode, (m) => m.position, (m) => m.assessedAbility)}
+            rowKey={(m) => `${m.scoutId}-${m.playerId}`}
+            emptyMessage="No players currently being scouted"
+            columns={[
+              {
+                key: 'player',
+                header: 'Player',
+                className: 'sq-name',
+                render: (m) => <Link to={`/players/${m.playerId}`}>{m.playerName}</Link>,
+              },
+              { key: 'position', header: 'Position', render: (m) => <PositionBadge position={m.position} /> },
+              { key: 'age', header: 'Age', render: (m) => m.age },
+              { key: 'club', header: 'Club', render: (m) => m.currentClubName || '—' },
+              { key: 'scout', header: 'Scout', render: (m) => m.scoutName || '—' },
+              { key: 'status', header: 'Status', render: (m) => m.status },
+              { key: 'started', header: 'Started', render: (m) => m.startedOn },
+              { key: 'lastObserved', header: 'Last observed', render: (m) => m.lastObserved },
+              { key: 'watched', header: 'Watched', render: (m) => m.timesWatched },
+              { key: 'ovr', header: 'OVR', render: (m) => m.assessedAbility },
+              { key: 'pa', header: 'PA', render: (m) => m.assessedPotential },
+              { key: 'confidence', header: 'Confidence', render: (m) => `${m.confidencePct}%` },
+              { key: 'value', header: 'Value', render: (m) => m.estimatedValue.toLocaleString() },
+            ]}
+          />
         </SectionPanel>
       </div>
     </Layout>

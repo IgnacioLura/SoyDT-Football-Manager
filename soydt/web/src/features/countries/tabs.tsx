@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import TabBar from '../../shared/ui/TabBar'
 
 // Shared tab bar for the country sub-pages (squad/schedule/staff/leagues/
 // free-agents) — mirrors open-football/src/web/src/countries/countries_layout.html.
@@ -6,19 +6,16 @@ import { Link } from 'react-router-dom'
 export type CountryTab = 'squad' | 'schedule' | 'staff' | 'leagues' | 'free_agents'
 
 export function countryTabs(countryId: string, active: CountryTab) {
-  const tab = (key: CountryTab, label: string, to: string) => (
-    <Link key={key} className={`fm-tab${active === key ? ' active' : ''}`} to={to}>
-      {label}
-    </Link>
-  )
-
   return (
-    <div className="fm-tabbar">
-      {tab('squad', 'Squad', `/countries/${countryId}`)}
-      {tab('schedule', 'Schedule', `/countries/${countryId}/schedule`)}
-      {tab('staff', 'Staff', `/countries/${countryId}/staff`)}
-      {tab('leagues', 'Leagues', `/countries/${countryId}/leagues`)}
-      {tab('free_agents', 'Free agents', `/countries/${countryId}/free-agents`)}
-    </div>
+    <TabBar
+      active={active}
+      items={[
+        { key: 'squad', label: 'Squad', to: `/countries/${countryId}` },
+        { key: 'schedule', label: 'Schedule', to: `/countries/${countryId}/schedule` },
+        { key: 'staff', label: 'Staff', to: `/countries/${countryId}/staff` },
+        { key: 'leagues', label: 'Leagues', to: `/countries/${countryId}/leagues` },
+        { key: 'free_agents', label: 'Free agents', to: `/countries/${countryId}/free-agents` },
+      ]}
+    />
   )
 }

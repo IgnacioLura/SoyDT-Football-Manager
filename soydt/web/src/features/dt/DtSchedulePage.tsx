@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import TeamCrest from '../onboarding/TeamCrest'
+import DataTable from '../../shared/ui/DataTable'
 import SectionPanel from '../../shared/ui/SectionPanel'
 import DtLayout from './DtLayout'
 import { useMyTeamId } from './useMyTeamId'
@@ -70,45 +71,46 @@ function DtSchedulePage() {
     <DtLayout title="Calendario">
       <div className="fm-page">
         <SectionPanel title="Calendario">
-          <table className="fm-schedule">
-            <thead>
-              <tr>
-                <th className="sch-date">Fecha</th>
-                <th className="sch-time">Hora</th>
-                <th>Rival</th>
-                <th className="sch-venue">Cancha</th>
-                <th className="sch-result">Resultado</th>
-                <th>Competición</th>
-              </tr>
-            </thead>
-            <tbody>
-              {items.map((item) => (
-                <tr key={item.matchId}>
-                  <td className="sch-date">{item.date}</td>
-                  <td className="sch-time">{item.time}</td>
-                  <td className="sch-opponent">
-                    <Link to={`/teams/${item.opponentTeamId}`} className="st-club-link">
-                      <TeamCrest slug={item.opponentSlug} name={item.opponentName} size={20} />
-                      <span>{item.opponentName}</span>
+          <DataTable
+            rows={items}
+            rowKey={(item) => item.matchId}
+            columns={[
+              { key: 'date', header: 'Fecha', render: (item) => item.date },
+              { key: 'time', header: 'Hora', render: (item) => item.time },
+              {
+                key: 'opponent',
+                header: 'Rival',
+                render: (item) => (
+                  <Link to={`/teams/${item.opponentTeamId}`} className="st-club-link">
+                    <TeamCrest slug={item.opponentSlug} name={item.opponentName} size={20} />
+                    <span>{item.opponentName}</span>
+                  </Link>
+                ),
+              },
+              {
+                key: 'venue',
+                header: 'Cancha',
+                align: 'center',
+                render: (item) => (
+                  <span className={`fm-venue ${item.isHome ? 'venue-h' : 'venue-a'}`}>{item.isHome ? 'L' : 'V'}</span>
+                ),
+              },
+              {
+                key: 'result',
+                header: 'Resultado',
+                align: 'center',
+                render: (item) =>
+                  item.homeGoals !== null && item.awayGoals !== null ? (
+                    <Link to={`/match/${item.matchId}`} className="fm-result">
+                      {item.homeGoals} – {item.awayGoals}
                     </Link>
-                  </td>
-                  <td className="sch-venue">
-                    <span className={`fm-venue ${item.isHome ? 'venue-h' : 'venue-a'}`}>{item.isHome ? 'L' : 'V'}</span>
-                  </td>
-                  <td className="sch-result">
-                    {item.homeGoals !== null && item.awayGoals !== null ? (
-                      <Link to={`/match/${item.matchId}`} className="fm-result">
-                        {item.homeGoals} – {item.awayGoals}
-                      </Link>
-                    ) : (
-                      <span className="fm-pending">–</span>
-                    )}
-                  </td>
-                  <td className="sch-comp">{item.competitionName}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  ) : (
+                    <span className="fm-pending">–</span>
+                  ),
+              },
+              { key: 'comp', header: 'Competición', render: (item) => item.competitionName },
+            ]}
+          />
         </SectionPanel>
       </div>
     </DtLayout>

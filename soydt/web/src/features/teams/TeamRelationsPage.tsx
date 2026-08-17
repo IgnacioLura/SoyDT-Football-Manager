@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import DataTable from '../../shared/ui/DataTable'
 import SectionPanel from '../../shared/ui/SectionPanel'
 import { useTeamCountryId } from '../../shared/useTeamCountryId'
 
@@ -119,36 +120,27 @@ function TeamRelationsPage() {
           title="Player relationships"
           actions={<span className="fm-panel-count">{relations.pairs.length}</span>}
         >
-          {relations.pairs.length === 0 ? (
-            <div className="fm-empty">No notable relationships</div>
-          ) : (
-            <table className="fm-squad">
-              <thead>
-                <tr>
-                  <th className="sq-name">Player</th>
-                  <th className="sq-name">Other player</th>
-                  <th>Tier</th>
-                  <th>Level</th>
-                </tr>
-              </thead>
-              <tbody>
-                {relations.pairs.map((p, i) => (
-                  <tr key={i}>
-                    <td className="sq-name">
-                      <Link to={`/players/${p.playerAId}`}>{p.playerAName}</Link>
-                    </td>
-                    <td className="sq-name">
-                      <Link to={`/players/${p.playerBId}`}>{p.playerBName}</Link>
-                    </td>
-                    <td>
-                      <TierBadge tier={p.tier} />
-                    </td>
-                    <td>{p.level}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+          <DataTable
+            rows={relations.pairs}
+            rowKey={(_, i) => i}
+            emptyMessage="No notable relationships"
+            columns={[
+              {
+                key: 'playerA',
+                header: 'Player',
+                className: 'sq-name',
+                render: (p) => <Link to={`/players/${p.playerAId}`}>{p.playerAName}</Link>,
+              },
+              {
+                key: 'playerB',
+                header: 'Other player',
+                className: 'sq-name',
+                render: (p) => <Link to={`/players/${p.playerBId}`}>{p.playerBName}</Link>,
+              },
+              { key: 'tier', header: 'Tier', render: (p) => <TierBadge tier={p.tier} /> },
+              { key: 'level', header: 'Level', render: (p) => p.level },
+            ]}
+          />
         </SectionPanel>
       </div>
     </Layout>

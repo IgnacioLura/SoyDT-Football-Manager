@@ -10,9 +10,14 @@
   --surface-2: #1a1f2b;
   --surface-3: #242a38;
 
-  /* Accents — pitch-green + broadcast-cyan */
+  /* Accents — pitch-green + broadcast-cyan + violet. Primary/secondary are
+     the app-wide accent pair; tertiary exists for per-section gradient tints
+     (see DESIGN_SYSTEM.md) — finances/tactics/scouting/academy panels each
+     getting their own accent instead of every panel using the same green,
+     mirroring FC Pro's per-tournament tint-off-one-base approach. */
   --accent-primary: #2ee6a6;
   --accent-secondary: #3fc7ff;
+  --accent-tertiary: #b98cf2;
 
   /* Rating tiers, low to high CA */
   --tier-bronze: #b06a3a;
@@ -44,6 +49,7 @@
      (box-shadow can't take a hex + alpha, so callers need the components). */
   --accent-primary-rgb: 46, 230, 166;
   --accent-secondary-rgb: 63, 199, 255;
+  --accent-tertiary-rgb: 185, 140, 242;
   --tier-gold-rgb: 242, 201, 76;
   --tier-elite-rgb: 46, 230, 166;
 
@@ -52,4 +58,22 @@
   --transition-base: 0.25s;
   --transition-slow: 0.4s;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Motion — Fase D (EA FC motion-language pass, see DESIGN_SYSTEM.md).
+     BUCK's EA Sports FC system names four movement principles (Trajectory,
+     Formation, Momentum, Match Cuts); `--ease-out`/`fadeInUp` above already
+     cover Formation (staggered group entrance via `--i`). These two add the
+     other flavors so motion isn't one-size-fits-all across the kit. */
+  --ease-momentum: cubic-bezier(0.34, 1.56, 0.64, 1); /* overshoot — "forward drive": counters, value reveals */
+  --ease-trajectory: cubic-bezier(0.4, 0, 0.2, 1); /* fast linear-ish path — badges/indicators entering on a line */
+
+  /* Triangle motif — the FC brand's core shape (see DESIGN_SYSTEM.md).
+     One clip-path, reused as a small accent notch wherever a panel/tile
+     wants a brand mark instead of a plain rectangle. */
+  --clip-triangle: polygon(0 0, 100% 50%, 0 100%);
+
+  /* Match Cuts — the fourth BUCK motion principle: a hard snap between
+     states rather than a soft crossfade. Near-zero duration, no easing —
+     the opposite intent of --ease-momentum/--ease-out above. */
+  --transition-snap: 0.05s;
 }

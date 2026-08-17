@@ -2,6 +2,7 @@ import { useEffect, useState, type CSSProperties } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import DataTable from '../../shared/ui/DataTable'
 import SectionPanel from '../../shared/ui/SectionPanel'
 import './CupBracketPage.css'
 
@@ -75,32 +76,32 @@ function CupBracketPage() {
 
         {bracket.rounds.map((round, i) => (
           <SectionPanel title={`Round ${round.round}`} key={round.round} index={i}>
-            <table className="fm-standings">
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Home</th>
-                  <th>Away</th>
-                  <th className="st-pts">Result</th>
-                </tr>
-              </thead>
-              <tbody>
-                {round.ties.map((tie, i) => (
-                  <tr key={i}>
-                    <td>{tie.date}</td>
-                    <td>
-                      <Link to={`/teams/${tie.homeTeamId}`}>{tie.homeTeamName}</Link>
-                    </td>
-                    <td>
-                      <Link to={`/teams/${tie.awayTeamId}`}>{tie.awayTeamName}</Link>
-                    </td>
-                    <td className="st-pts">
-                      {tie.homeGoals !== null && tie.awayGoals !== null ? `${tie.homeGoals} – ${tie.awayGoals}` : '–'}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <DataTable
+              rows={round.ties}
+              rowKey={(_, i) => i}
+              columns={[
+                { key: 'date', header: 'Date', align: 'center', render: (tie) => tie.date },
+                {
+                  key: 'home',
+                  header: 'Home',
+                  align: 'center',
+                  render: (tie) => <Link to={`/teams/${tie.homeTeamId}`}>{tie.homeTeamName}</Link>,
+                },
+                {
+                  key: 'away',
+                  header: 'Away',
+                  align: 'center',
+                  render: (tie) => <Link to={`/teams/${tie.awayTeamId}`}>{tie.awayTeamName}</Link>,
+                },
+                {
+                  key: 'result',
+                  header: 'Result',
+                  align: 'center',
+                  render: (tie) =>
+                    tie.homeGoals !== null && tie.awayGoals !== null ? `${tie.homeGoals} – ${tie.awayGoals}` : '–',
+                },
+              ]}
+            />
           </SectionPanel>
         ))}
 

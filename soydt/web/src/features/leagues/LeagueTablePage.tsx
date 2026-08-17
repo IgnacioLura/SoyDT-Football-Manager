@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import DataTable from '../../shared/ui/DataTable'
 import SectionPanel from '../../shared/ui/SectionPanel'
 import TeamCrest from '../onboarding/TeamCrest'
 import { leagueTabs } from './tabs'
@@ -79,42 +80,41 @@ function LeagueTablePage() {
     <Layout title={table.leagueName} subTitle={tabs} sidebarCountryId={table.countryId}>
       <div className="fm-page">
         <SectionPanel title="Standings">
-          <table className="fm-standings">
-            <thead>
-              <tr>
-                <th className="st-pos">#</th>
-                <th className="st-club">Club</th>
-                <th>P</th>
-                <th>W</th>
-                <th>D</th>
-                <th>L</th>
-                <th>GD</th>
-                <th className="st-pts">Pts</th>
-              </tr>
-            </thead>
-            <tbody>
-              {table.rows.map((row) => (
-                <tr key={row.teamId} className={zoneClass(row.position, table.rows.length)}>
-                  <td className="st-pos">{row.position}</td>
-                  <td className="st-club">
-                    <Link to={`/teams/${row.teamId}`} className="st-club-link">
-                      <TeamCrest slug={row.teamSlug} name={row.teamName} size={20} />
-                      <span>{row.teamName}</span>
-                    </Link>
-                  </td>
-                  <td>{row.played}</td>
-                  <td>{row.won}</td>
-                  <td>{row.drawn}</td>
-                  <td>{row.lost}</td>
-                  <td className="st-gd">
+          <DataTable
+            rows={table.rows}
+            rowKey={(row) => row.teamId}
+            rowClassName={(row) => zoneClass(row.position, table.rows.length) || undefined}
+            columns={[
+              { key: 'pos', header: '#', align: 'center', render: (row) => row.position },
+              {
+                key: 'club',
+                header: 'Club',
+                align: 'left',
+                render: (row) => (
+                  <Link to={`/teams/${row.teamId}`} className="st-club-link">
+                    <TeamCrest slug={row.teamSlug} name={row.teamName} size={20} />
+                    <span>{row.teamName}</span>
+                  </Link>
+                ),
+              },
+              { key: 'p', header: 'P', align: 'center', render: (row) => row.played },
+              { key: 'w', header: 'W', align: 'center', render: (row) => row.won },
+              { key: 'd', header: 'D', align: 'center', render: (row) => row.drawn },
+              { key: 'l', header: 'L', align: 'center', render: (row) => row.lost },
+              {
+                key: 'gd',
+                header: 'GD',
+                align: 'center',
+                render: (row) => (
+                  <>
                     {row.goalDifference > 0 ? '+' : ''}
                     {row.goalDifference}
-                  </td>
-                  <td className="st-pts">{row.points}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  </>
+                ),
+              },
+              { key: 'pts', header: 'Pts', align: 'center', render: (row) => row.points },
+            ]}
+          />
           <div className="fm-legend">
             <span>
               <i className="legend-dot ucl" /> Champions League

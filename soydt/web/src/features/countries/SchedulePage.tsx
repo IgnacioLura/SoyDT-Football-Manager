@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import DataTable from '../../shared/ui/DataTable'
 import SectionPanel from '../../shared/ui/SectionPanel'
 import { countryTabs } from './tabs'
 
@@ -58,44 +59,41 @@ function SchedulePage() {
     <Layout title="Schedule" subTitle={tabs} sidebarCountryId={Number(countryId)}>
       <div className="fm-page">
         <SectionPanel title="Schedule">
-          {items.length === 0 ? (
-            <div className="fm-empty">No schedule</div>
-          ) : (
-            <table className="fm-schedule">
-              <thead>
-                <tr>
-                  <th className="sch-date">Date</th>
-                  <th>Opposition</th>
-                  <th className="sch-venue">Venue</th>
-                  <th className="sch-result">Result</th>
-                  <th>Competition</th>
-                </tr>
-              </thead>
-              <tbody>
-                {items.map((item, i) => (
-                  <tr key={i}>
-                    <td className="sch-date">{item.date}</td>
-                    <td>
-                      <Link to={`/countries/${item.opponentCountryId}`}>{item.opponentName}</Link>
-                    </td>
-                    <td className="sch-venue">
-                      <span className={`fm-venue ${item.isHome ? 'venue-h' : 'venue-a'}`}>{item.isHome ? 'H' : 'A'}</span>
-                    </td>
-                    <td className="sch-result">
-                      {item.homeGoals !== null && item.awayGoals !== null ? (
-                        <span className="fm-result">
-                          {item.homeGoals} – {item.awayGoals}
-                        </span>
-                      ) : (
-                        <span className="fm-pending">–</span>
-                      )}
-                    </td>
-                    <td className="sch-comp">{item.competitionName}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+          <DataTable
+            rows={items}
+            rowKey={(_, i) => i}
+            emptyMessage="No schedule"
+            columns={[
+              { key: 'date', header: 'Date', render: (item) => item.date },
+              {
+                key: 'opposition',
+                header: 'Opposition',
+                render: (item) => <Link to={`/countries/${item.opponentCountryId}`}>{item.opponentName}</Link>,
+              },
+              {
+                key: 'venue',
+                header: 'Venue',
+                align: 'center',
+                render: (item) => (
+                  <span className={`fm-venue ${item.isHome ? 'venue-h' : 'venue-a'}`}>{item.isHome ? 'H' : 'A'}</span>
+                ),
+              },
+              {
+                key: 'result',
+                header: 'Result',
+                align: 'center',
+                render: (item) =>
+                  item.homeGoals !== null && item.awayGoals !== null ? (
+                    <span className="fm-result">
+                      {item.homeGoals} – {item.awayGoals}
+                    </span>
+                  ) : (
+                    <span className="fm-pending">–</span>
+                  ),
+              },
+              { key: 'competition', header: 'Competition', render: (item) => item.competitionName },
+            ]}
+          />
         </SectionPanel>
       </div>
     </Layout>

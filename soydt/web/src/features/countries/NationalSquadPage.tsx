@@ -3,7 +3,11 @@ import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
 import { PositionBadge } from '../../shared/positions'
+import type { SortMode } from '../../shared/sortPlayers'
+import { sortByMode } from '../../shared/sortPlayers'
+import DataTable from '../../shared/ui/DataTable'
 import SectionPanel from '../../shared/ui/SectionPanel'
+import SortToggle from '../../shared/ui/SortToggle'
 import { countryTabs } from './tabs'
 
 // Ported from open-football/src/web/src/countries/squad/index.html — the
@@ -57,6 +61,7 @@ function NationalSquadPage() {
   const u21 = searchParams.get('u21') === 'true'
   const [squad, setSquad] = useState<NationalSquadRow[] | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [sortMode, setSortMode] = useState<SortMode>('position')
 
   useEffect(() => {
     setSquad(null)
@@ -93,61 +98,53 @@ function NationalSquadPage() {
       <div className="fm-page">
         <SectionPanel
           title={u21 ? 'U21 squad' : 'Squad'}
-          actions={<span className="fm-panel-count">{squad.length}</span>}
+          actions={
+            <>
+              <SortToggle value={sortMode} onChange={setSortMode} />
+              <span className="fm-panel-count">{squad.length}</span>
+            </>
+          }
         >
-          {squad.length === 0 ? (
-            <div className="fm-empty">No squad</div>
-          ) : (
-            <table className="fm-squad">
-              <thead>
-                <tr>
-                  <th>Pos</th>
-                  <th className="sq-name">Name</th>
-                  <th className="sq-age">Age</th>
-                  <th>Club</th>
-                  <th className="sq-ability">Ability</th>
-                  <th className="sq-potential">Potential</th>
-                  <th className="sq-cond">Condition</th>
-                  <th className="sq-games">Caps</th>
-                  <th className="sq-games">Goals</th>
-                  <th className="sq-reason">Reason</th>
-                </tr>
-              </thead>
-              <tbody>
-                {squad.map((p) => (
-                  <tr key={p.playerId}>
-                    <td className="sq-pos">
-                      <PositionBadge position={p.position} />
-                    </td>
-                    <td className="sq-name">
-                      <Link to={`/players/${p.playerId}`}>
-                        {p.firstName} {p.lastName}
-                      </Link>
-                    </td>
-                    <td className="sq-age">{p.age}</td>
-                    <td>{p.clubId ? <Link to={`/teams/${p.clubId}`}>{p.clubName}</Link> : p.clubName || '—'}</td>
-                    <td>
-                      <Stars value={p.currentAbility} />
-                    </td>
-                    <td>
-                      <Stars value={p.currentAbility} />
-                    </td>
-                    <td className="sq-cond">
-                      <div className="fm-cond">
-                        <div className="fm-cond-bar">
-                          <div className="fm-cond-fill" style={{ width: `${p.conditionPct}%` }} />
-                        </div>
-                        <span className="fm-cond-val">{p.conditionPct}%</span>
-                      </div>
-                    </td>
-                    <td className="sq-games">{p.internationalApps}</td>
-                    <td className="sq-games">{p.internationalGoals}</td>
-                    <td className="sq-reason">{p.reason}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+          <DataTable
+            rows={sortByMode(squad, sortMode, (p) => p.position, (p) => p.currentAbility)}
+            rowKey={(p) => p.playerId}
+            emptyMessage="No squad"
+            columns={[
+              { key: 'pos', header: 'Pos', render: (p) => <PositionBadge position={p.position} /> },
+              {
+                key: 'name',
+                header: 'Name',
+                render: (p) => (
+                  <Link to={`/players/${p.playerId}`}>
+                    {p.firstName} {p.lastName}
+                  </Link>
+                ),
+              },
+              { key: 'age', header: 'Age', align: 'center', render: (p) => p.age },
+              {
+                key: 'club',
+                header: 'Club',
+                render: (p) => (p.clubId ? <Link to={`/teams/${p.clubId}`}>{p.clubName}</Link> : p.clubName || '—'),
+              },
+              { key: 'ability', header: 'Ability', render: (p) => <Stars value={p.currentAbility} /> },
+              { key: 'potential', header: 'Potential', render: (p) => <Stars value={p.currentAbility} /> },
+              {
+                key: 'cond',
+                header: 'Condition',
+                render: (p) => (
+                  <div className="fm-cond">
+                    <div className="fm-cond-bar">
+                      <div className="fm-cond-fill" style={{ width: `${p.conditionPct}%` }} />
+                    </div>
+                    <span className="fm-cond-val">{p.conditionPct}%</span>
+                  </div>
+                ),
+              },
+              { key: 'caps', header: 'Caps', align: 'center', render: (p) => p.internationalApps },
+              { key: 'goals', header: 'Goals', align: 'center', render: (p) => p.internationalGoals },
+              { key: 'reason', header: 'Reason', render: (p) => p.reason },
+            ]}
+          />
         </SectionPanel>
       </div>
     </Layout>

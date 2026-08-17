@@ -3,7 +3,11 @@ import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
 import { PositionBadge } from '../../shared/positions'
+import type { SortMode } from '../../shared/sortPlayers'
+import { sortByMode } from '../../shared/sortPlayers'
+import DataTable from '../../shared/ui/DataTable'
 import SectionPanel from '../../shared/ui/SectionPanel'
+import SortToggle from '../../shared/ui/SortToggle'
 import { countryTabs } from './tabs'
 
 // Ported from open-football/src/web/src/countries/free_agents/index.html —
@@ -23,6 +27,7 @@ function FreeAgentsPage() {
   const { countryId } = useParams<{ countryId: string }>()
   const [players, setPlayers] = useState<FreeAgent[] | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [sortMode, setSortMode] = useState<SortMode>('position')
 
   useEffect(() => {
     setPlayers(null)
@@ -57,37 +62,34 @@ function FreeAgentsPage() {
   return (
     <Layout title="Free agents" subTitle={tabs} sidebarCountryId={Number(countryId)}>
       <div className="fm-page">
-        <SectionPanel title="Free agents" actions={<span className="fm-panel-count">{players.length}</span>}>
-          {players.length === 0 ? (
-            <div className="fm-empty">No free agents</div>
-          ) : (
-            <table className="fm-squad fm-squad-fa">
-              <thead>
-                <tr>
-                  <th className="sq-pos">Pos</th>
-                  <th className="sq-age">Age</th>
-                  <th className="sq-name">Name</th>
-                  <th className="sq-ability">OVR</th>
-                </tr>
-              </thead>
-              <tbody>
-                {players.map((p) => (
-                  <tr key={p.playerId}>
-                    <td className="sq-pos">
-                      <PositionBadge position={p.position} />
-                    </td>
-                    <td className="sq-age">{p.age}</td>
-                    <td className="sq-name">
-                      <Link to={`/players/${p.playerId}`}>
-                        {p.firstName} {p.lastName}
-                      </Link>
-                    </td>
-                    <td>{p.currentAbility}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+        <SectionPanel
+          title="Free agents"
+          actions={
+            <>
+              <SortToggle value={sortMode} onChange={setSortMode} />
+              <span className="fm-panel-count">{players.length}</span>
+            </>
+          }
+        >
+          <DataTable
+            rows={sortByMode(players, sortMode, (p) => p.position, (p) => p.currentAbility)}
+            rowKey={(p) => p.playerId}
+            emptyMessage="No free agents"
+            columns={[
+              { key: 'pos', header: 'Pos', align: 'center', render: (p) => <PositionBadge position={p.position} /> },
+              { key: 'age', header: 'Age', align: 'center', render: (p) => p.age },
+              {
+                key: 'name',
+                header: 'Name',
+                render: (p) => (
+                  <Link to={`/players/${p.playerId}`}>
+                    {p.firstName} {p.lastName}
+                  </Link>
+                ),
+              },
+              { key: 'ovr', header: 'OVR', render: (p) => p.currentAbility },
+            ]}
+          />
         </SectionPanel>
       </div>
     </Layout>

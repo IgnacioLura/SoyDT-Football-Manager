@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Flag from '../../shared/Flag'
 import Layout from '../../shared/Layout'
+import DataTable from '../../shared/ui/DataTable'
 import SectionPanel from '../../shared/ui/SectionPanel'
 import { useTeamCountryId } from '../../shared/useTeamCountryId'
 
@@ -63,36 +64,27 @@ function TeamStaffPage() {
     <Layout title="Staff" sidebarCountryId={sidebarCountryId}>
       <div className="fm-page">
         <SectionPanel title="Staff" actions={<span className="fm-panel-count">{staff.length}</span>}>
-          {staff.length === 0 ? (
-            <div className="fm-empty">No staff</div>
-          ) : (
-            <table className="fm-squad fm-staff-table">
-              <thead>
-                <tr>
-                  <th className="st-name">Name</th>
-                  <th className="st-role">Role</th>
-                  <th className="st-nat">Nat</th>
-                  <th className="st-age">Age</th>
-                  <th className="st-wage">Wage</th>
-                </tr>
-              </thead>
-              <tbody>
-                {staff.map((m) => (
-                  <tr key={m.id}>
-                    <td className="st-name">
-                      {m.lastName} {m.firstName}
-                    </td>
-                    <td className="st-role">{m.role}</td>
-                    <td className="st-nat">
-                      <Flag code={m.countryCode} />
-                    </td>
-                    <td className="st-age">{m.age}</td>
-                    <td className="st-wage">{wageFormatter.format(m.wage)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+          <DataTable
+            rows={staff}
+            rowKey={(m) => m.id}
+            emptyMessage="No staff"
+            columns={[
+              {
+                key: 'name',
+                header: 'Name',
+                className: 'st-name',
+                render: (m) => (
+                  <>
+                    {m.lastName} {m.firstName}
+                  </>
+                ),
+              },
+              { key: 'role', header: 'Role', className: 'st-role', render: (m) => m.role },
+              { key: 'nat', header: 'Nat', className: 'st-nat', render: (m) => <Flag code={m.countryCode} /> },
+              { key: 'age', header: 'Age', align: 'center', className: 'st-age', render: (m) => m.age },
+              { key: 'wage', header: 'Wage', className: 'st-wage', render: (m) => wageFormatter.format(m.wage) },
+            ]}
+          />
         </SectionPanel>
       </div>
     </Layout>

@@ -1,10 +1,15 @@
 import { useProcessContext } from './ProcessContext'
 
-// Full-screen, input-blocking modal shown for the whole `process/live` run —
-// replaces the old header banner, which was easy to miss entirely (thin
-// strip, only visible if you happened to be looking at the header). Stays
-// up a minimum stretch (see MIN_VISIBLE_MS in ProcessContext) so a 1-day
-// click isn't just an invisible flash.
+// Non-blocking corner card shown for the whole `process/live` run — the
+// daily AI event (see GameController.TriggerDailyAiEvent) now blocks the
+// backend's day loop on an LLM call, so a run can take several seconds per
+// day; a full-screen input-blocking modal for that whole stretch made the
+// rest of the app unusable for no reason (nothing here needs the user's
+// attention until there's an actual match day or a resolved event to show).
+// Floats over the corner instead — everything else stays clickable — and
+// still holds a match day for acknowledgement via `awaitingAck`/`acknowledge`
+// same as before. Stays up a minimum stretch (see MIN_VISIBLE_MS in
+// ProcessContext) so a 1-day click isn't just an invisible flash.
 
 function ProcessOverlay() {
   const { processing, date, daysProcessed, totalDays, percent, logs, awaitingAck, acknowledge } = useProcessContext()
@@ -15,17 +20,13 @@ function ProcessOverlay() {
 
   return (
     <div
-      role="alertdialog"
+      role="status"
       aria-busy="true"
       style={{
         position: 'fixed',
-        inset: 0,
+        bottom: '1.25rem',
+        right: '1.25rem',
         zIndex: 2000,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: 'rgba(10, 16, 28, 0.72)',
-        backdropFilter: 'blur(2px)',
       }}
     >
       <style>{`
@@ -33,19 +34,37 @@ function ProcessOverlay() {
           from { opacity: 0; transform: scale(0.92); }
           to { opacity: 1; transform: scale(1); }
         }
+        /* Triangle motif (see DESIGN_SYSTEM.md) — the loading indicator
+           reads as the FC brand triangle instead of a generic circular
+           spinner, per BUCK's "integral to the brand" framing. */
+        @keyframes fm-process-tri-spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
       `}</style>
       <div
+        className="bg-triangle-grid"
         style={{
-          width: 'min(420px, 90vw)',
-          background: 'var(--card-bg, #1a2436)',
+          width: 'min(320px, 90vw)',
+          backgroundColor: 'var(--card-bg, #1a2436)',
           color: '#fff',
           borderRadius: 10,
-          padding: '1.5rem',
+          padding: '1rem 1.25rem',
           boxShadow: '0 10px 40px rgba(0,0,0,0.5)',
           textAlign: 'center',
+          pointerEvents: 'auto',
         }}
       >
-        <div className="spinner" style={{ margin: '0 auto 1rem', borderTopColor: '#fff', width: 28, height: 28 }} />
+        <div
+          style={{
+            margin: '0 auto 0.75rem',
+            width: 22,
+            height: 22,
+            clipPath: 'polygon(50% 0%, 100% 100%, 0% 100%)',
+            background: '#fff',
+            animation: 'fm-process-tri-spin 0.9s linear infinite',
+          }}
+        />
 
         <div style={{ fontSize: '1.05rem', fontWeight: 700 }}>
           Simulando día {date ?? '…'} ({daysProcessed}/{totalDays})

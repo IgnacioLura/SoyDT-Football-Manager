@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Flag from '../../shared/Flag'
 import Layout from '../../shared/Layout'
+import DataTable, { type DataTableColumn } from '../../shared/ui/DataTable'
 import SectionPanel from '../../shared/ui/SectionPanel'
 import { staffTabs } from './tabs'
 
@@ -68,14 +69,12 @@ type StaffDetail = {
   medical: StaffMedical
 }
 
-function AttrRow({ label, value }: { label: string; value: number }) {
-  return (
-    <tr>
-      <td>{label}</td>
-      <td>{value}</td>
-    </tr>
-  )
-}
+type AttrEntry = { label: string; value: number }
+
+const attrColumns: DataTableColumn<AttrEntry>[] = [
+  { key: 'label', header: '', className: 'dt-cell-muted', render: (r) => r.label },
+  { key: 'value', header: '', align: 'right', className: 'dt-cell-strong', render: (r) => r.value },
+]
 
 function StaffPage() {
   const { staffId } = useParams<{ staffId: string }>()
@@ -137,58 +136,68 @@ function StaffPage() {
           <div className="fm-staff-attrs" style={{ padding: '14px', display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
             <div>
               <h4>Coaching</h4>
-              <table className="fm-skills">
-                <tbody>
-                  <AttrRow label="Attacking" value={staff.coaching.attacking} />
-                  <AttrRow label="Defending" value={staff.coaching.defending} />
-                  <AttrRow label="Fitness" value={staff.coaching.fitness} />
-                  <AttrRow label="Mental" value={staff.coaching.mental} />
-                  <AttrRow label="Tactical" value={staff.coaching.tactical} />
-                  <AttrRow label="Technical" value={staff.coaching.technical} />
-                  <AttrRow label="Working with youngsters" value={staff.coaching.workingWithYoungsters} />
-                </tbody>
-              </table>
+              <DataTable
+                rows={[
+                  { label: 'Attacking', value: staff.coaching.attacking },
+                  { label: 'Defending', value: staff.coaching.defending },
+                  { label: 'Fitness', value: staff.coaching.fitness },
+                  { label: 'Mental', value: staff.coaching.mental },
+                  { label: 'Tactical', value: staff.coaching.tactical },
+                  { label: 'Technical', value: staff.coaching.technical },
+                  { label: 'Working with youngsters', value: staff.coaching.workingWithYoungsters },
+                ]}
+                rowKey={(r) => r.label}
+                columns={attrColumns}
+              />
             </div>
             <div>
               <h4>Mental</h4>
-              <table className="fm-skills">
-                <tbody>
-                  <AttrRow label="Adaptability" value={staff.mental.adaptability} />
-                  <AttrRow label="Determination" value={staff.mental.determination} />
-                  <AttrRow label="Discipline" value={staff.mental.discipline} />
-                  <AttrRow label="Man management" value={staff.mental.manManagement} />
-                  <AttrRow label="Motivating" value={staff.mental.motivating} />
-                </tbody>
-              </table>
+              <DataTable
+                rows={[
+                  { label: 'Adaptability', value: staff.mental.adaptability },
+                  { label: 'Determination', value: staff.mental.determination },
+                  { label: 'Discipline', value: staff.mental.discipline },
+                  { label: 'Man management', value: staff.mental.manManagement },
+                  { label: 'Motivating', value: staff.mental.motivating },
+                ]}
+                rowKey={(r) => r.label}
+                columns={attrColumns}
+              />
             </div>
             <div>
               <h4>Knowledge</h4>
-              <table className="fm-skills">
-                <tbody>
-                  <AttrRow label="Judging player ability" value={staff.knowledge.judgingPlayerAbility} />
-                  <AttrRow label="Judging player potential" value={staff.knowledge.judgingPlayerPotential} />
-                  <AttrRow label="Tactical knowledge" value={staff.knowledge.tacticalKnowledge} />
-                </tbody>
-              </table>
+              <DataTable
+                rows={[
+                  { label: 'Judging player ability', value: staff.knowledge.judgingPlayerAbility },
+                  { label: 'Judging player potential', value: staff.knowledge.judgingPlayerPotential },
+                  { label: 'Tactical knowledge', value: staff.knowledge.tacticalKnowledge },
+                ]}
+                rowKey={(r) => r.label}
+                columns={attrColumns}
+              />
             </div>
             <div>
               <h4>Goalkeeping</h4>
-              <table className="fm-skills">
-                <tbody>
-                  <AttrRow label="Distribution" value={staff.goalkeeping.distribution} />
-                  <AttrRow label="Handling" value={staff.goalkeeping.handling} />
-                  <AttrRow label="Shot stopping" value={staff.goalkeeping.shotStopping} />
-                </tbody>
-              </table>
+              <DataTable
+                rows={[
+                  { label: 'Distribution', value: staff.goalkeeping.distribution },
+                  { label: 'Handling', value: staff.goalkeeping.handling },
+                  { label: 'Shot stopping', value: staff.goalkeeping.shotStopping },
+                ]}
+                rowKey={(r) => r.label}
+                columns={attrColumns}
+              />
             </div>
             <div>
               <h4>Medical</h4>
-              <table className="fm-skills">
-                <tbody>
-                  <AttrRow label="Physiotherapy" value={staff.medical.physiotherapy} />
-                  <AttrRow label="Sports science" value={staff.medical.sportsScience} />
-                </tbody>
-              </table>
+              <DataTable
+                rows={[
+                  { label: 'Physiotherapy', value: staff.medical.physiotherapy },
+                  { label: 'Sports science', value: staff.medical.sportsScience },
+                ]}
+                rowKey={(r) => r.label}
+                columns={attrColumns}
+              />
             </div>
           </div>
         </SectionPanel>

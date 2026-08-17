@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import { PositionBadge } from '../../shared/positions'
 import TeamCrest from '../onboarding/TeamCrest'
+import DataTable from '../../shared/ui/DataTable'
 import SectionPanel from '../../shared/ui/SectionPanel'
 import DtLayout from './DtLayout'
 import { useMyTeamId } from './useMyTeamId'
@@ -34,46 +35,42 @@ type TeamTransfers = { incoming: TeamTransferItem[]; outgoing: TeamTransferItem[
 const PRIMERA_LEAGUE_ID = 140 // Uruguay Primera División — this MVP's only competition.
 
 function TransferHistoryTable({ items, otherLabel }: { items: TeamTransferItem[]; otherLabel: string }) {
-  if (items.length === 0) {
-    return <div className="fm-empty">Sin transferencias</div>
-  }
-
   return (
-    <table className="fm-squad">
-      <thead>
-        <tr>
-          <th className="sq-name">Jugador</th>
-          <th>{otherLabel}</th>
-          <th>Fee</th>
-          <th>Fecha</th>
-        </tr>
-      </thead>
-      <tbody>
-        {items.map((t, i) => (
-          <tr key={i}>
-            <td className="sq-name">
-              <Link to={`/players/${t.playerId}`}>{t.playerName}</Link>
-            </td>
-            <td>
-              <span className="st-club-link">
-                <TeamCrest slug={t.otherTeamSlug} name={t.otherTeamName} size={20} />
-                <span>{t.otherTeamName}</span>
-              </span>
-            </td>
-            <td>
-              {t.isFree ? (
-                <span className="fm-loan-badge">Gratis</span>
-              ) : t.isLoan ? (
-                <span className="fm-loan-badge">Préstamo</span>
-              ) : (
-                <span className="fm-transfer-fee">{t.fee.toLocaleString()}</span>
-              )}
-            </td>
-            <td>{t.date}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <DataTable
+      rows={items}
+      rowKey={(_, i) => i}
+      emptyMessage="Sin transferencias"
+      columns={[
+        {
+          key: 'name',
+          header: 'Jugador',
+          render: (t) => <Link to={`/players/${t.playerId}`}>{t.playerName}</Link>,
+        },
+        {
+          key: 'other',
+          header: otherLabel,
+          render: (t) => (
+            <span className="st-club-link">
+              <TeamCrest slug={t.otherTeamSlug} name={t.otherTeamName} size={20} />
+              <span>{t.otherTeamName}</span>
+            </span>
+          ),
+        },
+        {
+          key: 'fee',
+          header: 'Fee',
+          render: (t) =>
+            t.isFree ? (
+              <span className="fm-loan-badge">Gratis</span>
+            ) : t.isLoan ? (
+              <span className="fm-loan-badge">Préstamo</span>
+            ) : (
+              <span className="fm-transfer-fee">{t.fee.toLocaleString()}</span>
+            ),
+        },
+        { key: 'date', header: 'Fecha', render: (t) => t.date },
+      ]}
+    />
   )
 }
 
@@ -173,91 +170,79 @@ function DtTransfersPage() {
             ))}
           </select>
           {myTeam && (
-            <table className="fm-standings">
-              <thead>
-                <tr>
-                  <th className="st-club">Nombre</th>
-                  <th>Pos</th>
-                  <th>Edad</th>
-                  <th className="st-pts">OVR</th>
-                  <th>Fee</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {myTeam.players.map((p) => (
-                  <tr key={p.id}>
-                    <td className="st-club">{p.name}</td>
-                    <td>
-                      <PositionBadge position={p.position} />
-                    </td>
-                    <td>{p.age}</td>
-                    <td className="st-pts">{p.currentAbility}</td>
-                    <td>
-                      <input
-                        type="number"
-                        min={0}
-                        style={{ width: 100 }}
-                        value={fees[p.id] ?? p.value}
-                        onChange={(e) => setFees((f) => ({ ...f, [p.id]: e.target.value }))}
-                      />
-                    </td>
-                    <td>
-                      <button
-                        type="button"
-                        disabled={!browseTeamId}
-                        onClick={() => browseTeamId && doTransfer(p.id, myTeamId, browseTeamId, Number(fees[p.id] ?? p.value))}
-                      >
-                        Vender
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <DataTable
+              rows={myTeam.players}
+              rowKey={(p) => p.id}
+              columns={[
+                { key: 'name', header: 'Nombre', render: (p) => p.name },
+                { key: 'pos', header: 'Pos', render: (p) => <PositionBadge position={p.position} /> },
+                { key: 'age', header: 'Edad', render: (p) => p.age },
+                { key: 'ovr', header: 'OVR', align: 'right', render: (p) => p.currentAbility },
+                {
+                  key: 'fee',
+                  header: 'Fee',
+                  render: (p) => (
+                    <input
+                      type="number"
+                      min={0}
+                      style={{ width: 100 }}
+                      value={fees[p.id] ?? p.value}
+                      onChange={(e) => setFees((f) => ({ ...f, [p.id]: e.target.value }))}
+                    />
+                  ),
+                },
+                {
+                  key: 'actions',
+                  header: '',
+                  render: (p) => (
+                    <button
+                      type="button"
+                      disabled={!browseTeamId}
+                      onClick={() => browseTeamId && doTransfer(p.id, myTeamId, browseTeamId, Number(fees[p.id] ?? p.value))}
+                    >
+                      Vender
+                    </button>
+                  ),
+                },
+              ]}
+            />
           )}
         </SectionPanel>
 
         {browseTeam && (
           <SectionPanel title={`Fichar de ${browseTeam.name}`}>
-            <table className="fm-standings">
-              <thead>
-                <tr>
-                  <th className="st-club">Nombre</th>
-                  <th>Pos</th>
-                  <th>Edad</th>
-                  <th className="st-pts">OVR</th>
-                  <th>Fee</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {browseTeam.players.map((p) => (
-                  <tr key={p.id}>
-                    <td className="st-club">{p.name}</td>
-                    <td>
-                      <PositionBadge position={p.position} />
-                    </td>
-                    <td>{p.age}</td>
-                    <td className="st-pts">{p.currentAbility}</td>
-                    <td>
-                      <input
-                        type="number"
-                        min={0}
-                        style={{ width: 100 }}
-                        value={fees[p.id] ?? p.value}
-                        onChange={(e) => setFees((f) => ({ ...f, [p.id]: e.target.value }))}
-                      />
-                    </td>
-                    <td>
-                      <button type="button" onClick={() => doTransfer(p.id, browseTeam.id, myTeamId, Number(fees[p.id] ?? p.value))}>
-                        Fichar
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <DataTable
+              rows={browseTeam.players}
+              rowKey={(p) => p.id}
+              columns={[
+                { key: 'name', header: 'Nombre', render: (p) => p.name },
+                { key: 'pos', header: 'Pos', render: (p) => <PositionBadge position={p.position} /> },
+                { key: 'age', header: 'Edad', render: (p) => p.age },
+                { key: 'ovr', header: 'OVR', align: 'right', render: (p) => p.currentAbility },
+                {
+                  key: 'fee',
+                  header: 'Fee',
+                  render: (p) => (
+                    <input
+                      type="number"
+                      min={0}
+                      style={{ width: 100 }}
+                      value={fees[p.id] ?? p.value}
+                      onChange={(e) => setFees((f) => ({ ...f, [p.id]: e.target.value }))}
+                    />
+                  ),
+                },
+                {
+                  key: 'actions',
+                  header: '',
+                  render: (p) => (
+                    <button type="button" onClick={() => doTransfer(p.id, browseTeam.id, myTeamId, Number(fees[p.id] ?? p.value))}>
+                      Fichar
+                    </button>
+                  ),
+                },
+              ]}
+            />
           </SectionPanel>
         )}
 

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import TabBar from '../../shared/ui/TabBar'
 
 // Sub-tab bar for a single staff member's profile pages — mirrors
 // open-football/src/web/src/staff/get/index.html and
@@ -7,16 +7,13 @@ import { Link } from 'react-router-dom'
 export type StaffTab = 'overview' | 'personal'
 
 export function staffTabs(staffId: string, active: StaffTab) {
-  const tab = (key: StaffTab, label: string, to: string) => (
-    <Link key={key} className={`fm-tab${active === key ? ' active' : ''}`} to={to}>
-      {label}
-    </Link>
-  )
-
   return (
-    <div className="fm-tabbar">
-      {tab('overview', 'Overview', `/staff/${staffId}`)}
-      {tab('personal', 'Personal', `/staff/${staffId}/personal`)}
-    </div>
+    <TabBar
+      active={active}
+      items={[
+        { key: 'overview', label: 'Overview', to: `/staff/${staffId}` },
+        { key: 'personal', label: 'Personal', to: `/staff/${staffId}/personal` },
+      ]}
+    />
   )
 }

@@ -41,11 +41,42 @@
   transition: transform var(--transition-fast) ease;
 }
 
+.nr-tile {
+  position: relative;
+}
+
 .nr-active .nr-tile {
   background: var(--surface-2);
   color: var(--accent-primary);
-  border-left: 3px solid var(--accent-primary);
   animation: nr-active-glow 2.4s ease-in-out infinite;
+}
+
+/* Triangle motif (see DESIGN_SYSTEM.md) — active-tab marker as the FC
+   brand's triangle instead of a plain rectangle bar, sliding in along its
+   own point ("Trajectory": a fast, direct path, not the eased Formation
+   entrance used elsewhere in the kit). */
+.nr-active .nr-tile::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 6px;
+  height: 14px;
+  transform: translate(-2px, -50%);
+  background: var(--accent-primary);
+  clip-path: var(--clip-triangle);
+  animation: nr-tri-in var(--transition-fast) var(--ease-trajectory) both;
+}
+
+@keyframes nr-tri-in {
+  from {
+    transform: translate(-10px, -50%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-2px, -50%);
+    opacity: 1;
+  }
 }
 
 /* Slow breathing glow on the active tab's accent edge — matches the DT

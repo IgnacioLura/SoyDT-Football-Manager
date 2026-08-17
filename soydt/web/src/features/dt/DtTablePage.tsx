@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { callApi } from '../../shared/api'
+import DataTable from '../../shared/ui/DataTable'
 import SectionPanel from '../../shared/ui/SectionPanel'
 import TeamCrest from '../onboarding/TeamCrest'
 import DtLayout from './DtLayout'
@@ -48,42 +49,39 @@ function DtTablePage() {
     <DtLayout title={table.leagueName}>
       <div className="fm-page">
         <SectionPanel title={table.leagueName}>
-          <table className="fm-standings">
-            <thead>
-              <tr>
-                <th className="st-pos">#</th>
-                <th className="st-club">Club</th>
-                <th>P</th>
-                <th>G</th>
-                <th>E</th>
-                <th>P</th>
-                <th>DG</th>
-                <th className="st-pts">Pts</th>
-              </tr>
-            </thead>
-            <tbody>
-              {table.rows.map((row) => (
-                <tr key={row.teamId} style={row.teamId === myTeamId ? { fontWeight: 700, background: 'rgba(74, 222, 128, 0.08)' } : undefined}>
-                  <td className="st-pos">{row.position}</td>
-                  <td className="st-club">
-                    <span className="st-club-link">
-                      <TeamCrest slug={row.teamSlug} name={row.teamName} size={20} />
-                      <span>{row.teamName}</span>
-                    </span>
-                  </td>
-                  <td>{row.played}</td>
-                  <td>{row.won}</td>
-                  <td>{row.drawn}</td>
-                  <td>{row.lost}</td>
-                  <td className="st-gd">
+          <DataTable
+            rows={table.rows}
+            rowKey={(row) => row.teamId}
+            rowClassName={(row) => (row.teamId === myTeamId ? 'dt-row-highlight' : undefined)}
+            columns={[
+              { key: 'pos', header: '#', align: 'center', render: (row) => row.position },
+              {
+                key: 'club',
+                header: 'Club',
+                render: (row) => (
+                  <span className="st-club-link">
+                    <TeamCrest slug={row.teamSlug} name={row.teamName} size={20} />
+                    <span>{row.teamName}</span>
+                  </span>
+                ),
+              },
+              { key: 'played', header: 'P', render: (row) => row.played },
+              { key: 'won', header: 'G', render: (row) => row.won },
+              { key: 'drawn', header: 'E', render: (row) => row.drawn },
+              { key: 'lost', header: 'P', render: (row) => row.lost },
+              {
+                key: 'gd',
+                header: 'DG',
+                render: (row) => (
+                  <>
                     {row.goalDifference > 0 ? '+' : ''}
                     {row.goalDifference}
-                  </td>
-                  <td className="st-pts">{row.points}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  </>
+                ),
+              },
+              { key: 'pts', header: 'Pts', align: 'right', render: (row) => row.points },
+            ]}
+          />
         </SectionPanel>
       </div>
     </DtLayout>

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import TabBar from '../../shared/ui/TabBar'
 
 // Shared tab bar for league sub-pages (overview/schedule/news/transfers/
 // awards) — mirrors leagues/get/index.html's fm-tabbar. "News" (newspaper)
@@ -14,18 +14,15 @@ import { Link } from 'react-router-dom'
 export type LeagueTab = 'overview' | 'schedule' | 'transfers' | 'awards'
 
 export function leagueTabs(leagueId: string, active: LeagueTab) {
-  const tab = (key: LeagueTab, label: string, to: string) => (
-    <Link key={key} className={`fm-tab${active === key ? ' active' : ''}`} to={to}>
-      {label}
-    </Link>
-  )
-
   return (
-    <div className="fm-tabbar">
-      {tab('overview', 'Overview', `/leagues/${leagueId}`)}
-      {tab('schedule', 'Schedule', `/leagues/${leagueId}/schedule`)}
-      {tab('transfers', 'Transfers', `/leagues/${leagueId}/transfers`)}
-      {tab('awards', 'Awards', `/leagues/${leagueId}/awards`)}
-    </div>
+    <TabBar
+      active={active}
+      items={[
+        { key: 'overview', label: 'Overview', to: `/leagues/${leagueId}` },
+        { key: 'schedule', label: 'Schedule', to: `/leagues/${leagueId}/schedule` },
+        { key: 'transfers', label: 'Transfers', to: `/leagues/${leagueId}/transfers` },
+        { key: 'awards', label: 'Awards', to: `/leagues/${leagueId}/awards` },
+      ]}
+    />
   )
 }

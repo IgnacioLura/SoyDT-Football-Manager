@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
 import { PositionBadge } from '../../shared/positions'
+import type { SortMode } from '../../shared/sortPlayers'
+import { sortByMode } from '../../shared/sortPlayers'
+import DataTable from '../../shared/ui/DataTable'
 import SectionPanel from '../../shared/ui/SectionPanel'
+import SortToggle from '../../shared/ui/SortToggle'
 
 // Mirrors the original app's `watchlist/index.html` (`/{lang}/watchlist`) —
 // a plain list of player ids on `SimulatorData.watchlist`, resolved against
@@ -32,6 +36,7 @@ type WatchlistPlayer = {
 function WatchlistPage() {
   const [players, setPlayers] = useState<WatchlistPlayer[] | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [sortMode, setSortMode] = useState<SortMode>('position')
 
   const load = () => {
     callApi<WatchlistPlayer[]>('/api/watchlist')
@@ -69,49 +74,51 @@ function WatchlistPage() {
   return (
     <Layout title="Watch List">
       <div className="fm-page">
-        <SectionPanel title="Watch List" actions={<span className="fm-panel-count">{players.length}</span>}>
+        <SectionPanel
+          title="Watch List"
+          actions={
+            <>
+              <SortToggle value={sortMode} onChange={setSortMode} />
+              <span className="fm-panel-count">{players.length}</span>
+            </>
+          }
+        >
           {players.length === 0 ? (
             <p style={{ padding: '14px' }}>No players on your watch list yet — add one from a player's page.</p>
           ) : (
-            <table className="fm-standings">
-              <thead>
-                <tr>
-                  <th className="st-club">Name</th>
-                  <th>Pos</th>
-                  <th>Age</th>
-                  <th className="st-pts">OVR</th>
-                  <th className="st-pts">PA</th>
-                  <th>Club</th>
-                  <th>Status</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {players.map((p) => (
-                  <tr key={p.id}>
-                    <td className="st-club">
-                      <Link to={`/players/${p.id}`}>{p.name}</Link>
-                    </td>
-                    <td>
-                      <PositionBadge position={p.position} />
-                    </td>
-                    <td>{p.age}</td>
-                    <td className="st-pts">{p.currentAbility}</td>
-                    <td className="st-pts">{p.potentialAbility}</td>
-                    <td>{p.teamName}</td>
-                    <td>
+            <DataTable
+              rows={sortByMode(players, sortMode, (p) => p.position, (p) => p.currentAbility)}
+              rowKey={(p) => p.id}
+              columns={[
+                {
+                  key: 'name',
+                  header: 'Name',
+                  render: (p) => <Link to={`/players/${p.id}`}>{p.name}</Link>,
+                },
+                { key: 'pos', header: 'Pos', render: (p) => <PositionBadge position={p.position} /> },
+                { key: 'age', header: 'Age', render: (p) => p.age },
+                { key: 'ovr', header: 'OVR', align: 'right', render: (p) => p.currentAbility },
+                { key: 'pa', header: 'PA', align: 'right', render: (p) => p.potentialAbility },
+                { key: 'club', header: 'Club', render: (p) => p.teamName },
+                {
+                  key: 'status',
+                  header: 'Status',
+                  render: (p) => (
+                    <>
                       {p.retired && 'Retired'}
                       {p.injured && 'Injured '}
                       {p.unhappy && 'Unhappy '}
                       {p.transferListed && 'Listed'}
-                    </td>
-                    <td>
-                      <button onClick={() => remove(p.id)}>Remove</button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                    </>
+                  ),
+                },
+                {
+                  key: 'actions',
+                  header: '',
+                  render: (p) => <button onClick={() => remove(p.id)}>Remove</button>,
+                },
+              ]}
+            />
           )}
         </SectionPanel>
       </div>

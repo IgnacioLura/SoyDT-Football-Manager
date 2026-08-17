@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Flag from '../../shared/Flag'
 import Layout from '../../shared/Layout'
+import DataTable from '../../shared/ui/DataTable'
 import SectionPanel from '../../shared/ui/SectionPanel'
 import { countryTabs } from './tabs'
 
@@ -57,34 +58,17 @@ function StaffPage() {
     <Layout title="Staff" subTitle={tabs} sidebarCountryId={Number(countryId)}>
       <div className="fm-page">
         <SectionPanel title="Staff" actions={<span className="fm-panel-count">{staff.length}</span>}>
-          {staff.length === 0 ? (
-            <div className="fm-empty">No staff</div>
-          ) : (
-            <table className="fm-squad fm-staff-table">
-              <thead>
-                <tr>
-                  <th className="st-name">Name</th>
-                  <th className="st-role">Role</th>
-                  <th className="st-nat">Nat</th>
-                  <th className="st-age">Age</th>
-                </tr>
-              </thead>
-              <tbody>
-                {staff.map((m, i) => (
-                  <tr key={i}>
-                    <td className="st-name">
-                      {m.lastName} {m.firstName}
-                    </td>
-                    <td className="st-role">{m.role}</td>
-                    <td className="st-nat">
-                      <Flag code={m.countryCode} />
-                    </td>
-                    <td className="st-age">{m.age}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+          <DataTable
+            rows={staff}
+            rowKey={(_, i) => i}
+            emptyMessage="No staff"
+            columns={[
+              { key: 'name', header: 'Name', render: (m) => `${m.lastName} ${m.firstName}` },
+              { key: 'role', header: 'Role', render: (m) => m.role },
+              { key: 'nat', header: 'Nat', render: (m) => <Flag code={m.countryCode} /> },
+              { key: 'age', header: 'Age', align: 'center', render: (m) => m.age },
+            ]}
+          />
         </SectionPanel>
       </div>
     </Layout>

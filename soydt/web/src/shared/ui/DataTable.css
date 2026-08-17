@@ -1,0 +1,175 @@
+/* soydt/web/src/shared/ui/DataTable.css
+   Token-based replacement for fm-squad/fm-standings/fm-*-table (see
+   DESIGN_SYSTEM.md migration plan). Falls back to the old style.css literal
+   values, same pattern as SortToggle.css, so it renders correctly on pages
+   that don't import theme.css yet. */
+.dt-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.dt-table thead th {
+  padding: 9px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted, #8b93a7);
+  text-align: left;
+  border-bottom: 1px solid var(--surface-3, #2a353d);
+  white-space: nowrap;
+}
+
+.dt-table tbody td {
+  padding: 8px 10px;
+  font-size: 13px;
+  color: var(--text-primary, #f4f6fa);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.dt-table tbody tr {
+  border-left: 3px solid transparent;
+  transition: background var(--transition-fast, 0.15s) ease;
+}
+
+.dt-table tbody tr:nth-child(even) {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.dt-table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.dt-row-highlight td {
+  font-weight: 700;
+  background: rgba(74, 222, 128, 0.08);
+}
+
+/* Standings zone striping (UCL/UEL/relegation) — matches legacy
+   .fm-standings tbody tr.zone-* colors in style.css. */
+.dt-table tbody tr.zone-ucl {
+  border-left-color: #2ecc71;
+}
+
+.dt-table tbody tr.zone-uel {
+  border-left-color: #3498db;
+}
+
+.dt-table tbody tr.zone-rel {
+  border-left-color: #e74c3c;
+}
+
+.dt-align-left {
+  text-align: left;
+}
+
+.dt-align-center {
+  text-align: center;
+}
+
+.dt-align-right {
+  text-align: right;
+}
+
+.dt-cell-muted {
+  color: var(--text-muted, #8b93a7);
+}
+
+.dt-cell-strong {
+  font-weight: 700;
+  width: 28px;
+}
+
+.dt-empty {
+  padding: 14px;
+  color: var(--text-muted, #8b93a7);
+  font-size: 13px;
+}
+
+/* Legacy per-column cell classNames carried over from the fm-squad/
+   fm-standings/fm-staff-table/fm-schedule markup they replaced (see
+   DESIGN_SYSTEM.md Phase 1) — those rules were scoped to the old ancestor
+   table class (e.g. `.fm-squad .sq-name`), which no longer wraps them now
+   that every table renders as `.dt-table`. Re-scoped here, unchanged
+   values, so pages that kept these classNames on DataTable columns still
+   get their intended width/color. */
+.dt-table .sq-name {
+  white-space: nowrap;
+}
+
+.dt-table .sq-name a {
+  font-weight: 400;
+}
+
+.dt-table .st-club {
+  text-align: left;
+  padding-left: 12px;
+}
+
+.dt-table .st-club a {
+  color: var(--text-primary, #f4f6fa);
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.dt-table .st-pts {
+  font-weight: 700;
+  color: #fff;
+  width: 46px;
+  font-size: 14px;
+}
+
+.dt-table .st-name {
+  width: 30%;
+}
+
+.dt-table .st-name a {
+  font-weight: 500;
+}
+
+.dt-table .st-role {
+  width: 22%;
+  color: var(--text-muted, #8b93a7);
+  font-size: 12px;
+}
+
+.dt-table .st-nat {
+  width: 48px;
+}
+
+.dt-table .st-age {
+  width: 60px;
+  text-align: center;
+}
+
+.dt-table .st-wage {
+  width: 120px;
+}
+
+.dt-table .sch-date {
+  width: 100px;
+  color: var(--text-muted, #8b93a7);
+  font-size: 12px;
+}
+
+.dt-table .sch-time {
+  width: 70px;
+  color: var(--text-muted, #8b93a7);
+  font-size: 12px;
+}
+
+.dt-table .sch-venue {
+  width: 70px;
+  text-align: center;
+}
+
+.dt-table .sch-result {
+  width: 100px;
+  text-align: center;
+}
+
+.dt-table .sch-comp {
+  color: var(--text-muted, #8b93a7);
+  font-size: 12px;
+}

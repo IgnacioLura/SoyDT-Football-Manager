@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import DataTable from '../../shared/ui/DataTable'
 import SectionPanel from '../../shared/ui/SectionPanel'
 
 // SIMPLIFIED port of open-football/src/web/src/player/events — the
@@ -65,28 +66,16 @@ function PlayerEventsPage() {
           title="Events"
           actions={events.length > 0 ? <span className="fm-panel-count">{events.length}</span> : undefined}
         >
-          {events.length === 0 ? (
-            <div className="fm-empty">No events on record</div>
-          ) : (
-            <table className="fm-squad fm-events-table">
-              <thead>
-                <tr>
-                  <th className="sq-date">Date</th>
-                  <th className="sq-kind">Type</th>
-                  <th>Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                {events.map((e, i) => (
-                  <tr key={`${e.date}-${i}`}>
-                    <td className="sq-date">{e.date}</td>
-                    <td className="sq-kind">{KIND_LABELS[e.kind] ?? e.kind}</td>
-                    <td>{e.description}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+          <DataTable
+            rows={events}
+            rowKey={(e, i) => `${e.date}-${i}`}
+            emptyMessage="No events on record"
+            columns={[
+              { key: 'date', header: 'Date', render: (e) => e.date },
+              { key: 'kind', header: 'Type', render: (e) => KIND_LABELS[e.kind] ?? e.kind },
+              { key: 'description', header: 'Description', render: (e) => e.description },
+            ]}
+          />
         </SectionPanel>
       </div>
     </Layout>

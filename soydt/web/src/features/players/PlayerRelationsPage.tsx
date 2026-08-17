@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import DataTable from '../../shared/ui/DataTable'
 import SectionPanel from '../../shared/ui/SectionPanel'
 
 // SIMPLIFIED reinterpretation of open-football/src/web/src/player/relations/
@@ -114,32 +115,20 @@ function PlayerRelationsPage() {
           title={`${relations.playerName}'s relationships`}
           actions={<span className="fm-panel-count">{relations.relations.length}</span>}
         >
-          {relations.relations.length === 0 ? (
-            <div className="fm-empty">No notable relationships</div>
-          ) : (
-            <table className="fm-squad">
-              <thead>
-                <tr>
-                  <th className="sq-name">Teammate</th>
-                  <th>Tier</th>
-                  <th>Level</th>
-                </tr>
-              </thead>
-              <tbody>
-                {relations.relations.map((r, i) => (
-                  <tr key={i}>
-                    <td className="sq-name">
-                      <Link to={`/players/${r.otherPlayerId}`}>{r.otherPlayerName}</Link>
-                    </td>
-                    <td>
-                      <TierBadge tier={r.tier} />
-                    </td>
-                    <td>{r.level}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
+          <DataTable
+            rows={relations.relations}
+            rowKey={(_, i) => i}
+            emptyMessage="No notable relationships"
+            columns={[
+              {
+                key: 'teammate',
+                header: 'Teammate',
+                render: (r) => <Link to={`/players/${r.otherPlayerId}`}>{r.otherPlayerName}</Link>,
+              },
+              { key: 'tier', header: 'Tier', render: (r) => <TierBadge tier={r.tier} /> },
+              { key: 'level', header: 'Level', render: (r) => r.level },
+            ]}
+          />
         </SectionPanel>
       </div>
     </Layout>

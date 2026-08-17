@@ -73,7 +73,7 @@ function TeamFinancesPage() {
   return (
     <Layout title="Finances" sidebarCountryId={sidebarCountryId}>
       <div className="fm-page">
-        <SectionPanel title="Overview">
+        <SectionPanel title="Overview" accent="secondary">
           <div className="fm-personal-detail">
             <div className="fm-detail-row">
               <span className="fm-detail-label">Balance</span>
@@ -92,6 +92,7 @@ function TeamFinancesPage() {
 
         <SectionPanel
           title="Income"
+          accent="secondary"
           actions={<span className="fm-panel-count">{money(finances.incomeTotal)}</span>}
         >
           <div className="fm-personal-detail">
@@ -120,6 +121,7 @@ function TeamFinancesPage() {
 
         <SectionPanel
           title="Expenses"
+          accent="secondary"
           actions={<span className="fm-panel-count">{money(finances.expenseTotal)}</span>}
         >
           <div className="fm-personal-detail">

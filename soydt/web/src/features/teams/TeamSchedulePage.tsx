@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
 import TeamCrest from '../onboarding/TeamCrest'
+import DataTable from '../../shared/ui/DataTable'
 import SectionPanel from '../../shared/ui/SectionPanel'
 import { useTeamCountryId } from '../../shared/useTeamCountryId'
 
@@ -63,45 +64,49 @@ function TeamSchedulePage() {
     <Layout title="Schedule" sidebarCountryId={sidebarCountryId}>
       <div className="fm-page">
         <SectionPanel title="Schedule">
-          <table className="fm-schedule">
-            <thead>
-              <tr>
-                <th className="sch-date">Date</th>
-                <th className="sch-time">Time</th>
-                <th>Opposition</th>
-                <th className="sch-venue">Venue</th>
-                <th className="sch-result">Result</th>
-                <th>Competition</th>
-              </tr>
-            </thead>
-            <tbody>
-              {items.map((item) => (
-                <tr key={item.matchId}>
-                  <td className="sch-date">{item.date}</td>
-                  <td className="sch-time">{item.time}</td>
-                  <td className="sch-opponent">
-                    <Link to={`/teams/${item.opponentTeamId}`} className="st-club-link">
-                      <TeamCrest slug={item.opponentSlug} name={item.opponentName} size={20} />
-                      <span>{item.opponentName}</span>
+          <DataTable
+            rows={items}
+            rowKey={(item) => item.matchId}
+            columns={[
+              { key: 'date', header: 'Date', className: 'sch-date', render: (item) => item.date },
+              { key: 'time', header: 'Time', className: 'sch-time', render: (item) => item.time },
+              {
+                key: 'opposition',
+                header: 'Opposition',
+                className: 'sch-opponent',
+                render: (item) => (
+                  <Link to={`/teams/${item.opponentTeamId}`} className="st-club-link">
+                    <TeamCrest slug={item.opponentSlug} name={item.opponentName} size={20} />
+                    <span>{item.opponentName}</span>
+                  </Link>
+                ),
+              },
+              {
+                key: 'venue',
+                header: 'Venue',
+                align: 'center',
+                className: 'sch-venue',
+                render: (item) => (
+                  <span className={`fm-venue ${item.isHome ? 'venue-h' : 'venue-a'}`}>{item.isHome ? 'H' : 'A'}</span>
+                ),
+              },
+              {
+                key: 'result',
+                header: 'Result',
+                align: 'center',
+                className: 'sch-result',
+                render: (item) =>
+                  item.homeGoals !== null && item.awayGoals !== null ? (
+                    <Link to={`/match/${item.matchId}`} className="fm-result">
+                      {item.homeGoals} – {item.awayGoals}
                     </Link>
-                  </td>
-                  <td className="sch-venue">
-                    <span className={`fm-venue ${item.isHome ? 'venue-h' : 'venue-a'}`}>{item.isHome ? 'H' : 'A'}</span>
-                  </td>
-                  <td className="sch-result">
-                    {item.homeGoals !== null && item.awayGoals !== null ? (
-                      <Link to={`/match/${item.matchId}`} className="fm-result">
-                        {item.homeGoals} – {item.awayGoals}
-                      </Link>
-                    ) : (
-                      <span className="fm-pending">–</span>
-                    )}
-                  </td>
-                  <td className="sch-comp">{item.competitionName}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  ) : (
+                    <span className="fm-pending">–</span>
+                  ),
+              },
+              { key: 'competition', header: 'Competition', className: 'sch-comp', render: (item) => item.competitionName },
+            ]}
+          />
         </SectionPanel>
       </div>
     </Layout>

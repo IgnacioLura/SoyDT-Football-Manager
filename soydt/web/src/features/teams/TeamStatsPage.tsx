@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
 import { PositionBadge } from '../../shared/positions'
+import DataTable from '../../shared/ui/DataTable'
 import SectionPanel from '../../shared/ui/SectionPanel'
 import { useTeamCountryId } from '../../shared/useTeamCountryId'
 
@@ -67,47 +68,38 @@ function TeamStatsPage() {
           title="Season Statistics"
           actions={<span className="fm-panel-count">{rows.length}</span>}
         >
-          <table className="fm-stats">
-            <thead>
-              <tr>
-                <th>Pos</th>
-                <th className="st-club">Player</th>
-                <th className="st-pts">Apps</th>
-                <th className="st-pts">Gls</th>
-                <th className="st-pts">Ast</th>
-                <th className="st-pts">YC</th>
-                <th className="st-pts">RC</th>
-                <th className="st-pts">SoT</th>
-                <th className="st-pts">Passes</th>
-                <th className="st-pts">Tck</th>
-                <th className="st-pts">Av Rat</th>
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map((p) => (
-                <tr key={p.playerId}>
-                  <td>
-                    <PositionBadge position={p.position} />
-                  </td>
-                  <td className="st-club">
-                    <Link to={`/players/${p.playerId}`}>{p.name}</Link>
-                  </td>
-                  <td className="st-pts">
+          <DataTable
+            rows={rows}
+            rowKey={(p) => p.playerId}
+            columns={[
+              { key: 'pos', header: 'Pos', render: (p) => <PositionBadge position={p.position} /> },
+              {
+                key: 'player',
+                header: 'Player',
+                className: 'st-club',
+                render: (p) => <Link to={`/players/${p.playerId}`}>{p.name}</Link>,
+              },
+              {
+                key: 'apps',
+                header: 'Apps',
+                className: 'st-pts',
+                render: (p) => (
+                  <>
                     {p.played}
                     {p.playedSubs > 0 ? ` (${p.playedSubs})` : ''}
-                  </td>
-                  <td className="st-pts">{p.goals}</td>
-                  <td className="st-pts">{p.assists}</td>
-                  <td className="st-pts">{p.yellowCards}</td>
-                  <td className="st-pts">{p.redCards}</td>
-                  <td className="st-pts">{p.shotsOnTarget.toFixed(1)}</td>
-                  <td className="st-pts">{p.passes}</td>
-                  <td className="st-pts">{p.tackling.toFixed(1)}</td>
-                  <td className="st-pts">{p.averageRating}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  </>
+                ),
+              },
+              { key: 'gls', header: 'Gls', className: 'st-pts', render: (p) => p.goals },
+              { key: 'ast', header: 'Ast', className: 'st-pts', render: (p) => p.assists },
+              { key: 'yc', header: 'YC', className: 'st-pts', render: (p) => p.yellowCards },
+              { key: 'rc', header: 'RC', className: 'st-pts', render: (p) => p.redCards },
+              { key: 'sot', header: 'SoT', className: 'st-pts', render: (p) => p.shotsOnTarget.toFixed(1) },
+              { key: 'passes', header: 'Passes', className: 'st-pts', render: (p) => p.passes },
+              { key: 'tck', header: 'Tck', className: 'st-pts', render: (p) => p.tackling.toFixed(1) },
+              { key: 'avRat', header: 'Av Rat', className: 'st-pts', render: (p) => p.averageRating },
+            ]}
+          />
         </SectionPanel>
       </div>
     </Layout>

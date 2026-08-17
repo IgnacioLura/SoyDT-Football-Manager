@@ -1,8 +1,10 @@
 // soydt/web/src/shared/ui/PlayerCard.tsx
 import type { CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
-import { PositionBadge } from '../positions'
-import RatingBadge, { ratingTier } from './RatingBadge'
+import { positionInfo } from '../positions'
+import { playerPhotoOnError, playerPhotoSrc } from '../playerPhoto'
+import { useOvrGrowth } from '../useOvrGrowth'
+import { ratingTier } from './RatingBadge'
 import './PlayerCard.css'
 
 export type PlayerCardProps = {
@@ -20,29 +22,42 @@ export type PlayerCardProps = {
 
 function PlayerCard({ id, name, position, age, currentAbility, index }: PlayerCardProps) {
   const tier = ratingTier(currentAbility)
+  const pos = positionInfo(position)
+  const ovrGrowth = useOvrGrowth(id, currentAbility)
   return (
     <Link
       to={`/players/${id}`}
       className={`pc-card pc-tier-${tier} anim-fade-in-up`}
       style={index != null ? ({ '--i': index } as CSSProperties) : undefined}
+      draggable={false}
     >
-      <div className="pc-top">
-        <RatingBadge value={currentAbility} size="sm" />
-        <PositionBadge position={position} />
+      {/* Rank/position badges live outside `.pc-shape` on purpose — that inner
+          div carries the clip-path that cuts the shield silhouette, and any
+          child of a clipped element gets clipped too. Keeping the badges as
+          siblings lets them overflow above the shield's corners instead of
+          being sliced off by it. */}
+      <span className="pc-rank-value">{Math.round(currentAbility)}</span>
+      {ovrGrowth > 0 && <span className="pc-growth-badge">▲ +{ovrGrowth}</span>}
+      <span className="pc-pos-value" style={{ '--pos-color': pos.color } as CSSProperties}>
+        {pos.code}
+      </span>
+      <div className="pc-shape">
+        <div className="pc-photo-wrap">
+          <img
+            className="pc-photo"
+            src={playerPhotoSrc(id)}
+            onError={playerPhotoOnError}
+            alt=""
+            width={140}
+            height={172}
+            draggable={false}
+          />
+        </div>
+        <div className="pc-nameplate">
+          <div className="pc-name">{name}</div>
+          <div className="pc-age">Age {age}</div>
+        </div>
       </div>
-      <img
-        className="pc-photo"
-        src={`/static/images/players/${id}.jpg`}
-        onError={(e) => {
-          e.currentTarget.onerror = null
-          e.currentTarget.src = '/static/images/player/placeholder-face.svg'
-        }}
-        alt=""
-        width={72}
-        height={90}
-      />
-      <div className="pc-name">{name}</div>
-      <div className="pc-age">Age {age}</div>
     </Link>
   )
 }

@@ -3,7 +3,11 @@ import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
 import { PositionBadge } from '../../shared/positions'
+import type { SortMode } from '../../shared/sortPlayers'
+import { sortByMode } from '../../shared/sortPlayers'
+import DataTable from '../../shared/ui/DataTable'
 import SectionPanel from '../../shared/ui/SectionPanel'
+import SortToggle from '../../shared/ui/SortToggle'
 import { useTeamCountryId } from '../../shared/useTeamCountryId'
 
 // Team tactics page — deliberately simplified vs. the original app's
@@ -40,6 +44,7 @@ function TeamTacticsPage() {
   const sidebarCountryId = useTeamCountryId(teamId)
   const [tactics, setTactics] = useState<TeamTactics | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [sortMode, setSortMode] = useState<SortMode>('position')
 
   useEffect(() => {
     setTactics(null)
@@ -74,6 +79,7 @@ function TeamTacticsPage() {
       <div className="fm-page">
         <SectionPanel
           title="Formation"
+          accent="tertiary"
           actions={<span className="fm-panel-action">{tactics.formationName}</span>}
         >
           <div className="fm-personal-detail">
@@ -112,30 +118,28 @@ function TeamTacticsPage() {
 
         <SectionPanel
           title="Starting XI"
-          actions={<span className="fm-panel-count">{tactics.players.length}</span>}
+          accent="tertiary"
+          actions={
+            <>
+              <SortToggle value={sortMode} onChange={setSortMode} />
+              <span className="fm-panel-count">{tactics.players.length}</span>
+            </>
+          }
         >
-          <table className="fm-standings">
-            <thead>
-              <tr>
-                <th className="st-club">Name</th>
-                <th>Pos</th>
-                <th className="st-pts">OVR</th>
-              </tr>
-            </thead>
-            <tbody>
-              {tactics.players.map((p) => (
-                <tr key={p.playerId}>
-                  <td className="st-club">
-                    <Link to={`/players/${p.playerId}`}>{p.name}</Link>
-                  </td>
-                  <td>
-                    <PositionBadge position={p.position} />
-                  </td>
-                  <td className="st-pts">{p.currentAbility}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <DataTable
+            rows={sortByMode(tactics.players, sortMode, (p) => p.position, (p) => p.currentAbility)}
+            rowKey={(p) => p.playerId}
+            columns={[
+              {
+                key: 'name',
+                header: 'Name',
+                className: 'st-club',
+                render: (p) => <Link to={`/players/${p.playerId}`}>{p.name}</Link>,
+              },
+              { key: 'pos', header: 'Pos', render: (p) => <PositionBadge position={p.position} /> },
+              { key: 'ovr', header: 'OVR', className: 'st-pts', render: (p) => p.currentAbility },
+            ]}
+          />
         </SectionPanel>
       </div>
     </Layout>
