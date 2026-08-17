@@ -1,6 +1,6 @@
 import type { CSSProperties, ReactNode } from 'react'
 import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Flag from '../../shared/Flag'
 import ProcessControl from '../../shared/ProcessControl'
@@ -79,6 +79,10 @@ function DtLayout({ title, subTitle, children }: DtLayoutProps) {
           <div className="fm-sidebar">
             <div className="fm-sidebar-scroll">
               <NavRail navItems={NAV_ITEMS} countryLeagues={null} activePath={location.pathname} />
+              <Link to="/countries" className="nr-tile lyt-mode-switch">
+                <i className="fa fa-earth-americas" />
+                <span>Modo Admin</span>
+              </Link>
               <div className="lyt-lang-toggle">
                 <Flag code="us" />
                 <span>English</span>

@@ -57,6 +57,10 @@ function Layout({ title, subTitle, children, sidebarCountryId }: LayoutProps) {
           <div className="fm-sidebar">
             <div className="fm-sidebar-scroll">
               <NavRail navItems={NAV_ITEMS} countryLeagues={countryLeagues} activePath={location.pathname} />
+              <Link to="/dt" className="nr-tile lyt-mode-switch">
+                <i className="fa fa-futbol" />
+                <span>Modo DT</span>
+              </Link>
               <div className="lyt-lang-toggle">
                 <Flag code="us" />
                 <span>English</span>
