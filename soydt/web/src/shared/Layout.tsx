@@ -4,20 +4,25 @@ import AiSettingsBadge from './AiSettingsBadge'
 import Flag from './Flag'
 import ProcessControl from './ProcessControl'
 import { callApi } from './api'
+import NavRail, { type NavRailItem, type NavRailLeague } from './ui/NavRail'
+import './Layout.css'
 
 // Ported 1:1 from open-football/src/web/src/layout.html — same wrapper
 // div/class structure (fm-sidebar, fm-header, container-fluid/row/col from
 // Bootstrap5) so style.css's existing rules apply unmodified. See the
 // migration plan's pixel-perfect UI decision.
 //
+// Fase A (2026-08-16 EA FC redesign spec): the sidebar's *contents* now
+// render via `NavRail` (dark theme, icon tiles) instead of the raw
+// `fm-nav-section` list — wrapper divs/classes below are untouched so
+// style.css's layout rules (sidebar width, scroll, mobile toggle) keep
+// working unmodified for every other page still using this Layout.
+//
 // `menu_sections`/`i18n`/theming (--header-bg etc.) are server-computed in
 // the original Askama template; this is a static approximation until more
 // feature areas exist to populate a real nav (Phase 1 only has Countries).
 
-type NavItem = { title: string; icon: string; url: string }
-type SidebarLeague = { id: number; name: string }
-
-const NAV_ITEMS: NavItem[] = [{ title: 'Countries', icon: 'fa-earth-americas', url: '/countries' }]
+const NAV_ITEMS: NavRailItem[] = [{ title: 'Countries', icon: 'fa-earth-americas', url: '/countries' }]
 
 type LayoutProps = {
   title: string
@@ -33,65 +38,37 @@ type LayoutProps = {
 
 function Layout({ title, subTitle, children, sidebarCountryId }: LayoutProps) {
   const location = useLocation()
-  const [countryLeagues, setCountryLeagues] = useState<SidebarLeague[] | null>(null)
+  const [countryLeagues, setCountryLeagues] = useState<NavRailLeague[] | null>(null)
 
   useEffect(() => {
     if (sidebarCountryId == null) {
       setCountryLeagues(null)
       return
     }
-    callApi<SidebarLeague[]>(`/api/countries/${sidebarCountryId}/leagues`)
+    callApi<NavRailLeague[]>(`/api/countries/${sidebarCountryId}/leagues`)
       .then(setCountryLeagues)
       .catch(() => setCountryLeagues(null))
   }, [sidebarCountryId])
 
   return (
-    <div id="page-content">
+    <div id="page-content" className="lyt-root">
       <div className="container-fluid">
         <div className="row">
           <div className="fm-sidebar">
-            <nav className="fm-sidebar-scroll">
-              <ul className="fm-nav-section">
-                {NAV_ITEMS.map((item) => (
-                  <li key={item.url} className={location.pathname.startsWith(item.url) ? 'active' : ''}>
-                    <Link to={item.url}>
-                      <i className={`fa ${item.icon}`} />
-                      <span>{item.title}</span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-              {countryLeagues && countryLeagues.length > 0 && (
-                <ul className="fm-nav-section">
-                  {countryLeagues.map((league) => (
-                    <li
-                      key={league.id}
-                      className={location.pathname.startsWith(`/leagues/${league.id}`) ? 'active' : ''}
-                    >
-                      <Link to={`/leagues/${league.id}`}>
-                        <i className="fa fa-trophy" />
-                        <span>{league.name}</span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              )}
-              <ul className="fm-nav-section fm-nav-section-bottom">
-                <li className="fm-sidebar-lang">
-                  <div className="fm-sidebar-lang-toggle">
-                    <Flag code="us" />
-                    <span>English</span>
-                  </div>
-                </li>
-              </ul>
-            </nav>
+            <div className="fm-sidebar-scroll">
+              <NavRail navItems={NAV_ITEMS} countryLeagues={countryLeagues} activePath={location.pathname} />
+              <div className="lyt-lang-toggle">
+                <Flag code="us" />
+                <span>English</span>
+              </div>
+            </div>
           </div>
           <div className="fm-sidebar-overlay" onClick={() => document.body.classList.remove('fm-sidebar-open')} />
           <div className="col m-0 p-0">
             <div className="container-fluid">
               <div className="row">
                 <div className="col m-0 p-0">
-                  <div className="fm-header">
+                  <div className="lyt-header">
                     <button
                       className="fm-menu-toggle d-xl-none"
                       onClick={() => document.body.classList.toggle('fm-sidebar-open')}
@@ -99,16 +76,16 @@ function Layout({ title, subTitle, children, sidebarCountryId }: LayoutProps) {
                     >
                       <span />
                     </button>
-                    <div className="fm-header-title">
+                    <div className="lyt-header-title">
                       <h1>{title}</h1>
-                      {subTitle && <span className="fm-header-sub">{subTitle}</span>}
+                      {subTitle && <span className="lyt-header-sub">{subTitle}</span>}
                     </div>
-                    <div className="fm-header-actions">
+                    <div className="lyt-header-actions">
                       <AiSettingsBadge />
-                      <Link className="fm-header-search" to="/watchlist" title="Watch list">
+                      <Link className="lyt-header-icon" to="/watchlist" title="Watch list">
                         <i className="fa fa-star" />
                       </Link>
-                      <Link className="fm-header-search" to="/search" title="Search">
+                      <Link className="lyt-header-icon" to="/search" title="Search">
                         <i className="fa fa-search" />
                       </Link>
                       <ProcessControl />

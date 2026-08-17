@@ -1,0 +1,55 @@
+/* soydt/web/src/shared/Layout.css
+   Only targets the new `lyt-*` classes introduced above — never redefines
+   `fm-*`/bootstrap selectors, so this cannot bleed into pages that don't
+   render through these specific elements. */
+.lyt-root .fm-sidebar {
+  background: var(--surface-0);
+}
+
+.lyt-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-5);
+  background: var(--surface-1);
+  border-bottom: 1px solid var(--surface-3);
+}
+
+.lyt-header-title h1 {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.lyt-header-sub {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.lyt-header-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.lyt-header-icon {
+  color: var(--text-muted);
+  font-size: 16px;
+}
+
+.lyt-header-icon:hover {
+  color: var(--accent-primary);
+}
+
+.lyt-lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  color: var(--text-muted);
+  font-size: 13px;
+}
