@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import CountriesPage from './features/countries/CountriesPage'
 import FreeAgentsPage from './features/countries/FreeAgentsPage'
 import NationalSquadPage from './features/countries/NationalSquadPage'
+import TransferMarketPage from './features/countries/TransferMarketPage'
 import SchedulePage from './features/countries/SchedulePage'
 import StaffPage from './features/countries/StaffPage'
 import PipeCheckPage from './features/debug/PipeCheckPage'
@@ -68,6 +69,7 @@ function App() {
         <Route path="/countries/:countryId/staff" element={<StaffPage />} />
         <Route path="/countries/:countryId/leagues" element={<LeaguesPage />} />
         <Route path="/countries/:countryId/free-agents" element={<FreeAgentsPage />} />
+        <Route path="/countries/:countryId/transfer-market" element={<TransferMarketPage />} />
         <Route path="/leagues/:leagueId" element={<LeagueTablePage />} />
         <Route path="/leagues/:leagueId/transfers" element={<LeagueTransfersPage />} />
         <Route path="/leagues/:leagueId/awards" element={<LeagueAwardsPage />} />
