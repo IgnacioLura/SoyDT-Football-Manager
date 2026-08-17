@@ -36,6 +36,7 @@ mod team_finances;
 mod team_relations;
 mod team_schedule;
 mod team_scouting;
+mod team_squad_needs;
 mod team_stats;
 mod team_staff;
 mod team_lineup;
