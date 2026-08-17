@@ -1,0 +1,47 @@
+{
+  "id": 195629,
+  "first_name": "Matías",
+  "last_name": "De los Santos",
+  "birth_date": "1992-11-22",
+  "country_id": 1657,
+  "club_id": 102474,
+  "positions": [
+    {
+      "code": "DC",
+      "level": 20
+    }
+  ],
+  "foots": {
+    "left": 45,
+    "right": 100
+  },
+  "current_ability": 118,
+  "potential_ability": 118,
+  "value": 310000,
+  "contract": {
+    "expiration": "2027-12-31",
+    "started": "2025-07-01",
+    "contract_type": "FullTime"
+  },
+  "loan": {
+    "to_club_id": 1921,
+    "expiration": "2027-12-31",
+    "wage_contribution_pct": 100
+  },
+  "history": [
+    { "s": 2013, "c": 89, "p": 6 },
+    { "s": 2014, "c": 89, "p": 12 },
+    { "s": 2015, "c": 89, "p": 18 },
+    { "s": 2016, "c": 89, "p": 22 },
+    { "s": 2017, "c": 89, "p": 25 },
+    { "s": 2018, "c": 89, "p": 20 },
+    { "s": 2019, "c": 89, "p": 27 },
+    { "s": 2020, "c": 102474, "p": 15 },
+    { "s": 2021, "c": 102474, "p": 24 },
+    { "s": 2022, "c": 102474, "p": 26 },
+    { "s": 2023, "c": 102474, "p": 29 },
+    { "s": 2024, "c": 102474, "p": 30 },
+    { "s": 2025, "c": 102474, "p": 22 },
+    { "s": 2026, "c": 102474, "p": 0 }
+  ]
+}
