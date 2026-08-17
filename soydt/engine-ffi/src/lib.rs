@@ -10,6 +10,7 @@ mod ai_tools;
 mod awards;
 mod contract;
 mod continental;
+mod country_transfer_market;
 mod cups;
 mod game;
 mod league;
