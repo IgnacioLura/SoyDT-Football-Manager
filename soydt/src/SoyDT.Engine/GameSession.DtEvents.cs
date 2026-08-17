@@ -2,11 +2,11 @@ using SoyDT.Domain;
 
 namespace SoyDT.Engine;
 
-/// DT random events — from matchday 2 onward, a 35% chance per completed
-/// matchday of firing one of a fixed 3-entry catalog (investor, player hot
-/// streak, staff experiment), each resolving 50/50 and applying a 2-match
-/// OVR/morale buff or debuff. Entirely a .NET-side ledger: never reads or
-/// writes real engine finances/CA/morale — see
+/// DT random events — every completed matchday fires one of a fixed
+/// 3-entry catalog (investor, player hot streak, staff experiment), each
+/// resolving 50/50 and applying a 2-match OVR/morale buff or debuff.
+/// Entirely a .NET-side ledger: never reads or writes real engine
+/// finances/CA/morale — see
 /// docs/superpowers/specs/2026-08-16-dt-random-events-design.md. State is
 /// read under `_writeGate` (see GameSession.cs) since it's a plain mutable
 /// CLR list shared across threads, unlike the read paths that only ever
@@ -14,7 +14,6 @@ namespace SoyDT.Engine;
 public sealed partial class GameSession
 {
     private const double DtEventTriggerChance = 1.0;
-    private const int DtEventMinMatchday = 2;
     private const int DtBuffDurationMatches = 2;
 
     private sealed record DtEventDefinition(
@@ -130,10 +129,7 @@ public sealed partial class GameSession
             for (var matchday = _dtLastCompletedMatchCount + 1; matchday <= completedCount; matchday++)
             {
                 DecayDtBuffs();
-                if (matchday >= DtEventMinMatchday)
-                {
-                    MaybeTriggerDtEvent(engine, working, clubId, (int)matchday);
-                }
+                MaybeTriggerDtEvent(engine, working, clubId, (int)matchday);
             }
 
             _dtLastCompletedMatchCount = completedCount;

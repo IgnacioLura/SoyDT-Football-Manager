@@ -102,7 +102,7 @@ function DtEventsPage() {
             <span className="fm-panel-count">{data.log.length}</span>
           </div>
           {data.log.length === 0 && (
-            <p style={{ padding: '0 1rem 1rem' }}>Todavía no pasó nada — a partir del 2do partido jugado pueden aparecer eventos.</p>
+            <p style={{ padding: '0 1rem 1rem' }}>Todavía no pasó nada — pueden aparecer eventos después de cada partido.</p>
           )}
           {data.log.map((e, i) => (
             <div className="fm-detail-row" key={i}>
