@@ -1,0 +1,38 @@
+/* soydt/web/src/shared/ui/SectionPanel.css */
+.sp-panel {
+  background: var(--surface-1);
+  border: 1px solid var(--surface-3);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  margin-bottom: var(--space-5);
+  overflow: hidden;
+}
+
+.sp-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--surface-3);
+}
+
+.sp-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sp-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.sp-body {
+  padding: var(--space-4);
+}
