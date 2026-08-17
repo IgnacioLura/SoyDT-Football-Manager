@@ -106,3 +106,7 @@ Ver plan completo en la conversación (Fase 0-4). Este archivo se actualiza a me
 
 ## Fase 4 — Cutover
 - [x] Retirar servidor Axum Rust — `open-football/src/web` + su `src/main.rs` (binario raíz) borrados; `open-football/Cargo.toml` quedó como workspace virtual de 2 miembros (`core`+`database`), sin package/binario propio. Único ítem sin portar (`playoffs/get.html`/`playoffs/history.html`, sin datos de test para verificar) recuperable de la historia de git — ver `CLAUDE.md`.
+
+## UI redesign (Fase A) — EA Sports FC-style theme
+- [x] `shared/theme.css` (design tokens, sólo custom properties `:root`) + component kit `shared/ui/` (`RatingBadge`, `StatBar`, `PlayerCard`, `SectionPanel`, `NavRail`) aplicados a `Layout.tsx` (nav/header), `TeamPage.tsx` (squad como grid de `PlayerCard`) y `PlayerPage.tsx` (hero + atributos como `StatBar`). Ver spec `docs/superpowers/specs/2026-08-16-ea-fc-ui-redesign-design.md` y plan `docs/superpowers/plans/2026-08-16-ea-fc-ui-redesign.md`.
+- Resto de las páginas (`/countries`, leagues, watchlist, search, etc.) siguen con el theming Bootstrap/`style.css` original, sin cambios — `theme.css` sólo define custom properties, no puede filtrar visualmente a páginas no migradas. Pendiente para fases futuras.
