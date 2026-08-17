@@ -31,6 +31,7 @@ mod staff_personal;
 mod strings;
 mod team;
 mod team_academy;
+mod team_board;
 mod team_finances;
 mod team_relations;
 mod team_schedule;
