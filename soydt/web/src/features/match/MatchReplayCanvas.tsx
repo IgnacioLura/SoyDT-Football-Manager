@@ -55,7 +55,16 @@ function MatchReplayCanvas({ positionData, homePlayerIds }: Props) {
     app
       .init({ width: PITCH_WIDTH, height: PITCH_HEIGHT, background: '#2e7d32', antialias: true })
       .then(() => {
-        if (disposed || !containerRef.current) return
+        // StrictMode mounts effects twice; cleanup can fire before this
+        // promise resolves. `app.destroy` on a not-yet-initialized
+        // Application throws (Pixi's internal teardown, e.g.
+        // `_cancelResize`, isn't set up yet) — so defer the destroy to
+        // here instead of racing it in the cleanup function below.
+        if (disposed) {
+          app.destroy(true, { children: true })
+          return
+        }
+        if (!containerRef.current) return
         containerRef.current.appendChild(app.canvas)
         appRef.current = app
 
@@ -86,8 +95,12 @@ function MatchReplayCanvas({ positionData, homePlayerIds }: Props) {
 
     return () => {
       disposed = true
-      app.destroy(true, { children: true })
-      appRef.current = null
+      // Only destroy here if init already resolved (appRef.current set) —
+      // otherwise the .then() above handles destroy once init finishes.
+      if (appRef.current === app) {
+        app.destroy(true, { children: true })
+        appRef.current = null
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

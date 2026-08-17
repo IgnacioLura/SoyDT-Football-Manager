@@ -39,4 +39,17 @@
   /* Shape */
   --radius-card: 10px;
   --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.45);
+
+  /* RGB triplets of the accent/tier colors above, for rgba() glows
+     (box-shadow can't take a hex + alpha, so callers need the components). */
+  --accent-primary-rgb: 46, 230, 166;
+  --accent-secondary-rgb: 63, 199, 255;
+  --tier-gold-rgb: 242, 201, 76;
+  --tier-elite-rgb: 46, 230, 166;
+
+  /* Motion — Fase C (2026-08-17 motion/interaction pass) */
+  --transition-fast: 0.15s;
+  --transition-base: 0.25s;
+  --transition-slow: 0.4s;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }

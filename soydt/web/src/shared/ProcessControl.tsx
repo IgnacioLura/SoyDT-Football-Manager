@@ -1,4 +1,5 @@
 import { useProcessContext } from './ProcessContext'
+import './ProcessControl.css'
 
 // Ported from the original app's shared layout `#process-btn` (advance one
 // day) — same button lives in every page's header there

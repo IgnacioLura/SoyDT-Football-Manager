@@ -1,0 +1,33 @@
+/* soydt/web/src/shared/ProcessControl.css
+   Fase C (2026-08-17 motion/interaction pass): additive rules on top of
+   `.fm-process-btn`/`.fm-processing` (defined in the vendored global
+   `public/static/css/style.css`) — kept in its own file rather than editing
+   that vendored stylesheet directly, same approach `Layout.css`/`DtLayout.css`
+   already use for `.lyt-*`/`.fm-header-colored`. Loaded after style.css (this
+   component's import runs through the Vite bundle, which the plain <link>
+   tag in index.html always precedes), so these rules win on equal
+   specificity without needing `!important`. */
+
+.fm-process-btn {
+  transition: background var(--transition-fast) ease, transform var(--transition-fast) ease;
+}
+
+.fm-process-btn:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+/* Soft breathing opacity while a day is processing, so the button still
+   reads as "busy" even where the spinner icon is small/easy to miss. */
+.fm-process-btn.fm-processing {
+  animation: fm-process-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes fm-process-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.75;
+  }
+}

@@ -78,7 +78,7 @@ function TeamPage() {
           }
         >
           <div className="tp-grid">
-            {team.players.map((p) => (
+            {team.players.map((p, i) => (
               <PlayerCard
                 key={p.id}
                 id={p.id}
@@ -86,6 +86,7 @@ function TeamPage() {
                 position={p.position}
                 age={p.age}
                 currentAbility={p.currentAbility}
+                index={i}
               />
             ))}
           </div>

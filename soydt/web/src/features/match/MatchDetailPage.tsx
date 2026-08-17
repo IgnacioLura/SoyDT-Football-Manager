@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type CSSProperties } from 'react'
 import { useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
@@ -140,7 +140,7 @@ function MatchDetailPage() {
           ) : (
             <ul>
               {events.map((e, i) => (
-                <li key={i}>
+                <li className="anim-fade-in-up" style={{ '--i': i } as CSSProperties} key={i}>
                   {e.minute}' — {e.text} ({e.isHome ? 'H' : 'A'})
                 </li>
               ))}

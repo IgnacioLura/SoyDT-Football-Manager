@@ -12,12 +12,39 @@
   border: 1px solid var(--surface-3);
   text-decoration: none;
   color: var(--text-primary);
-  transition: transform 0.15s ease, border-color 0.15s ease;
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition-base) var(--ease-out), border-color var(--transition-base) ease,
+    box-shadow var(--transition-base) ease;
+}
+
+/* FUT-style specular sweep on hover — an oversized diagonal gradient bar,
+   parked off-screen at rest and only animated across while `:hover` is
+   active (mirrors the DT squad lineup token's `.fm-slot-photo-ring::after`
+   sweep) so it never runs idle on a grid of dozens of cards. */
+.pc-card::after {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  background: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, 0.25) 50%, transparent 60%);
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+
+.pc-card:hover::after {
+  animation: pc-card-shine 0.85s ease forwards;
+}
+
+@keyframes pc-card-shine {
+  to {
+    transform: translateX(120%);
+  }
 }
 
 .pc-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px) scale(1.02);
   border-color: var(--accent-primary);
+  box-shadow: 0 0 0 1px rgba(var(--accent-primary-rgb), 0.35), 0 10px 24px rgba(0, 0, 0, 0.5);
 }
 
 .pc-tier-elite {
@@ -26,6 +53,16 @@
 
 .pc-tier-gold {
   border-color: var(--tier-gold);
+}
+
+.pc-tier-elite:hover {
+  box-shadow: 0 0 0 1px rgba(var(--tier-elite-rgb), 0.5), 0 0 20px rgba(var(--tier-elite-rgb), 0.35),
+    0 10px 24px rgba(0, 0, 0, 0.5);
+}
+
+.pc-tier-gold:hover {
+  box-shadow: 0 0 0 1px rgba(var(--tier-gold-rgb), 0.5), 0 0 20px rgba(var(--tier-gold-rgb), 0.3),
+    0 10px 24px rgba(0, 0, 0, 0.5);
 }
 
 .pc-top {

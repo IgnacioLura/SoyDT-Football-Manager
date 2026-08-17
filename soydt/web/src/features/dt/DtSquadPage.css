@@ -1,0 +1,43 @@
+/* soydt/web/src/features/dt/DtSquadPage.css */
+
+/* Same layout as `features/teams/TeamPage.css`'s `.tp-grid` — kept as its
+   own copy rather than importing that file, since plain CSS imports are
+   bundled per entry chunk and this page shouldn't depend on the teams
+   feature's chunk having loaded. */
+.dt-squad-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.dt-squad-card {
+  position: relative;
+}
+
+/* Overlaid on top of PlayerCard so the DT sees real match-day status
+   (injured/suspended, or already picked as a starter above) that the
+   generic admin squad grid (TeamPage) has no reason to show. */
+.dt-squad-badge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm, 4px);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-align: center;
+  pointer-events: none;
+}
+
+.dt-squad-badge-starter {
+  background: rgba(var(--accent-primary-rgb), 0.85);
+  color: #04140f;
+}
+
+.dt-squad-badge-unavailable {
+  top: auto;
+  bottom: 6px;
+  background: rgba(220, 38, 38, 0.9);
+  color: #fff;
+}

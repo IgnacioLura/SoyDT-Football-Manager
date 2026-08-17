@@ -1,9 +1,11 @@
 import { useEffect, useMemo, useState } from 'react'
 import { callApi } from '../../shared/api'
 import { outOfPositionPenalty, positionInfo } from '../../shared/positions'
+import PlayerCard from '../../shared/ui/PlayerCard'
 import SectionPanel from '../../shared/ui/SectionPanel'
 import TeamCrest from '../onboarding/TeamCrest'
 import DtLayout from './DtLayout'
+import './DtSquadPage.css'
 import { useMyTeamId } from './useMyTeamId'
 
 // DT's squad + lineup editor — a fixed 4-3-3 formation of round player
@@ -18,6 +20,7 @@ type LineupPlayer = {
   playerId: number
   name: string
   position: string
+  age: number
   currentAbility: number
   shirtNumber: number | null
   pinned: boolean
@@ -424,6 +427,27 @@ function DtSquadPage() {
               Guardar alineación
             </button>
             {saved && <span style={{ color: '#4ade80' }}>Guardada ✓</span>}
+          </div>
+        </SectionPanel>
+
+        <SectionPanel title="Plantel completo" actions={<span className="fm-panel-count">{players?.length ?? 0}</span>}>
+          <div className="dt-squad-grid">
+            {players?.map((p, i) => (
+              <div className="dt-squad-card" key={p.playerId}>
+                <PlayerCard
+                  id={p.playerId}
+                  name={p.name}
+                  position={p.position}
+                  age={p.age}
+                  currentAbility={p.currentAbility}
+                  index={i}
+                />
+                {assignedIds.has(p.playerId) && <span className="dt-squad-badge dt-squad-badge-starter">Titular</span>}
+                {!p.isReadyForMatch && (
+                  <span className="dt-squad-badge dt-squad-badge-unavailable">{unavailableLabel(p)}</span>
+                )}
+              </div>
+            ))}
           </div>
         </SectionPanel>
       </div>

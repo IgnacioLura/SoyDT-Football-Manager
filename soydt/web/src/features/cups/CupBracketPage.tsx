@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type CSSProperties } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
 import SectionPanel from '../../shared/ui/SectionPanel'
+import './CupBracketPage.css'
 
 // Mirrors `cups/get.html` (bracket) + `cups/history.html` (past champions)
 // combined into one page — the original splits them into separate routes,
@@ -66,14 +67,14 @@ function CupBracketPage() {
       <div className="fm-page">
         {bracket.championTeamName && (
           <SectionPanel title="Champion">
-            <p style={{ padding: '14px' }}>
+            <p className="cup-champion-glow">
               <Link to={`/teams/${bracket.championTeamId}`}>{bracket.championTeamName}</Link>
             </p>
           </SectionPanel>
         )}
 
-        {bracket.rounds.map((round) => (
-          <SectionPanel title={`Round ${round.round}`} key={round.round}>
+        {bracket.rounds.map((round, i) => (
+          <SectionPanel title={`Round ${round.round}`} key={round.round} index={i}>
             <table className="fm-standings">
               <thead>
                 <tr>
@@ -109,7 +110,7 @@ function CupBracketPage() {
           ) : (
             <ul>
               {bracket.pastChampions.map((h, i) => (
-                <li key={i}>
+                <li className="anim-fade-in-up" style={{ '--i': i } as CSSProperties} key={i}>
                   {h.seasonStartYear} — {h.championTeamName}
                   {h.runnerUpTeamName && ` (beat ${h.runnerUpTeamName})`}
                 </li>

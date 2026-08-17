@@ -1,0 +1,36 @@
+/* soydt/web/src/shared/motion.css
+   Fase C (2026-08-17 motion/interaction pass): shared keyframes + utility
+   classes for the EA FC component kit's entrance/interaction animations.
+   Imported once globally (main.tsx) alongside theme.css so every component
+   in `shared/ui` can use these without redeclaring keyframes per file. */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mount-in animation for cards/panels. Grids that render a list can pass a
+   `--i` custom property per item (e.g. `style={{ '--i': index }}`) to stagger
+   each item's start by 40ms * index; components that don't set `--i` just
+   fade in together at delay 0. */
+.anim-fade-in-up {
+  animation: fadeInUp var(--transition-slow) var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 40ms);
+}

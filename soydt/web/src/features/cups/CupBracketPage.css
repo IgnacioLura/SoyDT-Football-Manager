@@ -1,0 +1,21 @@
+/* soydt/web/src/features/cups/CupBracketPage.css
+   Fase C (2026-08-17 motion/interaction pass): additive rule for the
+   champion banner — same breathing-glow language as `RatingBadge.css`'s
+   `rb-elite-pulse` and `NavRail.css`'s `nr-active-glow`, reused here so the
+   one name on the page that matters (the champion) reads as the visual
+   highlight, not just another link in a panel. */
+
+.cup-champion-glow {
+  padding: 14px;
+  animation: cup-champion-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes cup-champion-pulse {
+  0%,
+  100% {
+    text-shadow: 0 0 0 rgba(var(--tier-gold-rgb), 0);
+  }
+  50% {
+    text-shadow: 0 0 10px rgba(var(--tier-gold-rgb), 0.6);
+  }
+}
