@@ -2,7 +2,7 @@ using SoyDT.Domain;
 
 namespace SoyDT.Engine;
 
-/// DT random events — from matchday 5 onward, a 35% chance per completed
+/// DT random events — from matchday 2 onward, a 35% chance per completed
 /// matchday of firing one of a fixed 3-entry catalog (investor, player hot
 /// streak, staff experiment), each resolving 50/50 and applying a 2-match
 /// OVR/morale buff or debuff. Entirely a .NET-side ledger: never reads or
@@ -14,7 +14,7 @@ namespace SoyDT.Engine;
 public sealed partial class GameSession
 {
     private const double DtEventTriggerChance = 0.35;
-    private const int DtEventMinMatchday = 5;
+    private const int DtEventMinMatchday = 2;
     private const int DtBuffDurationMatches = 2;
 
     private sealed record DtEventDefinition(
