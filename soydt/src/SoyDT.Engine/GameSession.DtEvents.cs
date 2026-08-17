@@ -182,6 +182,27 @@ public sealed partial class GameSession
         });
     }
 
+    /// Appends a "daily AI event" entry to the same ledger as the matchday
+    /// catalog above — see `docs/superpowers/specs/2026-08-16-dt-random-events-design.md`'s
+    /// addendum. Unlike the catalog events, this fires once per calendar day
+    /// (from `GameController.ProcessLive`'s per-day progress callback, fully
+    /// outside `_writeGate` — the LLM call that produces `storyText`/
+    /// `moraleDelta` never runs under the day-processing lock) rather than
+    /// per completed matchday, and never creates a `DtActiveBuff` — v1 has
+    /// no consumer for this delta beyond the log itself, same as the
+    /// catalog's `MoraleDelta` today. `day` is this run's cumulative
+    /// days-processed count, not a real matchday number — the field is
+    /// reused loosely since `DtEventLogEntryDto` has no day-count field of
+    /// its own.
+    public void RecordDailyAiEvent(uint playerId, string playerName, string storyText, int moraleDelta, int day)
+    {
+        lock (_dtEventsLock)
+        {
+            _dtEventLog.Insert(0, new DtEventLogEntryDto(
+                "daily_ai", "Evento del día", storyText, moraleDelta >= 0, day, "Player", playerId, playerName));
+        }
+    }
+
     /// Reads under `_dtEventsLock` — `_dtEventLog`/`_dtActiveBuffs` are
     /// plain mutable lists mutated under that same dedicated lock by
     /// `AdvanceDtEvents`/`ResetDtEvents`, so a concurrent GET needs it too

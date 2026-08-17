@@ -19,6 +19,7 @@
 use crate::contract::run_guarded;
 use crate::game::GameHandle;
 use crate::strings::{read, to_owned_ptr};
+use core::utils::DateUtils;
 use serde::{Deserialize, Serialize};
 use std::os::raw::c_char;
 
@@ -27,6 +28,10 @@ struct LineupPlayerJson {
     player_id: u32,
     name: String,
     position: String,
+    // Added alongside the DT squad grid (Fase C) so the same lineup fetch
+    // can back a full-roster `PlayerCard` view without a second endpoint
+    // call — mirrors `team.rs`'s `PlayerCardJson.age` exactly.
+    age: u8,
     current_ability: u8,
     shirt_number: Option<u8>,
     pinned: bool,
@@ -74,6 +79,7 @@ pub extern "C" fn engine_get_team_lineup(handle: *mut GameHandle, team_id: u32) 
             return Err("null game handle".to_string());
         }
         let game = unsafe { &*handle };
+        let now = game.data().date.date();
 
         for country in game.data().continents.iter().flat_map(|c| c.countries.iter()) {
             for club in &country.clubs {
@@ -86,6 +92,7 @@ pub extern "C" fn engine_get_team_lineup(handle: *mut GameHandle, team_id: u32) 
                             player_id: p.id,
                             name: format!("{} {}", p.full_name.first_name, p.full_name.last_name),
                             position: p.positions.primary().map(|pos| format!("{pos:?}")).unwrap_or_else(|| "Unknown".to_string()),
+                            age: DateUtils::age(p.birth_date, now),
                             current_ability: p.player_attributes.current_ability,
                             shirt_number: p.contract.as_ref().and_then(|c| c.shirt_number),
                             pinned: p.is_force_match_selection,

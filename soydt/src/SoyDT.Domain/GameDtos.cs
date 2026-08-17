@@ -248,7 +248,7 @@ public sealed record PlayerDetail(
 
 /// Mirrors one entry of `engine_get_team_lineup`'s `data.players` array —
 /// the DT's squad with each player's current "pinned" (force-selection) state.
-public sealed record LineupPlayer(uint PlayerId, string Name, string Position, byte CurrentAbility, byte? ShirtNumber, bool Pinned, bool IsReadyForMatch, bool IsInjured, bool IsBanned);
+public sealed record LineupPlayer(uint PlayerId, string Name, string Position, byte Age, byte CurrentAbility, byte? ShirtNumber, bool Pinned, bool IsReadyForMatch, bool IsInjured, bool IsBanned);
 
 /// Mirrors `engine_get_team_lineup`'s `data` payload. `SlotOrder` is the
 /// exact formation-slot layout from the last save, in slot order (null
