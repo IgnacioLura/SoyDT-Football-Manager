@@ -81,7 +81,7 @@ function TransferMarketPage() {
         >
           <DataTable
             rows={market.listings}
-            rowKey={(l) => l.playerId}
+            rowKey={(l) => `${l.playerId}-${l.listingType}`}
             emptyMessage="No players currently listed"
             columns={[
               {

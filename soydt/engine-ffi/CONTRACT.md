@@ -117,6 +117,42 @@ simplification as `engine_get_team_schedule`.
 {"date":"14.08.2026","time":"18:00","home_team_id":82,"home_team_name":"Boca Juniors","home_team_slug":"boca-juniors","away_team_id":42,"away_team_name":"River Plate","away_team_slug":"river-plate","match_id":"2026-08-14_82_42","home_goals":null,"away_goals":null}
 ```
 
+### `engine_get_country_transfer_market(handle, country_id) -> *mut c_char`
+Current transfer-window status and active listings for `country_id`
+(`Country.transfer_market: core::transfers::TransferMarket`, already
+populated by the AI transfer pipeline — no new computation happens here).
+SIMPLIFIED: only `Available`/`InNegotiation` listings are returned
+(`Completed`/`Cancelled` are historical noise here — `engine_get_league_transfers`
+already covers completed deals). Live negotiation/offer state
+(`TransferMarket.negotiations`) is deliberately not exposed — internal AI
+bookkeeping with no stable browsable shape. `data`:
+
+```json
+{
+  "transfer_window_open": false,
+  "listings": [
+    {
+      "player_id": 123,
+      "player_name": "...",
+      "position": "ST",
+      "age": 24,
+      "team_id": 456,
+      "team_name": "...",
+      "team_slug": "...",
+      "asking_price": 5000000.0,
+      "listing_type": "Transfer",
+      "status": "Available",
+      "listed_date": "2026-07-01"
+    }
+  ]
+}
+```
+
+`listing_type` and `status` serialize via Rust's `Debug` format (e.g.
+`"Transfer"`, `"Loan"`, `"Available"`, `"InNegotiation"`) — treat as opaque
+display strings, not a fixed enum list. See
+docs/superpowers/specs/2026-08-17-transfers-deep-logic-design.md.
+
 ### `engine_get_team(handle, team_id) -> *mut c_char`
 Team identity + league + squad (lightweight player cards). `data`:
 
@@ -337,6 +373,41 @@ Each entry in `promises` has this shape:
 ```json
 { "promise_type": "TransferBudget", "due_date": "2027-01-31", "overdue": false }
 ```
+
+### `engine_get_team_squad_needs(handle, team_id) -> *mut c_char`
+Squad-depth shortfall snapshot for the club that owns `team_id` — a pure,
+stateless projection of `core::transfers::FirstTeamSquadNeeds::for_club`
+(see `open-football/src/core/src/transfers/squad_needs.rs`). No
+simplification — the whole struct is small and every field is directly
+meaningful, so it's exposed verbatim. `data`:
+
+```json
+{
+  "main_team_size": 22,
+  "total_missing": 3,
+  "urgent": false,
+  "gk_count": 2,
+  "gk_missing": 0,
+  "def_count": 6,
+  "def_missing": 1,
+  "mid_count": 6,
+  "mid_missing": 1,
+  "fwd_count": 3,
+  "fwd_missing": 1
+}
+```
+
+Important: `total_missing` is a *different axis* than the four group
+shortfalls (`gk_missing`/`def_missing`/`mid_missing`/`fwd_missing`) — it is
+NOT their sum. `total_missing` is the shortfall against
+`MIN_FIRST_TEAM_SQUAD` (25), a fixed total-squad-size minimum, while the
+per-group fields are shortfalls against separate per-group minimums (GK 2,
+DEF 7, MID 7, FWD 4 — summing to 20, not 25). A squad can show every group
+at or above its minimum (all four `*_missing` fields zero) and still have a
+nonzero `total_missing`, because 20 < 25. `urgent` is true when
+`main_team_size < 11` — the squad can't field a legal starting XI, not a
+generic "below minimum" signal. See
+docs/superpowers/specs/2026-08-17-transfers-deep-logic-design.md.
 
 ### `engine_get_player_history(handle, player_id) -> *mut c_char`
 Flat, historical-only season list for one player (SIMPLIFIED — League-kind

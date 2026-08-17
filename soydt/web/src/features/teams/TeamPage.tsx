@@ -125,10 +125,14 @@ function TeamPage() {
                 <div className="fm-detail-row">
                   <span className="fm-detail-label">Status</span>
                   <span className="fm-detail-value" style={{ color: 'crimson' }}>
-                    Urgent — squad below minimum
+                    Urgent — fewer than 11 players available
                   </span>
                 </div>
               )}
+              <div className="fm-detail-row">
+                <span className="fm-detail-label">Squad size</span>
+                <span className="fm-detail-value">{squadNeeds.mainTeamSize} / 25</span>
+              </div>
               <div className="fm-detail-row">
                 <span className="fm-detail-label">Goalkeepers</span>
                 <span className="fm-detail-value" style={squadNeeds.gkMissing > 0 ? { color: 'crimson' } : undefined}>
@@ -158,7 +162,7 @@ function TeamPage() {
                 </span>
               </div>
               <div className="fm-detail-row">
-                <span className="fm-detail-label">Total missing</span>
+                <span className="fm-detail-label">Squad size shortfall</span>
                 <span
                   className="fm-detail-value"
                   style={squadNeeds.totalMissing > 0 ? { color: 'crimson' } : undefined}

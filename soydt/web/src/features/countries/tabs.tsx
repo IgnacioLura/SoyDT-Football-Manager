@@ -17,7 +17,7 @@ export function countryTabs(countryId: string, active: CountryTab) {
         { key: 'staff', label: 'Staff', to: `/countries/${countryId}/staff` },
         { key: 'leagues', label: 'Leagues', to: `/countries/${countryId}/leagues` },
         { key: 'free_agents', label: 'Free agents', to: `/countries/${countryId}/free-agents` },
-        { key: 'transfer_market', label: 'Transfer Market', to: `/countries/${countryId}/transfer-market` },
+        { key: 'transfer_market', label: 'Transfer market', to: `/countries/${countryId}/transfer-market` },
       ]}
     />
   )
