@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Flag from '../../shared/Flag'
 import Layout from '../../shared/Layout'
+import SectionPanel from '../../shared/ui/SectionPanel'
 import { staffTabs } from './tabs'
 
 // Ported from open-football/src/web/src/staff/get/index.html — the
@@ -114,10 +115,7 @@ function StaffPage() {
   return (
     <Layout title={`${staff.firstName} ${staff.lastName}`} subTitle={tabs}>
       <div className="fm-page">
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Staff profile</h3>
-          </div>
+        <SectionPanel title="Staff profile">
           <div style={{ padding: '14px' }}>
             <p>
               <Flag code={staff.countryCode} /> {staff.countryName} — Age: {staff.age} — Born: {staff.birthDate}
@@ -133,12 +131,9 @@ function StaffPage() {
               </p>
             )}
           </div>
-        </section>
+        </SectionPanel>
 
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Attributes</h3>
-          </div>
+        <SectionPanel title="Attributes">
           <div className="fm-staff-attrs" style={{ padding: '14px', display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
             <div>
               <h4>Coaching</h4>
@@ -196,7 +191,7 @@ function StaffPage() {
               </table>
             </div>
           </div>
-        </section>
+        </SectionPanel>
       </div>
     </Layout>
   )

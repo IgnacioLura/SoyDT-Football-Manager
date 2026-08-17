@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import SectionPanel from '../../shared/ui/SectionPanel'
 
 // Mirrors `cups/get.html` (bracket) + `cups/history.html` (past champions)
 // combined into one page — the original splits them into separate routes,
@@ -64,21 +65,15 @@ function CupBracketPage() {
     <Layout title={bracket.name}>
       <div className="fm-page">
         {bracket.championTeamName && (
-          <section className="fm-panel">
-            <div className="fm-panel-head">
-              <h3>Champion</h3>
-            </div>
+          <SectionPanel title="Champion">
             <p style={{ padding: '14px' }}>
               <Link to={`/teams/${bracket.championTeamId}`}>{bracket.championTeamName}</Link>
             </p>
-          </section>
+          </SectionPanel>
         )}
 
         {bracket.rounds.map((round) => (
-          <section className="fm-panel" key={round.round}>
-            <div className="fm-panel-head">
-              <h3>Round {round.round}</h3>
-            </div>
+          <SectionPanel title={`Round ${round.round}`} key={round.round}>
             <table className="fm-standings">
               <thead>
                 <tr>
@@ -105,13 +100,10 @@ function CupBracketPage() {
                 ))}
               </tbody>
             </table>
-          </section>
+          </SectionPanel>
         ))}
 
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Past champions</h3>
-          </div>
+        <SectionPanel title="Past champions">
           {bracket.pastChampions.length === 0 ? (
             <p style={{ padding: '14px' }}>No completed editions yet.</p>
           ) : (
@@ -124,7 +116,7 @@ function CupBracketPage() {
               ))}
             </ul>
           )}
-        </section>
+        </SectionPanel>
       </div>
     </Layout>
   )

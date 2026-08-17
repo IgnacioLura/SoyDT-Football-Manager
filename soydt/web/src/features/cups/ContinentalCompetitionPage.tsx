@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import SectionPanel from '../../shared/ui/SectionPanel'
 
 // One component backs all four continental index pages
 // (champions-league/europa-league/conference-league/copa-libertadores) —
@@ -86,10 +87,7 @@ function ContinentalCompetitionPage() {
         ) : (
           <>
             {data.groups.map((group) => (
-              <section className="fm-panel" key={group.name}>
-                <div className="fm-panel-head">
-                  <h3>{group.name}</h3>
-                </div>
+              <SectionPanel title={group.name} key={group.name}>
                 <table className="fm-standings">
                   <thead>
                     <tr>
@@ -120,14 +118,11 @@ function ContinentalCompetitionPage() {
                     ))}
                   </tbody>
                 </table>
-              </section>
+              </SectionPanel>
             ))}
 
             {data.knockoutTies.length > 0 && (
-              <section className="fm-panel">
-                <div className="fm-panel-head">
-                  <h3>Knockout</h3>
-                </div>
+              <SectionPanel title="Knockout">
                 <table className="fm-standings">
                   <thead>
                     <tr>
@@ -158,7 +153,7 @@ function ContinentalCompetitionPage() {
                     ))}
                   </tbody>
                 </table>
-              </section>
+              </SectionPanel>
             )}
           </>
         )}

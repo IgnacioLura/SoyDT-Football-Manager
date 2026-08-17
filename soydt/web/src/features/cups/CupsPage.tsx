@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import SectionPanel from '../../shared/ui/SectionPanel'
 
 // Index of domestic cups across scoped countries — mirrors the original's
 // implicit "every country has a cup" (`cups/get.html` is normally reached
@@ -43,11 +44,7 @@ function CupsPage() {
   return (
     <Layout title="Cups">
       <div className="fm-page">
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Domestic Cups</h3>
-            <span className="fm-panel-count">{cups.length}</span>
-          </div>
+        <SectionPanel title="Domestic Cups" actions={<span className="fm-panel-count">{cups.length}</span>}>
           <ul>
             {cups.map((c) => (
               <li key={c.id}>
@@ -55,7 +52,7 @@ function CupsPage() {
               </li>
             ))}
           </ul>
-        </section>
+        </SectionPanel>
       </div>
     </Layout>
   )

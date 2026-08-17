@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import SectionPanel from '../../shared/ui/SectionPanel'
 
 // Mirrors the original app's `search/index.html` + `/api/search?q=...`
 // (`web/src/search/mod.rs`) — cross-entity substring search, 4-char
@@ -37,10 +38,7 @@ function SearchPage() {
   return (
     <Layout title="Search">
       <div className="fm-page">
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Search</h3>
-          </div>
+        <SectionPanel title="Search">
           <div style={{ padding: '14px' }}>
             <input
               value={query}
@@ -96,7 +94,7 @@ function SearchPage() {
               )}
             </div>
           )}
-        </section>
+        </SectionPanel>
       </div>
     </Layout>
   )

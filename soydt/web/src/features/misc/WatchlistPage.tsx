@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
 import { PositionBadge } from '../../shared/positions'
+import SectionPanel from '../../shared/ui/SectionPanel'
 
 // Mirrors the original app's `watchlist/index.html` (`/{lang}/watchlist`) —
 // a plain list of player ids on `SimulatorData.watchlist`, resolved against
@@ -68,11 +69,7 @@ function WatchlistPage() {
   return (
     <Layout title="Watch List">
       <div className="fm-page">
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Watch List</h3>
-            <span className="fm-panel-count">{players.length}</span>
-          </div>
+        <SectionPanel title="Watch List" actions={<span className="fm-panel-count">{players.length}</span>}>
           {players.length === 0 ? (
             <p style={{ padding: '14px' }}>No players on your watch list yet — add one from a player's page.</p>
           ) : (
@@ -116,7 +113,7 @@ function WatchlistPage() {
               </tbody>
             </table>
           )}
-        </section>
+        </SectionPanel>
       </div>
     </Layout>
   )

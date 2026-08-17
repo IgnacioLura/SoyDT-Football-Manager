@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import SectionPanel from '../../shared/ui/SectionPanel'
 import { staffTabs } from './tabs'
 
 // Ported from open-football/src/web/src/staff/personal/index.html — the
@@ -84,10 +85,7 @@ function StaffPersonalPage() {
   return (
     <Layout title="Personal" subTitle={tabs}>
       <div className="fm-page">
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Staff profile</h3>
-          </div>
+        <SectionPanel title="Staff profile">
           <div style={{ padding: '14px' }}>
             <Row label="Coaching style" value={personal.coachingStyle} />
             <Row label="License" value={personal.license} />
@@ -105,12 +103,9 @@ function StaffPersonalPage() {
               </>
             )}
           </div>
-        </section>
+        </SectionPanel>
 
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Performance</h3>
-          </div>
+        <SectionPanel title="Performance">
           <div style={{ padding: '14px' }}>
             <Row label="Behaviour" value={personal.behaviour} />
             <Row label="Training effectiveness" value={`${personal.trainingEffectivenessPct}%`} />
@@ -118,12 +113,9 @@ function StaffPersonalPage() {
             <Row label="Injury prevention" value={`${personal.injuryPreventionPct}%`} />
             <Row label="Tactical implementation" value={`${personal.tacticalImplementationPct}%`} />
           </div>
-        </section>
+        </SectionPanel>
 
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Personality</h3>
-          </div>
+        <SectionPanel title="Personality">
           <div style={{ padding: '14px' }}>
             <Row label="Adaptability" value={personal.adaptability.toFixed(1)} />
             <Row label="Ambition" value={personal.ambition.toFixed(1)} />
@@ -134,7 +126,7 @@ function StaffPersonalPage() {
             <Row label="Sportsmanship" value={personal.sportsmanship.toFixed(1)} />
             <Row label="Temperament" value={personal.temperament.toFixed(1)} />
           </div>
-        </section>
+        </SectionPanel>
       </div>
     </Layout>
   )

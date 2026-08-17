@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import SectionPanel from '../../shared/ui/SectionPanel'
 import MatchReplayCanvas from './MatchReplayCanvas'
 
 // Mirrors the original app's `match/get/index.html` (scoreboard + replay),
@@ -116,17 +117,14 @@ function MatchDetailPage() {
   return (
     <Layout title="Match">
       <div className="fm-page">
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>
-              {homeTeam?.name ?? `Team ${ids?.[0]}`} {match.homeGoals} – {match.awayGoals} {awayTeam?.name ?? `Team ${ids?.[1]}`}
-            </h3>
-            <span className="fm-panel-count">{match.homePossessionPercentage.toFixed(0)}% possession (home)</span>
-          </div>
+        <SectionPanel
+          title={`${homeTeam?.name ?? `Team ${ids?.[0]}`} ${match.homeGoals} – ${match.awayGoals} ${awayTeam?.name ?? `Team ${ids?.[1]}`}`}
+          actions={<span className="fm-panel-count">{match.homePossessionPercentage.toFixed(0)}% possession (home)</span>}
+        >
           <p style={{ fontSize: '0.85rem', opacity: 0.8 }}>
             Re-simulated from both squads' current rosters — not a replay of a specific historical result.
           </p>
-        </section>
+        </SectionPanel>
 
         {match.positionData && (
           <MatchReplayCanvas
@@ -136,10 +134,7 @@ function MatchDetailPage() {
           />
         )}
 
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Timeline</h3>
-          </div>
+        <SectionPanel title="Timeline">
           {events.length === 0 ? (
             <p>No notable events.</p>
           ) : (
@@ -151,7 +146,7 @@ function MatchDetailPage() {
               ))}
             </ul>
           )}
-        </section>
+        </SectionPanel>
       </div>
     </Layout>
   )
