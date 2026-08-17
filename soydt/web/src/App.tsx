@@ -42,6 +42,7 @@ import NewGamePage from './features/onboarding/NewGamePage'
 import StartPage from './features/onboarding/StartPage'
 import DtSquadPage from './features/dt/DtSquadPage'
 import DtTransfersPage from './features/dt/DtTransfersPage'
+import DtSchedulePage from './features/dt/DtSchedulePage'
 import DtFinancesPage from './features/dt/DtFinancesPage'
 import DtTablePage from './features/dt/DtTablePage'
 import DtEventsPage from './features/dt/DtEventsPage'
@@ -113,6 +114,7 @@ function App() {
         <Route path="/dt" element={<DtSquadPage />} />
         <Route path="/dt/squad" element={<DtSquadPage />} />
         <Route path="/dt/transfers" element={<DtTransfersPage />} />
+        <Route path="/dt/schedule" element={<DtSchedulePage />} />
         <Route path="/dt/finances" element={<DtFinancesPage />} />
         <Route path="/dt/table" element={<DtTablePage />} />
         <Route path="/dt/events" element={<DtEventsPage />} />

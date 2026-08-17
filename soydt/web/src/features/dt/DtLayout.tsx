@@ -25,6 +25,7 @@ import './DtLayout.css'
 const NAV_ITEMS: NavRailItem[] = [
   { title: 'Plantel', icon: 'fa-users', url: '/dt/squad' },
   { title: 'Transferencias', icon: 'fa-right-left', url: '/dt/transfers' },
+  { title: 'Calendario', icon: 'fa-calendar', url: '/dt/schedule' },
   { title: 'Finanzas', icon: 'fa-coins', url: '/dt/finances' },
   { title: 'Tabla', icon: 'fa-list-ol', url: '/dt/table' },
   { title: 'Eventos', icon: 'fa-bolt', url: '/dt/events' },
