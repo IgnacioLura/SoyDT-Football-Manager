@@ -29,7 +29,7 @@ Ver plan completo en la conversación (Fase 0-4). Este archivo se actualiza a me
 - [x] `countries/staff.html` — verificado con datos reales (Valentín Ojeda DT, etc.)
 - [x] `countries/list/index.html` → lista de ligas del país (`/countries/{id}/leagues`) — verificado end-to-end
 - [x] `countries/free_agents.html` — verificado con datos reales (Santiago Cáseres, etc.)
-- [ ] `countries/transfer-market` (`/countries/{id}/transfer-market`) — **feature nueva, sin template original** en `open-football/src/web`; ver spec `docs/superpowers/specs/2026-08-17-transfers-deep-logic-design.md`. Incluye: listado de fichajes `Available`/`InNegotiation` del país y estado de la ventana de transferencias (abierta/cerrada). Excluye: internals de negociación/ofertas (esas viven en otras páginas/flows de la feature). Verificación end-to-end pendiente (diferida al pase de build/verificación consolidado tras las 6 tareas de la feature).
+- [~] `countries/transfer-market` (`/countries/{id}/transfer-market`) — **feature nueva, sin template original** en `open-football/src/web`; ver spec `docs/superpowers/specs/2026-08-17-transfers-deep-logic-design.md`. Incluye: listado de fichajes `Available`/`InNegotiation` del país y estado de la ventana de transferencias (abierta/cerrada). Excluye: internals de negociación/ofertas (esas viven en otras páginas/flows de la feature). Verificación end-to-end pendiente (diferida al pase de build/verificación consolidado tras las 6 tareas de la feature).
 
 ### Leagues
 - [x] `leagues/get/index.html` (solo tabla de posiciones, tab "overview") — verificado end-to-end
