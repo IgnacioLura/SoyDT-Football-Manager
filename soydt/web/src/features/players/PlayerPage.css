@@ -1,0 +1,17 @@
+/* soydt/web/src/features/players/PlayerPage.css */
+.pp-hero {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.pp-photo {
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.pp-info p {
+  margin: 4px 0;
+  color: var(--text-primary);
+}

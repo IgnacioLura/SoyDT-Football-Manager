@@ -1,3 +1,4 @@
+// soydt/web/src/features/players/PlayerPage.tsx
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
@@ -5,11 +6,18 @@ import AiReportButton from '../../shared/AiReportButton'
 import Flag from '../../shared/Flag'
 import Layout from '../../shared/Layout'
 import { PositionBadge } from '../../shared/positions'
+import RatingBadge from '../../shared/ui/RatingBadge'
+import SectionPanel from '../../shared/ui/SectionPanel'
 import AttributeGrid, { type AttributeEntry } from './AttributeGrid'
+import './PlayerPage.css'
 
 // Phase 1: player overview page, mirrors the original app's
 // `/{lang}/players/{slug}` route (overview tab only so far — contract/
 // history/transfers/etc. are separate tabs there, not yet ported).
+//
+// Fase A (2026-08-16 EA FC redesign spec): hero header + StatBar attribute
+// rows replace the plain text rows / icon-tile grid — same underlying
+// `player` data, no API change.
 
 type TechnicalAttributes = {
   corners: number
@@ -226,14 +234,19 @@ function PlayerPage() {
   return (
     <Layout title={`${player.firstName} ${player.lastName}`} subTitle={subTitle}>
       <div className="fm-page">
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Overview</h3>
-            <button onClick={toggleWatchlist}>{inWatchlist ? '★ On watch list' : '☆ Add to watch list'}</button>
-            <AiReportButton title="AI scouting dossier" startUrl={`/api/players/${playerId}/ai-report`} />
-          </div>
-          <div style={{ padding: '14px', display: 'flex', gap: '16px' }}>
+        <SectionPanel
+          title="Overview"
+          actions={
+            <>
+              <button onClick={toggleWatchlist}>{inWatchlist ? '★ On watch list' : '☆ Add to watch list'}</button>
+              <AiReportButton title="AI scouting dossier" startUrl={`/api/players/${playerId}/ai-report`} />
+            </>
+          }
+        >
+          <div className="pp-hero">
+            <RatingBadge value={player.currentAbility} size="lg" />
             <img
+              className="pp-photo"
               src={`/static/images/players/${player.id}.jpg`}
               onError={(e) => {
                 e.currentTarget.onerror = null
@@ -242,15 +255,13 @@ function PlayerPage() {
               alt=""
               width={100}
               height={125}
-              style={{ borderRadius: '4px', flexShrink: 0, objectFit: 'cover' }}
             />
-            <div>
+            <div className="pp-info">
               <p>
-                Position: <PositionBadge position={player.position} /> — Age: {player.age}
+                <PositionBadge position={player.position} /> — Age: {player.age}
               </p>
               <p>
-                OVR: {player.currentAbility} — Value: {player.value.toLocaleString()} — Reputation:{' '}
-                {player.currentReputation}
+                Value: {player.value.toLocaleString()} — Reputation: {player.currentReputation}
               </p>
               <p>
                 Height: {player.height}cm — Weight: {player.weight}kg
@@ -263,21 +274,16 @@ function PlayerPage() {
               {player.isBanned && <p style={{ color: '#e74c3c' }}>Banned</p>}
             </div>
           </div>
-        </section>
+        </SectionPanel>
 
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Atributos</h3>
-          </div>
-          <div style={{ padding: '14px' }}>
-            <AttributeGrid title="Technical" entries={toEntries(TECHNICAL_LABELS, player.technical)} />
-            <AttributeGrid title="Mental" entries={toEntries(MENTAL_LABELS, player.mental)} />
-            <AttributeGrid title="Physical" entries={toEntries(PHYSICAL_LABELS, player.physical)} />
-            {player.goalkeeping && (
-              <AttributeGrid title="Goalkeeping" entries={toEntries(GOALKEEPING_LABELS, player.goalkeeping)} />
-            )}
-          </div>
-        </section>
+        <SectionPanel title="Atributos">
+          <AttributeGrid title="Technical" entries={toEntries(TECHNICAL_LABELS, player.technical)} />
+          <AttributeGrid title="Mental" entries={toEntries(MENTAL_LABELS, player.mental)} />
+          <AttributeGrid title="Physical" entries={toEntries(PHYSICAL_LABELS, player.physical)} />
+          {player.goalkeeping && (
+            <AttributeGrid title="Goalkeeping" entries={toEntries(GOALKEEPING_LABELS, player.goalkeeping)} />
+          )}
+        </SectionPanel>
       </div>
     </Layout>
   )
