@@ -25,6 +25,15 @@ type LineupPlayer = {
   isBanned: boolean
 }
 
+type DtActiveBuff = {
+  scope: string
+  playerId: number | null
+  playerName: string | null
+  ovrDelta: number
+  moraleDelta: number
+  matchesRemaining: number
+}
+
 function unavailableLabel(p: Pick<LineupPlayer, 'isInjured' | 'isBanned'>): string {
   if (p.isInjured) return 'Lesionado'
   if (p.isBanned) return 'Suspendido'
@@ -111,6 +120,7 @@ function DtSquadPage() {
   const [error, setError] = useState<string | null>(null)
   const [saved, setSaved] = useState(false)
   const [teamInfo, setTeamInfo] = useState<{ name: string; slug: string } | null>(null)
+  const [activeBuffs, setActiveBuffs] = useState<DtActiveBuff[]>([])
 
   useEffect(() => {
     if (myTeamId == null) return
@@ -167,6 +177,13 @@ function DtSquadPage() {
       .catch((e) => setError(e instanceof Error ? e.message : String(e)))
   }, [myTeamId])
 
+  useEffect(() => {
+    if (myTeamId == null) return
+    callApi<{ activeBuffs: DtActiveBuff[] }>('/api/dt/events')
+      .then((r) => setActiveBuffs(r.activeBuffs))
+      .catch(() => setActiveBuffs([]))
+  }, [myTeamId])
+
   const playerById = useMemo(() => {
     const map = new Map<number, LineupPlayer>()
     players?.forEach((p) => map.set(p.playerId, p))
@@ -175,6 +192,14 @@ function DtSquadPage() {
 
   const assignedIds = useMemo(() => new Set(slots.filter((id): id is number => id != null)), [slots])
   const filledCount = assignedIds.size
+
+  // Sum of every active DT-event buff/debuff touching this player — "Team"
+  // scope applies to everyone, "Player" scope only to its own playerId.
+  // Stacks with (and is applied before) the existing out-of-position
+  // penalty, same as `eligibility`'s penalty already stacks onto the raw
+  // OVR everywhere it's used below.
+  const buffDeltaFor = (playerId: number) =>
+    activeBuffs.filter((b) => b.scope === 'Team' || b.playerId === playerId).reduce((sum, b) => sum + b.ovrDelta, 0)
 
   const candidatesFor = (slotIndex: number) => {
     if (!players) return []
@@ -189,7 +214,9 @@ function DtSquadPage() {
       .filter((c) => c.eligible)
       .sort((a, b) => {
         if (a.isReadyForMatch !== b.isReadyForMatch) return a.isReadyForMatch ? -1 : 1
-        return b.currentAbility - a.currentAbility - (b.penalty - a.penalty)
+        const effA = a.currentAbility + buffDeltaFor(a.playerId) - a.penalty
+        const effB = b.currentAbility + buffDeltaFor(b.playerId) - b.penalty
+        return effB - effA
       })
   }
 
@@ -306,6 +333,7 @@ function DtSquadPage() {
                         {player &&
                           (() => {
                             const penalty = eligibility(player.position, slot).penalty
+                            const buff = buffDeltaFor(player.playerId)
                             return (
                               <>
                                 <span className="fm-slot-name">{player.name}</span>
@@ -313,6 +341,12 @@ function DtSquadPage() {
                                   <span className={`fm-ability fm-ability-${abilityColor(player.currentAbility)}`}>
                                     {player.currentAbility}
                                   </span>
+                                  {buff !== 0 && (
+                                    <span className={buff > 0 ? 'fm-ovr-buff-positive' : 'fm-ovr-buff-negative'}>
+                                      {buff > 0 ? '+' : ''}
+                                      {buff}
+                                    </span>
+                                  )}
                                   {penalty > 0 && <span className="fm-ovr-penalty">-{penalty}</span>}
                                 </span>
                               </>
@@ -350,6 +384,12 @@ function DtSquadPage() {
                                 {c.isReadyForMatch ? (
                                   <>
                                     <span className={`fm-ability fm-ability-${abilityColor(c.currentAbility)}`}>{c.currentAbility}</span>
+                                    {buffDeltaFor(c.playerId) !== 0 && (
+                                      <span className={buffDeltaFor(c.playerId) > 0 ? 'fm-ovr-buff-positive' : 'fm-ovr-buff-negative'}>
+                                        {buffDeltaFor(c.playerId) > 0 ? '+' : ''}
+                                        {buffDeltaFor(c.playerId)}
+                                      </span>
+                                    )}
                                     {c.penalty > 0 && <span className="fm-ovr-penalty">-{c.penalty}</span>}
                                   </>
                                 ) : (

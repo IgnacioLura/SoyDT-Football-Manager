@@ -21,6 +21,7 @@ const NAV_ITEMS: NavItem[] = [
   { title: 'Transferencias', icon: 'fa-right-left', url: '/dt/transfers' },
   { title: 'Finanzas', icon: 'fa-coins', url: '/dt/finances' },
   { title: 'Tabla', icon: 'fa-list-ol', url: '/dt/table' },
+  { title: 'Eventos', icon: 'fa-bolt', url: '/dt/events' },
 ]
 
 type DtLayoutProps = {
