@@ -13,7 +13,7 @@ set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 PLAYERS_DIR="$REPO_ROOT/open-football-database/data/uy/uruguayan-first-division/nacional/players"
-OUT_DIR="$REPO_ROOT/soydt/web/public/static/images/players"
+OUT_DIR="$REPO_ROOT/soydt/web/public/static/images/players/nacional"
 OVERRIDES_FILE="$REPO_ROOT/soydt/scripts/nacional-photo-overrides.txt"
 UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36"
 

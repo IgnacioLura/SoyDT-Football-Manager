@@ -1,22 +1,39 @@
 // soydt/web/src/shared/playerPhoto.ts
 import type { SyntheticEvent } from 'react'
 
-// Most player photos are plain .jpg headshots, but a growing subset (started
-// with Nacional's official squad photos, sourced with the background already
-// removed) are transparent .png cutouts — those look far better in the FIFA-
-// style cards since there's no flat studio backdrop to mask/fade away. Every
-// photo <img> tries .png first and falls back to .jpg, then the placeholder,
-// so dropping in a cutout for a player is just adding the file — no per-player
-// code changes needed.
+// Curated real photos are checked in under a per-team folder (see
+// soydt/scripts/download-nacional-photos.sh and the equivalent ad-hoc pass
+// for Peñarol) rather than flat, so the source is easy to attribute. The
+// frontend doesn't know a player's club at every call site (PlayerCard is
+// used from squad pages, free agents, search, relations, etc.), so instead
+// of threading a team slug through every caller, we just probe each known
+// team folder client-side via the <img> onError chain, then fall back to the
+// flat legacy path, then placeholder. Most players raise multiple 404s before
+// landing on the placeholder — accepted cost for "drop a file, no code
+// changes" simplicity. Every photo also tries .png (transparent cutout) before
+// .jpg (plain headshot).
+const PHOTO_TEAM_FOLDERS = ['nacional', 'penarol', 'liverpool-montevideo']
+
+function playerPhotoCandidates(id: number): string[] {
+  const dirs = [...PHOTO_TEAM_FOLDERS.map((t) => `/static/images/players/${t}`), '/static/images/players']
+  return [...dirs.map((d) => `${d}/${id}.png`), ...dirs.map((d) => `${d}/${id}.jpg`)]
+}
+
 export function playerPhotoSrc(id: number): string {
-  return `/static/images/players/${id}.png`
+  return playerPhotoCandidates(id)[0]
 }
 
 export function playerPhotoOnError(e: SyntheticEvent<HTMLImageElement>) {
   const img = e.currentTarget
-  if (img.src.endsWith('.png')) {
-    img.src = img.src.replace(/\.png$/, '.jpg')
-    return
+  const match = img.src.match(/\/(\d+)\.(?:png|jpg)$/)
+  if (match) {
+    const candidates = playerPhotoCandidates(Number(match[1]))
+    const currentPath = new URL(img.src).pathname
+    const idx = candidates.indexOf(currentPath)
+    if (idx !== -1 && idx < candidates.length - 1) {
+      img.src = candidates[idx + 1]
+      return
+    }
   }
   img.onerror = null
   img.src = '/static/images/player/placeholder-face.svg'
