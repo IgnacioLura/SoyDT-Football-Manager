@@ -1,0 +1,12 @@
+/* soydt/web/src/features/teams/TeamPage.css */
+.tp-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.tp-count {
+  color: var(--text-muted);
+  font-family: var(--font-display);
+  font-weight: 700;
+}

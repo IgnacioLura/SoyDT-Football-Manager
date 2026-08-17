@@ -1,15 +1,21 @@
+// soydt/web/src/features/teams/TeamPage.tsx
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import AiReportButton from '../../shared/AiReportButton'
 import Layout from '../../shared/Layout'
-import { PositionBadge } from '../../shared/positions'
+import PlayerCard from '../../shared/ui/PlayerCard'
+import SectionPanel from '../../shared/ui/SectionPanel'
+import './TeamPage.css'
 
 // Phase 1: team overview/squad page, mirrors the original app's
 // `/{lang}/teams/{slug}` route (overview tab only so far — tactics/staff/
 // transfers/etc. are separate tabs there, not yet ported).
+//
+// Fase A (2026-08-16 EA FC redesign spec): squad renders as a PlayerCard
+// grid instead of a table — same underlying `players` data, no API change.
 
-type PlayerCard = { id: number; name: string; position: string; age: number; currentAbility: number }
+type TeamPlayer = { id: number; name: string; position: string; age: number; currentAbility: number }
 type TeamDetail = {
   id: number
   name: string
@@ -19,7 +25,7 @@ type TeamDetail = {
   leagueId: number | null
   leagueName: string | null
   reputation: number
-  players: PlayerCard[]
+  players: TeamPlayer[]
 }
 
 function TeamPage() {
@@ -62,37 +68,28 @@ function TeamPage() {
   return (
     <Layout title={team.name} subTitle={subTitle} sidebarCountryId={team.countryId}>
       <div className="fm-page">
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Squad</h3>
-            <span className="fm-panel-count">{team.players.length}</span>
-            <AiReportButton title="AI scouting report" startUrl={`/api/teams/${teamId}/ai-report`} />
+        <SectionPanel
+          title="Squad"
+          actions={
+            <>
+              <span className="tp-count">{team.players.length}</span>
+              <AiReportButton title="AI scouting report" startUrl={`/api/teams/${teamId}/ai-report`} />
+            </>
+          }
+        >
+          <div className="tp-grid">
+            {team.players.map((p) => (
+              <PlayerCard
+                key={p.id}
+                id={p.id}
+                name={p.name}
+                position={p.position}
+                age={p.age}
+                currentAbility={p.currentAbility}
+              />
+            ))}
           </div>
-          <table className="fm-standings">
-            <thead>
-              <tr>
-                <th className="st-club">Name</th>
-                <th>Pos</th>
-                <th>Age</th>
-                <th className="st-pts">OVR</th>
-              </tr>
-            </thead>
-            <tbody>
-              {team.players.map((p) => (
-                <tr key={p.id}>
-                  <td className="st-club">
-                    <Link to={`/players/${p.id}`}>{p.name}</Link>
-                  </td>
-                  <td>
-                    <PositionBadge position={p.position} />
-                  </td>
-                  <td>{p.age}</td>
-                  <td className="st-pts">{p.currentAbility}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </section>
+        </SectionPanel>
       </div>
     </Layout>
   )
