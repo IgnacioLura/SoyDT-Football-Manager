@@ -18,9 +18,9 @@ function ProcessControl() {
       )}
       <button
         className={`fm-process-btn${processing ? ' fm-processing' : ''}`}
-        onClick={() => process(5)}
+        onClick={() => process(1)}
         disabled={processing}
-        title="Advance 5 days"
+        title="Advance 1 day"
       >
         <span className="fm-process-label">{processing ? 'Processing…' : 'Process'}</span>
         {processing && (
