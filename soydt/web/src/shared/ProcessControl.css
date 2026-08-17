@@ -1,19 +1,101 @@
 /* soydt/web/src/shared/ProcessControl.css
-   Fase C (2026-08-17 motion/interaction pass): additive rules on top of
-   `.fm-process-btn`/`.fm-processing` (defined in the vendored global
-   `public/static/css/style.css`) — kept in its own file rather than editing
-   that vendored stylesheet directly, same approach `Layout.css`/`DtLayout.css`
-   already use for `.lyt-*`/`.fm-header-colored`. Loaded after style.css (this
-   component's import runs through the Vite bundle, which the plain <link>
-   tag in index.html always precedes), so these rules win on equal
-   specificity without needing `!important`. */
+   Overrides on top of `.fm-date`/`.fm-process-btn`/`.fm-processing` (defined
+   in the vendored global `public/static/css/style.css`) — kept in its own
+   file rather than editing that vendored stylesheet directly, same approach
+   `Layout.css`/`DtLayout.css` already use for `.lyt-*`/`.fm-header-colored`.
+   Loaded after style.css (this component's import runs through the Vite
+   bundle, which the plain <link> tag in index.html always precedes), so
+   these rules win on equal specificity without needing `!important`.
 
+   Fase C+ (2026-08-17 EA FC header polish): restyled to match the rest of
+   the kit's card language (`.pc-card`, `.nr-active`) — dark surface fill,
+   thin accent border, specular sweep on hover — instead of the vendored
+   flat-bootstrap look or a solid gradient fill (read as a generic
+   PowerPoint button against the rest of the dark/glow kit). */
+
+.fm-date {
+  flex-direction: row;
+  gap: var(--space-2);
+  padding: 6px var(--space-4);
+  background: var(--surface-2);
+  border: 1px solid var(--surface-3);
+  border-radius: var(--radius-card);
+}
+
+.fm-date::before {
+  font-family: 'Font Awesome 5 Free', 'FontAwesome', sans-serif;
+  font-weight: 900;
+  content: '\f073';
+  color: var(--accent-secondary);
+  font-size: 13px;
+}
+
+.fm-date-main {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: 0.3px;
+  color: var(--text-primary);
+}
+
+/* Same card language as `.pc-card`/`.nr-active`: dark surface fill + thin
+   accent border + glow, not a solid gradient block — a filled gradient
+   pill read as a generic bootstrap/PowerPoint button against the rest of
+   the kit's flat-dark-plus-glow cards. */
 .fm-process-btn {
-  transition: background var(--transition-fast) ease, transform var(--transition-fast) ease;
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+  height: 38px;
+  padding: 0 var(--space-5);
+  margin-bottom: 0;
+  border-radius: var(--radius-card);
+  background: var(--surface-2);
+  border: 1px solid var(--accent-primary);
+  color: var(--accent-primary);
+  font-family: var(--font-display);
+  font-style: italic;
+  letter-spacing: 1.5px;
+  transition: background var(--transition-fast) ease, transform var(--transition-fast) var(--ease-out),
+    box-shadow var(--transition-fast) ease;
+}
+
+/* FUT-style specular sweep on hover — same trick as `.pc-card::after`. */
+.fm-process-btn::after {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  background: linear-gradient(115deg, transparent 40%, rgba(var(--accent-primary-rgb), 0.35) 50%, transparent 60%);
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+
+.fm-process-btn:hover:not(:disabled)::after {
+  animation: fm-process-btn-shine 0.85s ease forwards;
+}
+
+@keyframes fm-process-btn-shine {
+  to {
+    transform: translateX(120%);
+  }
+}
+
+.fm-process-btn:hover:not(:disabled) {
+  background: var(--surface-3);
+  box-shadow: 0 0 16px rgba(var(--accent-primary-rgb), 0.35);
 }
 
 .fm-process-btn:active:not(:disabled) {
   transform: scale(0.96);
+}
+
+.fm-process-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.spinner-wrapper .spinner {
+  border-top-color: var(--accent-primary);
 }
 
 /* Soft breathing opacity while a day is processing, so the button still
