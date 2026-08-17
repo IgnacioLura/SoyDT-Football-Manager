@@ -60,6 +60,10 @@ type TeamBoard = {
   takeoverMonthsInStatus: number
 }
 
+function money(value: number) {
+  return value.toLocaleString(undefined, { maximumFractionDigits: 0 })
+}
+
 function TeamBoardPage() {
   const { teamId } = useParams<{ teamId: string }>()
   const sidebarCountryId = useTeamCountryId(teamId)
@@ -186,11 +190,11 @@ function TeamBoardPage() {
                 </div>
                 <div className="fm-detail-row">
                   <span className="fm-detail-label">Transfer budget</span>
-                  <span className="fm-detail-value">{board.seasonTargets.transferBudget}</span>
+                  <span className="fm-detail-value">{money(board.seasonTargets.transferBudget)}</span>
                 </div>
                 <div className="fm-detail-row">
                   <span className="fm-detail-label">Wage budget</span>
-                  <span className="fm-detail-value">{board.seasonTargets.wageBudget}</span>
+                  <span className="fm-detail-value">{money(board.seasonTargets.wageBudget)}</span>
                 </div>
                 <div className="fm-detail-row">
                   <span className="fm-detail-label">Squad size</span>
