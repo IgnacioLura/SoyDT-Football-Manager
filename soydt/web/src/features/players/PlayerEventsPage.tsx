@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import SectionPanel from '../../shared/ui/SectionPanel'
 
 // SIMPLIFIED port of open-football/src/web/src/player/events — the
 // original renders every HappinessEvent variant (manager talks,
@@ -60,11 +61,10 @@ function PlayerEventsPage() {
   return (
     <Layout title="Events">
       <div className="fm-page">
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Events</h3>
-            {events.length > 0 && <span className="fm-panel-count">{events.length}</span>}
-          </div>
+        <SectionPanel
+          title="Events"
+          actions={events.length > 0 ? <span className="fm-panel-count">{events.length}</span> : undefined}
+        >
           {events.length === 0 ? (
             <div className="fm-empty">No events on record</div>
           ) : (
@@ -87,7 +87,7 @@ function PlayerEventsPage() {
               </tbody>
             </table>
           )}
-        </section>
+        </SectionPanel>
       </div>
     </Layout>
   )

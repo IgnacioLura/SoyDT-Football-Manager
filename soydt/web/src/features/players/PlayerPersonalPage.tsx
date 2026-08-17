@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import SectionPanel from '../../shared/ui/SectionPanel'
 
 // Player "Personal" sub-tab — attributes/personality/morale/reputation.
 // Simplified scope (see MIGRATION_CHECKLIST.md): no SVG radar chart, no
@@ -81,10 +82,7 @@ function PlayerPersonalPage() {
   return (
     <Layout title="Personal">
       <div className="fm-page">
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Attributes</h3>
-          </div>
+        <SectionPanel title="Attributes">
           <div style={{ padding: '14px' }}>
             <Row label="Preferred foot" value={personal.preferredFoot} />
             <Row label="Leadership" value={personal.leadership.toFixed(1)} />
@@ -94,23 +92,17 @@ function PlayerPersonalPage() {
             <Row label="Fitness" value={`${personal.fitnessPct}%`} />
             <Row label="Morale" value={personal.morale.toFixed(1)} />
           </div>
-        </section>
+        </SectionPanel>
 
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Reputation</h3>
-          </div>
+        <SectionPanel title="Reputation">
           <div style={{ padding: '14px' }}>
             <Row label="Current reputation" value={personal.currentReputation} />
             <Row label="Home reputation" value={personal.homeReputation} />
             <Row label="World reputation" value={personal.worldReputation} />
           </div>
-        </section>
+        </SectionPanel>
 
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Personality</h3>
-          </div>
+        <SectionPanel title="Personality">
           <div style={{ padding: '14px' }}>
             <Row label="Adaptability" value={personal.adaptability.toFixed(1)} />
             <Row label="Ambition" value={personal.ambition.toFixed(1)} />
@@ -121,12 +113,9 @@ function PlayerPersonalPage() {
             <Row label="Sportsmanship" value={personal.sportsmanship.toFixed(1)} />
             <Row label="Temperament" value={personal.temperament.toFixed(1)} />
           </div>
-        </section>
+        </SectionPanel>
 
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Languages</h3>
-          </div>
+        <SectionPanel title="Languages">
           <div style={{ padding: '14px' }}>
             {personal.languages.length === 0 && <p>No languages recorded.</p>}
             {personal.languages.map((lang) => (
@@ -137,7 +126,7 @@ function PlayerPersonalPage() {
               />
             ))}
           </div>
-        </section>
+        </SectionPanel>
       </div>
     </Layout>
   )

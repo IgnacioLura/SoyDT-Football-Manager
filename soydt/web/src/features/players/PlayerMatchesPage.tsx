@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import SectionPanel from '../../shared/ui/SectionPanel'
 
 // Player "matches" sub-tab, mirrors the original app's player fixture list.
 // Simplification: backed by `engine_get_player_matches`, which just returns
@@ -55,10 +56,7 @@ function PlayerMatchesPage() {
   return (
     <Layout title="Matches">
       <div className="fm-page">
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Matches</h3>
-          </div>
+        <SectionPanel title="Matches">
           <table className="fm-schedule">
             <thead>
               <tr>
@@ -91,7 +89,7 @@ function PlayerMatchesPage() {
               ))}
             </tbody>
           </table>
-        </section>
+        </SectionPanel>
       </div>
     </Layout>
   )

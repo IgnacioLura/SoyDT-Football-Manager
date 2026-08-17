@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import SectionPanel from '../../shared/ui/SectionPanel'
 
 // SIMPLIFIED reinterpretation of open-football/src/web/src/player/relations/
 // index.html — the `/{lang}/players/{slug}/relations` route. The original
@@ -56,11 +57,12 @@ function TierBadge({ tier }: { tier: PlayerRelation['tier'] }) {
 
 function SummaryTile({ label, count, color }: { label: string; count: number; color: string }) {
   return (
-    <div className="fm-panel" style={{ flex: '1 1 0', textAlign: 'center' }}>
-      <div className="fm-panel-head" style={{ justifyContent: 'center' }}>
-        <h3>{label}</h3>
-      </div>
-      <div style={{ fontSize: '1.8rem', fontWeight: 700, color, padding: '0.5rem 0' }}>{count}</div>
+    <div style={{ flex: '1 1 0' }}>
+      <SectionPanel title={label}>
+        <div style={{ fontSize: '1.8rem', fontWeight: 700, color, padding: '0.5rem 0', textAlign: 'center' }}>
+          {count}
+        </div>
+      </SectionPanel>
     </div>
   )
 }
@@ -108,11 +110,10 @@ function PlayerRelationsPage() {
           <SummaryTile label="Rivalry" count={relations.rivalryCount} color={TIER_COLOR.rivalry} />
         </section>
 
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>{relations.playerName}'s relationships</h3>
-            <span className="fm-panel-count">{relations.relations.length}</span>
-          </div>
+        <SectionPanel
+          title={`${relations.playerName}'s relationships`}
+          actions={<span className="fm-panel-count">{relations.relations.length}</span>}
+        >
           {relations.relations.length === 0 ? (
             <div className="fm-empty">No notable relationships</div>
           ) : (
@@ -139,7 +140,7 @@ function PlayerRelationsPage() {
               </tbody>
             </table>
           )}
-        </section>
+        </SectionPanel>
       </div>
     </Layout>
   )

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import SectionPanel from '../../shared/ui/SectionPanel'
 
 // SIMPLIFIED port of open-football/src/web/src/player/history — the
 // original renders an accordion of per-competition stat breakdowns backed
@@ -54,11 +55,7 @@ function PlayerHistoryPage() {
   return (
     <Layout title="Player History">
       <div className="fm-page">
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Season history</h3>
-            <span className="fm-panel-count">{rows.length}</span>
-          </div>
+        <SectionPanel title="Season history" actions={<span className="fm-panel-count">{rows.length}</span>}>
           {rows.length === 0 ? (
             <div className="fm-empty">No completed seasons</div>
           ) : (
@@ -87,7 +84,7 @@ function PlayerHistoryPage() {
               </tbody>
             </table>
           )}
-        </section>
+        </SectionPanel>
       </div>
     </Layout>
   )

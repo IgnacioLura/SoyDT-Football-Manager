@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import SectionPanel from '../../shared/ui/SectionPanel'
 
 // SIMPLIFIED port of open-football/src/web/src/player/awards — the
 // original groups totals per-league (archive blocks) and charts the last
@@ -90,21 +91,14 @@ function PlayerAwardsPage() {
   return (
     <Layout title="Player Awards">
       <div className="fm-page">
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Career Awards</h3>
-          </div>
+        <SectionPanel title="Career Awards">
           <div style={{ padding: '14px', textAlign: 'center' }}>
             <div style={{ fontSize: '3rem', fontWeight: 700, lineHeight: 1 }}>{awards.total}</div>
             <div style={{ color: '#888', marginTop: '4px' }}>Total career awards</div>
           </div>
-        </section>
+        </SectionPanel>
 
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Breakdown</h3>
-            <span className="fm-panel-count">{wonAwards.length}</span>
-          </div>
+        <SectionPanel title="Breakdown" actions={<span className="fm-panel-count">{wonAwards.length}</span>}>
           {wonAwards.length === 0 ? (
             <div className="fm-empty">No awards</div>
           ) : (
@@ -134,7 +128,7 @@ function PlayerAwardsPage() {
               ))}
             </div>
           )}
-        </section>
+        </SectionPanel>
       </div>
     </Layout>
   )

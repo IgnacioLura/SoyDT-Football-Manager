@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import SectionPanel from '../../shared/ui/SectionPanel'
 
 // Player's own career transfer history — SIMPLIFIED sub-page of the
 // original app's player transfer-market tab: only the completed-transfers
@@ -53,10 +54,7 @@ function PlayerTransfersPage() {
   return (
     <Layout title="Transfers">
       <div className="fm-page">
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Transfer history</h3>
-          </div>
+        <SectionPanel title="Transfer history">
           {transfers.length === 0 ? (
             <div className="fm-empty">No transfers on record</div>
           ) : (
@@ -89,7 +87,7 @@ function PlayerTransfersPage() {
               </tbody>
             </table>
           )}
-        </section>
+        </SectionPanel>
       </div>
     </Layout>
   )

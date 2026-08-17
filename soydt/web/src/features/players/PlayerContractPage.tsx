@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import SectionPanel from '../../shared/ui/SectionPanel'
 
 // Player contract sub-tab — simplified scope: core contract terms only
 // (club, shirt number, contract type, squad status, salary, dates,
@@ -65,10 +66,7 @@ function PlayerContractPage() {
   return (
     <Layout title="Contract">
       <div className="fm-page">
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Contract</h3>
-          </div>
+        <SectionPanel title="Contract">
           {!contract ? (
             <div className="fm-empty">No active contract</div>
           ) : (
@@ -113,7 +111,7 @@ function PlayerContractPage() {
               </div>
             </div>
           )}
-        </section>
+        </SectionPanel>
       </div>
     </Layout>
   )
