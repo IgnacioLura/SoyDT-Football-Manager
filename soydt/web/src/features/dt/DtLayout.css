@@ -1,0 +1,40 @@
+/* soydt/web/src/features/dt/DtLayout.css
+   Fase B (2026-08-16 EA FC redesign, Task B1): DtLayout's header now reuses
+   `shared/Layout.css`'s `.lyt-header`/`.lyt-header-title`/`.lyt-header-sub`/
+   `.lyt-header-actions` base rules (imported alongside this file) for the
+   same dark `--surface-1`/`--font-display` treatment `Layout.tsx` gets.
+
+   DT-specific on top of that base: per-club header color theming. The DT's
+   own club sets `--header-bg`/`--header-border`/`--tab-fg`/`--tab-fg-active`
+   inline (see `headerStyle` in DtLayout.tsx) and toggles the `.fm-header-colored`
+   marker class. The rules below key off the *combination* of `.lyt-header` +
+   `.fm-header-colored` so they always win over the plain `.lyt-header` base
+   rule regardless of CSS module load order (higher selector specificity),
+   and target the `.lyt-header-*` class names directly now that the old
+   `.fm-header-title`/`.fm-header-sub` classes are no longer rendered here. */
+
+.lyt-header.fm-header-colored {
+  background: var(--header-bg, var(--surface-1));
+  border-bottom-color: var(--header-border, var(--surface-3));
+}
+
+.lyt-header.fm-header-colored .lyt-header-title h1 {
+  color: var(--tab-fg-active, var(--text-primary));
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.lyt-header.fm-header-colored .lyt-header-sub,
+.lyt-header.fm-header-colored .lyt-header-sub a {
+  color: var(--tab-fg-active, var(--text-muted));
+}
+
+.lyt-header.fm-header-colored .fm-menu-toggle span,
+.lyt-header.fm-header-colored .fm-menu-toggle span::before,
+.lyt-header.fm-header-colored .fm-menu-toggle span::after {
+  background: var(--tab-fg-active, var(--text-primary));
+}
+
+/* `.fm-header-colored .fm-process-btn` (and `:hover`) in style.css already
+   keys purely off `.fm-header-colored` (no dependency on the old
+   `.fm-header-title` classes), so ProcessControl's per-club tint keeps
+   working unmodified without needing a rule here. */

@@ -1,11 +1,14 @@
 import type { CSSProperties, ReactNode } from 'react'
 import { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Flag from '../../shared/Flag'
 import ProcessControl from '../../shared/ProcessControl'
+import NavRail, { type NavRailItem } from '../../shared/ui/NavRail'
+import '../../shared/Layout.css'
 import TeamCrest from '../onboarding/TeamCrest'
 import { useMyTeamId } from './useMyTeamId'
+import './DtLayout.css'
 
 // Stripped-down sibling of `shared/Layout.tsx` for the DT/"Mi Equipo"
 // experience: same header/sidebar chrome so style.css's rules still apply,
@@ -13,10 +16,13 @@ import { useMyTeamId } from './useMyTeamId'
 // league/team browsing). `ProcessControl` (day-advancement) IS shown here —
 // the DT drives their own career now, same button as the admin/free-browse
 // Layout uses, backed by the same app-wide ProcessContext.
+//
+// Fase B (2026-08-16 EA FC redesign, Task B1): sidebar contents now render
+// via the shared `NavRail` (dark theme, icon tiles) instead of the raw
+// `fm-nav-section` list, and the header reuses `Layout.css`'s `lyt-header*`
+// classes for the same dark visual treatment — mirrors `shared/Layout.tsx`.
 
-type NavItem = { title: string; icon: string; url: string }
-
-const NAV_ITEMS: NavItem[] = [
+const NAV_ITEMS: NavRailItem[] = [
   { title: 'Plantel', icon: 'fa-users', url: '/dt/squad' },
   { title: 'Transferencias', icon: 'fa-right-left', url: '/dt/transfers' },
   { title: 'Finanzas', icon: 'fa-coins', url: '/dt/finances' },
@@ -71,33 +77,23 @@ function DtLayout({ title, subTitle, children }: DtLayoutProps) {
       <div className="container-fluid">
         <div className="row">
           <div className="fm-sidebar">
-            <nav className="fm-sidebar-scroll">
-              <ul className="fm-nav-section">
-                {NAV_ITEMS.map((item) => (
-                  <li key={item.url} className={location.pathname.startsWith(item.url) ? 'active' : ''}>
-                    <Link to={item.url}>
-                      <i className={`fa ${item.icon}`} />
-                      <span>{item.title}</span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-              <ul className="fm-nav-section fm-nav-section-bottom">
-                <li className="fm-sidebar-lang">
-                  <div className="fm-sidebar-lang-toggle">
-                    <Flag code="us" />
-                    <span>English</span>
-                  </div>
-                </li>
-              </ul>
-            </nav>
+            <div className="fm-sidebar-scroll">
+              <NavRail navItems={NAV_ITEMS} countryLeagues={null} activePath={location.pathname} />
+              <div className="lyt-lang-toggle">
+                <Flag code="us" />
+                <span>English</span>
+              </div>
+            </div>
           </div>
           <div className="fm-sidebar-overlay" onClick={() => document.body.classList.remove('fm-sidebar-open')} />
           <div className="col m-0 p-0">
             <div className="container-fluid">
               <div className="row">
                 <div className="col m-0 p-0">
-                  <div className={`fm-header${colors ? ' fm-header-colored' : ''}`} style={headerStyle}>
+                  <div
+                    className={`lyt-header${colors ? ' fm-header-colored' : ''}`}
+                    style={headerStyle}
+                  >
                     <button
                       className="fm-menu-toggle d-xl-none"
                       onClick={() => document.body.classList.toggle('fm-sidebar-open')}
@@ -110,15 +106,15 @@ function DtLayout({ title, subTitle, children }: DtLayoutProps) {
                         <TeamCrest slug={crest.slug} name={crest.name} size={48} />
                       </div>
                     )}
-                    <div className="fm-header-title">
+                    <div className="lyt-header-title">
                       <h1>{title}</h1>
-                      {subTitle && <span className="fm-header-sub">{subTitle}</span>}
+                      {subTitle && <span className="lyt-header-sub">{subTitle}</span>}
                     </div>
                     {/* No search/watchlist here — both lead into the
                         free-browse Admin area, out of scope for the DT's
                         own club. ProcessControl IS shown: the DT drives
                         their own career now. */}
-                    <div className="fm-header-actions">
+                    <div className="lyt-header-actions">
                       <ProcessControl />
                     </div>
                   </div>
