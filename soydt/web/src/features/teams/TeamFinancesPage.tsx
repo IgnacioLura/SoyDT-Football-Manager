@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import SectionPanel from '../../shared/ui/SectionPanel'
 import { useTeamCountryId } from '../../shared/useTeamCountryId'
 
 // Team finances page — deliberately simplified vs. the original app's
@@ -72,10 +73,7 @@ function TeamFinancesPage() {
   return (
     <Layout title="Finances" sidebarCountryId={sidebarCountryId}>
       <div className="fm-page">
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Overview</h3>
-          </div>
+        <SectionPanel title="Overview">
           <div className="fm-personal-detail">
             <div className="fm-detail-row">
               <span className="fm-detail-label">Balance</span>
@@ -90,13 +88,12 @@ function TeamFinancesPage() {
               <span className="fm-detail-value">{money(finances.wageBudget)}</span>
             </div>
           </div>
-        </section>
+        </SectionPanel>
 
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Income</h3>
-            <span className="fm-panel-count">{money(finances.incomeTotal)}</span>
-          </div>
+        <SectionPanel
+          title="Income"
+          actions={<span className="fm-panel-count">{money(finances.incomeTotal)}</span>}
+        >
           <div className="fm-personal-detail">
             <div className="fm-detail-row">
               <span className="fm-detail-label">TV</span>
@@ -119,13 +116,12 @@ function TeamFinancesPage() {
               <span className="fm-detail-value">{money(finances.incomePrizeMoney)}</span>
             </div>
           </div>
-        </section>
+        </SectionPanel>
 
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Expenses</h3>
-            <span className="fm-panel-count">{money(finances.expenseTotal)}</span>
-          </div>
+        <SectionPanel
+          title="Expenses"
+          actions={<span className="fm-panel-count">{money(finances.expenseTotal)}</span>}
+        >
           <div className="fm-personal-detail">
             <div className="fm-detail-row">
               <span className="fm-detail-label">Player wages</span>
@@ -140,7 +136,7 @@ function TeamFinancesPage() {
               <span className="fm-detail-value">{money(finances.expenseFacilities)}</span>
             </div>
           </div>
-        </section>
+        </SectionPanel>
       </div>
     </Layout>
   )

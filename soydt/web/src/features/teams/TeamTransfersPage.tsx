@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
 import TeamCrest from '../onboarding/TeamCrest'
+import SectionPanel from '../../shared/ui/SectionPanel'
 import { useTeamCountryId } from '../../shared/useTeamCountryId'
 
 // Ported from open-football/src/web/src/teams/transfers/index.html —
@@ -109,21 +110,19 @@ function TeamTransfersPage() {
   return (
     <Layout title="Transfers" sidebarCountryId={sidebarCountryId}>
       <div className="fm-page">
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Incoming transfers</h3>
-            <span className="fm-panel-count">{transfers.incoming.length}</span>
-          </div>
+        <SectionPanel
+          title="Incoming transfers"
+          actions={<span className="fm-panel-count">{transfers.incoming.length}</span>}
+        >
           <TransferTable items={transfers.incoming} otherLabel="From" />
-        </section>
+        </SectionPanel>
 
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Outgoing transfers</h3>
-            <span className="fm-panel-count">{transfers.outgoing.length}</span>
-          </div>
+        <SectionPanel
+          title="Outgoing transfers"
+          actions={<span className="fm-panel-count">{transfers.outgoing.length}</span>}
+        >
           <TransferTable items={transfers.outgoing} otherLabel="To" />
-        </section>
+        </SectionPanel>
       </div>
     </Layout>
   )

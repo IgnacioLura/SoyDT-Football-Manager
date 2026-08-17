@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
 import { PositionBadge } from '../../shared/positions'
+import SectionPanel from '../../shared/ui/SectionPanel'
 import { useTeamCountryId } from '../../shared/useTeamCountryId'
 
 // Ported from open-football/src/web/src/teams/scouting/index.html — the
@@ -71,11 +72,10 @@ function TeamScoutingPage() {
   return (
     <Layout title="Scouting" sidebarCountryId={sidebarCountryId}>
       <div className="fm-page">
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Active monitoring</h3>
-            <span className="fm-panel-count">{monitoring.length}</span>
-          </div>
+        <SectionPanel
+          title="Active monitoring"
+          actions={<span className="fm-panel-count">{monitoring.length}</span>}
+        >
           {monitoring.length === 0 ? (
             <div className="fm-empty">No players currently being scouted</div>
           ) : (
@@ -122,7 +122,7 @@ function TeamScoutingPage() {
               </tbody>
             </table>
           )}
-        </section>
+        </SectionPanel>
       </div>
     </Layout>
   )

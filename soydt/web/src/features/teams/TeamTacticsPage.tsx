@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
 import { PositionBadge } from '../../shared/positions'
+import SectionPanel from '../../shared/ui/SectionPanel'
 import { useTeamCountryId } from '../../shared/useTeamCountryId'
 
 // Team tactics page — deliberately simplified vs. the original app's
@@ -71,11 +72,10 @@ function TeamTacticsPage() {
   return (
     <Layout title="Tactics" sidebarCountryId={sidebarCountryId}>
       <div className="fm-page">
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Formation</h3>
-            <span className="fm-panel-action">{tactics.formationName}</span>
-          </div>
+        <SectionPanel
+          title="Formation"
+          actions={<span className="fm-panel-action">{tactics.formationName}</span>}
+        >
           <div className="fm-personal-detail">
             <div className="fm-detail-row">
               <span className="fm-detail-label">Shape</span>
@@ -108,13 +108,12 @@ function TeamTacticsPage() {
               </span>
             </div>
           </div>
-        </section>
+        </SectionPanel>
 
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Starting XI</h3>
-            <span className="fm-panel-count">{tactics.players.length}</span>
-          </div>
+        <SectionPanel
+          title="Starting XI"
+          actions={<span className="fm-panel-count">{tactics.players.length}</span>}
+        >
           <table className="fm-standings">
             <thead>
               <tr>
@@ -137,7 +136,7 @@ function TeamTacticsPage() {
               ))}
             </tbody>
           </table>
-        </section>
+        </SectionPanel>
       </div>
     </Layout>
   )

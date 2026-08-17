@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
 import { PositionBadge } from '../../shared/positions'
+import SectionPanel from '../../shared/ui/SectionPanel'
 import { useTeamCountryId } from '../../shared/useTeamCountryId'
 
 // Team season statistics page — mirrors the original app's team stats tab.
@@ -62,11 +63,10 @@ function TeamStatsPage() {
   return (
     <Layout title="Team Stats" sidebarCountryId={sidebarCountryId}>
       <div className="fm-page">
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Season Statistics</h3>
-            <span className="fm-panel-count">{rows.length}</span>
-          </div>
+        <SectionPanel
+          title="Season Statistics"
+          actions={<span className="fm-panel-count">{rows.length}</span>}
+        >
           <table className="fm-stats">
             <thead>
               <tr>
@@ -108,7 +108,7 @@ function TeamStatsPage() {
               ))}
             </tbody>
           </table>
-        </section>
+        </SectionPanel>
       </div>
     </Layout>
   )

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
+import SectionPanel from '../../shared/ui/SectionPanel'
 import { useTeamCountryId } from '../../shared/useTeamCountryId'
 
 // SIMPLIFIED reinterpretation of open-football/src/web/src/teams/relations/
@@ -58,11 +59,14 @@ function TierBadge({ tier }: { tier: RelationPair['tier'] }) {
 
 function SummaryTile({ label, count, color }: { label: string; count: number; color: string }) {
   return (
-    <div className="fm-panel" style={{ flex: '1 1 0', textAlign: 'center' }}>
-      <div className="fm-panel-head" style={{ justifyContent: 'center' }}>
-        <h3>{label}</h3>
-      </div>
-      <div style={{ fontSize: '1.8rem', fontWeight: 700, color, padding: '0.5rem 0' }}>{count}</div>
+    <div style={{ flex: '1 1 0' }}>
+      <SectionPanel title={label}>
+        <div
+          style={{ fontSize: '1.8rem', fontWeight: 700, color, padding: '0.5rem 0', textAlign: 'center' }}
+        >
+          {count}
+        </div>
+      </SectionPanel>
     </div>
   )
 }
@@ -111,11 +115,10 @@ function TeamRelationsPage() {
           <SummaryTile label="Rivalry" count={relations.rivalryCount} color={TIER_COLOR.rivalry} />
         </section>
 
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Player relationships</h3>
-            <span className="fm-panel-count">{relations.pairs.length}</span>
-          </div>
+        <SectionPanel
+          title="Player relationships"
+          actions={<span className="fm-panel-count">{relations.pairs.length}</span>}
+        >
           {relations.pairs.length === 0 ? (
             <div className="fm-empty">No notable relationships</div>
           ) : (
@@ -146,7 +149,7 @@ function TeamRelationsPage() {
               </tbody>
             </table>
           )}
-        </section>
+        </SectionPanel>
       </div>
     </Layout>
   )

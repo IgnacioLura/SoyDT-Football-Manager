@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
 import { PositionBadge } from '../../shared/positions'
+import SectionPanel from '../../shared/ui/SectionPanel'
 import { useTeamCountryId } from '../../shared/useTeamCountryId'
 
 // Ported from open-football/src/web/src/teams/academy/index.html — the
@@ -71,10 +72,7 @@ function TeamAcademyPage() {
   return (
     <Layout title="Academy" sidebarCountryId={sidebarCountryId}>
       <div className="fm-page">
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Overview</h3>
-          </div>
+        <SectionPanel title="Overview">
           <div className="fm-personal-detail">
             <div className="fm-detail-row">
               <span className="fm-detail-label">Academy level</span>
@@ -103,13 +101,12 @@ function TeamAcademyPage() {
               </span>
             </div>
           </div>
-        </section>
+        </SectionPanel>
 
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Academy players</h3>
-            <span className="fm-panel-count">{academy.players.length}</span>
-          </div>
+        <SectionPanel
+          title="Academy players"
+          actions={<span className="fm-panel-count">{academy.players.length}</span>}
+        >
           {academy.players.length === 0 ? (
             <div className="fm-empty">No academy players</div>
           ) : (
@@ -142,7 +139,7 @@ function TeamAcademyPage() {
               </tbody>
             </table>
           )}
-        </section>
+        </SectionPanel>
       </div>
     </Layout>
   )

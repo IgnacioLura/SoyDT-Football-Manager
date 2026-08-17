@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import { callApi } from '../../shared/api'
 import Layout from '../../shared/Layout'
 import TeamCrest from '../onboarding/TeamCrest'
+import SectionPanel from '../../shared/ui/SectionPanel'
 import { useTeamCountryId } from '../../shared/useTeamCountryId'
 
 // Mirrors the original app's `teams/schedule/index.html` (extends
@@ -61,10 +62,7 @@ function TeamSchedulePage() {
   return (
     <Layout title="Schedule" sidebarCountryId={sidebarCountryId}>
       <div className="fm-page">
-        <section className="fm-panel">
-          <div className="fm-panel-head">
-            <h3>Schedule</h3>
-          </div>
+        <SectionPanel title="Schedule">
           <table className="fm-schedule">
             <thead>
               <tr>
@@ -104,7 +102,7 @@ function TeamSchedulePage() {
               ))}
             </tbody>
           </table>
-        </section>
+        </SectionPanel>
       </div>
     </Layout>
   )
