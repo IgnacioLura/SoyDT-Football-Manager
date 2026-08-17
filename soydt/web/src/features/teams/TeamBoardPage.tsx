@@ -178,7 +178,7 @@ function TeamBoardPage() {
 
         <SectionPanel title="Season targets & vision">
           <div className="fm-personal-detail">
-            {board.seasonTargets && (
+            {board.seasonTargets ? (
               <>
                 <div className="fm-detail-row">
                   <span className="fm-detail-label">Expected position</span>
@@ -203,6 +203,11 @@ function TeamBoardPage() {
                   </span>
                 </div>
               </>
+            ) : (
+              <div className="fm-detail-row">
+                <span className="fm-detail-label">Season targets</span>
+                <span className="fm-detail-value">Not set yet</span>
+              </div>
             )}
             <div className="fm-detail-row">
               <span className="fm-detail-label">Playing style</span>
@@ -224,7 +229,8 @@ function TeamBoardPage() {
               <div className="fm-detail-row">
                 <span className="fm-detail-label">Long-term goal</span>
                 <span className="fm-detail-value">
-                  {board.visionLongTermGoal} ({board.visionLongTermHorizonSeasons}s)
+                  {board.visionLongTermGoal} (over {board.visionLongTermHorizonSeasons} season
+                  {board.visionLongTermHorizonSeasons === 1 ? '' : 's'})
                 </span>
               </div>
             )}

@@ -280,6 +280,64 @@ team's `club_id` (incoming matches `to_club_id`, outgoing matches
 }
 ```
 
+### `engine_get_team_board(handle, team_id) -> *mut c_char`
+Steady-state board-of-directors snapshot for the club that owns `team_id`
+(`core::club::board::ClubBoard`). SIMPLIFIED — omits the board's internal
+component-score breakdown (`latest_scores`), manager hiring-market/
+shortlist state, live transfer-proposal/dossier fields, and facility-review
+state; see `docs/superpowers/specs/2026-08-17-club-board-design.md` for the
+full scope rationale. Enums serialize via Rust's `Debug` format (e.g.
+`"Normal"`, `"FamilyOwned"`), not a fixed enum list — treat as opaque
+display strings. `season_targets` is `null` until the board sets targets;
+`takeover_status` is `"None"` outside a rare ownership-change event:
+
+```json
+{
+  "confidence_level": 65,
+  "mood": "Normal",
+  "manager_on_final_warning": false,
+  "poor_mood_months": 0,
+  "chairman_ambition": "Conservative",
+  "chairman_patience": "High",
+  "chairman_manager_loyalty": 50,
+  "ownership_type": "FamilyOwned",
+  "ownership_wealth": 64,
+  "ownership_interference": 40,
+  "ownership_risk_tolerance": 35,
+  "ownership_exit_pressure": 10,
+  "supporter_pressure": 0,
+  "media_pressure": 0,
+  "dressing_room_pressure": 0,
+  "financial_pressure": 0,
+  "regulatory_pressure": 0,
+  "trust_results": 55,
+  "trust_finances": 55,
+  "trust_squad_building": 55,
+  "trust_communication": 55,
+  "style_alignment": 55,
+  "season_targets": null,
+  "vision_playing_style": "Balanced",
+  "vision_youth_focus": "Balanced",
+  "vision_signing_preference": "Anyone",
+  "vision_financial_stance": "Conservative",
+  "vision_long_term_goal": null,
+  "vision_long_term_horizon_seasons": 0,
+  "promises": [],
+  "takeover_status": "None",
+  "takeover_months_in_status": 1
+}
+```
+
+When `season_targets` is present, it has this shape:
+```json
+{ "transfer_budget": 5000000, "wage_budget": 2000000, "max_squad_size": 25, "min_squad_size": 18, "expected_position": 4, "min_acceptable_position": 8 }
+```
+
+Each entry in `promises` has this shape:
+```json
+{ "promise_type": "TransferBudget", "due_date": "2027-01-31", "overdue": false }
+```
+
 ### `engine_get_player_history(handle, player_id) -> *mut c_char`
 Flat, historical-only season list for one player (SIMPLIFIED — League-kind
 `season_ledger` rows only, oldest first; drops the competition-breakdown
