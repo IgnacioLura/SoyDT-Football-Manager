@@ -45,4 +45,10 @@ public sealed class CountriesController(GameSession session) : ControllerBase
     {
         return Ok(session.GetFreeAgents(countryId));
     }
+
+    [HttpGet("{countryId}/transfer-market")]
+    public ActionResult<CountryTransferMarket> TransferMarket(uint countryId)
+    {
+        return Ok(session.GetCountryTransferMarket(countryId));
+    }
 }
