@@ -414,10 +414,29 @@ impl League {
             home_supplements.extend(home_overage);
             away_supplements.extend(away_overage);
 
-            (
-                home_team.get_rotation_match_squad_with_reserves(&home_supplements, &home_ctx),
-                away_team.get_rotation_match_squad_with_reserves(&away_supplements, &away_ctx),
-            )
+            // A friendly still goes through the development/rotation
+            // selector for non-Main teams (that's the whole point — youth
+            // sides run their season minutes plan regardless of fixture
+            // type), but the user's own Main-team pin
+            // (`is_force_match_selection`, set via the DT lineup picker)
+            // is otherwise silently ignored: the rotation selector's
+            // scoring never reads it, only `honor_force_selection` in the
+            // competitive path does, and that's gated on `is_main_team`,
+            // not on whether the fixture is a friendly. Route the Main
+            // team through the same competitive squad builder league/cup
+            // matches use so a manually-picked XI is actually fielded in
+            // a friendly too.
+            let home_squad = if home_team.team_type == TeamType::Main {
+                home_team.get_enhanced_match_squad(&home_supplements, &home_ctx)
+            } else {
+                home_team.get_rotation_match_squad_with_reserves(&home_supplements, &home_ctx)
+            };
+            let away_squad = if away_team.team_type == TeamType::Main {
+                away_team.get_enhanced_match_squad(&away_supplements, &away_ctx)
+            } else {
+                away_team.get_rotation_match_squad_with_reserves(&away_supplements, &away_ctx)
+            };
+            (home_squad, away_squad)
         } else {
             let home_is_main = home_team.team_type == TeamType::Main;
             let away_is_main = away_team.team_type == TeamType::Main;
