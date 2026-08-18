@@ -246,6 +246,9 @@ function PlayerPage() {
           actions={
             <>
               <button onClick={toggleWatchlist}>{inWatchlist ? '★ On watch list' : '☆ Add to watch list'}</button>
+              <Link to={`/players/compare?a=${player.id}`}>
+                <button type="button">⇄ Comparar</button>
+              </Link>
               <AiReportButton title="AI scouting dossier" startUrl={`/api/players/${playerId}/ai-report`} />
             </>
           }

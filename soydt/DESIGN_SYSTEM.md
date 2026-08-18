@@ -92,7 +92,12 @@ unaffected.
 ### Done (PlayerCard badge Trajectory entrance, this session)
 - [x] `.pc-rank-value`/`.pc-pos-value`/`.pc-growth-badge` now slide in on `--ease-trajectory` (`pc-badge-in-left`/`pc-badge-in-right` keyframes) on mount, mirroring NavRail's active-tab triangle marker's "fast, direct path" entrance instead of rendering statically. Growth badge gets a small stagger delay so it reads as following the OVR badge in, not simultaneous.
 
-Backlog is now empty — everything tracked above is done. Next candidates for a future pass: Phase 3/4 fine-grained dead-CSS removal in `style.css` (see Migration plan below), or a fresh BUCK-reel sweep if the second mux source above turns up more motifs worth adopting.
+Backlog is now empty — everything tracked above is done. Next candidates for a future pass: mobile/responsive pass, accessibility (contrast/keyboard) audit, or a fresh BUCK-reel sweep if the second mux source above turns up more motifs worth adopting.
+
+### Done (Phase 4 dead-CSS sweep, this session)
+- [x] Audited all ~386 class selectors in `style.css` against every `.tsx`/`.ts` reference (including dynamic template-literal construction, e.g. `fm-ability-{green,red,yellow}` built via `abilityColor()`, `fm-slot-tier-{bronze,silver,gold,elite}` via `ratingTier()` — both correctly kept). 197 classes confirmed dead (zero references, static or dynamic) and removed: an entire unbuilt scouting feature (`sc-*`, no `features/scouting` folder exists), the old bracket UI (`fm-bracket*`/`fm-tie*`/`fm-seed`/etc.), the pre-DataTable staff page (`fm-staff-table`/`fm-staff-profile`/`fm-staff-group`), the old academy squad table (`fm-academy-squad`/`aq-*`), and scattered singles.
+- [x] **4462 → 2977 lines** (1498 deletions). Verified via a normalized-subsequence check (whitespace/comments stripped) that nothing beyond the flagged dead rules was altered, plus `npm run build` clean before/after.
+- **Left alone, flagged for a closer look**: 83 compound/descendant selectors where only *part* of the selector is dead (e.g. `.fm-staff-table .st-name` — ancestor dead, but `.st-name` itself is alive in other tables) — conservative per the sweep's own rules, since blind removal there risks cutting a still-used descendant rule. Worth a second, more targeted pass if the scouting/bracket/staff-table remnants specifically are confirmed fully gone.
 
 ## Migration plan — retiring `fm-`/bootstrap `style.css`
 

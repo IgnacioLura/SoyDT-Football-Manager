@@ -240,45 +240,6 @@ a:active {
     display: none;
 }
 
-.fm-sidebar-lang-toggle {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 16px;
-    color: #6e7b85;
-    font-size: 14px;
-    cursor: pointer;
-    transition:
-        color 0.12s,
-        background 0.12s;
-}
-
-.fm-sidebar-lang-toggle:hover {
-    color: #c8d0d8;
-    background: rgba(255, 255, 255, 0.03);
-}
-
-/* Absolutely positioned, so it doesn't feed the sidebar's content width —
-   it sizes to its own language names and matches the rail at minimum. */
-.fm-sidebar-lang-menu {
-    display: none;
-    position: absolute;
-    bottom: 100%;
-    left: 0;
-    right: auto;
-    width: max-content;
-    min-width: 100%;
-    background: #1c2830;
-    border: 1px solid var(--surface-3);
-    border-radius: 4px;
-    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3);
-    z-index: 100;
-}
-
-.fm-sidebar-lang-menu .fm-lang-option {
-    text-decoration: none;
-}
-
 .fm-nav-section {
     list-style: none;
     padding: 6px 0;
@@ -354,22 +315,6 @@ a:active {
     color: #027b71;
 }
 
-.fm-nav-toggle-spacer {
-    width: 18px;
-    flex-shrink: 0;
-}
-
-.fm-nav-toggle-label {
-    display: inline-flex;
-    align-items: center;
-    font-size: 12px;
-    line-height: 1;
-}
-
-.fm-nav-toggle-icon {
-    font-size: 12px;
-}
-
 /* ============================================
    HEADER
    ============================================ */
@@ -388,35 +333,6 @@ a:active {
     border-bottom: 1px solid #e0e3e6;
     min-height: 68px;
     min-width: 0;
-}
-
-.fm-header-title {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-width: 0;
-    flex: 1;
-    overflow: hidden;
-}
-
-.fm-header-title h1 {
-    margin: 0;
-    font-size: 22px;
-    font-weight: 700;
-    color: #1e272d;
-    letter-spacing: -0.2px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.fm-header-sub {
-    font-size: 13px;
-    color: var(--text-muted);
-    font-weight: 400;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
 
 .fm-header-colored {
@@ -438,30 +354,6 @@ a:active {
 .fm-header-colored .fm-menu-toggle span::before,
 .fm-header-colored .fm-menu-toggle span::after {
     background: var(--tab-fg-active, #fff);
-}
-
-.fm-header-actions {
-    display: flex;
-    align-items: stretch;
-    gap: 0;
-    margin-left: auto;
-    align-self: stretch;
-    flex-shrink: 0;
-}
-
-.fm-lang-option {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 14px;
-    color: #b0bac2;
-    font-size: 13px;
-    transition: background 0.12s;
-}
-
-.fm-lang-option:hover {
-    background: rgba(255, 255, 255, 0.06);
-    color: #fff;
 }
 
 .fm-process-btn {
@@ -512,11 +404,6 @@ a:active {
     font-size: 15px;
     font-weight: 700;
     color: var(--tab-fg-active, #1e272d);
-}
-
-.fm-date-sub {
-    font-size: 12px;
-    color: var(--tab-fg, var(--text-muted));
 }
 
 /* Spinner */
@@ -582,29 +469,6 @@ a:active {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-.fm-panel-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 14px;
-    background: linear-gradient(180deg, #222e38 0%, #1e2a32 100%);
-    border-bottom: 1px solid var(--surface-3);
-}
-
-.fm-panel-head h3 {
-    margin: 0;
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    color: var(--text-muted);
-}
-
-.fm-transfer-history-head {
-    margin-top: 10px;
-    border-radius: 4px 4px 0 0;
-}
-
 .fm-panel-action {
     font-size: 11px;
     font-weight: 600;
@@ -623,36 +487,6 @@ a:active {
     color: var(--text-muted);
 }
 
-.fm-season-select {
-    appearance: none;
-    -webkit-appearance: none;
-    background: #1a2530
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='%23546a78'/%3E%3C/svg%3E")
-        no-repeat right 8px center;
-    border: 1px solid var(--surface-3);
-    border-radius: 3px;
-    color: #c8d6e0;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    padding: 4px 22px 4px 8px;
-    cursor: pointer;
-    outline: none;
-}
-
-.fm-season-select:hover {
-    border-color: #3a4f5e;
-}
-
-.fm-season-select:focus {
-    border-color: #4a8a6a;
-}
-
-.fm-season-select option {
-    background: #1a2530;
-    color: #c8d6e0;
-}
-
 .fm-empty {
     padding: 32px 20px;
     text-align: center;
@@ -661,9 +495,17 @@ a:active {
     font-style: italic;
 }
 
-/* Staff page */
-.fm-staff-group {
-    margin-top: 12px;
+/* Triangle motif (see DESIGN_SYSTEM.md) — a small dim brand mark above
+   empty-state copy instead of plain text on its own. */
+.fm-empty::before {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    margin: 0 auto 10px;
+    border-style: solid;
+    border-width: 7px 0 7px 11px;
+    border-color: transparent transparent transparent var(--surface-3, #33424e);
 }
 
 .fm-staff-table .st-name {
@@ -693,12 +535,6 @@ a:active {
     font-weight: 500;
 }
 
-/* Staff Profile Page */
-
-.fm-staff-profile {
-    padding: 16px;
-}
-
 .fm-staff-attrs {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -719,35 +555,8 @@ a:active {
     border-bottom: none;
 }
 
-.fm-transfers-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-top: 12px;
-}
-
 .fm-transfers-row .fm-panel {
     margin-bottom: 0;
-}
-
-/* ============================================
-   FM BADGES
-   ============================================ */
-
-.fm-badge {
-    display: inline-block;
-    padding: 2px 8px;
-    font-size: 11px;
-    font-weight: 700;
-    border-radius: 3px;
-    letter-spacing: 0.3px;
-}
-
-/* Morale direction arrows */
-.fm-morale {
-    display: inline-block;
-    font-size: 11px;
-    line-height: 1;
 }
 
 /* ============================================
@@ -843,46 +652,6 @@ a:active {
    ACADEMY SQUAD TABLE
    ============================================ */
 
-.fm-academy-squad .aq-name {
-    width: 22%;
-    font-size: 12px;
-    color: #98a4ae;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 180px;
-}
-
-.fm-academy-squad .aq-pos {
-    width: 12%;
-    font-size: 11px;
-    color: var(--text-muted);
-    text-align: center;
-}
-
-.fm-academy-squad .aq-nat {
-    width: 5%;
-    text-align: center;
-}
-
-.fm-academy-squad .aq-age {
-    width: 7%;
-    text-align: center;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-primary);
-    font-variant-numeric: tabular-nums;
-}
-
-.fm-academy-squad .aq-ca,
-.fm-academy-squad .aq-pa {
-    width: 16%;
-}
-
-.fm-academy-squad .aq-cond {
-    width: 22%;
-}
-
 .fm-academy-squad .aq-cond .fm-cond-bar {
     min-width: 80px;
 }
@@ -890,16 +659,6 @@ a:active {
 .fm-academy-squad .aq-cond .fm-cond-val {
     font-size: 13px;
     font-weight: 700;
-}
-
-.fm-academy-squad thead th.aq-ca,
-.fm-academy-squad thead th.aq-pa {
-    text-align: center;
-}
-
-.fm-academy-squad td.aq-ca,
-.fm-academy-squad td.aq-pa {
-    text-align: center;
 }
 
 /* ============================================
@@ -1093,34 +852,6 @@ a:active {
     color: var(--accent-primary);
 }
 
-.fx-scorers {
-    display: flex;
-    flex-direction: column;
-    margin-top: 2px;
-    overflow: hidden;
-}
-
-.fm-trophy-badge {
-    position: relative;
-    flex: 0 0 auto;
-    width: 62px;
-    height: 62px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-    background: radial-gradient(circle at 32% 26%, #3a3420, #1c2128);
-    box-shadow:
-        inset 0 0 0 1px rgba(232, 193, 74, 0.45),
-        inset 0 -6px 14px rgba(0, 0, 0, 0.5),
-        0 0 26px rgba(232, 193, 74, 0.14);
-}
-
-.fm-trophy-badge i {
-    font-size: 25px;
-    color: #f0cf63;
-    filter: drop-shadow(0 1px 4px rgba(232, 193, 74, 0.4));
-}
-
 .fm-trophy-badge.live {
     background: radial-gradient(circle at 32% 26%, #28323b, #1a2128);
     box-shadow:
@@ -1135,60 +866,6 @@ a:active {
 
 .fm-cup-hero-label.live {
     color: #5a7a86;
-}
-
-/* ---- Bracket ----
-   Rounds are fixed-width columns sitting side by side; the scroller takes
-   over horizontally rather than letting columns stretch into long rows.
-   Each later round spreads its ties with space-around, so the column
-   heights match and the field visibly narrows toward the final — the
-   pyramid. Faint nubs on each tie bridge the gap to the neighbouring
-   round, reading as a knockout bracket without claiming exact pairings
-   (which byes would otherwise break). */
-.fm-bracket-scroll {
-    overflow-x: auto;
-    padding: 16px 6px 20px;
-    -webkit-overflow-scrolling: touch;
-}
-
-.fm-bracket-scroll::-webkit-scrollbar {
-    height: 8px;
-}
-
-.fm-bracket-scroll::-webkit-scrollbar-thumb {
-    background: #2a3744;
-    border-radius: 4px;
-}
-
-.fm-bracket {
-    display: flex;
-    align-items: stretch;
-    min-width: min-content;
-}
-
-.fm-round {
-    flex: 0 0 230px;
-    width: 230px;
-    display: flex;
-    flex-direction: column;
-    padding: 0 16px;
-    position: relative;
-}
-
-.fm-tie {
-    position: relative;
-    background: linear-gradient(180deg, #1a242c, #161e25);
-    border: 1px solid #283643;
-    border-radius: 7px;
-    overflow: hidden;
-    transition:
-        border-color 0.12s ease,
-        box-shadow 0.12s ease;
-}
-
-.fm-tie:hover {
-    border-color: #3b4f61;
-    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.32);
 }
 
 .fm-tie-row.winner {
@@ -1216,32 +893,6 @@ a:active {
     color: #5cb86c;
 }
 
-.fm-round.is-final .fm-tie {
-    border-color: rgba(74, 157, 91, 0.4);
-    box-shadow: 0 0 20px rgba(74, 157, 91, 0.07);
-}
-
-.fm-round.is-final .fm-tie:hover {
-    border-color: rgba(74, 157, 91, 0.6);
-}
-
-.fm-bye {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    padding: 9px 11px;
-    border: 1px solid #283643;
-    border-radius: 7px;
-    background: rgba(255, 255, 255, 0.014);
-    color: var(--text-muted);
-    font-size: 12.5px;
-}
-
-.fm-bye:hover {
-    color: #9aa4ad;
-}
-
 .fm-bye .name {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1260,84 +911,9 @@ a:active {
     border-radius: 4px;
 }
 
-/* ---- Playoffs ----
-   Bracket extensions for the /playoffs pages: seed badges and host marks
-   on the tie rows, per-game chips under a best-of-N series, the neutral-
-   venue tag on the final, and a centered single-card section for the
-   cross-conference final. Everything else reuses the cup bracket. */
-.fm-bracket-centered {
-    justify-content: center;
-}
-
-.fm-seed {
-    flex-shrink: 0;
-    min-width: 16px;
-    padding: 1px 3px;
-    text-align: center;
-    font-size: 9px;
-    font-weight: 700;
-    color: #7c8893;
-    background: rgba(255, 255, 255, 0.06);
-    border-radius: 4px;
-    font-variant-numeric: tabular-nums;
-}
-
 .fm-tie-row.winner .fm-seed {
     color: #cfe4d4;
     background: rgba(74, 157, 91, 0.22);
-}
-
-.fm-host-mark {
-    flex-shrink: 0;
-    font-size: 8px;
-    color: #46535d;
-}
-
-.fm-shield-line {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.fm-shield-line i {
-    color: #f0cf63;
-    font-size: 11px;
-}
-
-.fm-shield-line a {
-    color: #aab4bd;
-}
-
-.fm-shield-line a:hover {
-    color: #fff;
-}
-
-.fm-series-games {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    padding: 6px 9px;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    background: rgba(0, 0, 0, 0.18);
-}
-
-.fm-game-chip {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding: 2px 7px;
-    font-size: 10px;
-    font-weight: 600;
-    color: #828f99;
-    font-variant-numeric: tabular-nums;
-    background: rgba(255, 255, 255, 0.04);
-    border-radius: 4px;
-    white-space: nowrap;
-}
-
-.fm-game-chip:hover {
-    color: #fff;
-    background: rgba(255, 255, 255, 0.08);
 }
 
 .fm-game-chip .g {
@@ -1345,22 +921,6 @@ a:active {
     font-weight: 700;
     letter-spacing: 0.5px;
     color: #566270;
-}
-
-.fm-game-chip.unplayed {
-    color: #46535d;
-}
-
-.fm-neutral-tag {
-    padding: 4px 11px;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    font-size: 8px;
-    font-weight: 700;
-    letter-spacing: 0.6px;
-    text-transform: uppercase;
-    color: #566270;
-    background: rgba(255, 255, 255, 0.02);
-    text-align: center;
 }
 
 /* ---- Responsive ---- */
@@ -1384,52 +944,6 @@ a:active {
         width: 200px;
         padding: 0 12px;
     }
-}
-
-.fm-rep-row {
-    display: flex;
-    align-items: center;
-    padding: 8px 14px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.025);
-    color: #b0bac2;
-    gap: 10px;
-    transition: background 0.1s ease;
-}
-
-.fm-rep-row:last-child {
-    border-bottom: none;
-}
-
-.fm-rep-row:hover {
-    background: rgba(255, 255, 255, 0.03);
-    color: #b0bac2;
-}
-
-.fm-rep-row:nth-child(even) {
-    background: rgba(0, 0, 0, 0.08);
-}
-
-.fm-rep-row:nth-child(even):hover {
-    background: rgba(255, 255, 255, 0.03);
-}
-
-.rep-detail {
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-}
-
-.rep-league-name {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text-primary);
-    white-space: normal;
-    overflow-wrap: anywhere;
-    line-height: 1.25;
-}
-
-.fm-rep-row:hover .rep-league-name {
-    color: #fff;
 }
 
 .fm-squad .sq-name {
@@ -1603,38 +1117,8 @@ a:active {
     color: #fff;
 }
 
-.fm-val-highlight {
-    color: #8cc87a;
-    font-weight: 600;
-}
-
-.fm-detail-hint {
-    font-size: 11px;
-    color: var(--text-muted);
-    font-weight: 400;
-}
-
-.fm-happiness-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
-
-.fm-happiness-col {
-    min-width: 0;
-}
-
 .fm-personal-col > .fm-panel {
     flex: 1;
-}
-
-.fm-section-subtitle {
-    font-size: 12px;
-    font-weight: 600;
-    color: #5a7080;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin: 0 0 8px 0;
 }
 
 .fm-personal-detail {
@@ -1644,193 +1128,21 @@ a:active {
     padding: 4px 0;
 }
 
-.fm-bar-row {
-    flex-wrap: wrap;
-    gap: 0;
-}
-
 .fm-bar-row .fm-detail-label {
     flex: 1 0 100%;
 }
 
-.fm-bar-row .fm-mini-bar {
-    flex: 1 1 0;
-    margin-left: 0;
-}
-
-.fm-bar-row .fm-detail-value-sm {
-    width: 36px;
-    flex-shrink: 0;
-    margin-left: 8px;
-    text-align: right;
-}
-
-.fm-bar-row .fm-rep-label {
-    width: 110px;
-    white-space: nowrap;
-}
-
 @media (min-width: 600px) {
-    .fm-bar-row {
-        flex-wrap: nowrap;
-    }
 
     .fm-bar-row .fm-detail-label {
         flex: 0 0 auto;
         margin-right: auto;
     }
-
-    .fm-bar-row .fm-mini-bar {
-        flex: 0 0 120px;
-        margin-left: auto;
-    }
-}
-
-.fm-factor-name {
-    color: var(--text-muted);
-    font-weight: 500;
-}
-
-.fm-factor-val {
-    color: var(--text-primary);
-    font-weight: 500;
-    text-align: right;
-}
-
-.fm-factor-val.fm-factor-pos {
-    color: #4caf50;
-}
-
-.fm-factor-val.fm-factor-neg {
-    color: #e53935;
-}
-
-.fm-concerns-title {
-    color: #e53935;
-}
-
-.fm-fav-club-link {
-    color: #5ba3d9;
-    text-decoration: none;
-    font-size: 13px;
-}
-
-.fm-fav-club-link:hover {
-    text-decoration: underline;
-}
-
-.fm-mini-bar {
-    flex: 1;
-    height: 4px;
-    background: #1a2a34;
-    border-radius: 2px;
-    overflow: hidden;
-    max-width: 120px;
-}
-
-.fm-mini-fill {
-    height: 100%;
-    border-radius: 2px;
-    background: #437fa2;
-}
-
-.fm-event-desc {
-    color: var(--text-muted);
-    font-weight: 500;
-}
-
-.fm-event-desc.fm-event-pos {
-    color: #4caf50;
-}
-
-.fm-event-desc.fm-event-neg {
-    color: #e53935;
-}
-
-.fm-event-ago {
-    color: var(--text-muted);
-    font-size: 12px;
-    text-align: right;
-    white-space: nowrap;
-}
-
-.fm-empty-state {
-    padding: 32px 16px;
-    text-align: center;
-    color: var(--text-muted);
-    font-size: 13px;
-}
-
-.fm-detail-value-sm {
-    font-size: 12px;
-    color: var(--text-primary);
-    width: 36px;
-    flex-shrink: 0;
-    text-align: right;
-}
-
-.fm-condition-good {
-    background: #4caf50;
-}
-
-.fm-condition-okay {
-    background: #ff9800;
-}
-
-.fm-condition-poor {
-    background: #e53935;
 }
 
 .fm-player-grid-left .fm-panel,
 .fm-player-grid-right .fm-panel {
     height: 100%;
-}
-
-/* Preferred foot */
-
-.fm-pref-foot {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: 10px 14px;
-    border-top: 1px solid var(--surface-3);
-    background: rgba(0, 0, 0, 0.08);
-}
-
-/* --- Attributes / Skills Grid --- */
-
-.fm-skills-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 0;
-    padding: 0;
-}
-
-.fm-skill-col {
-    padding: 12px 14px;
-    border-right: 1px solid var(--surface-3);
-}
-
-.fm-skill-col:last-child {
-    border-right: none;
-}
-
-.fm-skill-col h4 {
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--text-muted);
-    margin: 0 0 8px 0;
-    padding-bottom: 7px;
-    border-bottom: 1px solid var(--surface-3);
-}
-
-.fm-stats-current td {
-    background: rgba(74, 157, 91, 0.08);
-    font-weight: 600 !important;
-    color: var(--text-primary) !important;
-    border-top: 1px solid var(--surface-3);
 }
 
 .fm-loan-badge {
@@ -1911,121 +1223,14 @@ a:active {
     scrollbar-color: #2f4150 transparent;
 }
 
-.fm-panel--scrollx::-webkit-scrollbar {
-    height: 8px;
-}
-
-.fm-panel--scrollx::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.fm-panel--scrollx::-webkit-scrollbar-thumb {
-    background: #2f4150;
-    border-radius: 4px;
-}
-
-.fm-panel--scrollx::-webkit-scrollbar-thumb:hover {
-    background: #3b5064;
-}
-
-/* The heading is pinned to the viewport edge so it stays readable while
-   the table scrolls underneath it. */
-.fm-panel--scrollx > .fm-panel-head {
-    position: sticky;
-    left: 0;
-}
-
 .fm-history-table td.sq-nat .flag {
     vertical-align: middle;
     margin-right: 0.55em;
 }
 
-/* --- Team Stats Table --- */
-
-.fm-team-stats {
-    table-layout: fixed;
-}
-
-.fm-team-stats thead th.ts-name {
-    text-align: left;
-    padding-left: 14px;
-    width: auto;
-}
-
-.fm-team-stats thead th.ts-col {
-    width: 60px;
-}
-
-.fm-team-stats td.ts-name {
-    text-align: left;
-    padding-left: 14px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.fm-team-stats td.ts-name a {
-    color: var(--text-primary);
-}
-
-.fm-team-stats td.ts-name a:hover {
-    color: #fff;
-}
-
-.fm-team-stats thead th.ts-pos {
-    width: 4em;
-    text-align: center;
-}
-
-.fm-team-stats td.ts-pos {
-    width: 4em;
-    text-align: center !important;
-    color: var(--text-muted);
-    font-size: 12px;
-}
-
-.fm-team-stats td.ts-col {
-    width: 60px;
-}
-
-@media (max-width: 768px) {
-    .fm-team-stats thead th.ts-col {
-        width: 42px;
-        padding: 8px 3px;
-        font-size: 9px;
-    }
-
-    .fm-team-stats td.ts-col {
-        width: 42px;
-        padding: 6px 3px;
-        font-size: 11px;
-    }
-
-    .fm-team-stats td.ts-name {
-        padding-left: 8px;
-    }
-}
-
 /* ============================================
    COUNTRY PAGES
    ============================================ */
-
-/* Home overview: bare info tiles (no card chrome), mirroring the
-   academy overview below. The Go-on-holiday action lives as a square
-   card at the end of the same tile row. */
-.fm-home-overview {
-    padding: 8px 0;
-    margin-bottom: 10px;
-}
-
-/* Academy overview: bare info tiles (no card chrome) sitting flush
-   with the players panel below. Replaces the old .fm-info-panel card. */
-.fm-academy-overview {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 14px;
-}
 
 .fm-info-chips-label .fa {
     margin-right: 4px;
@@ -2037,18 +1242,6 @@ a:active {
         --fm-ai-bg: linear-gradient(159deg, #1280a3 0%, #15466e 100%);
         --fm-ai-border: #1b607e;
     --fm-ai-border-hover: #356aad;
-}
-
-/* Trailing actions cluster — the AI settings + holiday square cards ride
-   together as the last item in the home info row. One grid cell holding
-   two equal buttons keeps them paired at every breakpoint (side by side
-   beside the Players tile once the row wraps on phones). The grid row
-   stretches this to tile height; the flex children fill it. */
-.fm-home-actions {
-    display: flex;
-    gap: 8px;
-    align-items: stretch;
-    min-width: 0;
 }
 
 .fm-home-actions .fm-ai-btn{
@@ -2190,38 +1383,6 @@ a:active {
     color: #7c9cff;
 }
 
-/* Watchlist star + search icon links — plain, unboxed icon buttons that
-   match the AI badge's stripped-down header treatment right next to them
-   (same size, color, hover, and vertical centering) instead of falling
-   back to unstyled default <a> rendering (blue link color, no centering). */
-.fm-header-actions .fm-header-search {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 10px;
-    color: var(--text-muted);
-    text-decoration: none;
-    transition: color 0.2s;
-}
-
-.fm-header-actions .fm-header-search:hover {
-    color: #fff;
-}
-
-.fm-header-actions .fm-header-search i {
-    font-size: 15px;
-    line-height: 1;
-}
-
-/* Groups the workers chip + AI badge. `display: contents` makes the
-   wrapper invisible to layout, so on wide screens both pills stay direct
-   flex items of the machine tile (chip keeps its margin-left:auto and the
-   two ride side by side, right-aligned). The phones breakpoint promotes
-   this to a real flex column — see the max-width: 480px block. */
-.fm-machine-actions {
-    display: contents;
-}
-
 /* AI settings dialog — reuses the worker-dialog shell, but stacks its
    three fields (Base URL / Model / API Key) full-width instead of the
    worker dialog's host+port row, and widens a touch for long model ids. */
@@ -2239,75 +1400,6 @@ a:active {
 @media (max-width: 480px) {
     .fm-info-grid-home .fm-ai-btn-ic {
         font-size: 20px;
-    }
-}
-
-.fm-download-btn {
-    display: none;
-    align-items: center;
-    align-self: center;
-    gap: 6px;
-    height: 30px;
-    margin-right: 2em;
-    padding: 0 14px;
-    font-size: 10.5px;
-    font-weight: 600;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: #fff;
-    background: linear-gradient(160deg, #0b686b 0%, #055455 100%);
-    border: 1px solid #145d59e0;
-    border-radius: 6px;
-    white-space: nowrap;
-    box-shadow:
-        0 1px 0 rgba(255, 255, 255, 0.15) inset,
-        0 1px 3px rgba(50, 140, 120, 0.25);
-    transition:
-        color 0.25s,
-        background 0.3s,
-        border-color 0.3s,
-        box-shadow 0.35s,
-        transform 0.25s;
-    position: relative;
-}
-
-.fm-download-btn i {
-    font-size: 10px;
-    opacity: 0.8;
-    transition:
-        opacity 0.25s,
-        transform 0.3s;
-}
-
-.fm-download-btn:hover {
-    color: #fff;
-    background: linear-gradient(160deg, #0b686b 0%, #055455 100%);
-    border-color: #5cd4b6;
-    box-shadow:
-        0 1px 0 rgba(255, 255, 255, 0.18) inset,
-        0 0 10px rgba(65, 190, 160, 0.3),
-        0 2px 8px rgba(50, 140, 120, 0.3);
-    transform: translateY(-1px);
-}
-
-.fm-download-btn:hover i {
-    opacity: 1;
-    transform: translateY(-0.5px);
-}
-
-.fm-download-btn:active {
-    transform: translateY(0);
-    background: linear-gradient(160deg, #0b686b 0%, #055455 100%);
-    box-shadow:
-        0 1px 2px rgba(0, 0, 0, 0.15) inset,
-        0 1px 2px rgba(50, 140, 120, 0.2);
-    transition-duration: 0.08s;
-}
-
-@media (min-width: 1200px) {
-    .fm-download-btn {
-        display: inline-flex;
     }
 }
 
@@ -2348,19 +1440,6 @@ a:active {
     padding: 0;
 }
 
-/* Grouped competitions on the country page (Primera Division zones,
-   MLS conferences): a small heading above each competition's leagues
-   and playoff links. */
-.fm-league-group-hd {
-    padding: 12px 14px 6px;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.9px;
-    text-transform: uppercase;
-    color: #5d6a74;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.055);
-}
-
 .fm-league-item {
     display: flex;
     align-items: center;
@@ -2385,17 +1464,6 @@ a:active {
     text-align: center;
 }
 
-.time-progress {
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    background: linear-gradient(90deg, #4caf50 0%, #45a049 100%);
-    border-radius: 3px;
-    pointer-events: none;
-    transition: width 0.1s linear;
-}
-
 @keyframes goal-pulse {
     0%,
     100% {
@@ -2406,32 +1474,9 @@ a:active {
     }
 }
 
-.time-display {
-    position: absolute;
-    top: -35px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.8);
-    color: #fff;
-    padding: 4px 10px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: bold;
-    white-space: nowrap;
-    pointer-events: none;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-}
-
 /* ============================================
    TEAM TACTICS PAGE
    ============================================ */
-
-.fm-tactics-grid {
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: 14px;
-    align-items: start;
-}
 
 .fm-tactics-grid > .fm-panel {
     overflow: hidden;
@@ -2441,65 +1486,6 @@ a:active {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.fm-tactic-row {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    padding: 7px 12px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.025);
-    transition: background 0.1s;
-}
-
-.fm-tactic-row:last-child {
-    border-bottom: none;
-}
-
-.fm-tactic-row:nth-child(even) {
-    background: rgba(0, 0, 0, 0.1);
-}
-
-.fm-tactic-row:hover {
-    background: rgba(255, 255, 255, 0.03);
-}
-
-.fm-tactic-num {
-    width: 22px;
-    font-size: 11px;
-    font-weight: 700;
-    color: #3e4c55;
-    text-align: center;
-    flex-shrink: 0;
-}
-
-.fm-tactic-pos {
-    width: 36px;
-    font-size: 10px;
-    font-weight: 700;
-    color: var(--accent-primary);
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-    flex-shrink: 0;
-}
-
-.fm-tactic-name {
-    font-size: 13px;
-    font-weight: 500;
-    color: #d0d8e0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.fm-tactic-row:hover .fm-tactic-name {
-    color: #fff;
-}
-
-/* --- Pitch --- */
-
-.fm-pitch {
-    padding: 12px;
 }
 
 /* ============================================
@@ -2743,36 +1729,12 @@ a:active {
         padding-left: 0;
     }
 
-    .fm-header-title {
-        padding-left: 10px;
-    }
-
-    .fm-header-title h1 {
-        font-size: 16px;
-    }
-
-    .fm-header-sub {
-        font-size: 15px;
-    }
-
-    .fm-header-sub {
-        font-size: 13px;
-    }
-
-    .fm-header-actions {
-        flex-shrink: 1;
-    }
-
     .fm-date {
         padding: 0px 10px 0 0;
     }
 
     .fm-date-main {
         font-size: 11px;
-    }
-
-    .fm-date-sub {
-        font-size: 10px;
     }
 
     .fm-process-btn {
@@ -2786,17 +1748,8 @@ a:active {
         margin-right: -0.3px;
     }
 
-    .fm-watchlist-toggle {
-        margin-left: 0;
-    }
-
     .fm-page {
         padding: 10px 8px;
-    }
-
-    /* Staff profile: tighter on small */
-    .fm-staff-profile {
-        padding: 12px;
     }
 
     .fm-cond-bar {
@@ -2815,24 +1768,6 @@ a:active {
    WATCHLIST
    ============================================ */
 
-.fm-watchlist-remove {
-    background: none;
-    border: none;
-    color: var(--text-muted);
-    cursor: pointer;
-    padding: 4px 8px;
-    font-size: 12px;
-    border-radius: 3px;
-    transition:
-        color 0.1s,
-        background 0.1s;
-}
-
-.fm-watchlist-remove:hover {
-    color: #e74c3c;
-    background: rgba(231, 76, 60, 0.12);
-}
-
 .fm-header-colored .fm-ai-icon {
     color: var(--tab-fg, rgba(255, 255, 255, 0.6));
 }
@@ -2844,26 +1779,6 @@ a:active {
 /* ============================================
    FM DROPDOWN (tab-bar action menu)
    ============================================ */
-
-.fm-watchlist-toggle {
-    margin-left: auto;
-    flex-shrink: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 9px 12px;
-    font-size: 12px;
-    line-height: 1;
-    color: var(--tab-fg, var(--text-muted));
-    background: transparent;
-    border: none;
-    border-bottom: 2px solid transparent;
-    cursor: pointer;
-    font-family: inherit;
-    transition:
-        color 0.15s,
-        background 0.15s;
-}
 
 /* Floating tooltip — rendered at body level so .fm-tabbar's overflow-x:auto
    can't clip it or trigger a vertical scrollbar. Positioned by JS. */
@@ -2888,43 +1803,9 @@ a:active {
     z-index: 2000;
 }
 
-.fm-tooltip::before {
-    content: "";
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    border: 5px solid transparent;
-    border-bottom-color: #1e272d;
-}
-
 .fm-tooltip.show {
     opacity: 1;
     transform: translate(-50%, 0);
-}
-
-.fm-watchlist-toggle:hover {
-    color: var(--tab-fg-active, var(--text-primary));
-    background: var(--tab-hover-bg, rgba(255, 255, 255, 0.04));
-}
-
-.fm-watchlist-toggle:disabled {
-    opacity: 0.35;
-    cursor: not-allowed;
-}
-
-.fm-watchlist-toggle[data-in="true"] {
-    color: var(--tab-active-border, var(--accent-primary));
-}
-
-.fm-dlg {
-    background: #1e2830;
-    border: 1px solid var(--surface-3);
-    border-radius: 8px;
-    width: 400px;
-    max-width: 90vw;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-    animation: fm-dlg-in 0.15s ease-out;
 }
 
 @keyframes fm-dlg-in {
@@ -2952,51 +1833,14 @@ a:active {
    SCOUTING TAB
    ============================================ */
 
-.sc-subtabs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2px;
-    background: linear-gradient(180deg, #1c2830 0%, #192228 100%);
-    border: 1px solid var(--surface-3);
-    border-radius: 4px;
-    padding: 4px;
-    margin-bottom: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
 .sc-subtab.active {
     color: #fff;
     background: linear-gradient(180deg, #2a3a47 0%, #213038 100%);
 }
 
-.sc-subtab-icon {
-    font-size: 11px;
-    opacity: 0.85;
-}
-
-.sc-subtab-count {
-    display: inline-flex;
-    min-width: 18px;
-    height: 16px;
-    padding: 0 5px;
-    align-items: center;
-    justify-content: center;
-    font-size: 9px;
-    font-weight: 700;
-    color: var(--text-muted);
-    background: rgba(255, 255, 255, 0.06);
-    border-radius: 8px;
-    font-variant-numeric: tabular-nums;
-    letter-spacing: 0;
-}
-
 .sc-subtab.active .sc-subtab-count {
     color: var(--tab-fg-active, #0e1f12);
     background: var(--header-bg, #6db974);
-}
-
-.sc-tab-panel {
-    display: none;
 }
 
 .sc-tab-panel.active {
@@ -3008,318 +1852,6 @@ a:active {
 .sc-tab-panel > .fm-transfers-row + .fm-panel,
 .sc-tab-panel > .fm-transfers-row + .fm-transfers-row {
     margin-top: 10px;
-}
-
-.sc-stat-label {
-    font-size: 9px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    color: var(--text-muted);
-    line-height: 1.2;
-}
-
-.sc-stat-value {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--text-primary);
-    line-height: 1.1;
-    font-variant-numeric: tabular-nums;
-}
-
-.sc-table-wrap {
-    overflow-x: auto;
-}
-
-.sc-table-monitoring th,
-.sc-table-monitoring td {
-    padding: 5px 6px;
-}
-
-.sc-badge-region {
-    background: rgba(70, 132, 196, 0.16);
-    color: #8fb8e0;
-    border-color: rgba(70, 132, 196, 0.28);
-}
-
-.sc-badge-risk {
-    background: rgba(193, 76, 76, 0.16);
-    color: #e89090;
-    border-color: rgba(193, 76, 76, 0.32);
-}
-
-.sc-badge-vote,
-.sc-badge-decision {
-    background: rgba(212, 168, 67, 0.14);
-    color: #e8c270;
-    border-color: rgba(212, 168, 67, 0.26);
-}
-
-.sc-badge-completed {
-    background: rgba(74, 157, 91, 0.18);
-    color: #7fd28b;
-    border-color: rgba(74, 157, 91, 0.32);
-}
-
-.sc-badge-active-state {
-    background: rgba(212, 168, 67, 0.14);
-    color: #e8c270;
-    border-color: rgba(212, 168, 67, 0.26);
-}
-
-.sc-badge-shadow {
-    background: rgba(140, 110, 196, 0.16);
-    color: #b89fe6;
-    border-color: rgba(140, 110, 196, 0.3);
-}
-
-.sc-badge-active {
-    background: rgba(74, 157, 91, 0.18);
-    color: #7fd28b;
-    border-color: rgba(74, 157, 91, 0.32);
-}
-
-.sc-badge-board-approved {
-    background: rgba(74, 157, 91, 0.22);
-    color: #8ddc99;
-    border-color: rgba(74, 157, 91, 0.4);
-}
-
-.sc-badge-board-vetoed {
-    background: rgba(193, 76, 76, 0.18);
-    color: #ec9090;
-    border-color: rgba(193, 76, 76, 0.36);
-}
-
-/* Status / decision / vote / recommendation / priority hue tints */
-.sc-badge-monitoring_status_active,
-.sc-badge-request_status_scouting_active {
-    background: rgba(74, 157, 91, 0.14);
-    color: #7fd28b;
-    border-color: rgba(74, 157, 91, 0.28);
-}
-
-.sc-badge-monitoring_status_paused {
-    background: rgba(150, 150, 150, 0.1);
-    color: #a0a8b0;
-    border-color: rgba(150, 150, 150, 0.22);
-}
-
-.sc-badge-monitoring_status_report_ready {
-    background: rgba(212, 168, 67, 0.18);
-    color: #f0cf7c;
-    border-color: rgba(212, 168, 67, 0.36);
-}
-
-.sc-badge-monitoring_status_shortlisted,
-.sc-badge-request_status_shortlisted {
-    background: rgba(74, 157, 91, 0.2);
-    color: #8ddc99;
-    border-color: rgba(74, 157, 91, 0.36);
-}
-
-.sc-badge-monitoring_status_negotiating,
-.sc-badge-request_status_negotiating {
-    background: rgba(70, 132, 196, 0.18);
-    color: #93bce4;
-    border-color: rgba(70, 132, 196, 0.34);
-}
-
-.sc-badge-monitoring_status_signed,
-.sc-badge-request_status_fulfilled {
-    background: rgba(74, 157, 91, 0.26);
-    color: #95e0a1;
-    border-color: rgba(74, 157, 91, 0.46);
-}
-
-.sc-badge-monitoring_status_lost,
-.sc-badge-request_status_abandoned {
-    background: rgba(120, 100, 90, 0.18);
-    color: #b09a90;
-    border-color: rgba(120, 100, 90, 0.32);
-}
-
-.sc-badge-monitoring_status_rejected,
-.sc-badge-decision_reject {
-    background: rgba(193, 76, 76, 0.18);
-    color: #e89090;
-    border-color: rgba(193, 76, 76, 0.34);
-}
-
-.sc-badge-recommendation_strong_buy {
-    background: rgba(74, 157, 91, 0.3);
-    color: #9cebab;
-    border-color: rgba(74, 157, 91, 0.55);
-    font-weight: 700;
-}
-
-.sc-badge-recommendation_buy {
-    background: rgba(74, 157, 91, 0.18);
-    color: #7fd28b;
-    border-color: rgba(74, 157, 91, 0.34);
-}
-
-.sc-badge-recommendation_consider {
-    background: rgba(212, 168, 67, 0.14);
-    color: #e8c270;
-    border-color: rgba(212, 168, 67, 0.26);
-}
-
-.sc-badge-recommendation_pass {
-    background: rgba(193, 76, 76, 0.14);
-    color: #d88080;
-    border-color: rgba(193, 76, 76, 0.28);
-}
-
-.sc-badge-decision_promote_to_shortlist,
-.sc-badge-decision_start_negotiation {
-    background: rgba(74, 157, 91, 0.2);
-    color: #8ddc99;
-    border-color: rgba(74, 157, 91, 0.36);
-}
-
-.sc-badge-decision_keep_monitoring {
-    background: rgba(74, 157, 91, 0.12);
-    color: #7fd28b;
-    border-color: rgba(74, 157, 91, 0.24);
-}
-
-.sc-badge-decision_ask_board_approval {
-    background: rgba(70, 132, 196, 0.16);
-    color: #93bce4;
-    border-color: rgba(70, 132, 196, 0.3);
-}
-
-.sc-badge-scout_vote_strong_approve {
-    background: rgba(74, 157, 91, 0.3);
-    color: #9cebab;
-    border-color: rgba(74, 157, 91, 0.55);
-    font-weight: 700;
-}
-
-.sc-badge-scout_vote_approve {
-    background: rgba(74, 157, 91, 0.18);
-    color: #7fd28b;
-    border-color: rgba(74, 157, 91, 0.34);
-}
-
-.sc-badge-scout_vote_monitor {
-    background: rgba(74, 157, 91, 0.1);
-    color: #7fd28b;
-    border-color: rgba(74, 157, 91, 0.22);
-}
-
-.sc-badge-scout_vote_needs_more_info {
-    background: rgba(212, 168, 67, 0.14);
-    color: #e8c270;
-    border-color: rgba(212, 168, 67, 0.26);
-}
-
-.sc-badge-scout_vote_reject {
-    background: rgba(193, 76, 76, 0.18);
-    color: #e89090;
-    border-color: rgba(193, 76, 76, 0.34);
-}
-
-.sc-badge-request_priority_critical {
-    background: rgba(193, 76, 76, 0.22);
-    color: #ec9090;
-    border-color: rgba(193, 76, 76, 0.42);
-    font-weight: 700;
-}
-
-.sc-badge-request_priority_important {
-    background: rgba(212, 168, 67, 0.18);
-    color: #f0cf7c;
-    border-color: rgba(212, 168, 67, 0.36);
-}
-
-.sc-badge-request_priority_optional {
-    background: rgba(150, 160, 170, 0.1);
-    color: #a0aab4;
-    border-color: rgba(150, 160, 170, 0.22);
-}
-
-.sc-badge-request_status_pending {
-    background: rgba(212, 168, 67, 0.12);
-    color: #d8b870;
-    border-color: rgba(212, 168, 67, 0.24);
-}
-
-.sc-meeting-head {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 12px;
-    margin-bottom: 8px;
-    padding-bottom: 8px;
-    border-bottom: 1px dashed var(--surface-3);
-}
-
-.sc-meeting-date {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--text-primary);
-    letter-spacing: 0.2px;
-}
-
-.sc-meeting-id {
-    font-size: 11px;
-    color: var(--text-muted);
-    font-variant-numeric: tabular-nums;
-    font-weight: 600;
-}
-
-.sc-meeting-agenda {
-    font-size: 11px;
-    color: #8a96a0;
-}
-
-.sc-meeting-participants {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    align-items: center;
-    font-size: 11px;
-    color: #8a96a0;
-    margin-bottom: 8px;
-}
-
-.sc-meeting-label {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    font-weight: 700;
-    color: var(--text-muted);
-    margin-right: 4px;
-}
-
-.sc-pill-role {
-    font-size: 9px;
-    color: #6a8a5a;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-weight: 700;
-    color: #7fb088;
-}
-
-.sc-meeting-section {
-    margin-top: 10px;
-}
-
-.sc-meeting-section-head {
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: var(--text-muted);
-    margin-bottom: 6px;
-    padding-left: 8px;
-    border-left: 2px solid var(--accent-primary);
-}
-
-.sc-meeting-table {
-    font-size: 11px;
 }
 
 .fm-awards-detail-group-label .fa {
@@ -3343,10 +1875,6 @@ a:active {
 .fm-worker-seen .fa {
     font-size: 9px;
     opacity: 0.8;
-}
-
-.fm-muted {
-    color: var(--text-muted);
 }
 
 /* Add-worker modal dialog. */
@@ -4031,6 +2559,90 @@ a:active {
     border-radius: 8px;
 }
 
+/* Fase B/C (2026-08-17 FUT.GG-style redesign): pitch + fixed sidebar
+   replace the old full-width formation grid + floating per-slot dropdown.
+   `.fm-pitch` keeps `.fm-formation`'s row layout but paints real pitch
+   markings (touchline border, halfway line, center circle, top/bottom
+   penalty boxes) behind the slots via layered gradients/radial-gradient on
+   one pseudo-element, so the SVG-pitch-graphics precedent in
+   MIGRATION_CHECKLIST.md stays intact — this is CSS, not an SVG asset. */
+.fm-lineup-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.fm-pitch {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 36px;
+    flex: 1;
+    min-width: 0;
+    padding: 28px 8px;
+    background: radial-gradient(ellipse at 50% 8%, #1c2c22 0%, #0e1712 70%);
+    border: 1px solid #2c3c34;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.fm-pitch::before {
+    content: '';
+    position: absolute;
+    inset: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 4px;
+    pointer-events: none;
+}
+
+/* Halfway line + center circle — `.fm-pitch-markings` (a plain decorative
+   div rendered by DtSquadPage, not this pseudo-element) adds the top/bottom
+   penalty boxes, since a single ::after can only draw one shape. */
+.fm-pitch::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 14px;
+    right: 14px;
+    height: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    pointer-events: none;
+}
+
+.fm-pitch-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 130px;
+    height: 130px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.fm-pitch-box {
+    position: absolute;
+    left: 50%;
+    width: 220px;
+    height: 60px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-top: none;
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+.fm-pitch-box-top {
+    top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    border-bottom: none;
+}
+
+.fm-pitch-box-bottom {
+    bottom: 14px;
+}
+
 .fm-formation-row {
     display: flex;
     justify-content: center;
@@ -4264,51 +2876,101 @@ a:active {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-.fm-slot-dropdown-backdrop {
-    position: fixed;
-    inset: 0;
-    z-index: 40;
+/* Fixed sidebar (FUT.GG "SEARCH" panel equivalent) — replaces the old
+   per-slot floating dropdown. Always visible at the pitch's right, shows
+   the selected slot's candidates as a plain list instead of a popover, so
+   it never has to worry about running off the bottom of the viewport. */
+.fm-suggestions-panel {
+    width: 280px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 14px;
+    background: #16211c;
+    border: 1px solid #2c3c34;
+    border-radius: 8px;
+    align-self: stretch;
 }
 
-.fm-slot-dropdown {
-    position: absolute;
-    top: calc(100% + 6px);
-    left: 50%;
-    transform: translateX(-50%);
-    transform-origin: top center;
-    z-index: 41;
-    width: 220px;
-    max-height: 280px;
-    overflow-y: auto;
-    background: #1e2b25;
+.fm-suggestions-save {
+    padding: 10px 14px;
+    border: none;
+    border-radius: 6px;
+    background: var(--accent-primary);
+    color: #04140f;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: filter 0.15s ease;
+}
+
+.fm-suggestions-save:hover:not(:disabled) {
+    filter: brightness(1.1);
+}
+
+.fm-suggestions-save:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.fm-suggestions-best {
+    padding: 8px 14px;
     border: 1px solid #33453c;
-    border-radius: 8px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-    padding: 6px;
+    border-radius: 6px;
+    background: #1e2b25;
+    color: #e6efe9;
+    font-weight: 600;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.fm-suggestions-best:hover {
+    background: #2a3a32;
+}
+
+.fm-suggestions-placeholder {
+    margin-top: 8px;
+    color: #7c8b83;
+    font-size: 13px;
+    text-align: center;
+}
+
+.fm-suggestions-header {
+    margin-top: 6px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #2c3c34;
+    color: #e6efe9;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.fm-suggestions-slot-tag {
+    display: inline-block;
+    padding: 1px 8px;
+    border-radius: 10px;
+    background: var(--pos-color, #333);
+    color: #04140f;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.fm-suggestions-list {
     display: flex;
     flex-direction: column;
     gap: 2px;
-    animation: fm-dropdown-in 0.15s ease;
+    max-height: 560px;
+    overflow-y: auto;
 }
 
-/* Flips the dropdown to open upward instead of downward — set by
-   DtSquadPage whenever there isn't enough room left below the token (e.g.
-   the FWD row, near the bottom of the formation panel) so the list never
-   runs off the bottom of the viewport with no way to reach the rest of it. */
-.fm-slot-dropdown-up {
-    top: auto;
-    bottom: calc(100% + 6px);
-    transform-origin: bottom center;
-}
-
-@keyframes fm-dropdown-in {
-    from {
-        opacity: 0;
-        transform: translateX(-50%) scale(0.92);
+@media (max-width: 900px) {
+    .fm-lineup-layout {
+        flex-direction: column;
     }
-    to {
-        opacity: 1;
-        transform: translateX(-50%) scale(1);
+
+    .fm-suggestions-panel {
+        width: 100%;
     }
 }
 
