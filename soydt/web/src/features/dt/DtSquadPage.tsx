@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react'
 import { useEffect, useMemo, useState } from 'react'
+import { toast } from 'sonner'
 import { callApi } from '../../shared/api'
 import { outOfPositionPenalty, positionInfo } from '../../shared/positions'
 import type { SortMode } from '../../shared/sortPlayers'
@@ -33,6 +34,20 @@ type LineupPlayer = {
   isReadyForMatch: boolean
   isInjured: boolean
   isBanned: boolean
+}
+
+type SquadNeeds = {
+  mainTeamSize: number
+  totalMissing: number
+  urgent: boolean
+  gkCount: number
+  gkMissing: number
+  defCount: number
+  defMissing: number
+  midCount: number
+  midMissing: number
+  fwdCount: number
+  fwdMissing: number
 }
 
 type DtActiveBuff = {
@@ -174,17 +189,9 @@ function DtSquadPage() {
   // slots[i] = playerId filling FORMATION[i], or null if empty.
   const [slots, setSlots] = useState<(number | null)[]>(Array(11).fill(null))
   const [openSlot, setOpenSlot] = useState<number | null>(null)
-  // Whether the open dropdown should render above its token instead of
-  // below — the FWD row sits near the bottom of the formation panel, so a
-  // ~280px dropdown opening downward there routinely ran off the bottom of
-  // the viewport with no way to see (or click) the rest of it. Measured
-  // fresh on every open against the *current* viewport height rather than
-  // baked in per-row, since how much room a row has left depends on scroll
-  // position and window size, not just which row it is.
-  const [openUp, setOpenUp] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [saved, setSaved] = useState(false)
   const [teamInfo, setTeamInfo] = useState<{ name: string; slug: string } | null>(null)
+  const [squadNeeds, setSquadNeeds] = useState<SquadNeeds | null>(null)
   const [activeBuffs, setActiveBuffs] = useState<DtActiveBuff[]>([])
   const [sortMode, setSortMode] = useState<SortMode>('position')
   // Drag-and-drop is additive on top of the click-a-slot-to-open-a-dropdown
@@ -199,6 +206,13 @@ function DtSquadPage() {
     callApi<{ name: string; slug: string }>(`/api/teams/${myTeamId}`)
       .then(setTeamInfo)
       .catch(() => setTeamInfo(null))
+  }, [myTeamId])
+
+  useEffect(() => {
+    if (myTeamId == null) return
+    callApi<SquadNeeds>(`/api/teams/${myTeamId}/squad-needs`)
+      .then(setSquadNeeds)
+      .catch(() => setSquadNeeds(null))
   }, [myTeamId])
 
   useEffect(() => {
@@ -324,7 +338,6 @@ function DtSquadPage() {
       return next
     })
     setOpenSlot(null)
-    setSaved(false)
   }
 
   // Best-XI auto-fill: an actual maximum-weight assignment (Hungarian
@@ -361,7 +374,6 @@ function DtSquadPage() {
     })
     setSlots(next)
     setOpenSlot(null)
-    setSaved(false)
   }
 
   const clearSlot = (slotIndex: number) => {
@@ -371,7 +383,6 @@ function DtSquadPage() {
       return next
     })
     setOpenSlot(null)
-    setSaved(false)
   }
 
   const save = async () => {
@@ -383,7 +394,7 @@ function DtSquadPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ playerIds: slots.filter((id): id is number => id != null) }),
       })
-      setSaved(true)
+      toast.success('Alineación guardada.')
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e))
     }
@@ -423,7 +434,11 @@ function DtSquadPage() {
         >
           {error && <p style={{ color: 'crimson' }}>Error: {error}</p>}
 
-          <div className="fm-formation">
+          <div className="fm-lineup-layout">
+          <div className="fm-pitch">
+            <div className="fm-pitch-box fm-pitch-box-top" />
+            <div className="fm-pitch-box fm-pitch-box-bottom" />
+            <div className="fm-pitch-circle" />
             {FORMATION_ROWS.map((row, rowIdx) => (
               <div className="fm-formation-row" key={rowIdx}>
                 {row.map((slotIndex) => {
@@ -434,15 +449,7 @@ function DtSquadPage() {
                       <button
                         type="button"
                         className={`fm-slot${openSlot === slotIndex ? ' fm-slot-open' : ''}${player ? ` fm-slot-tier-${ratingTier(player.currentAbility)}` : ' fm-slot-empty-tier'}${dragOverSlot === slotIndex ? ' fm-slot-drag-over' : ''}`}
-                        onClick={(e) => {
-                          if (openSlot === slotIndex) {
-                            setOpenSlot(null)
-                            return
-                          }
-                          const rect = e.currentTarget.getBoundingClientRect()
-                          setOpenUp(window.innerHeight - rect.bottom < 300 && rect.top > 300)
-                          setOpenSlot(slotIndex)
-                        }}
+                        onClick={() => setOpenSlot((s) => (s === slotIndex ? null : slotIndex))}
                         draggable={player != null}
                         onDragStart={() => player && setDraggedPlayerId(player.playerId)}
                         onDragEnd={() => {
@@ -515,58 +522,6 @@ function DtSquadPage() {
                           )}
                         </span>
                       </button>
-
-                      {openSlot === slotIndex && (
-                        <>
-                          <div className="fm-slot-dropdown-backdrop" onClick={() => setOpenSlot(null)} />
-                          <div className={`fm-slot-dropdown${openUp ? ' fm-slot-dropdown-up' : ''}`}>
-                            {player && (
-                              <button type="button" className="fm-slot-dropdown-item fm-slot-dropdown-clear" onClick={() => clearSlot(slotIndex)}>
-                                Dejar vacío
-                              </button>
-                            )}
-                            {candidatesFor(slotIndex).map((c) => (
-                              <button
-                                type="button"
-                                key={c.playerId}
-                                className={`fm-slot-dropdown-item${!c.isReadyForMatch ? ' fm-slot-dropdown-item-disabled' : ''}`}
-                                disabled={!c.isReadyForMatch}
-                                onClick={() => assign(slotIndex, c.playerId)}
-                              >
-                                <img
-                                  className="fm-slot-dropdown-photo"
-                                  src={playerPhotoSrc(c.playerId)}
-                                  onError={playerPhotoOnError}
-                                  alt=""
-                                />
-                                <span className="fm-slot-dropdown-name">
-                                  {c.name}
-                                  {c.fromSlotIndex !== -1 && (
-                                    <span className="fm-slot-dropdown-swap-tag"> (titular en {FORMATION[c.fromSlotIndex].code})</span>
-                                  )}
-                                </span>
-                                {c.isReadyForMatch ? (
-                                  <>
-                                    <span className={`fm-ability fm-ability-${abilityColor(c.currentAbility)}`}>{c.currentAbility}</span>
-                                    {buffDeltaFor(c.playerId) !== 0 && (
-                                      <span className={buffDeltaFor(c.playerId) > 0 ? 'fm-ovr-buff-positive' : 'fm-ovr-buff-negative'}>
-                                        {buffDeltaFor(c.playerId) > 0 ? '+' : ''}
-                                        {buffDeltaFor(c.playerId)}
-                                      </span>
-                                    )}
-                                    {c.penalty > 0 && <span className="fm-ovr-penalty">-{c.penalty}</span>}
-                                  </>
-                                ) : (
-                                  <span className="fm-unavailable">{unavailableLabel(c)}</span>
-                                )}
-                              </button>
-                            ))}
-                            {candidatesFor(slotIndex).length === 0 && (
-                              <span className="fm-slot-dropdown-empty">No hay más {slot.code} disponibles en el banco</span>
-                            )}
-                          </div>
-                        </>
-                      )}
                     </div>
                   )
                 })}
@@ -574,19 +529,75 @@ function DtSquadPage() {
             ))}
           </div>
 
-          <div style={{ marginTop: '1rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <button type="button" className="fm-worker-dialog-btn" onClick={fillBestAvailable}>
-              Poner lo mejor disponible
-            </button>
+          <div className="fm-suggestions-panel">
             <button
               type="button"
-              className="fm-worker-dialog-btn fm-worker-dialog-btn-add"
+              className="fm-suggestions-save"
               disabled={filledCount !== 11}
               onClick={save}
             >
               Guardar alineación
             </button>
-            {saved && <span style={{ color: '#4ade80' }}>Guardada ✓</span>}
+            <button type="button" className="fm-suggestions-best" onClick={fillBestAvailable}>
+              Poner lo mejor disponible
+            </button>
+
+            {openSlot == null ? (
+              <p className="fm-suggestions-placeholder">Tocá un jugador de la cancha para ver sugerencias</p>
+            ) : (
+              <>
+                <div className="fm-suggestions-header">
+                  Sugerencias — <span style={{ '--pos-color': FORMATION[openSlot].color } as CSSProperties} className="fm-suggestions-slot-tag">{FORMATION[openSlot].code}</span>
+                </div>
+                <div className="fm-suggestions-list">
+                  {slots[openSlot] != null && (
+                    <button type="button" className="fm-slot-dropdown-item fm-slot-dropdown-clear" onClick={() => clearSlot(openSlot)}>
+                      Dejar vacío
+                    </button>
+                  )}
+                  {candidatesFor(openSlot).map((c) => (
+                    <button
+                      type="button"
+                      key={c.playerId}
+                      className={`fm-slot-dropdown-item${!c.isReadyForMatch ? ' fm-slot-dropdown-item-disabled' : ''}`}
+                      disabled={!c.isReadyForMatch}
+                      onClick={() => assign(openSlot, c.playerId)}
+                    >
+                      <img
+                        className="fm-slot-dropdown-photo"
+                        src={playerPhotoSrc(c.playerId)}
+                        onError={playerPhotoOnError}
+                        alt=""
+                      />
+                      <span className="fm-slot-dropdown-name">
+                        {c.name}
+                        {c.fromSlotIndex !== -1 && (
+                          <span className="fm-slot-dropdown-swap-tag"> (titular en {FORMATION[c.fromSlotIndex].code})</span>
+                        )}
+                      </span>
+                      {c.isReadyForMatch ? (
+                        <>
+                          <span className={`fm-ability fm-ability-${abilityColor(c.currentAbility)}`}>{c.currentAbility}</span>
+                          {buffDeltaFor(c.playerId) !== 0 && (
+                            <span className={buffDeltaFor(c.playerId) > 0 ? 'fm-ovr-buff-positive' : 'fm-ovr-buff-negative'}>
+                              {buffDeltaFor(c.playerId) > 0 ? '+' : ''}
+                              {buffDeltaFor(c.playerId)}
+                            </span>
+                          )}
+                          {c.penalty > 0 && <span className="fm-ovr-penalty">-{c.penalty}</span>}
+                        </>
+                      ) : (
+                        <span className="fm-unavailable">{unavailableLabel(c)}</span>
+                      )}
+                    </button>
+                  ))}
+                  {candidatesFor(openSlot).length === 0 && (
+                    <span className="fm-slot-dropdown-empty">No hay más {FORMATION[openSlot].code} disponibles en el banco</span>
+                  )}
+                </div>
+              </>
+            )}
+          </div>
           </div>
         </SectionPanel>
 
@@ -649,6 +660,62 @@ function DtSquadPage() {
               ))}
           </div>
         </SectionPanel>
+
+        {squadNeeds && (
+          <SectionPanel title="Necesidades de plantel">
+            <div className="fm-personal-detail">
+              {squadNeeds.urgent && (
+                <div className="fm-detail-row">
+                  <span className="fm-detail-label">Estado</span>
+                  <span className="fm-detail-value" style={{ color: 'crimson' }}>
+                    Urgente — menos de 11 jugadores disponibles
+                  </span>
+                </div>
+              )}
+              <div className="fm-detail-row">
+                <span className="fm-detail-label">Tamaño de plantel</span>
+                <span className="fm-detail-value">{squadNeeds.mainTeamSize} / 25</span>
+              </div>
+              <div className="fm-detail-row">
+                <span className="fm-detail-label">Arqueros</span>
+                <span className="fm-detail-value" style={squadNeeds.gkMissing > 0 ? { color: 'crimson' } : undefined}>
+                  {squadNeeds.gkCount}
+                  {squadNeeds.gkMissing > 0 ? ` (faltan ${squadNeeds.gkMissing})` : ''}
+                </span>
+              </div>
+              <div className="fm-detail-row">
+                <span className="fm-detail-label">Defensores</span>
+                <span className="fm-detail-value" style={squadNeeds.defMissing > 0 ? { color: 'crimson' } : undefined}>
+                  {squadNeeds.defCount}
+                  {squadNeeds.defMissing > 0 ? ` (faltan ${squadNeeds.defMissing})` : ''}
+                </span>
+              </div>
+              <div className="fm-detail-row">
+                <span className="fm-detail-label">Volantes</span>
+                <span className="fm-detail-value" style={squadNeeds.midMissing > 0 ? { color: 'crimson' } : undefined}>
+                  {squadNeeds.midCount}
+                  {squadNeeds.midMissing > 0 ? ` (faltan ${squadNeeds.midMissing})` : ''}
+                </span>
+              </div>
+              <div className="fm-detail-row">
+                <span className="fm-detail-label">Delanteros</span>
+                <span className="fm-detail-value" style={squadNeeds.fwdMissing > 0 ? { color: 'crimson' } : undefined}>
+                  {squadNeeds.fwdCount}
+                  {squadNeeds.fwdMissing > 0 ? ` (faltan ${squadNeeds.fwdMissing})` : ''}
+                </span>
+              </div>
+              <div className="fm-detail-row">
+                <span className="fm-detail-label">Faltante de plantel</span>
+                <span
+                  className="fm-detail-value"
+                  style={squadNeeds.totalMissing > 0 ? { color: 'crimson' } : undefined}
+                >
+                  {squadNeeds.totalMissing}
+                </span>
+              </div>
+            </div>
+          </SectionPanel>
+        )}
       </div>
     </DtLayout>
   )

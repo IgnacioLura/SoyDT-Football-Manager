@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { toast } from 'sonner'
 import { callApi } from '../../shared/api'
 import { PositionBadge } from '../../shared/positions'
 import TeamCrest from '../onboarding/TeamCrest'
@@ -16,9 +17,24 @@ import { useMyTeamId } from './useMyTeamId'
 // detail page shows) — used to pre-fill (still editable) the fee input,
 // since this MVP has no negotiation step to arrive at a price otherwise.
 type RosterPlayer = { id: number; name: string; position: string; age: number; currentAbility: number; value: number }
-type TeamDetail = { id: number; name: string; players: RosterPlayer[] }
+type TeamDetail = { id: number; name: string; countryId: number; players: RosterPlayer[] }
 type LeagueTableRow = { teamId: number; teamName: string }
 type LeagueTable = { rows: LeagueTableRow[] }
+
+type TransferListing = {
+  playerId: number
+  playerName: string
+  position: string
+  age: number
+  teamId: number
+  teamName: string
+  teamSlug: string
+  askingPrice: number
+  listingType: string
+  status: string
+  listedDate: string
+}
+type CountryTransferMarket = { transferWindowOpen: boolean; listings: TransferListing[] }
 
 type TeamTransferItem = {
   playerId: number
@@ -81,9 +97,9 @@ function DtTransfersPage() {
   const [browseTeamId, setBrowseTeamId] = useState<number | null>(null)
   const [browseTeam, setBrowseTeam] = useState<TeamDetail | null>(null)
   const [fees, setFees] = useState<Record<number, string>>({})
-  const [message, setMessage] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [history, setHistory] = useState<TeamTransfers | null>(null)
+  const [market, setMarket] = useState<CountryTransferMarket | null>(null)
 
   const reloadMyTeam = () => {
     if (!myTeamId) return
@@ -97,6 +113,13 @@ function DtTransfersPage() {
 
   useEffect(reloadMyTeam, [myTeamId])
   useEffect(reloadHistory, [myTeamId])
+
+  useEffect(() => {
+    if (myTeam == null) return
+    callApi<CountryTransferMarket>(`/api/countries/${myTeam.countryId}/transfer-market`)
+      .then(setMarket)
+      .catch(() => setMarket(null))
+  }, [myTeam])
 
   useEffect(() => {
     callApi<LeagueTable>(`/api/leagues/${PRIMERA_LEAGUE_ID}/table`).then((t) =>
@@ -114,14 +137,13 @@ function DtTransfersPage() {
 
   const doTransfer = async (playerId: number, fromTeamId: number, toTeamId: number, fee: number) => {
     setError(null)
-    setMessage(null)
     try {
       await callApi('/api/transfers', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ playerId, fromTeamId, toTeamId, fee }),
       })
-      setMessage('Transferencia completada.')
+      toast.success('Transferencia completada.')
       reloadMyTeam()
       reloadHistory()
       if (browseTeamId) callApi<TeamDetail>(`/api/teams/${browseTeamId}`).then(setBrowseTeam)
@@ -154,7 +176,6 @@ function DtTransfersPage() {
     <DtLayout title="Transferencias">
       <div className="fm-page">
         {error && <p style={{ color: 'crimson' }}>Error: {error}</p>}
-        {message && <p style={{ color: '#4ade80' }}>{message}</p>}
 
         <SectionPanel title="Vender jugador (a otro club)">
           <select
@@ -237,6 +258,54 @@ function DtTransfersPage() {
                   header: '',
                   render: (p) => (
                     <button type="button" onClick={() => doTransfer(p.id, browseTeam.id, myTeamId, Number(fees[p.id] ?? p.value))}>
+                      Fichar
+                    </button>
+                  ),
+                },
+              ]}
+            />
+          </SectionPanel>
+        )}
+
+        {market && (
+          <SectionPanel
+            title="Mercado de pases"
+            actions={
+              <span className="fm-panel-count">
+                {market.transferWindowOpen ? 'Ventana abierta' : 'Ventana cerrada'} ·{' '}
+                {market.listings.filter((l) => l.teamId !== myTeamId).length}
+              </span>
+            }
+          >
+            <DataTable
+              rows={market.listings.filter((l) => l.teamId !== myTeamId)}
+              rowKey={(l) => `${l.playerId}-${l.listingType}`}
+              emptyMessage="Sin jugadores en el mercado"
+              columns={[
+                {
+                  key: 'name',
+                  header: 'Jugador',
+                  render: (l) => <Link to={`/players/${l.playerId}`}>{l.playerName}</Link>,
+                },
+                { key: 'pos', header: 'Pos', render: (l) => <PositionBadge position={l.position} /> },
+                { key: 'age', header: 'Edad', render: (l) => l.age },
+                {
+                  key: 'team',
+                  header: 'Club',
+                  render: (l) => (
+                    <span className="st-club-link">
+                      <TeamCrest slug={l.teamSlug} name={l.teamName} size={20} />
+                      <span>{l.teamName}</span>
+                    </span>
+                  ),
+                },
+                { key: 'price', header: 'Precio pedido', align: 'right', render: (l) => l.askingPrice.toLocaleString() },
+                { key: 'type', header: 'Tipo', render: (l) => l.listingType },
+                {
+                  key: 'actions',
+                  header: '',
+                  render: (l) => (
+                    <button type="button" onClick={() => doTransfer(l.playerId, l.teamId, myTeamId, l.askingPrice)}>
                       Fichar
                     </button>
                   ),
