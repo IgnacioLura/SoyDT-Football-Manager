@@ -11,6 +11,7 @@ import LeagueAwardsPage from './features/leagues/LeagueAwardsPage'
 import LeagueTablePage from './features/leagues/LeagueTablePage'
 import LeagueTransfersPage from './features/leagues/LeagueTransfersPage'
 import PlayerPage from './features/players/PlayerPage'
+import PlayerComparePage from './features/players/PlayerComparePage'
 import PlayerContractPage from './features/players/PlayerContractPage'
 import PlayerHistoryPage from './features/players/PlayerHistoryPage'
 import PlayerAwardsPage from './features/players/PlayerAwardsPage'
@@ -48,6 +49,8 @@ import DtSchedulePage from './features/dt/DtSchedulePage'
 import DtFinancesPage from './features/dt/DtFinancesPage'
 import DtTablePage from './features/dt/DtTablePage'
 import DtEventsPage from './features/dt/DtEventsPage'
+import DtBoardPage from './features/dt/DtBoardPage'
+import { Toaster } from 'sonner'
 import { ProcessProvider } from './shared/ProcessContext'
 import ProcessOverlay from './shared/ProcessOverlay'
 import DtEventModal from './shared/DtEventModal'
@@ -57,6 +60,7 @@ function App() {
     <ProcessProvider>
       <ProcessOverlay />
       <DtEventModal />
+      <Toaster theme="dark" position="top-right" richColors />
       <BrowserRouter>
         <Routes>
         {/* Landing: continue the saved career (now that saves survive a
@@ -85,6 +89,7 @@ function App() {
         <Route path="/teams/:teamId/academy" element={<TeamAcademyPage />} />
         <Route path="/teams/:teamId/scouting" element={<TeamScoutingPage />} />
         <Route path="/teams/:teamId/tactics" element={<TeamTacticsPage />} />
+        <Route path="/players/compare" element={<PlayerComparePage />} />
         <Route path="/players/:playerId" element={<PlayerPage />} />
         <Route path="/players/:playerId/history" element={<PlayerHistoryPage />} />
         <Route path="/players/:playerId/contract" element={<PlayerContractPage />} />
@@ -122,6 +127,7 @@ function App() {
         <Route path="/dt/finances" element={<DtFinancesPage />} />
         <Route path="/dt/table" element={<DtTablePage />} />
         <Route path="/dt/events" element={<DtEventsPage />} />
+        <Route path="/dt/board" element={<DtBoardPage />} />
         </Routes>
       </BrowserRouter>
     </ProcessProvider>
