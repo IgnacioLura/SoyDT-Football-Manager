@@ -1,6 +1,5 @@
 // soydt/web/src/shared/ui/SectionPanel.tsx
 import type { CSSProperties, ReactNode } from 'react'
-import './SectionPanel.css'
 
 type SectionPanelAccent = 'primary' | 'secondary' | 'tertiary' | 'gold'
 
@@ -30,17 +29,22 @@ type SectionPanelProps = {
 
 function SectionPanel({ title, actions, children, index, accent }: SectionPanelProps) {
   const style = {
+    '--sp-accent': accent ? ACCENT_VARS[accent] : 'var(--accent-primary)',
     ...(index != null && { '--i': index }),
-    ...(accent && { '--sp-accent': ACCENT_VARS[accent] }),
   } as CSSProperties
 
   return (
-    <section className="sp-panel anim-fade-in-up" style={Object.keys(style).length ? style : undefined}>
-      <div className="sp-head">
-        <h3 className="sp-title">{title}</h3>
-        {actions && <div className="sp-actions">{actions}</div>}
+    <section
+      className="anim-fade-in-up mb-5 overflow-hidden rounded-card border border-surface-3 bg-surface-1 shadow-card"
+      style={style}
+    >
+      <div className="flex items-center justify-between border-b border-surface-3 bg-[linear-gradient(90deg,color-mix(in_srgb,var(--sp-accent)_10%,var(--surface-2)),var(--surface-2)_60%)] px-4 py-3">
+        <h3 className="m-0 flex items-center gap-2 font-display italic font-bold uppercase tracking-[0.5px] text-text-primary before:h-[10px] before:w-2 before:shrink-0 before:bg-[var(--sp-accent)] before:[clip-path:var(--clip-triangle)] before:content-['']">
+          {title}
+        </h3>
+        {actions && <div className="flex items-center gap-2">{actions}</div>}
       </div>
-      <div className="sp-body">{children}</div>
+      <div className="p-4">{children}</div>
     </section>
   )
 }
