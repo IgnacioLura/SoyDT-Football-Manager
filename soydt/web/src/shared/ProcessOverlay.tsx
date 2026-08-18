@@ -43,7 +43,7 @@ function ProcessOverlay() {
         }
       `}</style>
       <div
-        className="bg-triangle-grid"
+        className="bg-triangle-grid animate-in fade-in slide-in-from-bottom-2 duration-base"
         style={{
           width: 'min(320px, 90vw)',
           backgroundColor: 'var(--card-bg, #1a2436)',

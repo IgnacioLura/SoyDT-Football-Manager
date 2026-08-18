@@ -99,7 +99,9 @@ function Layout({ title, subTitle, children, sidebarCountryId }: LayoutProps) {
                       <ProcessControl />
                     </div>
                   </div>
-                  {children}
+                  <div key={location.pathname} className="animate-in fade-in slide-in-from-bottom-1 duration-base">
+                    {children}
+                  </div>
                 </div>
               </div>
             </div>

@@ -49,6 +49,7 @@ function DtEventModal() {
   return (
     <div
       role="alertdialog"
+      className="animate-in fade-in duration-fast"
       style={{
         position: 'fixed',
         inset: 0,
@@ -61,6 +62,8 @@ function DtEventModal() {
       }}
     >
       <div
+        key={current.eventId}
+        className="animate-in fade-in zoom-in-95 slide-in-from-bottom-2 duration-base"
         style={{
           width: 'min(420px, 90vw)',
           background: 'var(--card-bg, #1a2436)',
