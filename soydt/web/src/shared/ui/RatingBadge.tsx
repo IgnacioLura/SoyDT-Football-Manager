@@ -1,6 +1,5 @@
 // soydt/web/src/shared/ui/RatingBadge.tsx
 import { useCountUp } from '../useCountUp'
-import './RatingBadge.css'
 
 export type RatingTier = 'bronze' | 'silver' | 'gold' | 'elite'
 
@@ -21,12 +20,27 @@ type RatingBadgeProps = {
   size?: 'sm' | 'lg'
 }
 
+const TIER_CLASSES: Record<RatingTier, string> = {
+  bronze: 'border-tier-bronze bg-[linear-gradient(155deg,var(--tier-bronze),var(--surface-2))]',
+  silver: 'border-tier-silver bg-[linear-gradient(155deg,var(--tier-silver),var(--surface-2))] text-surface-0',
+  gold: 'border-tier-gold bg-[linear-gradient(155deg,var(--tier-gold),var(--surface-2))] text-surface-0',
+  elite:
+    'border-accent-primary bg-[linear-gradient(155deg,var(--accent-primary),var(--surface-2))] text-surface-0 animate-rb-elite-pulse',
+}
+
+const SIZE_CLASSES: Record<'sm' | 'lg', string> = {
+  lg: 'w-16 h-16 text-[28px]',
+  sm: 'w-9 h-9 text-base',
+}
+
 function RatingBadge({ value, size = 'lg' }: RatingBadgeProps) {
   const tier = ratingTier(value)
   const displayed = useCountUp(value)
   return (
-    <div className={`rb-badge rb-tier-${tier} rb-size-${size}`}>
-      <span className="rb-value">{displayed}</span>
+    <div
+      className={`inline-flex items-center justify-center rounded-card border-2 border-transparent font-display font-bold italic text-text-primary shadow-card ${SIZE_CLASSES[size]} ${TIER_CLASSES[tier]}`}
+    >
+      <span className="leading-none">{displayed}</span>
     </div>
   )
 }

@@ -1,6 +1,5 @@
 // soydt/web/src/shared/ui/StatBar.tsx
 import { useCountUp } from '../useCountUp'
-import './StatBar.css'
 
 type StatBarTone = 'normal' | 'inverse'
 
@@ -20,6 +19,12 @@ function barColor(pct: number, tone: StatBarTone): 'red' | 'yellow' | 'green' {
   return 'green'
 }
 
+const FILL_CLASSES: Record<'red' | 'yellow' | 'green', string> = {
+  red: 'bg-[linear-gradient(90deg,#7a1f2b,#e74c3c)]',
+  yellow: 'bg-[linear-gradient(90deg,#7a6a1f,#f2c94c)]',
+  green: 'bg-[linear-gradient(90deg,#1f7a4c,var(--accent-primary))]',
+}
+
 type StatBarProps = {
   label: string
   value: number
@@ -33,12 +38,15 @@ function StatBar({ label, value, max = 20, tone = 'normal' }: StatBarProps) {
   const pct = Math.max(0, Math.min(100, (rounded / max) * 100))
   const color = barColor(pct, tone)
   return (
-    <div className="sb-row">
-      <span className="sb-label">{label}</span>
-      <div className="sb-track">
-        <div className={`sb-fill sb-fill-${color}`} style={{ width: `${pct}%` }} />
+    <div className="grid grid-cols-[120px_1fr_32px] items-center gap-2 py-[3px]">
+      <span className="text-[13px] text-text-muted">{label}</span>
+      <div className="h-1.5 overflow-hidden rounded-[3px] bg-surface-3">
+        <div
+          className={`h-full rounded-[3px] transition-[width] duration-slow ease-out ${FILL_CLASSES[color]}`}
+          style={{ width: `${pct}%` }}
+        />
       </div>
-      <span className="sb-value">{displayed}</span>
+      <span className="text-right font-display font-bold text-text-primary">{displayed}</span>
     </div>
   )
 }
