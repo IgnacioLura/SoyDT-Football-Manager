@@ -1,7 +1,9 @@
 import type { CSSProperties } from 'react'
 import { useEffect, useMemo, useState } from 'react'
+import { GitCompare } from 'lucide-react'
 import { toast } from 'sonner'
 import { callApi } from '../../shared/api'
+import PlayerCompareModal from '../../shared/PlayerCompareModal'
 import { outOfPositionPenalty, positionInfo } from '../../shared/positions'
 import type { SortMode } from '../../shared/sortPlayers'
 import { sortByMode } from '../../shared/sortPlayers'
@@ -200,6 +202,27 @@ function DtSquadPage() {
   // up (or not) as valid drop targets while hovering.
   const [draggedPlayerId, setDraggedPlayerId] = useState<number | null>(null)
   const [dragOverSlot, setDragOverSlot] = useState<number | null>(null)
+  // Compare-two-players mode for the squad grid below — toggled on, tapping
+  // a card selects it (max 2) instead of navigating to /players/:id; a
+  // modal (shared/PlayerCompareModal) opens the head-to-head once both are
+  // picked, so comparing doesn't require leaving the squad page or
+  // searching by name like the standalone /players/compare page does.
+  const [compareMode, setCompareMode] = useState(false)
+  const [compareSelection, setCompareSelection] = useState<number[]>([])
+  const [compareOpen, setCompareOpen] = useState(false)
+
+  const toggleCompareMode = () => {
+    setCompareMode((prev) => !prev)
+    setCompareSelection([])
+  }
+
+  const toggleCompareSelect = (playerId: number) => {
+    setCompareSelection((prev) => {
+      if (prev.includes(playerId)) return prev.filter((id) => id !== playerId)
+      if (prev.length >= 2) return prev
+      return [...prev, playerId]
+    })
+  }
 
   useEffect(() => {
     if (myTeamId == null) return
@@ -613,11 +636,38 @@ function DtSquadPage() {
                   </button>
                 </span>
               )}
+              <button
+                type="button"
+                onClick={toggleCompareMode}
+                className={`flex items-center gap-1.5 rounded-card px-2.5 py-1.5 text-xs font-display font-semibold uppercase tracking-[0.5px] transition-colors duration-fast ${
+                  compareMode
+                    ? 'bg-accent-primary/15 text-accent-primary ring-1 ring-inset ring-accent-primary/40'
+                    : 'text-text-muted hover:bg-surface-2 hover:text-text-primary'
+                }`}
+              >
+                <GitCompare size={14} />
+                {compareMode ? 'Cancelar comparar' : 'Comparar'}
+              </button>
               <SortToggle value={sortMode} onChange={setSortMode} />
               <span className="fm-panel-count">{players?.length ?? 0}</span>
             </>
           }
         >
+          {compareMode && (
+            <div className="mb-3 flex animate-in fade-in slide-in-from-top-1 items-center justify-between gap-3 rounded-card border border-accent-primary/30 bg-accent-primary/10 px-4 py-2.5 duration-200">
+              <span className="text-sm text-text-primary">
+                Seleccioná 2 jugadores para comparar — {compareSelection.length}/2
+              </span>
+              <button
+                type="button"
+                disabled={compareSelection.length !== 2}
+                onClick={() => setCompareOpen(true)}
+                className="rounded-card bg-accent-primary px-3 py-1.5 text-xs font-display font-bold uppercase tracking-[0.5px] text-surface-0 transition-opacity duration-fast disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                Comparar
+              </button>
+            </div>
+          )}
           <div className="dt-squad-grid">
             {sortByMode(players ?? [], sortMode, (p) => p.position, (p) => p.currentAbility)
               // A slot selected up top (click-to-open or mid-drag) filters this
@@ -625,41 +675,61 @@ function DtSquadPage() {
               // rule the dropdown already used, now also driving what's visibly
               // pickable here instead of only inside that dropdown.
               .filter((p) => openSlot == null || eligibility(p.position, FORMATION[openSlot]).eligible)
-              .map((p, i) => (
-                <div
-                  className={`dt-squad-card${openSlot != null ? ' dt-squad-card-pickable' : ''}`}
-                  key={p.playerId}
-                  draggable
-                  onDragStart={() => setDraggedPlayerId(p.playerId)}
-                  onDragEnd={() => {
-                    setDraggedPlayerId(null)
-                    setDragOverSlot(null)
-                  }}
-                  onClickCapture={(e) => {
-                    // While a slot is selected, clicking a card here assigns it
-                    // to that slot instead of the PlayerCard's normal navigation
-                    // to /players/:id — drag-and-drop still works either way.
-                    if (openSlot == null || !p.isReadyForMatch) return
-                    e.preventDefault()
-                    assign(openSlot, p.playerId)
-                  }}
-                >
-                  <PlayerCard
-                    id={p.playerId}
-                    name={p.name}
-                    position={p.position}
-                    age={p.age}
-                    currentAbility={p.currentAbility}
-                    index={i}
-                  />
-                  {assignedIds.has(p.playerId) && <span className="dt-squad-badge dt-squad-badge-starter">Titular</span>}
-                  {!p.isReadyForMatch && (
-                    <span className="dt-squad-badge dt-squad-badge-unavailable">{unavailableLabel(p)}</span>
-                  )}
-                </div>
-              ))}
+              .map((p, i) => {
+                const selectedForCompare = compareSelection.includes(p.playerId)
+                return (
+                  <div
+                    className={`dt-squad-card${openSlot != null ? ' dt-squad-card-pickable' : ''}${
+                      selectedForCompare ? ' rounded-card ring-2 ring-accent-primary' : ''
+                    }`}
+                    key={p.playerId}
+                    draggable={!compareMode}
+                    onDragStart={() => setDraggedPlayerId(p.playerId)}
+                    onDragEnd={() => {
+                      setDraggedPlayerId(null)
+                      setDragOverSlot(null)
+                    }}
+                    onClickCapture={(e) => {
+                      // Compare mode takes priority: tapping a card toggles its
+                      // selection instead of assigning a slot or navigating to
+                      // /players/:id. Otherwise, while a slot is selected,
+                      // clicking a card assigns it to that slot — drag-and-drop
+                      // still works either way.
+                      if (compareMode) {
+                        e.preventDefault()
+                        toggleCompareSelect(p.playerId)
+                        return
+                      }
+                      if (openSlot == null || !p.isReadyForMatch) return
+                      e.preventDefault()
+                      assign(openSlot, p.playerId)
+                    }}
+                  >
+                    <PlayerCard
+                      id={p.playerId}
+                      name={p.name}
+                      position={p.position}
+                      age={p.age}
+                      currentAbility={p.currentAbility}
+                      index={i}
+                    />
+                    {assignedIds.has(p.playerId) && <span className="dt-squad-badge dt-squad-badge-starter">Titular</span>}
+                    {!p.isReadyForMatch && (
+                      <span className="dt-squad-badge dt-squad-badge-unavailable">{unavailableLabel(p)}</span>
+                    )}
+                  </div>
+                )
+              })}
           </div>
         </SectionPanel>
+
+        {compareOpen && compareSelection.length === 2 && (
+          <PlayerCompareModal
+            idA={compareSelection[0]}
+            idB={compareSelection[1]}
+            onClose={() => setCompareOpen(false)}
+          />
+        )}
 
         {squadNeeds && (
           <SectionPanel title="Necesidades de plantel">
