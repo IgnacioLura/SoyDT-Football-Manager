@@ -2,8 +2,10 @@
 import type { SyntheticEvent } from 'react'
 
 // Curated real photos are checked in under a per-team folder (see
-// soydt/scripts/download-nacional-photos.sh and the equivalent ad-hoc pass
-// for Peñarol) rather than flat, so the source is easy to attribute. The
+// soydt/scripts/download-nacional-photos.sh for the original Nacional-only
+// pass and soydt/scripts/download-team-photos.sh for the generalized,
+// id-driven version run across every other team) rather than flat, so the
+// source is easy to attribute. The
 // frontend doesn't know a player's club at every call site (PlayerCard is
 // used from squad pages, free agents, search, relations, etc.), so instead
 // of threading a team slug through every caller, we just probe each known
@@ -12,7 +14,26 @@ import type { SyntheticEvent } from 'react'
 // landing on the placeholder — accepted cost for "drop a file, no code
 // changes" simplicity. Every photo also tries .png (transparent cutout) before
 // .jpg (plain headshot).
-const PHOTO_TEAM_FOLDERS = ['nacional', 'penarol', 'liverpool-montevideo']
+const PHOTO_TEAM_FOLDERS = [
+  'nacional',
+  'penarol',
+  'liverpool-montevideo',
+  'boston-river',
+  'cerro',
+  'cerro-largo',
+  'danubio',
+  'defensor-sporting',
+  'juventud',
+  'miramar-misiones',
+  'montevideo-city-torque',
+  'plaza-colonia',
+  'progreso',
+  'racing-montevideo',
+  'river-plate-montevideo',
+  'wanderers',
+  'river-plate',
+  'boca-juniors',
+]
 
 function playerPhotoCandidates(id: number): string[] {
   const dirs = [...PHOTO_TEAM_FOLDERS.map((t) => `/static/images/players/${t}`), '/static/images/players']

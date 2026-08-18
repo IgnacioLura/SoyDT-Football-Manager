@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { ChevronDown } from 'lucide-react'
 import { toast } from 'sonner'
 import { callApi } from '../../shared/api'
 import { PositionBadge } from '../../shared/positions'
@@ -178,18 +179,26 @@ function DtTransfersPage() {
         {error && <p style={{ color: 'crimson' }}>Error: {error}</p>}
 
         <SectionPanel title="Vender jugador (a otro club)">
-          <select
-            value={browseTeamId ?? ''}
-            onChange={(e) => setBrowseTeamId(e.target.value ? Number(e.target.value) : null)}
-            style={{ marginBottom: '0.75rem' }}
-          >
-            <option value="">Elegí el club comprador…</option>
-            {otherTeams.map((t) => (
-              <option key={t.teamId} value={t.teamId}>
-                {t.teamName}
+          <div className="relative mb-3 inline-block">
+            <select
+              value={browseTeamId ?? ''}
+              onChange={(e) => setBrowseTeamId(e.target.value ? Number(e.target.value) : null)}
+              className="appearance-none rounded-card border border-surface-3 bg-surface-1 py-2 pl-3 pr-9 text-text-primary outline-none focus:border-accent-primary"
+              style={{ borderColor: 'var(--surface-3)' }}
+              onFocus={(e) => (e.currentTarget.style.borderColor = 'var(--accent-primary)')}
+              onBlur={(e) => (e.currentTarget.style.borderColor = 'var(--surface-3)')}
+            >
+              <option value="" className="bg-surface-1 text-text-primary">
+                Elegí el club comprador…
               </option>
-            ))}
-          </select>
+              {otherTeams.map((t) => (
+                <option key={t.teamId} value={t.teamId} className="bg-surface-1 text-text-primary">
+                  {t.teamName}
+                </option>
+              ))}
+            </select>
+            <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-muted" />
+          </div>
           {myTeam && (
             <DataTable
               rows={myTeam.players}

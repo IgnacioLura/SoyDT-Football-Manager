@@ -1,0 +1,120 @@
+]9;4;3;\]9;4;0;\info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://localhost:18100
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: C:\Users\jiluraschi\FootballDT\soydt\src\SoyDT.Api
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]
+      Failed to determine the https port for redirect.
+fail: Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware[1]
+      An unhandled exception has occurred while executing the request.
+      SoyDT.Domain.EngineException: no country with id 1
+         at SoyDT.Engine.NativeStringMarshal.ReadEnvelope[T](IntPtr ptr) in C:\Users\jiluraschi\FootballDT\soydt\src\SoyDT.Engine\NativeStringMarshal.cs:line 49
+         at SoyDT.Engine.NativeGameEngine.GetLeagues(GameHandleSafeHandle game, UInt32 countryId) in C:\Users\jiluraschi\FootballDT\soydt\src\SoyDT.Engine\NativeGameEngine.cs:line 133
+         at SoyDT.Engine.GameSession.<>c__DisplayClass30_0.<GetLeagues>b__0(NativeGameEngine e, GameHandleSafeHandle h) in C:\Users\jiluraschi\FootballDT\soydt\src\SoyDT.Engine\GameSession.cs:line 237
+         at SoyDT.Engine.GameSession.WithGame[T](Func`3 body) in C:\Users\jiluraschi\FootballDT\soydt\src\SoyDT.Engine\GameSession.cs:line 132
+         at SoyDT.Engine.GameSession.GetLeagues(UInt32 countryId) in C:\Users\jiluraschi\FootballDT\soydt\src\SoyDT.Engine\GameSession.cs:line 237
+         at SoyDT.Api.Controllers.CountriesController.Leagues(UInt32 countryId) in C:\Users\jiluraschi\FootballDT\soydt\src\SoyDT.Api\Controllers\CountriesController.cs:line 22
+         at lambda_method25(Closure, Object, Object[])
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+      --- End of stack trace from previous location ---
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+      --- End of stack trace from previous location ---
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+         at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+         at Microsoft.AspNetCore.ResponseCompression.ResponseCompressionMiddleware.InvokeCore(HttpContext context)
+         at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+fail: Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware[1]
+      An unhandled exception has occurred while executing the request.
+      SoyDT.Domain.EngineException: no country with id 1
+         at SoyDT.Engine.NativeStringMarshal.ReadEnvelope[T](IntPtr ptr) in C:\Users\jiluraschi\FootballDT\soydt\src\SoyDT.Engine\NativeStringMarshal.cs:line 49
+         at SoyDT.Engine.NativeGameEngine.GetLeagues(GameHandleSafeHandle game, UInt32 countryId) in C:\Users\jiluraschi\FootballDT\soydt\src\SoyDT.Engine\NativeGameEngine.cs:line 133
+         at SoyDT.Engine.GameSession.<>c__DisplayClass30_0.<GetLeagues>b__0(NativeGameEngine e, GameHandleSafeHandle h) in C:\Users\jiluraschi\FootballDT\soydt\src\SoyDT.Engine\GameSession.cs:line 237
+         at SoyDT.Engine.GameSession.WithGame[T](Func`3 body) in C:\Users\jiluraschi\FootballDT\soydt\src\SoyDT.Engine\GameSession.cs:line 132
+         at SoyDT.Engine.GameSession.GetLeagues(UInt32 countryId) in C:\Users\jiluraschi\FootballDT\soydt\src\SoyDT.Engine\GameSession.cs:line 237
+         at SoyDT.Api.Controllers.CountriesController.Leagues(UInt32 countryId) in C:\Users\jiluraschi\FootballDT\soydt\src\SoyDT.Api\Controllers\CountriesController.cs:line 22
+         at lambda_method25(Closure, Object, Object[])
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+      --- End of stack trace from previous location ---
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+      --- End of stack trace from previous location ---
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+         at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+         at Microsoft.AspNetCore.ResponseCompression.ResponseCompressionMiddleware.InvokeCore(HttpContext context)
+         at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+fail: Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware[1]
+      An unhandled exception has occurred while executing the request.
+      SoyDT.Domain.EngineException: no player with id 2000156879
+         at SoyDT.Engine.NativeStringMarshal.ReadEnvelope[T](IntPtr ptr) in C:\Users\jiluraschi\FootballDT\soydt\src\SoyDT.Engine\NativeStringMarshal.cs:line 49
+         at SoyDT.Engine.NativeGameEngine.GetPlayer(GameHandleSafeHandle game, UInt32 playerId) in C:\Users\jiluraschi\FootballDT\soydt\src\SoyDT.Engine\NativeGameEngine.cs:line 178
+         at SoyDT.Engine.GameSession.<>c__DisplayClass33_0.<GetPlayer>b__0(NativeGameEngine e, GameHandleSafeHandle h) in C:\Users\jiluraschi\FootballDT\soydt\src\SoyDT.Engine\GameSession.cs:line 243
+         at SoyDT.Engine.GameSession.WithGame[T](Func`3 body) in C:\Users\jiluraschi\FootballDT\soydt\src\SoyDT.Engine\GameSession.cs:line 132
+         at SoyDT.Engine.GameSession.GetPlayer(UInt32 playerId) in C:\Users\jiluraschi\FootballDT\soydt\src\SoyDT.Engine\GameSession.cs:line 243
+         at SoyDT.Api.Controllers.PlayersController.Get(UInt32 playerId) in C:\Users\jiluraschi\FootballDT\soydt\src\SoyDT.Api\Controllers\PlayersController.cs:line 17
+         at lambda_method33(Closure, Object, Object[])
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+      --- End of stack trace from previous location ---
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+      --- End of stack trace from previous location ---
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+         at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+         at Microsoft.AspNetCore.ResponseCompression.ResponseCompressionMiddleware.InvokeCore(HttpContext context)
+         at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+fail: Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware[1]
+      An unhandled exception has occurred while executing the request.
+      SoyDT.Domain.EngineException: no player with id 2000156879
+         at SoyDT.Engine.NativeStringMarshal.ReadEnvelope[T](IntPtr ptr) in C:\Users\jiluraschi\FootballDT\soydt\src\SoyDT.Engine\NativeStringMarshal.cs:line 49
+         at SoyDT.Engine.NativeGameEngine.GetPlayer(GameHandleSafeHandle game, UInt32 playerId) in C:\Users\jiluraschi\FootballDT\soydt\src\SoyDT.Engine\NativeGameEngine.cs:line 178
+         at SoyDT.Engine.GameSession.<>c__DisplayClass33_0.<GetPlayer>b__0(NativeGameEngine e, GameHandleSafeHandle h) in C:\Users\jiluraschi\FootballDT\soydt\src\SoyDT.Engine\GameSession.cs:line 243
+         at SoyDT.Engine.GameSession.WithGame[T](Func`3 body) in C:\Users\jiluraschi\FootballDT\soydt\src\SoyDT.Engine\GameSession.cs:line 132
+         at SoyDT.Engine.GameSession.GetPlayer(UInt32 playerId) in C:\Users\jiluraschi\FootballDT\soydt\src\SoyDT.Engine\GameSession.cs:line 243
+         at SoyDT.Api.Controllers.PlayersController.Get(UInt32 playerId) in C:\Users\jiluraschi\FootballDT\soydt\src\SoyDT.Api\Controllers\PlayersController.cs:line 17
+         at lambda_method33(Closure, Object, Object[])
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+      --- End of stack trace from previous location ---
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+      --- End of stack trace from previous location ---
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+         at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+         at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+         at Microsoft.AspNetCore.ResponseCompression.ResponseCompressionMiddleware.InvokeCore(HttpContext context)
+         at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddlewareImpl.<Invoke>g__Awaited|10_0(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+warn: SoyDT.Api.Controllers.GameController[0]
+      process/live starting, days=1
+warn: SoyDT.Api.Controllers.GameController[0]
+      process/live progress: ProcessProgress { Date = 2026-08-04, DaysProcessed = 1, TotalDays = 1, MatchesPlayed = 0, Done = True }
+info: System.Net.Http.HttpClient.ai-agent.LogicalHandler[100]
+      Start processing HTTP request POST http://host.docker.internal:11434/v1/chat/completions
+info: System.Net.Http.HttpClient.ai-agent.ClientHandler[100]
+      Sending HTTP request POST http://host.docker.internal:11434/v1/chat/completions
+info: System.Net.Http.HttpClient.ai-agent.LogicalHandler[100]
+      Start processing HTTP request POST http://host.docker.internal:11434/v1/chat/completions
+info: System.Net.Http.HttpClient.ai-agent.ClientHandler[100]
+      Sending HTTP request POST http://host.docker.internal:11434/v1/chat/completions
+warn: SoyDT.Api.Controllers.GameController[0]
+      process/live finished
