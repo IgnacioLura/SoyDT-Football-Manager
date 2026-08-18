@@ -1,45 +1,9 @@
 /* soydt/web/src/shared/ui/DataTable.css
-   Token-based replacement for fm-squad/fm-standings/fm-*-table (see
-   DESIGN_SYSTEM.md migration plan). Falls back to the old style.css literal
-   values, same pattern as SortToggle.css, so it renders correctly on pages
-   that don't import theme.css yet. */
-.dt-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-variant-numeric: tabular-nums;
-}
-
-.dt-table thead th {
-  padding: 9px 10px;
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--text-muted, #8b93a7);
-  text-align: left;
-  border-bottom: 1px solid var(--surface-3, #2a353d);
-  white-space: nowrap;
-}
-
-.dt-table tbody td {
-  padding: 8px 10px;
-  font-size: 13px;
-  color: var(--text-primary, #f4f6fa);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-}
-
-.dt-table tbody tr {
-  border-left: 3px solid transparent;
-  transition: background var(--transition-fast, 0.15s) ease;
-}
-
-.dt-table tbody tr:nth-child(even) {
-  background: rgba(0, 0, 0, 0.12);
-}
-
-.dt-table tbody tr:hover {
-  background: rgba(255, 255, 255, 0.04);
-}
+   `.dt-table` carries no rules of its own anymore — its base shell moved to
+   Tailwind utilities in DataTable.tsx (see Fase 1 Tailwind migration).
+   The class name itself stays on the <table> purely so the descendant
+   selectors below (driven by rowClassName/column className strings that
+   out-of-scope feature pages still pass into DataTable) keep matching. */
 
 .dt-row-highlight td {
   font-weight: 700;
@@ -60,18 +24,6 @@
   border-left-color: #e74c3c;
 }
 
-.dt-align-left {
-  text-align: left;
-}
-
-.dt-align-center {
-  text-align: center;
-}
-
-.dt-align-right {
-  text-align: right;
-}
-
 .dt-cell-muted {
   color: var(--text-muted, #8b93a7);
 }
@@ -79,12 +31,6 @@
 .dt-cell-strong {
   font-weight: 700;
   width: 28px;
-}
-
-.dt-empty {
-  padding: 14px;
-  color: var(--text-muted, #8b93a7);
-  font-size: 13px;
 }
 
 /* Legacy per-column cell classNames carried over from the fm-squad/

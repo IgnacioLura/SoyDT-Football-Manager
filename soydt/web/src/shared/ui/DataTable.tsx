@@ -28,15 +28,20 @@ function DataTable<T>({
   emptyMessage?: ReactNode
 }) {
   if (rows.length === 0) {
-    return <div className="dt-empty">{emptyMessage}</div>
+    return <div className="dt-empty p-3.5 text-[13px] text-text-muted">{emptyMessage}</div>
   }
 
   return (
-    <table className="dt-table">
+    <table className="dt-table w-full border-collapse [font-variant-numeric:tabular-nums]">
       <thead>
         <tr>
           {columns.map((c) => (
-            <th key={c.key} className={c.align ? `dt-align-${c.align}` : undefined}>
+            <th
+              key={c.key}
+              className={`whitespace-nowrap border-b border-surface-3 px-[10px] py-[9px] text-left text-[10px] font-bold uppercase tracking-[0.5px] text-text-muted ${
+                c.align ? `text-${c.align}` : ''
+              }`}
+            >
               {c.header}
             </th>
           ))}
@@ -44,11 +49,20 @@ function DataTable<T>({
       </thead>
       <tbody>
         {rows.map((row, i) => (
-          <tr key={rowKey(row, i)} className={rowClassName?.(row, i)}>
+          <tr
+            key={rowKey(row, i)}
+            className={`border-l-[3px] border-l-transparent transition-colors duration-fast ease-linear even:bg-black/[0.12] hover:bg-white/[0.04] ${rowClassName?.(row, i) ?? ''}`}
+          >
             {columns.map((c) => (
               <td
                 key={c.key}
-                className={[c.align ? `dt-align-${c.align}` : '', c.className ?? ''].filter(Boolean).join(' ') || undefined}
+                className={[
+                  'border-b border-white/[0.04] px-[10px] py-2 text-[13px] text-text-primary',
+                  c.align ? `text-${c.align}` : '',
+                  c.className ?? '',
+                ]
+                  .filter(Boolean)
+                  .join(' ')}
               >
                 {c.render(row, i)}
               </td>
