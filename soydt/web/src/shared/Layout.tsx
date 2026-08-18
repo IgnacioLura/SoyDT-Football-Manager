@@ -1,5 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { Globe2, Search, Shield, Star } from 'lucide-react'
 import AiSettingsBadge from './AiSettingsBadge'
 import Flag from './Flag'
 import ProcessControl from './ProcessControl'
@@ -22,7 +23,7 @@ import './Layout.css'
 // the original Askama template; this is a static approximation until more
 // feature areas exist to populate a real nav (Phase 1 only has Countries).
 
-const NAV_ITEMS: NavRailItem[] = [{ title: 'Countries', icon: 'fa-earth-americas', url: '/countries' }]
+const NAV_ITEMS: NavRailItem[] = [{ title: 'Countries', icon: Globe2, url: '/countries' }]
 
 type LayoutProps = {
   title: string
@@ -57,8 +58,11 @@ function Layout({ title, subTitle, children, sidebarCountryId }: LayoutProps) {
           <div className="fm-sidebar">
             <div className="fm-sidebar-scroll">
               <NavRail navItems={NAV_ITEMS} countryLeagues={countryLeagues} activePath={location.pathname} />
-              <Link to="/dt" className="nr-tile lyt-mode-switch">
-                <i className="fa fa-futbol" />
+              <Link
+                to="/dt"
+                className="lyt-mode-switch flex items-center gap-3 rounded-card p-3 font-display font-semibold text-text-muted no-underline transition-colors duration-fast hover:bg-surface-2 hover:text-text-primary"
+              >
+                <Shield size={18} />
                 <span>Modo DT</span>
               </Link>
               <div className="lyt-lang-toggle">
@@ -87,10 +91,10 @@ function Layout({ title, subTitle, children, sidebarCountryId }: LayoutProps) {
                     <div className="lyt-header-actions">
                       <AiSettingsBadge />
                       <Link className="lyt-header-icon" to="/watchlist" title="Watch list">
-                        <i className="fa fa-star" />
+                        <Star size={18} />
                       </Link>
                       <Link className="lyt-header-icon" to="/search" title="Search">
-                        <i className="fa fa-search" />
+                        <Search size={18} />
                       </Link>
                       <ProcessControl />
                     </div>

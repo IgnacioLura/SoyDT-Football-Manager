@@ -1,6 +1,7 @@
 import type { CSSProperties, ReactNode } from 'react'
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { ArrowLeftRight, Building2, Calendar, Coins, Globe2, ListOrdered, Users, Zap } from 'lucide-react'
 import { callApi } from '../../shared/api'
 import Flag from '../../shared/Flag'
 import ProcessControl from '../../shared/ProcessControl'
@@ -23,12 +24,13 @@ import './DtLayout.css'
 // classes for the same dark visual treatment — mirrors `shared/Layout.tsx`.
 
 const NAV_ITEMS: NavRailItem[] = [
-  { title: 'Plantel', icon: 'fa-users', url: '/dt/squad' },
-  { title: 'Transferencias', icon: 'fa-right-left', url: '/dt/transfers' },
-  { title: 'Calendario', icon: 'fa-calendar', url: '/dt/schedule' },
-  { title: 'Finanzas', icon: 'fa-coins', url: '/dt/finances' },
-  { title: 'Tabla', icon: 'fa-list-ol', url: '/dt/table' },
-  { title: 'Eventos', icon: 'fa-bolt', url: '/dt/events' },
+  { title: 'Plantel', icon: Users, url: '/dt/squad' },
+  { title: 'Transferencias', icon: ArrowLeftRight, url: '/dt/transfers' },
+  { title: 'Calendario', icon: Calendar, url: '/dt/schedule' },
+  { title: 'Finanzas', icon: Coins, url: '/dt/finances' },
+  { title: 'Tabla', icon: ListOrdered, url: '/dt/table' },
+  { title: 'Eventos', icon: Zap, url: '/dt/events' },
+  { title: 'Directiva', icon: Building2, url: '/dt/board' },
 ]
 
 type DtLayoutProps = {
@@ -80,8 +82,11 @@ function DtLayout({ title, subTitle, children }: DtLayoutProps) {
           <div className="fm-sidebar">
             <div className="fm-sidebar-scroll">
               <NavRail navItems={NAV_ITEMS} countryLeagues={null} activePath={location.pathname} />
-              <Link to="/countries" className="nr-tile lyt-mode-switch">
-                <i className="fa fa-earth-americas" />
+              <Link
+                to="/countries"
+                className="lyt-mode-switch flex items-center gap-3 rounded-card p-3 font-display font-semibold text-text-muted no-underline transition-colors duration-fast hover:bg-surface-2 hover:text-text-primary"
+              >
+                <Globe2 size={18} />
                 <span>Modo Admin</span>
               </Link>
               <div className="lyt-lang-toggle">
